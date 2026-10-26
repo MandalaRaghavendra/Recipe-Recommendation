@@ -1,0 +1,150 @@
+ID:   1 | Andhra Chicken Biryani                        | Lunch      | Non-Veg | Andhra       | Ing: basmati rice, chicken, yogurt, ginger-garlic paste
+ID:   2 | Gongura Mutton                                | Dinner     | Non-Veg | Andhra       | Ing: mutton, gongura leaves, onions, tomatoes, ginger-g
+ID:   3 | Royyala Iguru (Prawn Curry)                   | Lunch      | Non-Veg | Andhra       | Ing: prawns, onions, tomatoes, ginger-garlic paste, red
+ID:   4 | Andhra Style Fish Curry                       | Lunch      | Non-Veg | Andhra       | Ing: fish pieces, tamarind, onions, tomatoes, red chili
+ID:   5 | Andhra Special Egg Curry                      | Lunch      | Non-Veg | Andhra       | Ing: eggs, onions, tomatoes, ginger-garlic paste, red c
+ID:   6 | Andhra Chicken Pulao                          | Lunch      | Non-Veg | Andhra       | Ing: basmati rice, chicken, onions, ginger-garlic paste
+ID:   7 | Andhra Special Chicken Fry                    | Dinner     | Non-Veg | Andhra       | Ing: chicken, ginger-garlic paste, red chili powder, tu
+ID:   8 | Andhra Mutton Curry                           | Lunch      | Non-Veg | Andhra       | Ing: mutton, onions, tomatoes, ginger-garlic paste, red
+ID:   9 | Andhra Style Crab Curry                       | Lunch      | Non-Veg | Andhra       | Ing: crabs, tamarind, onions, tomatoes, red chili powde
+ID:  10 | Andhra Chicken 65                             | Dinner     | Non-Veg | Andhra       | Ing: chicken, yogurt, ginger-garlic paste, red chili po
+ID:  11 | Andhra Special Veg Biryani                    | Lunch      | Veg    | Andhra       | Ing: basmati rice, mixed vegetables, onions, ginger-gar
+ID:  12 | Andhra Style Paneer Curry                     | Lunch      | Veg    | Andhra       | Ing: paneer, onions, tomatoes, ginger-garlic paste, red
+ID:  13 | Andhra Special Aloo Curry                     | Lunch      | Veg    | Andhra       | Ing: potatoes, onions, tomatoes, ginger-garlic paste, r
+ID:  14 | Andhra Style Baingan Bharta                   | Dinner     | Veg    | Andhra       | Ing: brinjal, onions, tomatoes, ginger-garlic paste, re
+ID:  15 | Andhra Special Dal Tadka                      | Lunch      | Veg    | Andhra       | Ing: toor dal, onions, tomatoes, ginger-garlic paste, r
+ID:  16 | Andhra Style Chana Masala                     | Dinner     | Veg    | Andhra       | Ing: chickpeas, onions, tomatoes, ginger-garlic paste, 
+ID:  17 | Andhra Special Vegetable Curry                | Lunch      | Veg    | Andhra       | Ing: mixed vegetables, onions, tomatoes, ginger-garlic 
+ID:  18 | Andhra Style Mushroom Curry                   | Lunch      | Veg    | Andhra       | Ing: mushrooms, onions, tomatoes, ginger-garlic paste, 
+ID:  19 | Andhra Special Tomato Rice                    | Dinner     | Veg    | Andhra       | Ing: rice, tomatoes, onions, ginger-garlic paste, red c
+ID:  20 | Andhra Style Lemon Rice                       | Dinner     | Veg    | Andhra       | Ing: rice, lemon juice, peanuts, chana dal, urad dal, m
+ID:  21 | Andhra Special Tamarind Rice                  | Dinner     | Veg    | Andhra       | Ing: rice, tamarind, peanuts, chana dal, urad dal, must
+ID:  22 | Andhra Style Coconut Rice                     | Dinner     | Veg    | Andhra       | Ing: rice, fresh coconut, mustard seeds, urad dal, chan
+ID:  23 | Andhra Special Curd Rice                      | Dinner     | Veg    | Andhra       | Ing: rice, yogurt, milk, ginger, green chilies, mustard
+ID:  24 | Andhra Style Bisi Bele Bath                   | Dinner     | Veg    | Andhra       | Ing: rice, toor dal, mixed vegetables, bisi bele bath p
+ID:  25 | Andhra Special Pongal                         | Breakfast  | Veg    | Andhra       | Ing: rice, moong dal, pepper, cumin, ginger, cashews, g
+ID:  26 | Gongura Pappu (Sorrel Leaves Dal)             | Lunch      | Veg    | Andhra       | Ing: toor dal, gongura (sorrel leaves), green chilies, 
+ID:  27 | Pesarattu (Green Moong Dal Dosa)              | Breakfast  | Veg    | South Indian | Ing: whole green gram (pesaralu), rice (optional), ging
+ID:  28 | Gutti Vankaya Kura (Stuffed Brinjal Curry)    | Lunch      | Veg    | South Indian | Ing: small brinjals (eggplant), peanuts, sesame seeds, 
+ID:  29 | Andhra Chicken Curry (Kodi Kura)              | Lunch      | Non-Veg | Andhra       | Ing: chicken (bone-in), onion, tomato, ginger-garlic pa
+ID:  30 | Dibba Rotti (Andhra Minapa Rotti)             | Lunch      | Veg    | Andhra       | Ing: urad dal (minapa pappu), idli rava (rice semolina)
+ID:  31 | Tamarind Rice (Chintapandu Pulihora)          | Dinner     | Veg    | South Indian | Ing: rice, tamarind pulp, peanuts, chana dal, urad dal,
+ID:  32 | Tomato Pappu (Andhra Tomato Dal)              | Lunch      | Veg    | Andhra       | Ing: toor dal, tomatoes, green chilies, onion, turmeric
+ID:  33 | Aloo Vepudu (Andhra Potato Fry)               | Dinner     | Veg    | Andhra       | Ing: potatoes, oil, mustard seeds, urad dal, chana dal,
+ID:  34 | Coconut Chutney (Kobbari Pachadi)             | Dinner     | Veg    | Andhra       | Ing: fresh grated coconut, chana dal (roasted), ginger,
+ID:  35 | Lemon Rice (Nimmakaya Pulihora)               | Dinner     | Veg    | South Indian | Ing: rice, lemon juice, peanuts, chana dal, urad dal, m
+ID:  36 | Punugulu (Rice & Urad Dal Fritters)           | Snack      | Veg    | South Indian | Ing: idli/dosa batter, rice flour (optional), onion, gi
+ID:  37 | Mamidikaya Pappu (Raw Mango Dal)              | Lunch      | Veg    | Andhra       | Ing: toor dal, raw mango, green chilies, turmeric powde
+ID:  38 | Mirapakaya Bajji (Chili Fritters)             | Snack      | Veg    | North Indian | Ing: large green chilies (bajji mirchi), besan (chickpe
+ID:  39 | Sunnundalu (Urad Dal Jaggery Laddu)           | Lunch      | Veg    | North Indian | Ing: urad dal (whole/split), jaggery, ghee (clarified b
+ID:  40 | Chicken Biryani (Andhra Style)                | Lunch      | Non-Veg | Andhra       | Ing: basmati rice, chicken (bone-in), curd/yogurt, ging
+ID:  41 | Ragi Sankati (Finger Millet Balls)            | Dinner     | Veg    | North Indian | Ing: ragi flour (finger millet), rice (optional), water
+ID:  42 | Bendakaya Fry (Okra Stir Fry)                 | Dinner     | Veg    | North Indian | Ing: okra (lady's finger), onion, oil, mustard seeds, c
+ID:  43 | Rasam (Chaaru)                                | Lunch      | Veg    | South Indian | Ing: tamarind pulp, tomatoes, rasam powder, turmeric, g
+ID:  44 | Bobbatlu (Poli/Puran Poli)                    | Dinner     | Veg    | Maharashtrian | Ing: chana dal (bengal gram), jaggery, cardamom powder,
+ID:  45 | Chicken Liver Fry                             | Dinner     | Non-Veg | North Indian | Ing: chicken liver, onion, ginger-garlic paste, chili p
+ID:  46 | Masala Vada (Paruppu Vada)                    | Breakfast  | Veg    | North Indian | Ing: chana dal (bengal gram), onion, ginger, green chil
+ID:  47 | Aratikaya Fry (Raw Banana Fry)                | Dinner     | Veg    | North Indian | Ing: raw banana (plantain), oil, mustard seeds, urad da
+ID:  48 | Ulavacharu (Horse Gram Soup)                  | Lunch      | Veg    | North Indian | Ing: horse gram (ulavalu), tamarind pulp, chili powder,
+ID:  49 | Chicken Fry (Kodi Vepudu)                     | Dinner     | Non-Veg | Andhra       | Ing: chicken pieces (small), ginger-garlic paste, chili
+ID:  50 | Semiya Payasam (Vermicelli Kheer)             | Dessert    | Veg    | North Indian | Ing: vermicelli (semiya), milk, sugar, ghee, cardamom p
+ID:  51 | Paneer Butter Masala                          | Dinner     | Veg    | North Indian | Ing: paneer (cottage cheese), butter, cream, tomatoes, 
+ID:  52 | Dal Tadka (Yellow Lentil Curry)               | Lunch      | Veg    | South Indian | Ing: toor dal (yellow lentils), onions, tomatoes, garli
+ID:  53 | Grilled Lemon Herb Chicken                    | Dinner     | Non-Veg | North Indian | Ing: chicken breast, lemon juice, olive oil, garlic, or
+ID:  54 | Palak Paneer (Spinach Cottage Cheese)         | Dinner     | Veg    | North Indian | Ing: paneer (cottage cheese), spinach (palak), onions, 
+ID:  55 | Egg Bhurji (Indian Masala Scrambled Eggs)     | Breakfast  | Non-Veg | North Indian | Ing: eggs, onions, tomatoes, green chilies, turmeric, r
+ID:  56 | Vegetable Oats Upma                           | Breakfast  | Veg    | South Indian | Ing: rolled oats, carrots, green peas, beans, mustard s
+ID:  57 | Chicken Tikka Masala                          | Dinner     | Non-Veg | North Indian | Ing: chicken thigh or breast, yogurt, garam masala, gin
+ID:  58 | Crispy Masala Dosa with Potato Filling        | Breakfast  | Veg    | South Indian | Ing: fermented dosa batter (rice & urad dal), potatoes,
+ID:  59 | Tandoori Fish Tikka                           | Dinner     | Non-Veg | North Indian | Ing: fish fillets (kingfish or tilapia), yogurt, ginger
+ID:  60 | Quinoa Mediterranean Power Bowl               | Dinner     | Veg    | North Indian | Ing: quinoa, cucumber, cherry tomatoes, kalamata olives
+ID:  61 | Classic Butter Chicken (Murgh Makhani)        | Drink      | Non-Veg | North Indian | Ing: chicken, butter, tomatoes, cashews, heavy cream, g
+ID:  62 | Punjabi Rajma Masala (Red Kidney Beans)       | Dinner     | Veg    | North Indian | Ing: red kidney beans (rajma), onions, tomatoes, ginger
+ID:  63 | Avocado Toast with Poached Eggs               | Breakfast  | Non-Veg | North Indian | Ing: whole wheat bread, avocado, eggs, red pepper flake
+ID:  64 | Mushroom Pepper Fry                           | Dinner     | Veg    | North Indian | Ing: button mushrooms, black pepper (freshly ground), o
+ID:  65 | Mutton Sukka (Spicy Dry Roast)                | Dinner     | Non-Veg | North Indian | Ing: mutton (goat meat), shallots (sambar onions), ging
+ID:  66 | Moong Dal Khichdi                             | Lunch      | Veg    | North Indian | Ing: split yellow moong dal, rice, cumin seeds, ghee, g
+ID:  67 | Tofu & Broccoli Stir Fry                      | Dinner     | Veg    | North Indian | Ing: firm tofu, broccoli florets, soy sauce, garlic, se
+ID:  68 | Coastal Prawns Masala Fry                     | Dinner     | Non-Veg | North Indian | Ing: prawns (cleaned & deveined), onions, tomatoes, gar
+ID:  69 | Sprouted Moong Salad                          | Dinner     | Veg    | North Indian | Ing: sprouted moong beans, cucumber, tomato, pomegranat
+ID:  70 | Greek Yogurt Berry & Nut Parfait              | Dinner     | Veg    | North Indian | Ing: greek yogurt, mixed berries (strawberries/blueberr
+ID:  71 | Healthy Chicken Clear Soup                    | Dinner     | Non-Veg | North Indian | Ing: chicken breast (shredded), carrots, celery, garlic
+ID:  72 | Besan Chilla (Savory Chickpea Pancakes)       | Breakfast  | Veg    | North Indian | Ing: gram flour (besan), onions, tomatoes, green chilie
+ID:  73 | Methi Chicken (Fenugreek Chicken Curry)       | Lunch      | Non-Veg | South Indian | Ing: chicken, fresh methi leaves (fenugreek), onions, t
+ID:  74 | Royal Vegetable Biryani                       | Lunch      | Veg    | North Indian | Ing: basmati rice, carrots, beans, potatoes, green peas
+ID:  75 | Peanut Butter Banana Protein Smoothie         | Drink      | Veg    | North Indian | Ing: banana, peanut butter, milk or almond milk, whey p
+ID:  76 | Natu Kodi Pulusu (Country Chicken Curry)      | Lunch      | Non-Veg | Andhra       | Ing: country chicken (natu kodi), onions, poppy seeds (
+ID:  77 | Nellore Chepala Pulusu (Tangy Fish Curry)     | Lunch      | Non-Veg | Andhra       | Ing: freshwater fish / rohu, tamarind pulp (aged), shal
+ID:  78 | Kodi Vepudu - Pepper Style (Andhra Pepper Chicken) | Dinner     | Non-Veg | Andhra       | Ing: chicken pieces, black pepper (freshly crushed), fe
+ID:  79 | Mutton Keema Unde Kura (Meatball Curry)       | Lunch      | Non-Veg | Telangana    | Ing: minced mutton (keema), roasted gram (putnalu), oni
+ID:  80 | Gongura Royyalu (Prawns with Sorrel Leaves)   | Dinner     | Non-Veg | Andhra       | Ing: prawns, gongura leaves (red sorrel), onions, green
+ID:  81 | Peethala Vepudu (Andhra Crab Fry)             | Dinner     | Non-Veg | Andhra       | Ing: fresh crabs (cleaned), shallots, ginger-garlic pas
+ID:  82 | Guddu Pulusu (Andhra Egg Tamarind Curry)      | Lunch      | Non-Veg | Andhra       | Ing: hard boiled eggs, onions (thickly sliced), tamarin
+ID:  83 | Boti Kura (Spicy Andhra Lamb Tripe Curry)     | Lunch      | Non-Veg | Andhra       | Ing: lamb boti (tripe & organ meat), chana dal (optiona
+ID:  84 | Kobbari Palu Kodi Kura (Chicken in Coconut Milk) | Lunch      | Non-Veg | Andhra       | Ing: chicken, fresh thick coconut milk, onions, green c
+ID:  85 | Nellore Chepala Vepudu (Nellore Spicy Fish Fry) | Dinner     | Non-Veg | Andhra       | Ing: fish steaks (vanjaram / seer fish), ginger-garlic 
+ID:  86 | Royyala Vepudu (Andhra Crispy Prawn Fry)      | Dinner     | Non-Veg | Andhra       | Ing: small prawns, ginger-garlic paste, red chili powde
+ID:  87 | Kodi Guddu Porutu (Andhra Spiced Egg Scramble) | Breakfast  | Non-Veg | Andhra       | Ing: eggs, onions (finely chopped), green chilies, curr
+ID:  88 | Talakaya Kura (Spicy Andhra Mutton Head Meat Curry) | Lunch      | Non-Veg | Andhra       | Ing: mutton head meat (talakaya mamsam), onions, ginger
+ID:  89 | Natu Kodi Fry (Country Chicken Dry Roast)     | Dinner     | Non-Veg | Andhra       | Ing: country chicken, shallots, ginger-garlic paste, dr
+ID:  90 | Chintachiguru Mutton (Tender Tamarind Leaves Mutton) | Lunch      | Non-Veg | North Indian | Ing: mutton, chintachiguru (tender tamarind leaves), on
+ID:  91 | Gongura Chicken (Sorrel Leaf Chicken Curry)   | Lunch      | Non-Veg | Andhra       | Ing: chicken, gongura leaves (red stem), onions, green 
+ID:  92 | Andhra Kodi Chips (Crispy Chicken Strips)     | Snack      | Non-Veg | Andhra       | Ing: boneless chicken breast (sliced thin), rice flour,
+ID:  93 | Andhra Mutton Chops Fry                       | Dinner     | Non-Veg | Andhra       | Ing: mutton chops (ribs), ginger-garlic paste, black pe
+ID:  94 | Royyala Pulao (Andhra Spiced Prawn Pulao)     | Lunch      | Non-Veg | Andhra       | Ing: basmati rice, prawns, onions, green chilies, ginge
+ID:  95 | Bommidala Pulusu (Mudfish in Tangy Stew)      | Lunch      | Non-Veg | Andhra       | Ing: bommidala fish (mudfish), tamarind pulp, onions, f
+ID:  96 | Dosakaya Pappu (Yellow Cucumber Dal)          | Breakfast  | Veg    | Andhra       | Ing: toor dal, dosakaya (yellow cucumber - peeled & cub
+ID:  97 | Palakura Pappu (Spinach Dal)                  | Lunch      | Veg    | Andhra       | Ing: toor dal, fresh spinach (palakura), green chilies,
+ID:  98 | Menthi Kura Pappu (Fenugreek Leaves Dal)      | Lunch      | Veg    | Andhra       | Ing: toor dal, fresh fenugreek leaves (menthi kura), on
+ID:  99 | Beerakaya Pappu (Ridge Gourd Dal)             | Lunch      | Veg    | Andhra       | Ing: toor dal, beerakaya (ridge gourd - peeled & choppe
+ID: 100 | Bachali Kura Pappu (Malabar Spinach Dal)      | Lunch      | Veg    | Andhra       | Ing: toor dal, bachali kura (malabar spinach), tamarind
+ID: 101 | Majjiga Pulusu (Andhra Seasoned Buttermilk Stew) | Lunch      | Veg    | Andhra       | Ing: sour curd / buttermilk, besan (gram flour), bottle
+ID: 102 | Challa Charu (Spiced Buttermilk Rasam)        | Lunch      | Veg    | Andhra       | Ing: buttermilk (thin), onions (finely sliced), green c
+ID: 103 | Miriyala Chaaru (Andhra Pepper Rasam)         | Lunch      | Veg    | Andhra       | Ing: black peppercorns, cumin seeds, garlic cloves, tam
+ID: 104 | Andhra Tomato Charu (Spiced Tomato Rasam)     | Lunch      | Veg    | Andhra       | Ing: ripe juicy tomatoes, tamarind pulp, rasam powder, 
+ID: 105 | Kandi Kattu (Clear Toor Dal Broth)            | Lunch      | Veg    | Andhra       | Ing: toor dal water (strained from boiled dal), ghee, m
+ID: 106 | Menthi Majjiga (Tempered Buttermilk with Fenugreek) | Lunch      | Veg    | North Indian | Ing: curd (churned into thin buttermilk), fenugreek see
+ID: 107 | Pachi Pulusu (Rayalaseema Raw Tamarind Stew)  | Lunch      | Veg    | Andhra       | Ing: tamarind (soaked & extracted), onions (finely slic
+ID: 108 | Kakarakaya Pulusu (Bitter Gourd Tangy Stew)   | Lunch      | Veg    | Andhra       | Ing: bitter gourd (kakarakaya - sliced into rounds), ta
+ID: 109 | Anapakaya Pulusu (Bottle Gourd Tamarind Stew) | Lunch      | Veg    | Andhra       | Ing: bottle gourd (anapakaya / sorakaya - cubed), tamar
+ID: 110 | Vankaya Pulusu (Brinjal Tangy Stew)           | Lunch      | Veg    | Andhra       | Ing: brinjal / eggplant (small purple), tamarind extrac
+ID: 111 | Dondakaya Vepudu (Tindora / Ivy Gourd Fry with Peanuts) | Dinner     | Veg    | Andhra       | Ing: dondakaya (ivy gourd / tindora - sliced thin), pea
+ID: 112 | Chamadumpa Vepudu (Crispy Taro Root / Arbi Fry) | Dinner     | Veg    | Andhra       | Ing: chamadumpa (taro root / arbi), rice flour, red chi
+ID: 113 | Kanda Bachali Kura (Yam with Malabar Spinach) | Lunch      | Veg    | Andhra       | Ing: kanda (elephant foot yam - cubed), bachali kura (m
+ID: 114 | Cabbage Senagapappu Vepudu (Cabbage & Chana Dal Stir Fry) | Dinner     | Veg    | Andhra       | Ing: cabbage (shredded), chana dal (soaked for 30 mins)
+ID: 115 | Andhra Beetroot Vepudu                        | Dinner     | Veg    | Andhra       | Ing: beetroot (grated or finely diced), fresh grated co
+ID: 116 | Kakarakaya Vepudu (Crispy Bitter Gourd Fry)   | Dinner     | Veg    | Andhra       | Ing: bitter gourd (sliced ultra thin), rice flour, besa
+ID: 117 | Beerakaya Pechula Vepudu (Ridge Gourd Peel Stir Fry) | Dinner     | Veg    | Andhra       | Ing: ridge gourd peel (fresh & cleaned), green chilies,
+ID: 118 | Potlakaya Fry (Snake Gourd Coconut Fry)       | Dinner     | Veg    | Andhra       | Ing: potlakaya (snake gourd - deseeded & chopped), grat
+ID: 119 | Andhra Gobi Vepudu (Spicy Cauliflower Stir Fry) | Dinner     | Veg    | Andhra       | Ing: cauliflower florets, onions, ginger-garlic paste, 
+ID: 120 | Carrot Senagapappu Kura (Carrot & Bengal Gram Fry) | Dinner     | Veg    | Andhra       | Ing: carrots (finely diced), chana dal (boiled), green 
+ID: 121 | Goruchikkudu Fry (Cluster Beans Coconut Fry)  | Dinner     | Veg    | North Indian | Ing: cluster beans (goruchikkudu / guar - chopped), gra
+ID: 122 | Sorakaya Palu Kura (Bottle Gourd in Milk Gravy) | Lunch      | Veg    | Andhra       | Ing: bottle gourd (sorakaya - peeled & diced), milk, gr
+ID: 123 | Munakkaya Kaju Kura (Drumstick Cashew Curry)  | Lunch      | Veg    | South Indian | Ing: drumsticks (cut into 2-inch pieces), whole cashews
+ID: 124 | Vankaya Kothimeera Karam (Brinjal in Cilantro Chili Paste) | Dinner     | Veg    | North Indian | Ing: brinjal (small purple), fresh coriander leaves (la
+ID: 125 | Capsicum Senagapindi Kura (Bell Pepper with Besan) | Lunch      | Veg    | North Indian | Ing: capsicum / bell pepper (diced), besan (gram flour)
+ID: 126 | Gongura Pachadi (Authentic Sorrel Leaves Chutney) | Dinner     | Veg    | Andhra       | Ing: red stem gongura leaves, dried red chilies, corian
+ID: 127 | Rallato Nurchina Tomato Pachadi (Rustic Tomato Chutney) | Dinner     | Veg    | Andhra       | Ing: ripe country tomatoes, green chilies, garlic clove
+ID: 128 | Dosakaya Pachadi (Raw Yellow Cucumber Chutney) | Breakfast  | Veg    | Andhra       | Ing: dosakaya (yellow cucumber), green chilies, mustard
+ID: 129 | Beerakaya Pachadi (Ridge Gourd Roti Pachadi)  | Dinner     | Veg    | Andhra       | Ing: beerakaya (ridge gourd - with peel), green chilies
+ID: 130 | Vankaya Pachadi (Fire-Roasted Brinjal Chutney) | Dinner     | Veg    | Andhra       | Ing: large eggplant (bharta brinjal), green chilies, ga
+ID: 131 | Kothimeera Pachadi (Fresh Coriander Chutney)  | Dinner     | Veg    | Andhra       | Ing: fresh coriander leaves (kothimeera), tamarind, ura
+ID: 132 | Allam Pachadi (Spicy Sweet Ginger Chutney)    | Dessert    | Veg    | Andhra       | Ing: fresh ginger (allam - peeled & chopped), tamarind 
+ID: 133 | Sorakaya Pachadi (Bottle Gourd Chutney)       | Dinner     | Veg    | Andhra       | Ing: bottle gourd (peeled & chopped), green chilies, pe
+ID: 134 | Mamidikaya Thokku (Grated Raw Mango Pickle)   | Dinner     | Veg    | Andhra       | Ing: sour raw mango (grated), mustard powder (ava pindi
+ID: 135 | Karivepaku Pachadi (Curry Leaves Digestive Chutney) | Lunch      | Veg    | Andhra       | Ing: fresh curry leaves (karivepaku), chana dal, urad d
+ID: 136 | Rayalaseema Uggani (Spiced Puffed Rice / Borugula Upma) | Breakfast  | Veg    | Andhra       | Ing: puffed rice (borugulu / murmura), roasted gram pow
+ID: 137 | Andhra Stuffed Mirchi Bajji (Chili Fritters)  | Snack      | Veg    | Andhra       | Ing: bhavnagri / bajji chilies (large mild green chilie
+ID: 138 | Alasanda Vada (Black-Eyed Peas Fritters / Lobia Vada) | Breakfast  | Veg    | North Indian | Ing: alasandalu (black-eyed peas / lobia - soaked 4 hou
+ID: 139 | Gongura Rice (Sorrel Leaves Spiced Rice)      | Dinner     | Veg    | Andhra       | Ing: cooked rice, gongura leaves paste, peanuts, chana 
+ID: 140 | Atukula Upma (Andhra Poha with Peanuts)       | Breakfast  | Veg    | Andhra       | Ing: thick poha (atukulu / flattened rice), onions, pea
+ID: 141 | Crispy Andhra Rava Dosa                       | Breakfast  | Veg    | Andhra       | Ing: suji / rava (semolina), rice flour, maida or wheat
+ID: 142 | Biyyam Rava Upma (Uppudu Pindi / Rice Rava Upma) | Breakfast  | Veg    | South Indian | Ing: rice rava (biyyam rava), toor dal or moong dal, mu
+ID: 143 | Godhuma Rava Pongal (Broken Wheat Pongal)     | Breakfast  | Veg    | South Indian | Ing: broken wheat (godhuma rava / daliya), yellow moong
+ID: 144 | Palathalikalu (Traditional Rice Noodle Sweet) | Dessert    | Veg    | Andhra       | Ing: rice flour, milk (full fat), jaggery (bellam), car
+ID: 145 | Andhra Pootharekulu (Paper Sweet)             | Dessert    | Veg    | Andhra       | Ing: rice starch sheets (paper thin), powdered jaggery 
+ID: 146 | Kakinada Gottam Kaja (Syrup Filled Pastry Sweet) | Dessert    | Veg    | Andhra       | Ing: all-purpose flour (maida), sugar syrup, cardamom, 
+ID: 147 | Poornam Boorelu (Sweet Stuffed Fritters)      | Dessert    | Veg    | Andhra       | Ing: chana dal, jaggery (bellam), cardamom powder, dosa
+ID: 148 | Rava Kesari (Semolina Halwa with Saffron & Ghee) | Dessert    | Veg    | North Indian | Ing: semolina (rava / suji), sugar, pure ghee, cardamom
+ID: 149 | Bellam Paramannam (Jaggery Rice Pudding / Sweet Pongal) | Dessert    | Veg    | South Indian | Ing: raw rice (biyyam), moong dal, organic jaggery (bel
+ID: 150 | Jonna Rotti (Sorghum / Jowar Flatbread)       | Lunch      | Veg    | Andhra       | Ing: jowar flour (jonnalu / sorghum flour), warm water,

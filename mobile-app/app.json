@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Tastio Recipe & Nutrition",
+    "slug": "recipe-recommendation-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#00A388"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.mandalaraghavendra.tastio",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#00A388"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c89279d6-2be0-4423-8ec0-28af4e3fd3e0"
+      }
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font",
+      "expo-status-bar",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you identify food dishes and log nutrition.",
+          "cameraPermission": "The app accesses your camera to capture food dishes for instant AI identification."
+        }
+      ]
+    ]
+  }
+}

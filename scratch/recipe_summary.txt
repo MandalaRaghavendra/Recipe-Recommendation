@@ -1,0 +1,198 @@
+ID   1 | Non-Veg | Andhra         | Andhra Chicken Biryani
+ID   2 | Non-Veg | Andhra         | Gongura Mutton
+ID   3 | Non-Veg | Andhra         | Royyala Iguru (Prawn Curry)
+ID   4 | Non-Veg | Andhra         | Andhra Style Fish Curry
+ID   5 | Non-Veg | Andhra         | Andhra Special Egg Curry
+ID   6 | Non-Veg | Andhra         | Andhra Chicken Pulao
+ID   7 | Non-Veg | Andhra         | Andhra Special Chicken Fry
+ID   8 | Non-Veg | Andhra         | Andhra Mutton Curry
+ID   9 | Non-Veg | Andhra         | Andhra Style Crab Curry
+ID  10 | Non-Veg | Andhra         | Andhra Chicken 65
+ID  11 | Veg     | Andhra         | Andhra Special Veg Biryani
+ID  12 | Veg     | Andhra         | Andhra Style Paneer Curry
+ID  13 | Veg     | Andhra         | Andhra Special Aloo Curry
+ID  14 | Veg     | Andhra         | Andhra Style Baingan Bharta
+ID  15 | Veg     | Andhra         | Andhra Special Dal Tadka
+ID  16 | Veg     | Andhra         | Andhra Style Chana Masala
+ID  17 | Veg     | Andhra         | Andhra Special Vegetable Curry
+ID  18 | Veg     | Andhra         | Andhra Style Mushroom Curry
+ID  19 | Veg     | Andhra         | Andhra Special Tomato Rice
+ID  20 | Veg     | Andhra         | Andhra Style Lemon Rice
+ID  21 | Veg     | Andhra         | Andhra Special Tamarind Rice
+ID  22 | Veg     | Andhra         | Andhra Style Coconut Rice
+ID  23 | Veg     | Andhra         | Andhra Special Curd Rice
+ID  24 | Veg     | Andhra         | Andhra Style Bisi Bele Bath
+ID  25 | Veg     | Andhra         | Andhra Special Pongal
+ID  26 | Veg     | Andhra         | Gongura Pappu (Sorrel Leaves Dal)
+ID  27 | Veg     | South Indian   | Pesarattu (Green Moong Dal Dosa)
+ID  28 | Veg     | South Indian   | Gutti Vankaya Kura (Stuffed Brinjal Curry)
+ID  29 | Non-Veg | Andhra         | Andhra Chicken Curry (Kodi Kura)
+ID  30 | Veg     | Andhra         | Dibba Rotti (Andhra Minapa Rotti)
+ID  31 | Veg     | South Indian   | Tamarind Rice (Chintapandu Pulihora)
+ID  32 | Veg     | Andhra         | Tomato Pappu (Andhra Tomato Dal)
+ID  33 | Veg     | Andhra         | Aloo Vepudu (Andhra Potato Fry)
+ID  34 | Veg     | Andhra         | Coconut Chutney (Kobbari Pachadi)
+ID  35 | Veg     | South Indian   | Lemon Rice (Nimmakaya Pulihora)
+ID  36 | Veg     | South Indian   | Punugulu (Rice & Urad Dal Fritters)
+ID  37 | Veg     | Andhra         | Mamidikaya Pappu (Raw Mango Dal)
+ID  38 | Veg     | North Indian   | Mirapakaya Bajji (Chili Fritters)
+ID  39 | Veg     | North Indian   | Sunnundalu (Urad Dal Jaggery Laddu)
+ID  40 | Non-Veg | Andhra         | Chicken Biryani (Andhra Style)
+ID  41 | Veg     | North Indian   | Ragi Sankati (Finger Millet Balls)
+ID  42 | Veg     | North Indian   | Bendakaya Fry (Okra Stir Fry)
+ID  43 | Veg     | South Indian   | Rasam (Chaaru)
+ID  44 | Veg     | Maharashtrian  | Bobbatlu (Poli/Puran Poli)
+ID  45 | Non-Veg | North Indian   | Chicken Liver Fry
+ID  46 | Veg     | North Indian   | Masala Vada (Paruppu Vada)
+ID  47 | Veg     | North Indian   | Aratikaya Fry (Raw Banana Fry)
+ID  48 | Veg     | North Indian   | Ulavacharu (Horse Gram Soup)
+ID  49 | Non-Veg | Andhra         | Chicken Fry (Kodi Vepudu)
+ID  50 | Veg     | North Indian   | Semiya Payasam (Vermicelli Kheer)
+ID  51 | Veg     | North Indian   | Paneer Butter Masala
+ID  52 | Veg     | South Indian   | Dal Tadka (Yellow Lentil Curry)
+ID  53 | Non-Veg | North Indian   | Grilled Lemon Herb Chicken
+ID  54 | Veg     | North Indian   | Palak Paneer (Spinach Cottage Cheese)
+ID  55 | Non-Veg | North Indian   | Egg Bhurji (Indian Masala Scrambled Eggs)
+ID  56 | Veg     | South Indian   | Vegetable Oats Upma
+ID  57 | Non-Veg | North Indian   | Chicken Tikka Masala
+ID  58 | Veg     | South Indian   | Crispy Masala Dosa with Potato Filling
+ID  59 | Non-Veg | North Indian   | Tandoori Fish Tikka
+ID  60 | Veg     | North Indian   | Quinoa Mediterranean Power Bowl
+ID  61 | Non-Veg | North Indian   | Classic Butter Chicken (Murgh Makhani)
+ID  62 | Veg     | North Indian   | Punjabi Rajma Masala (Red Kidney Beans)
+ID  63 | Non-Veg | North Indian   | Avocado Toast with Poached Eggs
+ID  64 | Veg     | North Indian   | Mushroom Pepper Fry
+ID  65 | Non-Veg | North Indian   | Mutton Sukka (Spicy Dry Roast)
+ID  66 | Veg     | North Indian   | Moong Dal Khichdi
+ID  67 | Veg     | North Indian   | Tofu & Broccoli Stir Fry
+ID  68 | Non-Veg | North Indian   | Coastal Prawns Masala Fry
+ID  69 | Veg     | North Indian   | Sprouted Moong Salad
+ID  70 | Veg     | North Indian   | Greek Yogurt Berry & Nut Parfait
+ID  71 | Non-Veg | North Indian   | Healthy Chicken Clear Soup
+ID  72 | Veg     | North Indian   | Besan Chilla (Savory Chickpea Pancakes)
+ID  73 | Non-Veg | South Indian   | Methi Chicken (Fenugreek Chicken Curry)
+ID  74 | Veg     | North Indian   | Royal Vegetable Biryani
+ID  75 | Veg     | North Indian   | Peanut Butter Banana Protein Smoothie
+ID  76 | Non-Veg | Andhra         | Natu Kodi Pulusu (Country Chicken Curry)
+ID  77 | Non-Veg | Andhra         | Nellore Chepala Pulusu (Tangy Fish Curry)
+ID  78 | Non-Veg | Andhra         | Kodi Vepudu - Pepper Style (Andhra Pepper Chicken)
+ID  79 | Non-Veg | Telangana      | Mutton Keema Unde Kura (Meatball Curry)
+ID  80 | Non-Veg | Andhra         | Gongura Royyalu (Prawns with Sorrel Leaves)
+ID  81 | Non-Veg | Andhra         | Peethala Vepudu (Andhra Crab Fry)
+ID  82 | Non-Veg | Andhra         | Guddu Pulusu (Andhra Egg Tamarind Curry)
+ID  83 | Non-Veg | Andhra         | Boti Kura (Spicy Andhra Lamb Tripe Curry)
+ID  84 | Non-Veg | Andhra         | Kobbari Palu Kodi Kura (Chicken in Coconut Milk)
+ID  85 | Non-Veg | Andhra         | Nellore Chepala Vepudu (Nellore Spicy Fish Fry)
+ID  86 | Non-Veg | Andhra         | Royyala Vepudu (Andhra Crispy Prawn Fry)
+ID  87 | Non-Veg | Andhra         | Kodi Guddu Porutu (Andhra Spiced Egg Scramble)
+ID  88 | Non-Veg | Andhra         | Talakaya Kura (Spicy Andhra Mutton Head Meat Curry)
+ID  89 | Non-Veg | Andhra         | Natu Kodi Fry (Country Chicken Dry Roast)
+ID  90 | Non-Veg | North Indian   | Chintachiguru Mutton (Tender Tamarind Leaves Mutton)
+ID  91 | Non-Veg | Andhra         | Gongura Chicken (Sorrel Leaf Chicken Curry)
+ID  92 | Non-Veg | Andhra         | Andhra Kodi Chips (Crispy Chicken Strips)
+ID  93 | Non-Veg | Andhra         | Andhra Mutton Chops Fry
+ID  94 | Non-Veg | Andhra         | Royyala Pulao (Andhra Spiced Prawn Pulao)
+ID  95 | Non-Veg | Andhra         | Bommidala Pulusu (Mudfish in Tangy Stew)
+ID  96 | Veg     | Andhra         | Dosakaya Pappu (Yellow Cucumber Dal)
+ID  97 | Veg     | Andhra         | Palakura Pappu (Spinach Dal)
+ID  98 | Veg     | Andhra         | Menthi Kura Pappu (Fenugreek Leaves Dal)
+ID  99 | Veg     | Andhra         | Beerakaya Pappu (Ridge Gourd Dal)
+ID 100 | Veg     | Andhra         | Bachali Kura Pappu (Malabar Spinach Dal)
+ID 101 | Veg     | Andhra         | Majjiga Pulusu (Andhra Seasoned Buttermilk Stew)
+ID 102 | Veg     | Andhra         | Challa Charu (Spiced Buttermilk Rasam)
+ID 103 | Veg     | Andhra         | Miriyala Chaaru (Andhra Pepper Rasam)
+ID 104 | Veg     | Andhra         | Andhra Tomato Charu (Spiced Tomato Rasam)
+ID 105 | Veg     | Andhra         | Kandi Kattu (Clear Toor Dal Broth)
+ID 106 | Veg     | North Indian   | Menthi Majjiga (Tempered Buttermilk with Fenugreek)
+ID 107 | Veg     | Andhra         | Pachi Pulusu (Rayalaseema Raw Tamarind Stew)
+ID 108 | Veg     | Andhra         | Kakarakaya Pulusu (Bitter Gourd Tangy Stew)
+ID 109 | Veg     | Andhra         | Anapakaya Pulusu (Bottle Gourd Tamarind Stew)
+ID 110 | Veg     | Andhra         | Vankaya Pulusu (Brinjal Tangy Stew)
+ID 111 | Veg     | Andhra         | Dondakaya Vepudu (Tindora / Ivy Gourd Fry with Peanuts)
+ID 112 | Veg     | Andhra         | Chamadumpa Vepudu (Crispy Taro Root / Arbi Fry)
+ID 113 | Veg     | Andhra         | Kanda Bachali Kura (Yam with Malabar Spinach)
+ID 114 | Veg     | Andhra         | Cabbage Senagapappu Vepudu (Cabbage & Chana Dal Stir Fry)
+ID 115 | Veg     | Andhra         | Andhra Beetroot Vepudu
+ID 116 | Veg     | Andhra         | Kakarakaya Vepudu (Crispy Bitter Gourd Fry)
+ID 117 | Veg     | Andhra         | Beerakaya Pechula Vepudu (Ridge Gourd Peel Stir Fry)
+ID 118 | Veg     | Andhra         | Potlakaya Fry (Snake Gourd Coconut Fry)
+ID 119 | Veg     | Andhra         | Andhra Gobi Vepudu (Spicy Cauliflower Stir Fry)
+ID 120 | Veg     | Andhra         | Carrot Senagapappu Kura (Carrot & Bengal Gram Fry)
+ID 121 | Veg     | North Indian   | Goruchikkudu Fry (Cluster Beans Coconut Fry)
+ID 122 | Veg     | Andhra         | Sorakaya Palu Kura (Bottle Gourd in Milk Gravy)
+ID 123 | Veg     | South Indian   | Munakkaya Kaju Kura (Drumstick Cashew Curry)
+ID 124 | Veg     | North Indian   | Vankaya Kothimeera Karam (Brinjal in Cilantro Chili Paste)
+ID 125 | Veg     | North Indian   | Capsicum Senagapindi Kura (Bell Pepper with Besan)
+ID 126 | Veg     | Andhra         | Gongura Pachadi (Authentic Sorrel Leaves Chutney)
+ID 127 | Veg     | Andhra         | Rallato Nurchina Tomato Pachadi (Rustic Tomato Chutney)
+ID 128 | Veg     | Andhra         | Dosakaya Pachadi (Raw Yellow Cucumber Chutney)
+ID 129 | Veg     | Andhra         | Beerakaya Pachadi (Ridge Gourd Roti Pachadi)
+ID 130 | Veg     | Andhra         | Vankaya Pachadi (Fire-Roasted Brinjal Chutney)
+ID 131 | Veg     | Andhra         | Kothimeera Pachadi (Fresh Coriander Chutney)
+ID 132 | Veg     | Andhra         | Allam Pachadi (Spicy Sweet Ginger Chutney)
+ID 133 | Veg     | Andhra         | Sorakaya Pachadi (Bottle Gourd Chutney)
+ID 134 | Veg     | Andhra         | Mamidikaya Thokku (Grated Raw Mango Pickle)
+ID 135 | Veg     | Andhra         | Karivepaku Pachadi (Curry Leaves Digestive Chutney)
+ID 136 | Veg     | Andhra         | Rayalaseema Uggani (Spiced Puffed Rice / Borugula Upma)
+ID 137 | Veg     | Andhra         | Andhra Stuffed Mirchi Bajji (Chili Fritters)
+ID 138 | Veg     | North Indian   | Alasanda Vada (Black-Eyed Peas Fritters / Lobia Vada)
+ID 139 | Veg     | Andhra         | Gongura Rice (Sorrel Leaves Spiced Rice)
+ID 140 | Veg     | Andhra         | Atukula Upma (Andhra Poha with Peanuts)
+ID 141 | Veg     | Andhra         | Crispy Andhra Rava Dosa
+ID 142 | Veg     | South Indian   | Biyyam Rava Upma (Uppudu Pindi / Rice Rava Upma)
+ID 143 | Veg     | South Indian   | Godhuma Rava Pongal (Broken Wheat Pongal)
+ID 144 | Veg     | Andhra         | Palathalikalu (Traditional Rice Noodle Sweet)
+ID 145 | Veg     | Andhra         | Andhra Pootharekulu (Paper Sweet)
+ID 146 | Veg     | Andhra         | Kakinada Gottam Kaja (Syrup Filled Pastry Sweet)
+ID 147 | Veg     | Andhra         | Poornam Boorelu (Sweet Stuffed Fritters)
+ID 148 | Veg     | North Indian   | Rava Kesari (Semolina Halwa with Saffron & Ghee)
+ID 149 | Veg     | South Indian   | Bellam Paramannam (Jaggery Rice Pudding / Sweet Pongal)
+ID 150 | Veg     | Andhra         | Jonna Rotti (Sorghum / Jowar Flatbread)
+ID 151 | Veg     | Telangana      | Telangana Sarva Pindi
+ID 152 | Veg     | Telangana      | Hyderabadi Bagara Rice & Dalcha
+ID 153 | Non-Veg | Telangana      | Telangana Mamsam Curry (Country Mutton)
+ID 154 | Veg     | Telangana      | Telangana Pacchi Pulusu
+ID 155 | Non-Veg | Telangana      | Golichina Mamsam (Telangana Mutton Fry)
+ID 156 | Veg     | Telangana      | Sakinalu (Telangana Festive Crunch)
+ID 157 | Non-Veg | Punjabi        | Punjabi Butter Chicken (Murgh Makhani)
+ID 158 | Veg     | Punjabi        | Amritsari Dal Makhani
+ID 159 | Veg     | Punjabi        | Amritsari Chole Bhature
+ID 160 | Veg     | Punjabi        | Paneer Tikka Masala
+ID 161 | Veg     | Punjabi        | Sarson Ka Saag & Makki Di Roti
+ID 162 | Veg     | Punjabi        | Punjabi Rajma Masala
+ID 163 | Veg     | Gujarati       | Khaman Dhokla (Soft & Spongy)
+ID 164 | Veg     | Gujarati       | Gujarati Methi Thepla
+ID 165 | Veg     | Gujarati       | Authentic Gujarati Undhiyu
+ID 166 | Veg     | Gujarati       | Gujarati Khatti Meethi Dal
+ID 167 | Veg     | Gujarati       | Gujarati Handvo (Crisp Baked Lentil Cake)
+ID 168 | Veg     | Gujarati       | Sev Tameta Nu Shaak (Kathiyawadi Style)
+ID 169 | Non-Veg | Bengali        | Shorshe Maach (Bengali Mustard Fish)
+ID 170 | Non-Veg | Bengali        | Kosha Mangsho (Bengali Mutton Kasha)
+ID 171 | Veg     | Bengali        | Bengali Chholar Dal with Luchi
+ID 172 | Veg     | Bengali        | Aloo Posto (Potatoes in Poppy Seed Paste)
+ID 173 | Non-Veg | Bengali        | Chingri Malai Curry (Prawns in Coconut Milk)
+ID 174 | Non-Veg | Bengali        | Kolkata Style Chicken Chaap
+ID 175 | Veg     | Maharashtrian  | Mumbai Pav Bhaji (Street Style)
+ID 176 | Veg     | Maharashtrian  | Kolhapuri Misal Pav (Fiery Sprouted Curry)
+ID 177 | Veg     | Maharashtrian  | Traditional Puran Poli
+ID 178 | Veg     | Maharashtrian  | Kanda Poha (Traditional Maharashtrian)
+ID 179 | Non-Veg | Maharashtrian  | Kolhapuri Chicken Sukka
+ID 180 | Veg     | Maharashtrian  | Sabudana Khichdi (Non-Sticky Maharashtrian)
+ID 181 | Veg     | Kerala         | Kerala Appam with Vegetable Stew
+ID 182 | Non-Veg | Kerala         | Kerala Meen Curry (Kottayam Fish Curry)
+ID 183 | Non-Veg | Kerala         | Thalassery Malabar Chicken Biryani
+ID 184 | Veg     | Kerala         | Kerala Puttu with Kadala Curry
+ID 185 | Veg     | Kerala         | Authentic Kerala Avial
+ID 186 | Non-Veg | Kerala         | Karimeen Pollichathu (Banana Leaf Roasted Fish)
+ID 187 | Veg     | Karnataka      | Bisi Bele Bath (Classic Karnataka)
+ID 188 | Veg     | Karnataka      | Mysore Masala Dosa
+ID 189 | Non-Veg | Karnataka      | Mangalore Chicken Ghee Roast
+ID 190 | Veg     | Karnataka      | Neer Dosa with Coconut Chutney
+ID 191 | Veg     | Karnataka      | Crispy Maddur Vada
+ID 192 | Non-Veg | Karnataka      | Ragi Mudde with Nati Koli Saaru
+ID 193 | Non-Veg | Tamil Nadu     | Chettinad Chicken Curry
+ID 194 | Veg     | Tamil Nadu     | Authentic Tamil Sambar with Soft Idli
+ID 195 | Veg     | Tamil Nadu     | Crispy Medu Vada (Hotel Style)
+ID 196 | Veg     | Tamil Nadu     | Ven Pongal & Coconut Chutney
+ID 197 | Non-Veg | Tamil Nadu     | Madurai Kothu Parotta (Street Style)
+ID 198 | Veg     | Tamil Nadu     | Thanjavur Tomato Rasam

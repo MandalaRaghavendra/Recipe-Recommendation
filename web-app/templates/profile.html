@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#7B2C3F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <title>User Profile - Tastio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- NEW THEME: WARM AMBER & DEEP BURGUNDY --- */
+        :root {
+            --primary-color: #7B2C3F; /* Deep Burgundy */
+            --accent-color: #FF9E1F; /* Warm Amber/Orange */
+            --light-bg: #f8f9fa; /* Light Gray for body */
+        }
+
+        body { background-color: var(--light-bg); font-family: 'Inter', sans-serif; }
+        .navbar { background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,.05); }
+        .profile-container { margin-top: 30px; }
+        .sidebar { background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .main-content-card { border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        .header-primary {
+            background: linear-gradient(135deg, var(--primary-color), #9D3B55);
+            color: white;
+            padding: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .text-primary, .btn-primary { color: var(--primary-color) !important; }
+        .btn-primary { 
+            background-color: var(--accent-color) !important; 
+            border-color: var(--accent-color) !important; 
+            color: white !important;
+        }
+        .text-info { color: var(--accent-color) !important; }
+
+        .form-control, .form-select { border-radius: 8px; }
+        .nav-link.sidebar-link { color: #495057; }
+        .nav-link.sidebar-link:hover, .nav-link.sidebar-link.active {
+            background-color: rgba(123, 44, 63, 0.1); /* Light Burgundy hover */
+            color: var(--primary-color);
+            border-radius: 5px;
+        }
+        .detail-value { font-weight: bold; color: #343a40; }
+
+        /* Mobile Bottom Navigation Bar */
+        .mobile-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1040;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+            padding: 8px 16px;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 0.72rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        .mobile-nav-item i {
+            font-size: 1.25rem;
+            margin-bottom: 3px;
+            transition: transform 0.2s;
+        }
+        .mobile-nav-item:hover, .mobile-nav-item.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .mobile-nav-item.active i {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Floating AI Coach Button */
+        .floating-coach-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            background: linear-gradient(135deg, #7B2C3F, #9D3B55);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 8px 24px rgba(123, 44, 63, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .floating-coach-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 28px rgba(123, 44, 63, 0.45);
+            color: #FFD180 !important;
+        }
+        .coach-pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        @media (max-width: 768px) {
+            .floating-coach-btn {
+                bottom: 75px;
+                right: 16px;
+                padding: 8px 14px;
+                font-size: 0.82rem;
+            }
+        }
+
+        /* Mobile Adjustments for Profile Sidebar and Cards */
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 75px;
+            }
+            .sidebar {
+                margin-bottom: 20px;
+                padding: 12px;
+            }
+            .sidebar .nav-pills {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                white-space: nowrap;
+                gap: 8px;
+                padding-bottom: 6px;
+            }
+            .sidebar .nav-pills .nav-item {
+                flex-shrink: 0;
+            }
+            .sidebar .nav-link {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+            .header-primary {
+                padding: 14px;
+            }
+            .profile-container {
+                margin-top: 15px;
+            }
+        }
+        .detail-label { color: #6c757d; }
+        
+        /* Style for history items */
+        .history-item { 
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-left: 5px solid var(--accent-color); 
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: pointer; 
+            transition: all 0.25s ease;
+            overflow: hidden;
+        }
+        .history-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(123, 44, 63, 0.12);
+            border-left-color: var(--primary-color);
+            background-color: #ffffff;
+        }
+        .history-img-wrapper {
+            width: 110px;
+            height: 110px;
+            min-width: 110px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f1f3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dee2e6;
+        }
+        .history-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .history-content {
+            padding: 4px 8px;
+            flex-grow: 1;
+        }
+        .rating-badge {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        .review-comment-box {
+            background-color: #f8f9fa;
+            border-left: 3px solid #dee2e6;
+            padding: 4px 10px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            color: #495057;
+            font-style: italic;
+        }
+        .ingredients-list { list-style: none; padding-left: 0; }
+        .ingredients-list li { margin-bottom: 5px; }
+        .steps-list { 
+            padding-left: 0; 
+            list-style: none; 
+            counter-reset: step-counter; 
+        }
+        .steps-list li { 
+            position: relative;
+            counter-increment: step-counter;
+            padding: 12px 16px 12px 48px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #eef0f3;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            width: 26px;
+            height: 26px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        /* Progress bar custom styling */
+        .progress-bar-protein { background-color: var(--primary-color) !important; }
+        .progress-bar-calories { background-color: var(--accent-color) !important; }
+
+        /* Modal specific styling for theme consistency */
+        #detailModal .modal-header, #reviewModal .modal-header {
+             background: linear-gradient(135deg, var(--primary-color), #9D3B55) !important;
+             color: white;
+        }
+
+        /* Enhanced button styling */
+        .btn-primary:hover {
+            background-color: #E58E1B !important;
+            border-color: #E58E1B !important;
+        }
+
+        /* Card header enhancements */
+        .card-header-custom {
+            background: linear-gradient(135deg, var(--primary-color), #9D3B55);
+            color: white;
+            border-radius: 8px 8px 0 0 !important;
+        }
+
+        /* --- CHATGPT AI NUTRITION COACH STYLING --- */
+        .ai-coach-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(123, 44, 63, 0.08), 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid rgba(123, 44, 63, 0.15) !important;
+        }
+        .bg-gradient-ai {
+            background: linear-gradient(135deg, #10a37f 0%, #0d8a6a 45%, #7B2C3F 100%);
+        }
+        .ai-avatar-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .ai-sparkle-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .bg-ai-canvas {
+            background: #fbfbfc;
+        }
+        .ai-chat-bubble {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            border: 1px solid #eef0f3;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.03);
+        }
+        .ai-badge-label {
+            display: inline-flex;
+            align-items: center;
+            background: #f3f4f6;
+            color: #1f2937;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #e5e7eb;
+        }
+        .ai-insight-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 15px 18px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.22s ease-in-out;
+        }
+        .ai-insight-box:hover {
+            background: #ffffff;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px);
+        }
+        .insight-icon-pill {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .bg-primary-subtle {
+            background-color: rgba(123, 44, 63, 0.12) !important;
+            color: var(--primary-color) !important;
+        }
+        .bg-success-subtle {
+            background-color: rgba(16, 163, 127, 0.14) !important;
+            color: #0d8a6a !important;
+        }
+        .bg-info-subtle {
+            background-color: rgba(13, 110, 253, 0.12) !important;
+            color: #0d6efd !important;
+        }
+        .bg-warning-subtle {
+            background-color: rgba(255, 158, 31, 0.15) !important;
+            color: #b45309 !important;
+        }
+        .bg-secondary-subtle {
+            background-color: rgba(108, 117, 125, 0.12) !important;
+            color: #495057 !important;
+        }
+        .ai-insight-text {
+            font-size: 0.93rem;
+            line-height: 1.65;
+            color: #374151 !important;
+        }
+        .ai-insight-text strong {
+            color: #111827;
+            font-weight: 700;
+        }
+        .ai-tip-item {
+            font-size: 0.91rem;
+            line-height: 1.6;
+            padding: 5px 0;
+            color: #374151;
+        }
+        .ai-tip-item strong {
+            color: #111827;
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-dark" href="{{ url_for('dashboard') }}"><i class="fas fa-utensils me-2" style="color: var(--accent-color);"></i>Tastio</a>
+        <div class="collapse navbar-collapse show" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}"><i class="fas fa-home me-1"></i>Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('meal_plan') }}"><i class="fas fa-calendar-alt me-1 text-warning"></i>Meal Plan</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('coach') }}"><i class="fas fa-robot me-1 text-warning"></i>AI Coach</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('profile') }}"><i class="fas fa-user me-1"></i>Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt me-1"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container profile-container">
+    {% if message %}
+        <div class="alert mt-3 text-center {% if '✅' in message %}alert-success{% elif '❌' in message %}alert-danger{% else %}alert-info{% endif %}" role="alert">
+            {{ message | safe }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="sidebar">
+                <p class="fw-bold text-uppercase mb-3 text-secondary">Navigation</p>
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    
+                    <a class="nav-link sidebar-link" href="{{ url_for('dashboard') }}" role="tab">
+                        <i class="fas fa-home me-2"></i>Home (Recipe Menu)
+                    </a>
+                    
+                    <a class="nav-link sidebar-link {% if active_tab == 'v-pills-profile' or not active_tab %}active{% endif %}" 
+                        id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="{% if active_tab == 'v-pills-profile' or not active_tab %}true{% else %}false{% endif %}">
+                        <i class="fas fa-user-circle me-2"></i>My Details
+                    </a>
+                    
+                    <a class="nav-link sidebar-link {% if active_tab == 'v-pills-edit' %}active{% endif %}" 
+                        id="v-pills-edit-tab" data-bs-toggle="pill" data-bs-target="#v-pills-edit" type="button" role="tab" aria-controls="v-pills-edit" aria-selected="{% if active_tab == 'v-pills-edit' %}true{% else %}false{% endif %}">
+                        <i class="fas fa-edit me-2"></i>Edit Profile
+                    </a>
+                    
+                    <a class="nav-link sidebar-link {% if active_tab == 'v-pills-history' %}active{% endif %}" 
+                        id="v-pills-history-tab" data-bs-toggle="pill" data-bs-target="#v-pills-history" type="button" role="tab" aria-controls="v-pills-history" aria-selected="{% if active_tab == 'v-pills-history' %}true{% else %}false{% endif %}">
+                        <i class="fas fa-utensils me-2"></i>Eaten History
+                    </a>
+
+                    <a class="nav-link sidebar-link {% if active_tab == 'v-pills-diet-history' %}active{% endif %}" 
+                        id="v-pills-diet-history-tab" data-bs-toggle="pill" data-bs-target="#v-pills-diet-history" type="button" role="tab" 
+                        aria-controls="v-pills-diet-history" aria-selected="{% if active_tab == 'v-pills-diet-history' %}true{% else %}false{% endif %}">
+                        <i class="fas fa-chart-line me-2"></i>Diet History
+                    </a>
+                    
+                    <a class="nav-link sidebar-link" href="{{ url_for('meal_plan') }}" role="tab">
+                        <i class="fas fa-calendar-alt me-2 text-warning"></i>7-Day AI Meal Plan
+                    </a>
+
+                    <a class="nav-link sidebar-link" href="{{ url_for('coach') }}" role="tab">
+                        <i class="fas fa-robot me-2 text-warning"></i>AI Nutrition Coach
+                    </a>
+                    
+                    <a class="nav-link sidebar-link mt-3 text-danger" href="{{ url_for('logout') }}" role="tab">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </div>
+                </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="tab-content main-content-card bg-white" id="v-pills-tabContent">
+                
+                <div class="tab-pane fade {% if active_tab == 'v-pills-profile' or not active_tab %}show active{% endif %}" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="header-primary">
+                        <h3 class="mb-0"><i class="fas fa-info-circle me-2"></i>My Personal Details</h3>
+                        <p class="mb-0 small">{{ session.user.name or "User" }}, here are your current settings.</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="detail-label mb-0">Full Name</p>
+                                <p class="detail-value">{{ session.user.name or "N/A" }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="detail-label mb-0">Email</p>
+                                <p class="detail-value">{{ session.user.email or "N/A" }}</p>
+                            </div>
+                        </div>
+                        <!-- START: HEALTH METRICS BLOCK (UPDATED) -->
+                        <h5 class="mt-3 mb-3 text-primary border-bottom pb-2">Health Metrics</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <p class="detail-label mb-0">Age</p>
+                                <p class="detail-value">
+                                    {% if profile.age %}{{ profile.age }} years{% else %}N/A{% endif %}
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="detail-label mb-0">Gender</p>
+                                <p class="detail-value">
+                                    {% if profile.gender %}{{ profile.gender | capitalize }}{% else %}N/A{% endif %}
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="detail-label mb-0">Height</p>
+                                <p class="detail-value">
+                                    {% if profile.height %}{{ profile.height }} cm{% else %}N/A{% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="detail-label mb-0">Weight</p>
+                                <p class="detail-value">
+                                    {% if profile.weight %}{{ profile.weight }} kg{% else %}N/A{% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END: HEALTH METRICS BLOCK -->
+
+                        <h5 class="mt-4 mb-3 text-primary border-bottom pb-2">Diet & Preferences</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="detail-label mb-0">Diet Goal</p>
+                                <p class="detail-value">
+                                    {% if profile.diet_goal == 'weight_loss' %}Weight Loss (Lower Calories)
+                                    {% elif profile.diet_goal == 'muscle_gain' %}Muscle Gain (Higher Protein)
+                                    {% elif profile.diet_goal == 'weight_gain' %}Weight Gain (Higher Calories)
+                                    {% else %}No specific goal{% endif %}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="detail-label mb-0">Diet Duration</p>
+                                <p class="detail-value">
+                                    {% if profile.duration_months %}{{ profile.duration_months }} Months{% else %}3 Months (Default){% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="detail-label mb-0">Food Preference</p>
+                                <p class="detail-value">{{ profile.food_pref or "Vegetarian & Non-Vegetarian" }}</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <p class="detail-label mb-0">Allergies/Avoided Ingredients</p>
+                            <p class="detail-value">
+                                {% if profile.allergies %}{{ profile.allergies }}{% else %}None listed. Enjoy!{% endif %}
+                            </p>
+                        </div>
+
+                        <a href="#v-pills-edit" role="tab" data-bs-toggle="pill" data-bs-target="#v-pills-edit" id="edit-profile-btn" class="btn btn-primary mt-3">
+                            <i class="fas fa-edit me-2"></i>Edit Profile
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade {% if active_tab == 'v-pills-edit' %}show active{% endif %}" id="v-pills-edit" role="tabpanel" aria-labelledby="v-pills-edit-tab">
+                    <div class="header-primary">
+                        <h3 class="mb-0"><i class="fas fa-user-edit me-2"></i>Edit Your Preferences</h3>
+                        <p class="mb-0 small">Update your personalized metrics and dietary preferences below and save your changes.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST" action="{{ url_for('profile') }}">
+                            <h5 class="mt-3 mb-3 text-primary">Health & Metrics</h5>
+
+                            <!-- NEW ROW: AGE AND GENDER -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" value="{{ profile.age or '' }}" placeholder="e.g., 30" min="15" max="99">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" name="gender">
+                                        <option value="">Select...</option>
+                                        <option value="male" {% if (profile.gender|lower) == 'male' %}selected{% endif %}>Male</option>
+                                        <option value="female" {% if (profile.gender|lower) == 'female' %}selected{% endif %}>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- END NEW ROW -->
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="height" class="form-label">Height (cm)</label>
+                                    <input type="number" step="0.1" class="form-control" id="height" name="height" value="{{ profile.height or '' }}" placeholder="e.g., 175">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="weight" class="form-label">Weight (kg)</label>
+                                    <input type="number" step="0.1" class="form-control" id="weight" name="weight" value="{{ profile.weight or '' }}" placeholder="e.g., 70">
+                                </div>
+                            </div>
+
+                            <h5 class="mt-4 mb-3 text-primary">Dietary Preferences</h5>
+
+                            <!-- NEW ROW: DIET DURATION -->
+                            <div class="mb-3">
+                                <label for="duration_months" class="form-label">Diet Plan Duration (Months)</label>
+                                <select class="form-select" id="duration_months" name="duration_months">
+                                    <option value="1" {% if profile.duration_months == 1 %}selected{% endif %}>1 Month</option>
+                                    <option value="3" {% if profile.duration_months == 3 or not profile.duration_months %}selected{% endif %}>3 Months (Recommended)</option>
+                                    <option value="6" {% if profile.duration_months == 6 %}selected{% endif %}>6 Months</option>
+                                </select>
+                            </div>
+                            <!-- END NEW ROW -->
+
+                            <div class="mb-3">
+                                <label for="food_pref" class="form-label">Food Preference</label>
+                                <select class="form-select" id="food_pref" name="food_pref">
+                                    <option value="both" {% if (profile.food_pref|lower) == 'both' or not profile.food_pref %}selected{% endif %}>Vegetarian & Non-Vegetarian</option>
+                                    <option value="veg" {% if (profile.food_pref|lower) == 'veg' %}selected{% endif %}>Vegetarian Only</option>
+                                    <option value="non-veg" {% if (profile.food_pref|lower) == 'non-veg' %}selected{% endif %}>Non-Vegetarian Only</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="diet_goal" class="form-label">Diet Goal</label>
+                                <select class="form-select" id="diet_goal" name="diet_goal">
+                                    <option value="">No specific goal</option>
+                                    <option value="weight_loss" {% if (profile.diet_goal|lower) == 'weight_loss' %}selected{% endif %}>Weight Loss (Lower Calories)</option>
+                                    <option value="muscle_gain" {% if (profile.diet_goal|lower) == 'muscle_gain' %}selected{% endif %}>Muscle Gain (Higher Protein)</option>
+                                    <option value="weight_gain" {% if (profile.diet_goal|lower) == 'weight_gain' %}selected{% endif %}>Weight Gain (Higher Calories)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="allergies" class="form-label">Allergies/Avoided Ingredients</label>
+                                <textarea class="form-control" id="allergies" name="allergies" rows="3" placeholder="e.g., milk, peanuts, gluten, eggs">{{ profile.allergies or '' }}</textarea>
+                                <div class="form-text">Enter ingredients you are allergic to or want to avoid, separated by commas.</div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg" id="saveProfileBtn">
+                                    <i class="fas fa-save me-2"></i>Save Preferences
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade {% if active_tab == 'v-pills-history' %}show active{% endif %}" id="v-pills-history" role="tabpanel" aria-labelledby="v-pills-history-tab">
+                    <div class="header-primary">
+                        <h3 class="mb-0"><i class="fas fa-utensils me-2"></i>Eaten History</h3>
+                        <p class="mb-0 small">Recipes you've marked as eaten, ordered by most recent.</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="alert alert-info py-2 small mb-4">
+                            <strong>Current User ID (Session/Users.objectId):</strong> 
+                            <span class="text-break">{{ session.user.objectId or 'Not Logged In' }}</span>
+                            <br>
+                            *This ID must match the `user_id` column in CookedRecipes for records to appear.
+                        </div>
+
+                        {% if cooked_recipes %}
+                            {% for recipe in cooked_recipes %}
+                            {% set recipe_json = recipe | tojson %} 
+                            
+                            <div class="card mb-3 history-item" 
+                                onclick="openDetailsModal(JSON.parse(this.dataset.recipe))" 
+                                data-recipe='{{ recipe_json }}'>
+                                
+                                <div class="d-flex flex-column flex-sm-row align-items-center p-3 gap-3">
+                                    <!-- Separate Image Container -->
+                                    <div class="history-img-wrapper shadow-sm flex-shrink-0">
+                                        <img src="{{ recipe.image_link }}" class="history-img" alt="{{ recipe.recipe_name }}"
+                                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';">
+                                    </div>
+                                    
+                                    <!-- Separated Text and Metadata Section -->
+                                    <div class="history-content w-100 p-0">
+                                        <div class="d-flex flex-wrap justify-content-between align-items-start mb-1">
+                                            <h5 class="mb-1 fw-bold" style="color: var(--primary-color); font-size: 1.1rem;">
+                                                {{ recipe.recipe_name }}
+                                            </h5>
+                                            {% if recipe.veg_nonveg %}
+                                            <span class="badge {% if recipe.veg_nonveg == 'Veg' %}bg-success{% else %}bg-danger{% endif %} text-white small">
+                                                {{ recipe.veg_nonveg }}
+                                            </span>
+                                            {% endif %}
+                                        </div>
+
+                                        <p class="card-text text-muted small mb-2">
+                                            <i class="fas fa-calendar-alt me-1 text-secondary"></i> Cooked on: 
+                                            <span class="fw-semibold text-dark">{{ recipe.date_cooked[:10] if recipe.date_cooked else 'N/A' }}</span>
+                                            {% if recipe.nutritions and recipe.nutritions.calories %}
+                                                <span class="ms-2 text-secondary">•</span>
+                                                <span class="ms-2"><i class="fas fa-fire me-1 text-warning"></i>{{ recipe.nutritions.calories }} kcal</span>
+                                            {% endif %}
+                                            {% if recipe.nutritions and recipe.nutritions.protein_g %}
+                                                <span class="ms-2 text-secondary">•</span>
+                                                <span class="ms-2"><i class="fas fa-dumbbell me-1 text-primary"></i>{{ recipe.nutritions.protein_g }}g Protein</span>
+                                            {% endif %}
+                                        </p>
+                                        
+                                        <!-- Ratings & Reviews Section (Clearly Separated) -->
+                                        <div class="d-flex flex-wrap align-items-center gap-2 mt-2 pt-2 border-top">
+                                            {% if recipe.review %}
+                                                {% set rating = recipe.review.rating %}
+                                                <span class="rating-badge">
+                                                    <i class="fas fa-star text-warning me-1"></i>Rated {{ rating }}/5
+                                                </span>
+                                                {% if recipe.review.comment %}
+                                                    <div class="review-comment-box text-truncate" style="max-width: 420px;">
+                                                        "{{ recipe.review.comment }}"
+                                                    </div>
+                                                {% endif %}
+                                            {% else %}
+                                                <span class="badge bg-warning text-dark px-2 py-1"><i class="fas fa-edit me-1"></i>Awaiting Review</span>
+                                                <button type="button" class="btn btn-sm btn-outline-warning py-0 px-2" style="font-size: 0.8rem;"
+                                                        onclick="event.stopPropagation(); setReviewModalData('{{ recipe.recipe_id }}', '{{ recipe.recipe_name }}'); openReviewModal();">
+                                                    Leave Review
+                                                </button>
+                                            {% endif %}
+
+                                            <span class="ms-auto text-primary small fw-semibold">
+                                                <i class="fas fa-eye me-1"></i>View Full Recipe Steps &rarr;
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center py-5">
+                                <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                                <p class="lead text-muted">Your eating history is empty!</p>
+                                <p>Start marking recipes as "Eaten" from the <a href="{{ url_for('dashboard') }}">Home (Recipe Menu)</a>.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                          <div class="tab-pane fade {% if active_tab == 'v-pills-diet-history' %}show active{% endif %}" id="v-pills-diet-history" role="tabpanel" aria-labelledby="v-pills-diet-history-tab">
+                    <div class="header-primary d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <div>
+                            <h3 class="mb-1"><i class="fas fa-chart-pie me-2"></i>Nutrition Analytics Dashboard</h3>
+                            <p class="mb-0 small text-white-50">Multi-dimensional nutrition tracking based on real database records and metabolic targets.</p>
+                        </div>
+                        <div class="btn-group bg-white rounded-pill p-1 shadow-sm" role="group" id="analyticsViewSwitcher">
+                            <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 fw-bold" onclick="switchAnalyticsView('today', this)" id="btnViewToday">
+                                <i class="fas fa-sun me-1 text-warning"></i>Today
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light rounded-pill px-3 fw-bold" onclick="switchAnalyticsView('week', this)" id="btnViewWeek">
+                                <i class="fas fa-calendar-week me-1 text-primary"></i>Week (7D)
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light rounded-pill px-3 fw-bold" onclick="switchAnalyticsView('month', this)" id="btnViewMonth">
+                                <i class="fas fa-chart-line me-1 text-success"></i>Month (30D)
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4">
+                        {% set an = analytics or diet_report.get('analytics', {}) %}
+                        {% set target_goals = diet_report.get('target_goals', {}) %}
+
+                        <!-- =================================================== -->
+                        <!-- 1. TODAY ANALYTICS VIEW -->
+                        <!-- =================================================== -->
+                        <div id="analytics-today-view" class="analytics-sub-view">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-clock text-primary me-2"></i>Today's Nutrition Intake ({{ an.today.date_formatted if an.today else 'Today' }})</h5>
+                                <span class="badge bg-primary rounded-pill px-3 py-2">
+                                    {{ an.today.goal_completion_pct if an.today else 0 }}% Goal Adherence
+                                </span>
+                            </div>
+
+                            <!-- 4 Progress Cards Row -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-6 col-lg-3">
+                                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 bg-white border-start border-4 border-warning">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="text-muted small fw-bold text-uppercase">Calories</span>
+                                            <span class="badge bg-warning text-dark"><i class="fas fa-fire me-1"></i>{{ an.today.goal_completion_pct if an.today else 0 }}%</span>
+                                        </div>
+                                        <div class="h4 fw-bold text-dark mb-0">{{ an.today.consumed_calories if an.today else 0 }} <small class="text-muted" style="font-size:0.8rem;">/ {{ an.today.target_calories if an.today else target_goals.get('target_calories', 1800) }} kcal</small></div>
+                                        <div class="progress my-2" style="height: 6px;">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{ an.today.goal_completion_pct if an.today else 0 }}%;"></div>
+                                        </div>
+                                        <small class="text-muted"><i class="fas fa-bullseye me-1"></i>Remaining: <strong class="text-dark">{{ an.today.remaining_calories if an.today else 0 }} kcal</strong></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 bg-white border-start border-4 border-primary">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="text-muted small fw-bold text-uppercase">Protein</span>
+                                            <span class="badge bg-primary text-white"><i class="fas fa-dumbbell me-1"></i>{{ an.today.protein_completion_pct if an.today else 0 }}%</span>
+                                        </div>
+                                        <div class="h4 fw-bold text-primary mb-0">{{ an.today.consumed_protein if an.today else 0 }}g <small class="text-muted" style="font-size:0.8rem;">/ {{ an.today.target_protein if an.today else target_goals.get('target_protein', 100) }}g</small></div>
+                                        <div class="progress my-2" style="height: 6px;">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: {{ an.today.protein_completion_pct if an.today else 0 }}%;"></div>
+                                        </div>
+                                        <small class="text-muted"><i class="fas fa-dumbbell me-1"></i>Remaining: <strong class="text-dark">{{ an.today.remaining_protein if an.today else 0 }}g</strong></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 bg-white border-start border-4 border-success">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="text-muted small fw-bold text-uppercase">Carbohydrates</span>
+                                            <span class="badge bg-success text-white">{{ an.today.carbs_completion_pct if an.today else 0 }}%</span>
+                                        </div>
+                                        <div class="h4 fw-bold text-success mb-0">{{ an.today.consumed_carbs if an.today else 0 }}g <small class="text-muted" style="font-size:0.8rem;">/ {{ an.today.target_carbs if an.today else target_goals.get('target_carbs', 200) }}g</small></div>
+                                        <div class="progress my-2" style="height: 6px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ an.today.carbs_completion_pct if an.today else 0 }}%;"></div>
+                                        </div>
+                                        <small class="text-muted"><i class="fas fa-bread-slice me-1"></i>Remaining: <strong class="text-dark">{{ an.today.remaining_carbs if an.today else 0 }}g</strong></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 bg-white border-start border-4 border-danger">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="text-muted small fw-bold text-uppercase">Healthy Fats</span>
+                                            <span class="badge bg-danger text-white">{{ an.today.fat_completion_pct if an.today else 0 }}%</span>
+                                        </div>
+                                        <div class="h4 fw-bold text-danger mb-0">{{ an.today.consumed_fat if an.today else 0 }}g <small class="text-muted" style="font-size:0.8rem;">/ {{ an.today.target_fat if an.today else target_goals.get('target_fat', 50) }}g</small></div>
+                                        <div class="progress my-2" style="height: 6px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ an.today.fat_completion_pct if an.today else 0 }}%;"></div>
+                                        </div>
+                                        <small class="text-muted"><i class="fas fa-tint me-1"></i>Remaining: <strong class="text-dark">{{ an.today.remaining_fat if an.today else 0 }}g</strong></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Today Charts & Meals Row -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-lg-5">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 h-100 bg-white">
+                                        <h6 class="fw-bold mb-3"><i class="fas fa-chart-pie text-primary me-2"></i>Today's Macro Split (Calories)</h6>
+                                        <div style="height: 220px; position: relative;">
+                                            <canvas id="todayMacroChart"></canvas>
+                                        </div>
+                                        <div class="d-flex justify-content-around text-center mt-3 pt-2 border-top">
+                                            <div>
+                                                <small class="text-muted d-block">Protein</small>
+                                                <strong class="text-primary">{{ an.today.consumed_protein if an.today else 0 }}g</strong>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted d-block">Carbs</small>
+                                                <strong class="text-success">{{ an.today.consumed_carbs if an.today else 0 }}g</strong>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted d-block">Fat</small>
+                                                <strong class="text-danger">{{ an.today.consumed_fat if an.today else 0 }}g</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 h-100 bg-white">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h6 class="fw-bold mb-0"><i class="fas fa-utensils text-warning me-2"></i>Today's Logged Meals ({{ an.today.today_meals|length if an.today else 0 }})</h6>
+                                            <a href="/dashboard" class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2" style="font-size:0.75rem;">+ Log Meal</a>
+                                        </div>
+                                        {% if an.today and an.today.today_meals %}
+                                            <div class="list-group list-group-flush" style="max-height: 280px; overflow-y: auto;">
+                                                {% for m in an.today.today_meals %}
+                                                    <div class="list-group-item px-0 py-2 border-light d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <img src="{{ m.image_link or 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500' }}" alt="{{ m.recipe_name }}" class="rounded-3 shadow-sm" style="width: 44px; height: 44px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500'">
+                                                            <div>
+                                                                <div class="fw-bold text-dark small">{{ m.recipe_name }}</div>
+                                                                <small class="text-muted">{{ m.serving_size }}x serving • {{ m.logged_time }}</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <span class="badge bg-warning text-dark fw-bold">{{ m.calories }} kcal</span>
+                                                            <div class="small text-muted" style="font-size:0.75rem;">{{ m.protein }}g P • {{ m.carbs }}g C • {{ m.fat }}g F</div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="text-center py-4 my-auto">
+                                                <i class="fas fa-bowl-food fa-2x text-muted mb-2"></i>
+                                                <p class="text-muted small mb-0">No meals logged today yet. Browse recipes on the <a href="/dashboard">Home menu</a> and tap <strong>Log as Eaten</strong>.</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- =================================================== -->
+                        <!-- 2. WEEK ANALYTICS VIEW (7 Days) -->
+                        <!-- =================================================== -->
+                        <div id="analytics-week-view" class="analytics-sub-view" style="display: none;">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-calendar-alt text-primary me-2"></i>Weekly Nutrition Trend (Past 7 Days)</h5>
+                                <span class="badge bg-success rounded-pill px-3 py-2">
+                                    {{ an.week.active_days_count if an.week else 0 }} / 7 Days Active
+                                </span>
+                            </div>
+
+                            <!-- Weekly Summary Stat Cards -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Avg Daily Calories</span>
+                                        <h4 class="fw-bold text-warning mb-0 mt-1">{{ an.week.avg_daily_calories if an.week else 0 }} <small class="text-muted" style="font-size:0.8rem;">kcal</small></h4>
+                                        <small class="text-muted">Target: {{ an.week.target_calories if an.week else target_goals.get('target_calories', 1800) }} kcal</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Avg Daily Protein</span>
+                                        <h4 class="fw-bold text-primary mb-0 mt-1">{{ an.week.avg_daily_protein if an.week else 0 }} <small class="text-muted" style="font-size:0.8rem;">g</small></h4>
+                                        <small class="text-muted">Target: {{ an.week.target_protein if an.week else target_goals.get('target_protein', 100) }}g</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Meals Logged</span>
+                                        <h4 class="fw-bold text-success mb-0 mt-1">{{ an.week.total_meals_logged if an.week else 0 }}</h4>
+                                        <small class="text-muted">In past 7 days</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Active Log Days</span>
+                                        <h4 class="fw-bold text-info mb-0 mt-1">{{ an.week.active_days_count if an.week else 0 }} / 7</h4>
+                                        <small class="text-muted">Logging consistency</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Weekly Charts Grid -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-lg-7">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+                                        <h6 class="fw-bold mb-3"><i class="fas fa-chart-column text-primary me-2"></i>Daily Caloric Intake vs. Daily Target</h6>
+                                        <div style="height: 250px;">
+                                            <canvas id="weekCalorieChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+                                        <h6 class="fw-bold mb-3"><i class="fas fa-cubes-stacked text-success me-2"></i>Daily Macronutrients (Protein / Carbs / Fat)</h6>
+                                        <div style="height: 250px;">
+                                            <canvas id="weekMacroChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- =================================================== -->
+                        <!-- 3. MONTH ANALYTICS VIEW (30 Days) -->
+                        <!-- =================================================== -->
+                        <div id="analytics-month-view" class="analytics-sub-view" style="display: none;">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-calendar-check text-primary me-2"></i>Monthly Analytics (Past 30 Days)</h5>
+                                <span class="badge bg-primary rounded-pill px-3 py-2">
+                                    {{ an.month.goal_adherence_pct if an.month else 0 }}% Goal Adherence
+                                </span>
+                            </div>
+
+                            <!-- Monthly Metric Cards -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Monthly Avg Cal</span>
+                                        <h4 class="fw-bold text-warning mb-0 mt-1">{{ an.month.avg_daily_calories if an.month else 0 }} <small class="text-muted" style="font-size:0.8rem;">kcal</small></h4>
+                                        <small class="text-muted">Target: {{ target_goals.get('target_calories', 1800) }} kcal</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Goal Adherence</span>
+                                        <h4 class="fw-bold text-success mb-0 mt-1">{{ an.month.goal_adherence_pct if an.month else 0 }}%</h4>
+                                        <small class="text-muted">Within metabolic target</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Meal Frequency</span>
+                                        <h4 class="fw-bold text-primary mb-0 mt-1">{{ an.month.avg_meals_per_day if an.month else 0 }}</h4>
+                                        <small class="text-muted">Average meals/day</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white text-center">
+                                        <span class="text-muted small fw-bold text-uppercase">Total Meals</span>
+                                        <h4 class="fw-bold text-info mb-0 mt-1">{{ an.month.total_meals_logged if an.month else 0 }}</h4>
+                                        <small class="text-muted">Logged this month</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 30-Day Line Chart -->
+                            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white mb-4">
+                                <h6 class="fw-bold mb-3"><i class="fas fa-chart-line text-primary me-2"></i>30-Day Calorie Intake Trend</h6>
+                                <div style="height: 250px;">
+                                    <canvas id="monthCalorieChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Top Recipes & Categories Row -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white h-100">
+                                        <h6 class="fw-bold mb-3"><i class="fas fa-crown text-warning me-2"></i>Most Eaten Recipes</h6>
+                                        {% if an.month and an.month.most_eaten_recipes %}
+                                            <div style="height: 220px;">
+                                                <canvas id="topRecipesChart"></canvas>
+                                            </div>
+                                        {% else %}
+                                            <p class="text-muted small text-center py-4">No recipe consumption history recorded yet.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card border-0 shadow-sm rounded-4 p-3 bg-white h-100">
+                                        <h6 class="fw-bold mb-3"><i class="fas fa-tags text-primary me-2"></i>Most Preferred Recipe Categories</h6>
+                                        {% if an.month and an.month.preferred_categories %}
+                                            <div style="height: 220px; position: relative;">
+                                                <canvas id="categoryChart"></canvas>
+                                            </div>
+                                        {% else %}
+                                            <p class="text-muted small text-center py-4">No category data recorded yet.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- START: CHATGPT AI NUTRITION COACH & GOAL IMPACT CARD -->
+                        <div class="card mb-4 ai-coach-card shadow-sm border-0">
+                            <div class="card-header bg-gradient-ai text-white d-flex align-items-center justify-content-between py-3 px-3 px-md-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="ai-avatar-icon me-3">
+                                        <i class="fas fa-robot text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 fw-bold d-flex align-items-center flex-wrap gap-2">
+                                            <span>Goal Impact & AI Coach Insights</span>
+                                            <span class="badge bg-white text-dark ai-sparkle-pill"><i class="fas fa-sparkles text-warning me-1"></i>GPT Intelligence</span>
+                                        </h5>
+                                        <small class="text-white-50">Personalized dietary analysis tailored to your metabolic goal</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-dark bg-opacity-25 text-white d-none d-md-inline-block px-3 py-2 rounded-pill small">
+                                    <i class="fas fa-check-circle text-success me-1"></i>Live Analysis
+                                </span>
+                            </div>
+                            <div class="card-body p-3 p-md-4 bg-ai-canvas">
+                                <div class="ai-chat-bubble">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="ai-badge-label">
+                                            <i class="fas fa-wand-magic-sparkles text-warning me-1"></i> Tastio AI Coach
+                                        </div>
+                                        <small class="text-muted ms-auto"><i class="far fa-clock me-1"></i>Updated with your logs</small>
+                                    </div>
+
+                                    {% if diet_report.ai_coach %}
+                                        <div class="ai-insight-grid">
+                                            <div class="ai-insight-box insight-strategy mb-3">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="insight-icon-pill bg-primary-subtle me-2">
+                                                        <i class="{{ diet_report.ai_coach.strategy.icon or 'fas fa-bullseye' }}"></i>
+                                                    </div>
+                                                    <h6 class="mb-0 fw-bold text-dark">{{ diet_report.ai_coach.strategy.title }}</h6>
+                                                    <span class="badge bg-primary ms-auto px-2 py-1 small rounded-pill">{{ diet_report.ai_coach.strategy.badge }}</span>
+                                                </div>
+                                                <p class="mb-0 ai-insight-text">{{ diet_report.ai_coach.strategy.text | safe }}</p>
+                                            </div>
+
+                                            <div class="ai-insight-box insight-adherence mb-3">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="insight-icon-pill {{ diet_report.ai_coach.intake_status.pill_class or 'bg-success-subtle' }} me-2">
+                                                        <i class="{{ diet_report.ai_coach.intake_status.icon or 'fas fa-chart-pie' }}"></i>
+                                                    </div>
+                                                    <h6 class="mb-0 fw-bold text-dark">{{ diet_report.ai_coach.intake_status.title }}</h6>
+                                                    <span class="badge {{ diet_report.ai_coach.intake_status.badge_class or 'bg-success' }} ms-auto px-2 py-1 small rounded-pill">{{ diet_report.ai_coach.intake_status.badge }}</span>
+                                                </div>
+                                                <p class="mb-0 ai-insight-text">{{ diet_report.ai_coach.intake_status.text | safe }}</p>
+                                            </div>
+
+                                            <div class="ai-insight-box insight-macro mb-3">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="insight-icon-pill bg-info-subtle me-2">
+                                                        <i class="{{ diet_report.ai_coach.macro_status.icon or 'fas fa-dumbbell' }}"></i>
+                                                    </div>
+                                                    <h6 class="mb-0 fw-bold text-dark">{{ diet_report.ai_coach.macro_status.title }}</h6>
+                                                    <span class="badge bg-info text-white ms-auto px-2 py-1 small rounded-pill">{{ diet_report.ai_coach.macro_status.badge }}</span>
+                                                </div>
+                                                <p class="mb-0 ai-insight-text">{{ diet_report.ai_coach.macro_status.text | safe }}</p>
+                                            </div>
+
+                                            {% if diet_report.ai_coach.tips %}
+                                            <div class="ai-insight-box insight-tips">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="insight-icon-pill bg-warning-subtle me-2">
+                                                        <i class="fas fa-lightbulb"></i>
+                                                    </div>
+                                                    <h6 class="mb-0 fw-bold text-dark">Actionable AI Recommendations</h6>
+                                                    <span class="badge bg-warning text-dark ms-auto px-2 py-1 small rounded-pill">Next Steps</span>
+                                                </div>
+                                                <ul class="list-unstyled mb-0 ps-1">
+                                                    {% for tip in diet_report.ai_coach.tips %}
+                                                        <li class="ai-tip-item">
+                                                            <i class="fas fa-circle-check text-success me-2"></i>{{ tip | safe }}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" style="background: linear-gradient(135deg, var(--primary-color), #9D3B55) !important;">
+                <h5 class="modal-title" id="detail-recipe-name">Recipe Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <img id="detail-img" src="" alt="Recipe Image" class="img-fluid rounded shadow-sm" style="max-height: 240px; width: 100%; object-fit: cover;"
+                         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';">
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="text-primary mb-3"><i class="fas fa-list-alt me-1"></i>Ingredients:</h6>
+                        <ul id="detail-ingredients" class="ingredients-list"></ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-primary mb-3"><i class="fas fa-chart-bar me-1"></i>Nutrition (per serving):</h6>
+                        <div id="detail-nutritions" class="p-3 bg-light rounded border"></div>
+                    </div>
+                </div>
+
+                <h6 class="text-primary mb-3"><i class="fas fa-shoe-prints me-1"></i>Detailed Step-by-Step Preparation:</h6>
+                <ol id="detail-steps" class="steps-list"></ol>
+
+                <p class="small text-danger" id="detail-missing-data" style="display:none;">
+                    Missing recipe data. Details were not found in the local <code>data.json</code> file.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reviewModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark" style="background-color: var(--primary-color) !important; color: white !important;">
+                <h5 class="modal-title"><i class="fas fa-star me-2"></i>Review Recipe: <span id="review-recipe-name"></span></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="review-form" onsubmit="event.preventDefault(); submitReview();">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="rating-input" class="form-label">Your Rating (1-5)</label>
+                        <input type="number" class="form-control" id="rating-input" min="1" max="5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment-input" class="form-label">Comment (Optional)</label>
+                        <textarea class="form-control" id="comment-input" rows="3"></textarea>
+                    </div>
+                    <div id="review-message" class="mt-3 small text-center"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Submit Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Embedded JSON Data for Safe Client-Side Parsing -->
+<script id="report-json-data" type="application/json">
+{{ (diet_report.report if diet_report and diet_report.report else {}) | tojson }}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // --- Modal Variables and Functions (Details/Review) ---
+    let currentRecipeId = null;
+    let reviewModalElement = new bootstrap.Modal(document.getElementById('reviewModal'), {});
+    let detailModalElement = new bootstrap.Modal(document.getElementById('detailModal'), {});
+
+    // REPORT_DATA is parsed safely from application/json
+    const REPORT_DATA = JSON.parse(document.getElementById('report-json-data')?.textContent || '{}');
+
+    // Initialize progress bar widths dynamically from data-progress
+    document.querySelectorAll('.progress-bar[data-progress]').forEach(function(bar) {
+        bar.style.width = (bar.getAttribute('data-progress') || 0) + '%';
+    });
+
+    function openDetailsModal(recipe) {
+        document.getElementById('detail-recipe-name').textContent = recipe.recipe_name || 'Recipe Details';
+        const detailImg = document.getElementById('detail-img');
+        if (detailImg) {
+            detailImg.src = recipe.image_link || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';
+        }
+        const ingredientsList = document.getElementById('detail-ingredients');
+        const stepsList = document.getElementById('detail-steps');
+        const nutritionDiv = document.getElementById('detail-nutritions');
+        const missingDataAlert = document.getElementById('detail-missing-data');
+
+        ingredientsList.innerHTML = '';
+        stepsList.innerHTML = '';
+        missingDataAlert.style.display = 'none';
+
+        const isMissingData = recipe.recipe_name.includes("MISSING LOCAL DATA");
+
+        if (isMissingData) {
+            missingDataAlert.style.display = 'block';
+            ingredientsList.innerHTML = '<li>Ingredients unavailable.</li>';
+            stepsList.innerHTML = '<li>Steps unavailable.</li>';
+            nutritionDiv.innerHTML = 'N/A';
+        } else {
+            if (recipe.ingredients && recipe.ingredients.length > 0) {
+                recipe.ingredients.forEach(ing => {
+                    const li = document.createElement('li');
+                    li.textContent = `• ${ing}`;
+                    ingredientsList.appendChild(li);
+                });
+            } else {
+                ingredientsList.innerHTML = '<li><span class="text-danger">Ingredients data missing or empty.</span></li>';
+            }
+
+            if (recipe.steps && recipe.steps.length > 0) {
+                recipe.steps.forEach((step, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${index + 1}. ${step}`;
+                    stepsList.appendChild(li);
+                });
+            } else {
+                stepsList.innerHTML = '<li><span class="text-danger">Steps data missing or empty.</span></li>';
+            }
+
+            const nutritions = recipe.nutritions || {};
+            nutritionDiv.innerHTML = `
+                Calories: <strong>${nutritions.calories || 'N/A'} kcal</strong> | 
+                Protein: <strong>${nutritions.protein_g || 'N/A'} g</strong> | 
+                Carbs: <strong>${nutritions.carbs_g || 'N/A'} g</strong> | 
+                Fat: <strong>${nutritions.fat_g || 'N/A'} g</strong>
+            `;
+        }
+        detailModalElement.show();
+    }
+
+    function setReviewModalData(recipeId, recipeName) {
+        currentRecipeId = recipeId;
+        document.getElementById('review-recipe-name').textContent = recipeName;
+        document.getElementById('rating-input').value = '';
+        document.getElementById('comment-input').value = '';
+        document.getElementById('review-message').textContent = '';
+    }
+
+    function openReviewModal() {
+        if (currentRecipeId) {
+            reviewModalElement.show();
+        } else {
+            console.error("No recipe ID set for review.");
+        }
+    }
+    
+    function submitReview() {
+        const rating = document.getElementById('rating-input').value;
+        const comment = document.getElementById('comment-input').value;
+        const messageDiv = document.getElementById('review-message');
+
+        if (!currentRecipeId || rating === "" || parseInt(rating) < 1 || parseInt(rating) > 5) {
+            messageDiv.textContent = "Please provide a valid rating (1-5).";
+            return;
+        }
+
+        const payload = { rating: parseInt(rating), comment: comment };
+        messageDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+
+        fetch(`/review/${currentRecipeId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                messageDiv.innerHTML = `<span class="text-success">${data.message}</span>`;
+                setTimeout(() => {
+                    if (reviewModalElement) reviewModalElement.hide();
+                    window.location.reload();
+                }, 800);
+            } else {
+                messageDiv.innerHTML = `<span class="text-danger">${data.message}</span>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting review:', error);
+            messageDiv.innerHTML = '<span class="text-danger">A network error occurred.</span>';
+        });
+    }
+
+    // --- Comprehensive Nutrition Analytics Dashboard Scripts ---
+    const ANALYTICS_DATA = {{ (analytics if analytics else (diet_report.get('analytics') if diet_report else {})) | tojson | safe }} || {};
+
+    function switchAnalyticsView(viewName, btnEl) {
+        document.querySelectorAll('.analytics-sub-view').forEach(function(el) {
+            el.style.display = 'none';
+        });
+
+        const targetView = document.getElementById(`analytics-${viewName}-view`);
+        if (targetView) {
+            targetView.style.display = 'block';
+        }
+
+        if (btnEl && btnEl.parentElement) {
+            btnEl.parentElement.querySelectorAll('button').forEach(function(b) {
+                b.className = 'btn btn-sm btn-light rounded-pill px-3 fw-bold';
+            });
+            btnEl.className = 'btn btn-sm btn-primary rounded-pill px-3 fw-bold';
+        }
+
+        // Trigger chart render for newly visible view
+        if (viewName === 'today') initTodayCharts();
+        else if (viewName === 'week') initWeekCharts();
+        else if (viewName === 'month') initMonthCharts();
+    }
+
+    let todayChartInstance = null;
+    let weekCalChartInstance = null;
+    let weekMacroChartInstance = null;
+    let monthCalChartInstance = null;
+    let topRecipesChartInstance = null;
+    let categoryChartInstance = null;
+
+    function initTodayCharts() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById('todayMacroChart');
+        if (!ctx) return;
+
+        const today = ANALYTICS_DATA.today || {};
+        const p = today.consumed_protein || 0;
+        const c = today.consumed_carbs || 0;
+        const f = today.consumed_fat || 0;
+
+        const dataVals = (p === 0 && c === 0 && f === 0) ? [1, 1, 1] : [p * 4, c * 4, f * 9];
+        const bgColors = (p === 0 && c === 0 && f === 0) 
+            ? ['#E2E8F0', '#E2E8F0', '#E2E8F0'] 
+            : ['#7B2C3F', '#10B981', '#EF4444'];
+
+        if (todayChartInstance) todayChartInstance.destroy();
+
+        todayChartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Protein (kcal)', 'Carbohydrates (kcal)', 'Healthy Fats (kcal)'],
+                datasets: [{
+                    data: dataVals,
+                    backgroundColor: bgColors,
+                    borderWidth: 2,
+                    borderColor: '#FFFFFF'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(item) {
+                                return ` ${item.label}: ${item.raw} kcal`;
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    }
+
+    function initWeekCharts() {
+        if (!window.Chart) return;
+        const week = ANALYTICS_DATA.week || {};
+        const labels = week.labels || ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'];
+        const calories = week.calories || [0, 0, 0, 0, 0, 0, 0];
+        const targets = week.targets || [1800, 1800, 1800, 1800, 1800, 1800, 1800];
+
+        // 1. Calorie Chart
+        const calCtx = document.getElementById('weekCalorieChart');
+        if (calCtx) {
+            if (weekCalChartInstance) weekCalChartInstance.destroy();
+            weekCalChartInstance = new Chart(calCtx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Target Calories',
+                            data: targets,
+                            type: 'line',
+                            borderColor: '#EF4444',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false,
+                            order: 1
+                        },
+                        {
+                            label: 'Consumed (kcal)',
+                            data: calories,
+                            backgroundColor: '#FF9E1F',
+                            borderRadius: 8,
+                            order: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#F1F5F9' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12 } }
+                    }
+                }
+            });
+        }
+
+        // 2. Macro Chart
+        const macroCtx = document.getElementById('weekMacroChart');
+        if (macroCtx) {
+            if (weekMacroChartInstance) weekMacroChartInstance.destroy();
+            weekMacroChartInstance = new Chart(macroCtx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Protein (g)',
+                            data: week.protein || [0, 0, 0, 0, 0, 0, 0],
+                            backgroundColor: '#7B2C3F',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Carbs (g)',
+                            data: week.carbs || [0, 0, 0, 0, 0, 0, 0],
+                            backgroundColor: '#10B981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Fat (g)',
+                            data: week.fat || [0, 0, 0, 0, 0, 0, 0],
+                            backgroundColor: '#F59E0B',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#F1F5F9' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10 } }
+                    }
+                }
+            });
+        }
+    }
+
+    function initMonthCharts() {
+        if (!window.Chart) return;
+        const month = ANALYTICS_DATA.month || {};
+
+        // 1. 30-Day Calorie Line Chart
+        const calCtx = document.getElementById('monthCalorieChart');
+        if (calCtx) {
+            if (monthCalChartInstance) monthCalChartInstance.destroy();
+            monthCalChartInstance = new Chart(calCtx, {
+                type: 'line',
+                data: {
+                    labels: month.labels || [],
+                    datasets: [
+                        {
+                            label: 'Target Baseline',
+                            data: month.targets || [],
+                            borderColor: '#EF4444',
+                            borderWidth: 2,
+                            borderDash: [4, 4],
+                            pointRadius: 0,
+                            fill: false
+                        },
+                        {
+                            label: 'Daily Intake (kcal)',
+                            data: month.calories || [],
+                            borderColor: '#7B2C3F',
+                            backgroundColor: 'rgba(123, 44, 63, 0.08)',
+                            borderWidth: 2.5,
+                            fill: true,
+                            tension: 0.3,
+                            pointRadius: 2,
+                            pointHoverRadius: 5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#F1F5F9' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12 } }
+                    }
+                }
+            });
+        }
+
+        // 2. Top Eaten Recipes Chart
+        const topCtx = document.getElementById('topRecipesChart');
+        if (topCtx && month.most_eaten_recipes && month.most_eaten_recipes.length > 0) {
+            if (topRecipesChartInstance) topRecipesChartInstance.destroy();
+            const topNames = month.most_eaten_recipes.map(r => r.recipe_name.length > 20 ? r.recipe_name.substring(0, 18) + '...' : r.recipe_name);
+            const topCounts = month.most_eaten_recipes.map(r => r.times_eaten);
+
+            topRecipesChartInstance = new Chart(topCtx, {
+                type: 'bar',
+                data: {
+                    labels: topNames,
+                    datasets: [{
+                        label: 'Times Eaten',
+                        data: topCounts,
+                        backgroundColor: '#FF9E1F',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { beginAtZero: true, ticks: { stepSize: 1 } },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // 3. Category Chart
+        const catCtx = document.getElementById('categoryChart');
+        if (catCtx && month.preferred_categories && month.preferred_categories.length > 0) {
+            if (categoryChartInstance) categoryChartInstance.destroy();
+            const catLabels = month.preferred_categories.map(c => c.category);
+            const catCounts = month.preferred_categories.map(c => c.count);
+
+            categoryChartInstance = new Chart(catCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: catLabels,
+                    datasets: [{
+                        data: catCounts,
+                        backgroundColor: ['#7B2C3F', '#FF9E1F', '#10B981', '#3B82F6', '#8B5CF6'],
+                        borderWidth: 2,
+                        borderColor: '#FFFFFF'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 10, font: { size: 11 } } }
+                    }
+                }
+            });
+        }
+    }
+
+    // --- DOMContentLoaded Activation ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const activeTabId = "{{ active_tab }}";
+        
+        // Show specific tab if requested via URL or redirect
+        if (activeTabId && activeTabId !== 'v-pills-profile') {
+            const tabTrigger = document.querySelector(`[data-bs-target="#${activeTabId}"]`);
+            if (tabTrigger) {
+                const tab = new bootstrap.Tab(tabTrigger);
+                tab.show();
+            }
+        }
+
+        // Initialize today's analytics chart on load
+        initTodayCharts();
+
+        // Listen for tab switch to Diet History / Analytics to re-render charts
+        const dietTab = document.getElementById('v-pills-diet-history-tab');
+        if (dietTab) {
+            dietTab.addEventListener('shown.bs.tab', function() {
+                initTodayCharts();
+            });
+        }
+
+        // Fallback: Ensure the Edit Profile button activates the edit tab
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        if (editProfileBtn) {
+            editProfileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const editTabTrigger = document.getElementById('v-pills-edit-tab');
+                if (editTabTrigger) {
+                    const tab = new bootstrap.Tab(editTabTrigger);
+                    tab.show();
+                }
+            });
+        }
+
+        // Add feedback when submitting profile form
+        const profileForm = document.querySelector('form[action*="profile"]');
+        if (profileForm) {
+            profileForm.addEventListener('submit', function() {
+                const btn = document.getElementById('saveProfileBtn');
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving Preferences...';
+                }
+            });
+        }
+    });
+</script>
+<!-- Floating AI Coach Launcher Button -->
+<a href="/coach" class="floating-coach-btn" title="Chat with Tastio AI Nutrition Coach">
+    <span class="coach-pulse-dot"></span>
+    <i class="fas fa-robot text-warning"></i>
+    <span>AI Coach</span>
+</a>
+
+<!-- Mobile Bottom Navigation Bar -->
+<div class="mobile-bottom-bar d-md-none">
+    <a href="/dashboard" class="mobile-nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="/what-can-i-cook" class="mobile-nav-item">
+        <i class="fas fa-carrot"></i>
+        <span>Pantry</span>
+    </a>
+    <a href="/meal-plan" class="mobile-nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Planner</span>
+    </a>
+    <a href="/coach" class="mobile-nav-item">
+        <i class="fas fa-robot"></i>
+        <span>Coach</span>
+    </a>
+    <a href="/profile" class="mobile-nav-item active">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
+    </a>
+</div>
+
+</body>
+</html>

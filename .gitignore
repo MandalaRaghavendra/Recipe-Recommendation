@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+*.env
+
+# Node / Expo / Mobile
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

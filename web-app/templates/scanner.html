@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#7B2C3F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <title>AI Food Scanner - Tastio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7B2C3F;
+            --primary-dark: #581827;
+            --accent-color: #FF9E1F;
+            --accent-hover: #E58E1B;
+            --light-bg: #F4F6F9;
+            --card-bg: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary-color) !important;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: #475569 !important;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+            background-color: rgba(123, 44, 63, 0.06);
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9E3850 100%);
+            color: white;
+            padding: 36px 0;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 10px 25px rgba(123, 44, 63, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .dropzone-card {
+            background: #ffffff;
+            border: 2px dashed #CBD5E1;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .dropzone-card:hover, .dropzone-card.dragover {
+            border-color: var(--primary-color);
+            background-color: #FFF9FA;
+            transform: translateY(-2px);
+        }
+
+        .scanner-preview-img {
+            max-height: 280px;
+            width: auto;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .macro-chip {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .disclaimer-box {
+            background-color: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: #92400E;
+        }
+
+        .similar-card {
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: #ffffff;
+            cursor: pointer;
+        }
+        .similar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .floating-coach-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: #ffffff !important;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(123, 44, 63, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .mobile-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 1020;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748B;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .mobile-nav-item.active, .mobile-nav-item:hover {
+            color: var(--primary-color);
+        }
+        .mobile-nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/dashboard">
+            <i class="fas fa-utensils me-2"></i>Tastio
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard"><i class="fas fa-home me-1"></i>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/what-can-i-cook"><i class="fas fa-carrot me-1"></i>Pantry Matcher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/meal-plan"><i class="fas fa-calendar-alt me-1"></i>Meal Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/grocery-list"><i class="fas fa-shopping-cart me-1"></i>Grocery List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/scanner"><i class="fas fa-camera me-1 text-warning"></i>Food Scanner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/coach"><i class="fas fa-robot text-warning me-1"></i>AI Coach</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2">
+                <a href="/profile?active_tab=v-pills-diet-history" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold">
+                    <i class="fas fa-chart-line me-1"></i>Analytics
+                </a>
+                <a href="/profile" class="btn btn-primary btn-sm rounded-pill px-3 fw-bold" style="background-color: var(--primary-color); border-color: var(--primary-color); color:white;">
+                    <i class="fas fa-user me-1"></i>Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">
+                    <i class="fas fa-sparkles me-1"></i>Computer Vision AI
+                </span>
+                <h1 class="display-6 fw-bold mb-2">AI Food Image Scanner</h1>
+                <p class="lead mb-0 text-white-50 fs-6">
+                    Upload or snap a photo of any meal to instantly identify the dish, reveal verified recipe database nutrition, and discover matching recipes.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Container -->
+<div class="container mb-5 flex-grow-1">
+    <div class="row">
+        <!-- Upload / Dropzone Column -->
+        <div class="col-lg-5 mb-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                <h5 class="fw-bold mb-3 text-dark">
+                    <i class="fas fa-camera-retro text-primary me-2"></i>Select or Capture Food Photo
+                </h5>
+
+                <!-- Dropzone Area -->
+                <div class="dropzone-card" id="dropzone" onclick="document.getElementById('foodImageInput').click()">
+                    <input type="file" id="foodImageInput" accept="image/*" style="display: none;" onchange="handleFileSelected(this)">
+                    <div id="dropzonePrompt">
+                        <i class="fas fa-cloud-arrow-up fa-3x text-primary mb-3"></i>
+                        <h6 class="fw-bold text-dark mb-1">Click to Upload or Drag & Drop</h6>
+                        <p class="text-muted small mb-3">Supports JPG, PNG, WEBP</p>
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-bold">
+                            <i class="fas fa-folder-open me-1"></i>Browse Photo
+                        </button>
+                    </div>
+
+                    <div id="previewContainer" style="display: none;">
+                        <img id="previewImg" class="scanner-preview-img mb-3" alt="Food Preview">
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="button" class="btn btn-warning rounded-pill px-4 fw-bold text-dark" id="btnScanPhoto" onclick="scanFoodPhoto()">
+                                <i class="fas fa-wand-magic-sparkles me-1"></i>Recognize Food
+                            </button>
+                            <button type="button" class="btn btn-light rounded-pill px-3 text-muted" onclick="resetScanner()">
+                                Retake
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Test Samples -->
+                <div class="mt-4 pt-3 border-top">
+                    <small class="fw-bold text-muted d-block mb-2">TRY WITH DEMO DISH SAMPLES:</small>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-sm btn-light border rounded-pill" onclick="testSample('biryani')">🍛 Biryani</button>
+                        <button type="button" class="btn btn-sm btn-light border rounded-pill" onclick="testSample('dosa')">🥞 Masala Dosa</button>
+                        <button type="button" class="btn btn-sm btn-light border rounded-pill" onclick="testSample('paneer')">🥘 Paneer Tikka</button>
+                        <button type="button" class="btn btn-sm btn-light border rounded-pill" onclick="testSample('salad')">🥗 Green Salad</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recognition & Nutrition Results Column -->
+        <div class="col-lg-7">
+            <!-- Initial Empty Prompt -->
+            <div id="resultsEmpty" class="card border-0 shadow-sm rounded-4 p-5 text-center bg-white">
+                <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                <h5 class="fw-bold text-dark">No Food Scanned Yet</h5>
+                <p class="text-muted mb-0" style="max-width: 420px; margin: 0 auto;">
+                    Take a photo of your breakfast, lunch, or dinner on the left to identify the recipe and see exact nutritional information.
+                </p>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="resultsLoading" class="card border-0 shadow-sm rounded-4 p-5 text-center bg-white" style="display: none;">
+                <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
+                <h5 class="fw-bold text-dark">Analyzing Food Image...</h5>
+                <p class="text-muted mb-0">Running visual feature classification and querying verified recipe database.</p>
+            </div>
+
+            <!-- Results Card -->
+            <div id="resultsContent" style="display: none;">
+                <!-- Prediction Header Banner -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                        <div>
+                            <span class="badge bg-success rounded-pill px-3 py-1 mb-2" id="resConfidenceBadge">
+                                <i class="fas fa-check-circle me-1"></i>High Confidence (88%)
+                            </span>
+                            <h3 class="fw-bold text-dark mb-1" id="resDishTitle">Paneer Butter Masala</h3>
+                            <small class="text-muted" id="resModelInfo">Identified via Tastio Modular Vision Engine</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary rounded-pill px-3 fw-bold btn-sm" id="btnLogMeal" onclick="logRecognizedMeal()" style="background-color: var(--primary-color); border-color: var(--primary-color);">
+                                <i class="fas fa-check me-1"></i>Log This Meal
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Verified Database Nutrition -->
+                    <h6 class="fw-bold text-dark mt-2 mb-2">
+                        <i class="fas fa-chart-pie text-warning me-2"></i>Verified Database Nutrition (Standard Serving)
+                    </h6>
+                    <div class="row g-2 mb-3">
+                        <div class="col-3">
+                            <div class="macro-chip">
+                                <small class="text-muted d-block">Calories</small>
+                                <strong class="fs-5 text-dark" id="nutrCal">420</strong> <small class="text-muted">kcal</small>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="macro-chip">
+                                <small class="text-muted d-block">Protein</small>
+                                <strong class="fs-5 text-primary" id="nutrProt">18g</strong>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="macro-chip">
+                                <small class="text-muted d-block">Carbs</small>
+                                <strong class="fs-5 text-success" id="nutrCarbs">32g</strong>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="macro-chip">
+                                <small class="text-muted d-block">Health Score</small>
+                                <strong class="fs-5 text-warning" id="nutrHealth">85/100</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mandatory Grounding Disclaimer -->
+                    <div class="disclaimer-box mb-3">
+                        <i class="fas fa-shield-halved me-1"></i>
+                        <span id="resDisclaimer">
+                            Nutrition values reflect standardized portion database measurements for this authentic recipe, not estimated pixel density.
+                        </span>
+                    </div>
+
+                    <!-- Recipe Meta & Description -->
+                    <div class="p-3 bg-light rounded-3 mb-3">
+                        <div class="d-flex flex-wrap gap-2 mb-2" id="resBadges">
+                            <span class="badge bg-secondary" id="badgeCuisine">North Indian</span>
+                            <span class="badge bg-success" id="badgeDiet">Vegetarian</span>
+                            <span class="badge bg-light text-dark border" id="badgeTime">⏱️ 35 mins</span>
+                        </div>
+                        <div class="small text-muted" id="resStepsPreview">
+                            Step-by-step cooking guide and ingredients available in your recipe catalog.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alternative Candidate Matches (for Moderate/Low Confidence) -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4" id="candidateSection" style="display: none;">
+                    <h6 class="fw-bold text-dark mb-2">
+                        <i class="fas fa-list-check text-primary me-2"></i>Not quite right? Select an Alternative Match:
+                    </h6>
+                    <div class="d-flex flex-wrap gap-2" id="candidateChipsContainer"></div>
+                </div>
+
+                <!-- Similar Recipes from Cuisine -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <h6 class="fw-bold text-dark mb-3">
+                        <i class="fas fa-utensils text-warning me-2"></i>Similar Recipes You Might Like
+                    </h6>
+                    <div class="row g-3" id="similarRecipesContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating AI Coach Launcher Button -->
+<a href="/coach" class="floating-coach-btn d-none d-md-flex" title="Chat with Tastio AI Nutrition Coach">
+    <i class="fas fa-robot text-warning"></i>
+    <span>AI Coach</span>
+</a>
+
+<!-- Mobile Bottom Navigation Bar -->
+<div class="mobile-bottom-bar d-md-none">
+    <a href="/dashboard" class="mobile-nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="/what-can-i-cook" class="mobile-nav-item">
+        <i class="fas fa-carrot"></i>
+        <span>Pantry</span>
+    </a>
+    <a href="/meal-plan" class="mobile-nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Planner</span>
+    </a>
+    <a href="/scanner" class="mobile-nav-item active">
+        <i class="fas fa-camera"></i>
+        <span>Scanner</span>
+    </a>
+    <a href="/grocery-list" class="mobile-nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Grocery</span>
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let currentSelectedFile = null;
+    let currentMatchedRecipeId = null;
+
+    function handleFileSelected(input) {
+        if (input.files && input.files[0]) {
+            currentSelectedFile = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('dropzonePrompt').style.display = 'none';
+                document.getElementById('previewContainer').style.display = 'block';
+            };
+            reader.readAsDataURL(currentSelectedFile);
+        }
+    }
+
+    function resetScanner() {
+        currentSelectedFile = null;
+        document.getElementById('foodImageInput').value = '';
+        document.getElementById('dropzonePrompt').style.display = 'block';
+        document.getElementById('previewContainer').style.display = 'none';
+        document.getElementById('resultsEmpty').style.display = 'block';
+        document.getElementById('resultsContent').style.display = 'none';
+    }
+
+    async function scanFoodPhoto() {
+        if (!currentSelectedFile) return;
+
+        document.getElementById('resultsEmpty').style.display = 'none';
+        document.getElementById('resultsContent').style.display = 'none';
+        document.getElementById('resultsLoading').style.display = 'block';
+
+        const formData = new FormData();
+        formData.append('image', currentSelectedFile);
+
+        try {
+            const res = await fetch('/api/vision/recognize-food', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+            document.getElementById('resultsLoading').style.display = 'none';
+
+            if (data.success && data.recognition) {
+                renderRecognitionResults(data.recognition, data.predictions);
+            } else {
+                alert(data.message || "Could not recognize food in the image. Try another photo.");
+                document.getElementById('resultsEmpty').style.display = 'block';
+            }
+        } catch (e) {
+            document.getElementById('resultsLoading').style.display = 'none';
+            document.getElementById('resultsEmpty').style.display = 'block';
+            alert("A network error occurred while scanning the image.");
+        }
+    }
+
+    function testSample(dishType) {
+        // Create canvas mock image to test vision engine instantly
+        const canvas = document.createElement('canvas');
+        canvas.width = 100;
+        canvas.height = 100;
+        const ctx = canvas.getContext('2d');
+        if (dishType === 'biryani') ctx.fillStyle = '#EAB308';
+        else if (dishType === 'salad') ctx.fillStyle = '#22C55E';
+        else if (dishType === 'paneer') ctx.fillStyle = '#EF4444';
+        else ctx.fillStyle = '#F59E0B';
+        ctx.fillRect(0, 0, 100, 100);
+
+        canvas.toBlob(blob => {
+            currentSelectedFile = blob;
+            document.getElementById('previewImg').src = canvas.toDataURL();
+            document.getElementById('dropzonePrompt').style.display = 'none';
+            document.getElementById('previewContainer').style.display = 'block';
+            scanFoodPhoto();
+        });
+    }
+
+    function renderRecognitionResults(rec, predictions) {
+        document.getElementById('resultsContent').style.display = 'block';
+
+        const topPred = rec.top_prediction || {};
+        const recipe = rec.matched_recipe || {};
+        const nutr = rec.verified_nutrition || {};
+
+        currentMatchedRecipeId = recipe.recipe_id;
+
+        // Confidence badge
+        const badge = document.getElementById('resConfidenceBadge');
+        badge.className = `badge bg-${topPred.tier_badge || 'success'} rounded-pill px-3 py-1 mb-2`;
+        badge.innerText = `${topPred.confidence_tier || 'Recognized'} (${topPred.confidence_pct || 85}%)`;
+
+        document.getElementById('resDishTitle').innerText = recipe.recipe_name || topPred.label;
+        document.getElementById('nutrCal').innerText = nutr.calories || 350;
+        document.getElementById('nutrProt').innerText = `${nutr.protein_g || 15}g`;
+        document.getElementById('nutrCarbs').innerText = `${nutr.carbs_g || 45}g`;
+        document.getElementById('nutrHealth').innerText = `${nutr.health_score || 80}/100`;
+
+        if (rec.disclaimer) {
+            document.getElementById('resDisclaimer').innerText = rec.disclaimer;
+        }
+
+        document.getElementById('badgeCuisine').innerText = recipe.cuisine || 'Authentic Dish';
+        document.getElementById('badgeDiet').innerText = recipe.veg_nonveg || recipe.diet || 'Balanced';
+        document.getElementById('badgeTime').innerText = `⏱️ ${(recipe.prep_time_mins || 15) + (recipe.cook_time_mins || 20)} mins`;
+
+        // Render alternative candidate chips
+        const candidates = rec.candidate_recipes || [];
+        const candSec = document.getElementById('candidateSection');
+        const candCont = document.getElementById('candidateChipsContainer');
+        if (candidates.length > 0) {
+            candSec.style.display = 'block';
+            candCont.innerHTML = candidates.map(c => `
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" onclick="selectCandidateRecipe(${JSON.stringify(c).replace(/"/g, '&quot;')})">
+                    ${c.recipe_name} (${c.nutritions?.calories || 350} kcal)
+                </button>
+            `).join('');
+        } else {
+            candSec.style.display = 'none';
+        }
+
+        // Render Similar Recipes
+        const similar = rec.similar_recipes || [];
+        const simCont = document.getElementById('similarRecipesContainer');
+        simCont.innerHTML = similar.map(s => `
+            <div class="col-md-4">
+                <div class="similar-card p-2 h-100">
+                    <img src="${s.image_link || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600'}" class="w-100 rounded-3 mb-2" style="height: 100px; object-fit: cover;">
+                    <h6 class="fw-bold text-dark mb-1 small">${s.recipe_name}</h6>
+                    <small class="text-muted d-block">${s.nutritions?.calories || 300} kcal • ${s.nutritions?.protein_g || 15}g P</small>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function selectCandidateRecipe(recipe) {
+        currentMatchedRecipeId = recipe.recipe_id;
+        document.getElementById('resDishTitle').innerText = recipe.recipe_name;
+        document.getElementById('nutrCal').innerText = recipe.nutritions?.calories || 350;
+        document.getElementById('nutrProt').innerText = `${recipe.nutritions?.protein_g || 15}g`;
+        document.getElementById('nutrCarbs').innerText = `${recipe.nutritions?.carbs_g || 45}g`;
+        document.getElementById('nutrHealth').innerText = `${recipe.health_score || 80}/100`;
+        document.getElementById('badgeCuisine').innerText = recipe.cuisine || 'Authentic Dish';
+        document.getElementById('badgeDiet').innerText = recipe.veg_nonveg || recipe.diet || 'Balanced';
+    }
+
+    async function logRecognizedMeal() {
+        if (!currentMatchedRecipeId) return;
+        const btn = document.getElementById('btnLogMeal');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Logging...';
+
+        try {
+            const res = await fetch(`/mark_eaten/${currentMatchedRecipeId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ serving_size: 1.0 })
+            });
+            const data = await res.json();
+            if (data.success) {
+                btn.className = 'btn btn-success rounded-pill px-3 fw-bold btn-sm';
+                btn.innerHTML = '<i class="fas fa-check me-1"></i>Logged!';
+            }
+        } catch (e) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-check me-1"></i>Log This Meal';
+        }
+    }
+</script>
+</body>
+</html>

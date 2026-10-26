@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#7B2C3F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <title>Tastio - Recipe Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- NEW THEME: WARM AMBER & DEEP BURGUNDY --- */
+        :root {
+            --primary-color: #7B2C3F; /* Deep Burgundy */
+            --accent-color: #FF9E1F; /* Warm Amber/Orange */
+            --light-bg: #f8f9fa; /* Light Gray for body */
+        }
+
+        /* General Styles */
+        body { 
+            background-color: var(--light-bg); 
+            font-family: 'Inter', sans-serif; 
+        }
+
+        /* Navbar */
+        .navbar { 
+            background-color: #ffffff; 
+            box-shadow: 0 2px 4px rgba(0,0,0,.05); 
+        }
+        .text-primary { 
+            color: var(--primary-color) !important; 
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
+                        linear-gradient(135deg, var(--primary-color), #9D3B55);
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+        .hero-section .display-4, .hero-section .lead {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Search Bar */
+        .search-container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 50px;
+            padding: 5px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .search-icon { 
+            color: var(--primary-color); 
+            margin: 0 10px; 
+        }
+        .search-input { 
+            border: none; 
+            box-shadow: none; 
+            padding: 10px 5px; 
+        }
+        .search-input:focus { 
+            box-shadow: none; 
+        }
+        .search-btn {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+        .search-btn:hover { 
+            background-color: #E58E1B; 
+            border-color: #E58E1B; 
+        }
+
+        /* Recipe Cards & Modals */
+        .recipe-card {
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        .recipe-img { 
+            height: 200px; 
+            object-fit: cover; 
+        }
+        .badge-custom { 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 3px 8px; 
+            margin-right: 5px; 
+            border-radius: 5px; 
+            font-size: 0.8rem; 
+        }
+        .badge-accent {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        .health-score { 
+            font-weight: bold; 
+            color: #198754; 
+        }
+        .view-details-btn {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .view-details-btn:hover {
+            background-color: #6a2536;
+            border-color: #6a2536;
+        }
+        .modal-image { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover; 
+            margin-bottom: 15px; 
+            border-radius: 5px; 
+        }
+        .steps-list { 
+            padding-left: 0;
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .steps-list li {
+            position: relative;
+            counter-increment: step-counter;
+            padding: 12px 16px 12px 48px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #eef0f3;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            width: 26px;
+            height: 26px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* Star Rating in Modal */
+        .rating-stars { 
+            font-size: 2rem; 
+            color: #ccc; 
+            cursor: pointer; 
+        }
+        .rating-stars .star { 
+            transition: color 0.1s; 
+        }
+        .rating-stars .star.selected {
+            color: gold;
+        }
+
+        /* Message Box */
+        .message-box {
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.05);
+        }
+
+        /* Modal Headers */
+        .modal-header-custom {
+            background: linear-gradient(135deg, var(--primary-color), #9D3B55) !important;
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-eaten {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+        }
+        .btn-eaten:hover {
+            background-color: #E58E1B;
+            border-color: #E58E1B;
+        }
+
+        /* Print Button */
+        .btn-print {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        .btn-print:hover {
+            background-color: #6a2536;
+            border-color: #6a2536;
+        }
+
+        /* Category Filter Buttons */
+        .btn-category {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            color: #495057;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+        .btn-category:hover, .btn-category.active {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 6px rgba(123, 44, 63, 0.25);
+        }
+        .text-truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Section Headers */
+        .section-header {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile Bottom Navigation Bar */
+        .mobile-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1040;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+            padding: 8px 16px;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 0.72rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        .mobile-nav-item i {
+            font-size: 1.25rem;
+            margin-bottom: 3px;
+            transition: transform 0.2s;
+        }
+        .mobile-nav-item:hover, .mobile-nav-item.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .mobile-nav-item.active i {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Layout & Card Tweaks */
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 75px; /* space for bottom bar */
+            }
+            .hero-section {
+                padding: 45px 15px !important;
+            }
+            .hero-section h1 {
+                font-size: 1.85rem !important;
+            }
+            .hero-section .lead {
+                font-size: 1rem !important;
+                margin-bottom: 20px !important;
+            }
+            .search-box {
+                padding: 4px 8px;
+            }
+            .recipe-card {
+                margin-bottom: 1rem;
+            }
+            .modal-dialog {
+                margin: 0.5rem;
+            }
+            .modal-image {
+                height: 200px !important;
+            }
+        }
+
+        /* Floating AI Coach Button */
+        .floating-coach-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            background: linear-gradient(135deg, #7B2C3F, #9D3B55);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 8px 24px rgba(123, 44, 63, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .floating-coach-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 28px rgba(123, 44, 63, 0.45);
+            color: #FFD180 !important;
+        }
+        .coach-pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        @media (max-width: 768px) {
+            .floating-coach-btn {
+                bottom: 75px;
+                right: 16px;
+                padding: 8px 14px;
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+    
+</head>
+
+<body data-authenticated="{% if session.user %}true{% else %}false{% endif %}">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-dark" href="/dashboard">
+            <i class="fas fa-utensils me-2" style="color: var(--accent-color);"></i>Tastio
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if session.user %}
+                    <li class="nav-item">
+                        <span class="nav-link text-success fw-bold">Welcome, {{ session.user.name }}!</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">
+                            <i class="fas fa-user me-1" style="color: var(--primary-color);"></i>Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">
+                            <i class="fas fa-sign-out-alt me-1" style="color: var(--primary-color);"></i>Logout
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/meal-plan"><i class="fas fa-calendar-alt me-1 text-warning"></i>Meal Plan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/grocery-list"><i class="fas fa-shopping-cart me-1" style="color: var(--primary-color);"></i>Grocery List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scanner"><i class="fas fa-camera me-1 text-warning"></i>Food Scanner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/coach"><i class="fas fa-robot me-1 text-warning"></i>AI Coach</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section and Search Bar -->
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Discover Your Perfect Recipe</h1>
+        <p class="lead mb-4">Find delicious meals tailored to your pantry ingredients, diet goals, and metabolic targets</p>
+        
+        <!-- Search Mode Tabs -->
+        <ul class="nav nav-pills justify-content-center mb-4 gap-2" id="searchModeTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if not is_pantry_mode %}active{% endif %} rounded-pill px-4 py-2" id="general-search-tab" data-bs-toggle="pill" data-bs-target="#generalSearchPane" type="button" role="tab" style="font-weight: 600;">
+                    <i class="fas fa-search me-2"></i>Smart Search
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if is_pantry_mode %}active{% endif %} rounded-pill px-4 py-2" id="pantry-search-tab" data-bs-toggle="pill" data-bs-target="#pantrySearchPane" type="button" role="tab" style="font-weight: 600;">
+                    <i class="fas fa-utensils me-2"></i>🥘 What Can I Cook?
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="searchModeContent">
+            <!-- Mode 1: General Recipe Search -->
+            <div class="tab-pane fade {% if not is_pantry_mode %}show active{% endif %}" id="generalSearchPane" role="tabpanel">
+                <form method="POST" action="/recommend" class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="query" value="{{ query or '' }}" class="form-control search-input" placeholder="Search dish or ingredients (e.g., chicken, broccoli, biryani)" aria-label="Search ingredients">
+                        <button type="submit" class="btn search-btn">
+                            <span class="d-none d-sm-inline">Search Recipes</span>
+                            <span class="d-inline d-sm-none"><i class="fas fa-arrow-right"></i></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Mode 2: What Can I Cook? (Pantry Matcher) -->
+            <div class="tab-pane fade {% if is_pantry_mode %}show active{% endif %}" id="pantrySearchPane" role="tabpanel">
+                <form method="POST" action="/what-can-i-cook" class="search-container" id="pantryForm">
+                    <div class="search-box" style="border: 2px solid #f59e0b;">
+                        <i class="fas fa-carrot search-icon text-warning"></i>
+                        <input type="text" id="pantryInput" name="pantry_ingredients" value="{{ pantry_query or '' }}" class="form-control search-input" placeholder="Enter ingredients you currently have (e.g., chicken, rice, tomato, onion)" aria-label="Pantry ingredients">
+                        <button type="submit" class="btn search-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <span class="d-none d-sm-inline"><i class="fas fa-fire me-1"></i>Match Pantry</span>
+                            <span class="d-inline d-sm-none"><i class="fas fa-fire"></i></span>
+                        </button>
+                    </div>
+                </form>
+                <!-- Quick-Add Pantry Ingredient Chips -->
+                <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                    <small class="text-white align-self-center me-1 opacity-75">Quick Add:</small>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('chicken')">+ Chicken</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('rice')">+ Rice</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('tomato')">+ Tomato</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('onion')">+ Onion</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('paneer')">+ Paneer</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('potato')">+ Potato</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('spinach')">+ Spinach</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('eggs')">+ Eggs</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('dal')">+ Dal</button>
+                    <button type="button" class="btn btn-sm btn-outline-light rounded-pill py-1 px-2" onclick="addPantryChip('garlic')">+ Garlic</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Area (Messages & Recipes) -->
+<div class="container py-5">
+    <div id="message-area">
+    {% if message %}
+        <div class="alert message-box text-center {% if '✅' in message %}alert-success{% elif '❌' in message %}alert-danger{% else %}alert-info{% endif %}" role="alert">
+            {{ message | safe }}
+        </div>
+    {% endif %}
+    </div>
+
+
+    <!-- Multi-facet Indian Cuisine & Category Filter Toolbar -->
+    <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+            <h6 class="fw-bold mb-0 text-dark">
+                <i class="fas fa-sliders text-warning me-2"></i>Explore by Cuisine & Diet
+            </h6>
+            <button class="btn btn-sm btn-link text-muted p-0 text-decoration-none" type="button" onclick="resetFilters()">
+                <i class="fas fa-rotate-left me-1"></i>Reset Filters
+            </button>
+        </div>
+
+        <!-- 1. Regional Cuisines Row -->
+        <div class="d-flex align-items-center flex-wrap gap-1 mb-2">
+            <small class="fw-bold text-muted me-2" style="font-size:0.75rem;"><i class="fas fa-map-marker-alt me-1 text-danger"></i>CUISINE:</small>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill active" data-filter-type="cuisine" data-filter-val="all" onclick="applyFacetFilter(this)">All</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Andhra" onclick="applyFacetFilter(this)">Andhra</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Telangana" onclick="applyFacetFilter(this)">Telangana</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="South Indian" onclick="applyFacetFilter(this)">South Indian</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="North Indian" onclick="applyFacetFilter(this)">North Indian</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Punjabi" onclick="applyFacetFilter(this)">Punjabi</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Gujarati" onclick="applyFacetFilter(this)">Gujarati</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Bengali" onclick="applyFacetFilter(this)">Bengali</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Maharashtrian" onclick="applyFacetFilter(this)">Maharashtrian</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Kerala" onclick="applyFacetFilter(this)">Kerala</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Karnataka" onclick="applyFacetFilter(this)">Karnataka</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Tamil Nadu" onclick="applyFacetFilter(this)">Tamil Nadu</button>
+        </div>
+
+        <!-- 2. Meal Type & Nutrition Row -->
+        <div class="d-flex align-items-center flex-wrap gap-1">
+            <small class="fw-bold text-muted me-2" style="font-size:0.75rem;"><i class="fas fa-utensils me-1 text-primary"></i>MEAL & NUTRITION:</small>
+            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Breakfast" onclick="applyFacetFilter(this)">Breakfast</button>
+            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Lunch" onclick="applyFacetFilter(this)">Lunch</button>
+            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Dinner" onclick="applyFacetFilter(this)">Dinner</button>
+            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Snack" onclick="applyFacetFilter(this)">Snack</button>
+            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Dessert" onclick="applyFacetFilter(this)">Dessert</button>
+            <span class="text-muted mx-1">|</span>
+            <button class="btn btn-sm btn-outline-success rounded-pill py-0 px-2 filter-pill" data-filter-type="diet" data-filter-val="Vegetarian" onclick="applyFacetFilter(this)">Veg</button>
+            <button class="btn btn-sm btn-outline-danger rounded-pill py-0 px-2 filter-pill" data-filter-type="diet" data-filter-val="Non-Vegetarian" onclick="applyFacetFilter(this)">Non-Veg</button>
+            <button class="btn btn-sm btn-outline-warning rounded-pill py-0 px-2 filter-pill" data-filter-type="nutrition_tag" data-filter-val="High Protein" onclick="applyFacetFilter(this)">💪 High Protein</button>
+            <button class="btn btn-sm btn-outline-info rounded-pill py-0 px-2 filter-pill" data-filter-type="nutrition_tag" data-filter-val="Low Calorie" onclick="applyFacetFilter(this)">🔥 Low Cal</button>
+        </div>
+    </div>
+
+    <h2 class="text-center mb-5 mt-4 section-header" id="recipeSectionTitle">
+        {% if recipes and not message %}Popular Recipes Today{% elif recipes and 'Found' in message %}Your Search Results{% elif recipes %}Recommended Recipes{% else %}Start Your Culinary Journey!{% endif %}
+    </h2>
+
+    <div class="row" id="recipesGridContainer">
+        {% if recipes %}
+            {% for recipe in recipes %}
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+                <div class="card recipe-card" data-bs-toggle="modal" data-bs-target="#recipeModal{{ loop.index }}">
+                    <img src="{{ recipe.image_link }}" class="card-img-top recipe-img" alt="{{ recipe.recipe_name }}"
+                        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" style="color: var(--primary-color);">{{ recipe.recipe_name }}</h5>
+
+                        <div class="mb-2 d-flex flex-wrap gap-1 align-items-center">
+                            {% if recipe.match_score_pct %}<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="fas fa-magic me-1"></i>{{ recipe.match_score_pct }}% Match</span>{% endif %}
+                            {% if recipe.diet_goal %}<span class="badge-custom">{{ recipe.diet_goal }}</span>{% endif %}
+                            {% if recipe.veg_nonveg %}<span class="badge-accent">{{ recipe.veg_nonveg }}</span>{% endif %}
+                        </div>
+
+                        {% if recipe.recommendation_reason %}
+                        <div class="p-2 mb-3 rounded-3 small text-dark border-start border-warning border-3" style="background-color: #f8fafc; font-size: 0.82rem;">
+                            <i class="fas fa-wand-magic-sparkles text-warning me-1"></i><strong>AI Insight:</strong> {{ recipe.recommendation_reason }}
+                        </div>
+                        {% endif %}
+
+                        {% if recipe.available_ingredients or recipe.missing_ingredients %}
+                        <!-- Pantry Match Breakdown -->
+                        <div class="mb-3 p-2 rounded-3 border small" style="background-color: #f8fafc;">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <strong class="text-dark"><i class="fas fa-layer-group text-primary me-1"></i>Pantry Match:</strong>
+                                <span class="badge {% if (recipe.pantry_match_pct or 0) >= 70 %}bg-success{% elif (recipe.pantry_match_pct or 0) >= 40 %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                                    {{ recipe.pantry_match_pct or 0 }}% Match
+                                </span>
+                            </div>
+                            {% if recipe.available_ingredients %}
+                            <div class="text-success small mb-1">
+                                <strong>✓ Available ({{ recipe.available_ingredients|length }}):</strong> {{ recipe.available_ingredients[:3]|join(', ') }}{% if recipe.available_ingredients|length > 3 %}...{% endif %}
+                            </div>
+                            {% endif %}
+                            {% if recipe.missing_ingredients %}
+                            <div class="text-muted small">
+                                <strong>+ Missing ({{ recipe.missing_ingredients|length }}):</strong> {{ recipe.missing_ingredients[:3]|join(', ') }}{% if recipe.missing_ingredients|length > 3 %}...{% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <div class="card-text text-muted small mb-3 flex-grow-1">
+                            <strong>Key Ingredients:</strong>
+                            <ul class="list-unstyled mb-0">
+                                {% set allergies = user_allergies or [] %}
+                                {% for ing in recipe.ingredients[:3] %}
+                                    {% if ing.lower() in allergies %}
+                                        <li class="text-danger fw-bold"><i class="fas fa-exclamation-triangle me-1"></i>{{ ing }} ⚠️</li>
+                                    {% else %}
+                                        <li><i class="fas fa-circle me-1" style="font-size: 0.5rem; vertical-align: middle; color: var(--accent-color);"></i>{{ ing }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if recipe.ingredients|length > 3 %}
+                                    <li class="fst-italic text-secondary">...and {{ recipe.ingredients|length - 3 }} more.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                        <div class="nutrition-info mt-auto pt-3 border-top">
+                            <p class="mb-1"><strong>Nutrition (per serving):</strong></p>
+                            <div class="d-flex justify-content-between small">
+                                <span>Calories: <strong>{{ recipe.nutritions.calories or 'N/A' }}</strong></span>
+                                <span>Protein: <strong>{{ recipe.nutritions.protein_g or 'N/A' }}g</strong></span>
+                            </div>
+                            <p class="health-score mt-2 mb-0">Health Score: {{ recipe.health_score or 'N/A' }}/100</p>
+                        </div>
+
+                        <button class="btn view-details-btn mt-3">
+                            <i class="fas fa-receipt me-2"></i>View Full Recipe
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recipe Detail Modal (for each recipe) -->
+            <div class="modal fade" id="recipeModal{{ loop.index }}" tabindex="-1" aria-labelledby="recipeModalLabel{{ loop.index }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header modal-header-custom">
+                            <h5 class="modal-title" id="recipeModalLabel{{ loop.index }}">{{ recipe.recipe_name }}</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{ recipe.image_link }}" class="modal-image" alt="{{ recipe.recipe_name }}"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';">
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <h6 class="section-header">Ingredients</h6>
+                                    <ul class="list-unstyled">
+                                        {% for ing in recipe.ingredients %}
+                                            {% if ing.lower() in allergies %}
+                                                <li style="color:red; font-weight:bold;">
+                                                    <i class="fas fa-exclamation-triangle me-1"></i>{{ ing }} (Allergy Risk)
+                                                </li>
+                                            {% else %}
+                                                <li>
+                                                    <i class="fas fa-dot-circle me-1" style="color: var(--accent-color); font-size: 0.6rem;"></i>{{ ing }}
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="section-header">Nutrition Snapshot</h6>
+                                    <p class="mb-1">Calories: <strong>{{ recipe.nutritions.calories or 'N/A' }}</strong></p>
+                                    <p class="mb-1">Protein: <strong>{{ recipe.nutritions.protein_g or 'N/A' }}g</strong></p>
+                                    <p class="mb-1">Carbs: <strong>{{ recipe.nutritions.carbs_g or 'N/A' }}g</strong></p>
+                                    <p class="mb-1">Fat: <strong>{{ recipe.nutritions.fat_g or 'N/A' }}g</strong></p>
+                                    <p class="mb-1">Diet: <span class="badge-custom">{{ recipe.diet_goal or 'Any' }}</span></p>
+                                    <p class="mb-1">Type: <span class="badge-accent">{{ recipe.veg_nonveg or 'Any' }}</span></p>
+                                    <p class="health-score mt-3"><strong>Health Score:</strong> {{ recipe.health_score or 'N/A' }}/100</p>
+                                </div>
+                            </div>
+
+                            <h6 class="section-header">Preparation Steps</h6>
+                            <ol class="steps-list">
+                                {% for step in recipe.steps %}
+                                    <li>{{ step }}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                        <div class="modal-footer justify-content-between flex-wrap gap-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <div class="d-flex gap-2 align-items-center flex-wrap">
+                                <div class="input-group input-group-sm" style="width: 140px;">
+                                    <span class="input-group-text"><i class="fas fa-utensil-spoon"></i></span>
+                                    <select class="form-select portion-select" title="Serving Size">
+                                        <option value="0.5">0.5x Portion</option>
+                                        <option value="1.0" selected>1.0x Portion</option>
+                                        <option value="1.5">1.5x Portion</option>
+                                        <option value="2.0">2.0x Portion</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="toggleFavorite('{{ recipe.recipe_id }}', this)">
+                                    <i class="{% if recipe.recipe_id|string in (favorites or []) %}fas fa-heart text-danger{% else %}far fa-heart text-muted{% endif %} me-1"></i>Favorite
+                                </button>
+                                <button type="button" class="btn btn-outline-success btn-sm rounded-pill px-3" onclick="addRecipeToGrocery('{{ recipe.recipe_id }}', '{{ recipe.recipe_name|replace("\'", "\\\'") }}', this)">
+                                    <i class="fas fa-cart-plus me-1"></i>Add to Grocery
+                                </button>
+                                <button type="button" class="btn btn-eaten btn-sm" onclick="markRecipeEaten('{{ recipe.recipe_id }}', 'recipeModal{{ loop.index }}', this)">
+                                    <i class="fas fa-check-circle me-2"></i>Log Meal
+                                </button>
+                                <button type="button" class="btn btn-print btn-sm" onclick="window.print()">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-pepper-hot fa-3x text-muted mb-3"></i>
+            <p class="lead text-muted">No recipes found. Try searching for ingredients like 'pasta', 'chicken', or 'broccoli'!</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- ALL 150 RECIPES COLLECTION SECTION -->
+    <div class="all-recipes-section mt-5 pt-4 border-top">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+            <div>
+                <h2 class="section-header mb-1" style="display: inline-block;">
+                    <i class="fas fa-book-open me-2" style="color: var(--accent-color);"></i>Explore All Recipes <span class="badge bg-primary fs-6 align-middle ms-2">{{ all_recipes|length if all_recipes else '150' }} Recipes</span>
+                </h2>
+                <p class="text-muted mb-0">Browse through our complete collection of authentic Andhra curries, fries, dals, tiffins, sweets, and healthy dishes.</p>
+            </div>
+            <div class="mt-3 mt-md-0 d-flex gap-2 align-items-center">
+                <div class="input-group input-group-sm" style="max-width: 280px;">
+                    <span class="input-group-text bg-white"><i class="fas fa-filter text-muted"></i></span>
+                    <input type="text" id="catalogSearchInput" class="form-control" placeholder="Filter by name or ingredient..." onkeyup="filterCatalog()">
+                </div>
+                <span id="catalogCount" class="badge bg-light text-dark border px-3 py-2">Showing {{ all_recipes|length if all_recipes else '150' }} / {{ all_recipes|length if all_recipes else '150' }}</span>
+            </div>
+        </div>
+
+        <!-- Filter Category Pills -->
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-sm btn-category active" onclick="setCategoryFilter('all', this)"><i class="fas fa-utensils me-1"></i>All ({{ all_recipes|length if all_recipes else '150' }})</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('veg', this)"><i class="fas fa-leaf me-1 text-success"></i>Vegetarian</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('non-veg', this)"><i class="fas fa-drumstick-bite me-1 text-danger"></i>Non-Veg</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('high protein', this)"><i class="fas fa-dumbbell me-1 text-primary"></i>High Protein</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('traditional', this)"><i class="fas fa-pepper-hot me-1 text-warning"></i>Traditional Andhra</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('weight loss', this)"><i class="fas fa-heartbeat me-1 text-info"></i>Weight Loss</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('breakfast', this)"><i class="fas fa-sun me-1 text-warning"></i>Breakfast & Tiffins</button>
+            <button class="btn btn-sm btn-category" onclick="setCategoryFilter('sweet', this)"><i class="fas fa-cookie me-1 text-danger"></i>Sweets & Desserts</button>
+        </div>
+
+        <!-- Full 150 Recipe Cards Grid -->
+        <div class="row" id="catalogGrid">
+            {% if all_recipes %}
+                {% for recipe in all_recipes %}
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4 catalog-item" 
+                     data-name="{{ recipe.recipe_name|lower }}" 
+                     data-ingredients="{{ recipe.ingredients|join(' ')|lower }}" 
+                     data-type="{{ recipe.veg_nonveg|lower }}" 
+                     data-diet="{{ recipe.diet_goal|lower }}">
+                    <div class="card recipe-card w-100" data-bs-toggle="modal" data-bs-target="#catalogModal_{{ recipe.recipe_id }}">
+                        <img src="{{ recipe.image_link }}" class="card-img-top recipe-img" alt="{{ recipe.recipe_name }}"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80';">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="badge bg-secondary text-white small" style="font-size: 0.75rem;">#{{ recipe.recipe_id }}</span>
+                                <span class="health-score small">★ {{ recipe.health_score or 'N/A' }}/100</span>
+                            </div>
+                            <h5 class="card-title text-truncate-2" style="color: var(--primary-color); min-height: 48px;">{{ recipe.recipe_name }}</h5>
+
+                            <div class="mb-3">
+                                {% if recipe.diet_goal %}<span class="badge-custom">{{ recipe.diet_goal }}</span>{% endif %}
+                                {% if recipe.veg_nonveg %}
+                                    <span class="badge {% if recipe.veg_nonveg == 'Veg' %}bg-success{% else %}bg-danger{% endif %} text-white">{{ recipe.veg_nonveg }}</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="card-text text-muted small mb-3 flex-grow-1">
+                                <strong>Key Ingredients:</strong>
+                                <ul class="list-unstyled mb-0">
+                                    {% for ing in recipe.ingredients[:3] %}
+                                        <li><i class="fas fa-circle me-1" style="font-size: 0.45rem; vertical-align: middle; color: var(--accent-color);"></i>{{ ing }}</li>
+                                    {% endfor %}
+                                    {% if recipe.ingredients|length > 3 %}
+                                        <li class="fst-italic text-secondary">...and {{ recipe.ingredients|length - 3 }} more</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+
+                            <div class="nutrition-info mt-auto pt-3 border-top">
+                                <div class="d-flex justify-content-between small">
+                                    <span>Calories: <strong>{{ recipe.nutritions.calories or 'N/A' }} kcal</strong></span>
+                                    <span>Protein: <strong>{{ recipe.nutritions.protein_g or 'N/A' }}g</strong></span>
+                                </div>
+                            </div>
+
+                            <button class="btn view-details-btn mt-3">
+                                <i class="fas fa-receipt me-2"></i>View Full Recipe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Modal for Each Catalog Recipe -->
+                <div class="modal fade" id="catalogModal_{{ recipe.recipe_id }}" tabindex="-1" aria-labelledby="catalogModalLabel_{{ recipe.recipe_id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header modal-header-custom">
+                                <h5 class="modal-title" id="catalogModalLabel_{{ recipe.recipe_id }}">#{{ recipe.recipe_id }} - {{ recipe.recipe_name }}</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{{ recipe.image_link }}" class="modal-image" alt="{{ recipe.recipe_name }}"
+                                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80';">
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <h6 class="section-header">Ingredients</h6>
+                                        <ul class="list-unstyled">
+                                            {% for ing in recipe.ingredients %}
+                                                <li>
+                                                    <i class="fas fa-dot-circle me-1" style="color: var(--accent-color); font-size: 0.6rem;"></i>{{ ing }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="section-header">Nutrition Snapshot</h6>
+                                        <p class="mb-1">Calories: <strong>{{ recipe.nutritions.calories or 'N/A' }} kcal</strong></p>
+                                        <p class="mb-1">Protein: <strong>{{ recipe.nutritions.protein_g or 'N/A' }}g</strong></p>
+                                        <p class="mb-1">Carbs: <strong>{{ recipe.nutritions.carbs_g or 'N/A' }}g</strong></p>
+                                        <p class="mb-1">Fat: <strong>{{ recipe.nutritions.fat_g or 'N/A' }}g</strong></p>
+                                        <p class="mb-1">Diet Goal: <span class="badge-custom">{{ recipe.diet_goal or 'Any' }}</span></p>
+                                        <p class="mb-1">Type: <span class="badge {% if recipe.veg_nonveg == 'Veg' %}bg-success{% else %}bg-danger{% endif %} text-white">{{ recipe.veg_nonveg or 'Any' }}</span></p>
+                                        <p class="health-score mt-3"><strong>Health Score:</strong> {{ recipe.health_score or 'N/A' }}/100</p>
+                                    </div>
+                                </div>
+
+                                <h6 class="section-header">Detailed Step-by-Step Preparation</h6>
+                                <ol class="steps-list">
+                                    {% for step in recipe.steps %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-outline-success" onclick="addRecipeToGrocery('{{ recipe.recipe_id }}', '{{ recipe.recipe_name|replace("\'", "\\\'") }}', this)">
+                                        <i class="fas fa-cart-plus me-2"></i>Add to Grocery
+                                    </button>
+                                    <button type="button" class="btn btn-eaten" onclick="markRecipeEaten('{{ recipe.recipe_id }}', 'catalogModal_{{ recipe.recipe_id }}', this)">
+                                        <i class="fas fa-check-circle me-2"></i>Mark as Eaten
+                                    </button>
+                                    <button type="button" class="btn btn-print" onclick="window.print()">
+                                        <i class="fas fa-print me-2"></i>Print Recipe
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- 50-Recipe Pagination & Load More Control Bar -->
+        <div id="catalogPaginationControls" class="d-flex flex-column flex-sm-row justify-content-between align-items-center mt-4 pt-3 border-top gap-3">
+            <div class="text-muted small" id="paginationStatusText">
+                Showing <strong>1 to 50</strong> of <strong>150</strong> recipes (Page 1 of 3)
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <button type="button" class="btn btn-outline-primary btn-sm px-3" id="loadMoreBtn" onclick="loadMoreRecipes()">
+                    <i class="fas fa-plus-circle me-1"></i>Load Next 50 Recipes
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm px-3" id="showAllBtn" onclick="showAllCatalogRecipes()">
+                    <i class="fas fa-list-ul me-1"></i>Show All 150
+                </button>
+                <div class="btn-group btn-group-sm ms-sm-2" role="group" id="pageNumberButtons">
+                    <button type="button" class="btn btn-outline-dark active" onclick="goToCatalogPage(1, this)">1</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="goToCatalogPage(2, this)">2</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="goToCatalogPage(3, this)">3</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="noCatalogMatch" class="col-12 text-center py-5 d-none">
+            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+            <p class="lead text-muted">No recipes found matching your filter in the collection.</p>
+            <button class="btn btn-sm btn-outline-primary" onclick="setCategoryFilter('all', document.querySelector('.btn-category'))">Reset Filters</button>
+        </div>
+    </div>
+</div>
+
+<!-- Global Modals (Login, Signup, Review) -->
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/login" method="POST">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title" id="loginModalLabel"><i class="fas fa-sign-in-alt me-2"></i>Login</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" name="password" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-eaten">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/signup" method="POST">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title" id="signupModalLabel"><i class="fas fa-user-plus me-2"></i>Sign Up</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="signupName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="signupName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="signupEmail" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="signupPassword" name="password" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-eaten">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <form id="reviewForm"> 
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title" id="reviewModalLabel"><i class="fas fa-star me-2"></i>Rate Your Recipe!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="lead">How was your meal?</p>
+                    <div class="rating-stars mb-4">
+                        <i class="fas fa-star star" data-rating="1"></i>
+                        <i class="fas fa-star star" data-rating="2"></i>
+                        <i class="fas fa-star star" data-rating="3"></i>
+                        <i class="fas fa-star star" data-rating="4"></i>
+                        <i class="fas fa-star star" data-rating="5"></i>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reviewComment" class="form-label">Add a comment (optional)</label>
+                        <textarea class="form-control" id="reviewComment" rows="3" placeholder="Tell us what you loved or how we can improve..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-eaten" id="submitReviewBtn">
+                        <i class="fas fa-paper-plane me-2"></i>Submit Review
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// ----------------------------
+// Global Variables & Setup
+// ----------------------------
+const IS_USER_AUTHENTICATED = document.body.dataset.authenticated === 'true';
+let currentRecipeId = null;
+let selectedRating = 0;
+
+// Get Bootstrap Modal instances
+const reviewModalElement = document.getElementById('reviewModal');
+const reviewModal = new bootstrap.Modal(reviewModalElement);
+
+// ----------------------------
+// Helper Function: Show Alert
+// ----------------------------
+function showAlert(message, isSuccess = true) {
+    const messageArea = document.getElementById('message-area');
+    // Determine alert type based on success status or content
+    let alertType;
+    if (isSuccess) {
+        alertType = 'alert-success';
+        message = '✅ ' + message;
+    } else {
+        alertType = 'alert-danger';
+        message = '❌ ' + message;
+    }
+    
+    // Create the alert element
+    const alertHtml = `
+        <div class="alert message-box text-center ${alertType}" role="alert">
+            ${message}
+        </div>
+    `;
+
+    // Replace the current content (clears previous messages)
+    messageArea.innerHTML = alertHtml;
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+        const currentAlert = messageArea.querySelector('.alert');
+        if (currentAlert) {
+            currentAlert.remove();
+        }
+    }, 5000);
+}
+
+// ----------------------------
+// What Can I Cook - Quick Add Chip
+// ----------------------------
+function addPantryChip(item) {
+    const input = document.getElementById('pantryInput');
+    if (!input) return;
+    const current = input.value.trim();
+    if (!current) {
+        input.value = item;
+    } else {
+        const terms = current.split(',').map(s => s.trim().toLowerCase());
+        if (!terms.includes(item.toLowerCase())) {
+            input.value = current + ', ' + item;
+        }
+    }
+    input.focus();
+}
+
+// ----------------------------
+// Favorite Toggle
+// ----------------------------
+function toggleFavorite(recipeId, btnElem) {
+    if (!IS_USER_AUTHENTICATED) {
+        const loginModalElem = document.getElementById('loginModal');
+        if (loginModalElem) {
+            bootstrap.Modal.getOrCreateInstance(loginModalElem).show();
+        }
+        showAlert("Please log in to save favorite recipes!", false);
+        return;
+    }
+
+    fetch(`/favorite/${recipeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            const icon = btnElem.querySelector('i');
+            if (icon) {
+                if (data.is_favorite) {
+                    icon.className = 'fas fa-heart text-danger me-1';
+                    showAlert("⭐ Added to your favorite recipes!", true);
+                } else {
+                    icon.className = 'far fa-heart text-muted me-1';
+                    showAlert("Removed from favorites.", true);
+                }
+            }
+        }
+    })
+    .catch(() => showAlert("Error updating favorites", false));
+}
+
+// ----------------------------
+// Add Recipe to Grocery List
+// ----------------------------
+function addRecipeToGrocery(recipeId, recipeName, btnElem) {
+    let originalBtnContent = '';
+    if (btnElem) {
+        originalBtnContent = btnElem.innerHTML;
+        btnElem.disabled = true;
+        btnElem.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Adding...';
+    }
+
+    fetch('/api/grocery-list/add-recipe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipe_id: recipeId, recipe_name: recipeName })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data && data.success) {
+            showAlert(`Added ${data.added || 'all'} ingredients from '${recipeName}' to your Smart Grocery List! 🛒`, true);
+            if (btnElem) {
+                btnElem.innerHTML = '<i class="fas fa-check text-success me-1"></i>In Grocery';
+            }
+        } else {
+            showAlert(data?.message || 'Could not add ingredients to grocery list.', false);
+            if (btnElem) {
+                btnElem.disabled = false;
+                btnElem.innerHTML = originalBtnContent;
+            }
+        }
+    })
+    .catch(() => {
+        showAlert('Network error while adding to grocery list.', false);
+        if (btnElem) {
+            btnElem.disabled = false;
+            btnElem.innerHTML = originalBtnContent;
+        }
+    });
+}
+
+// ----------------------------
+// Mark Recipe as Eaten
+// ----------------------------
+function markRecipeEaten(recipeId, modalId, btnElem) {
+    if (!IS_USER_AUTHENTICATED) {
+        if (modalId) {
+            const currentModal = document.getElementById(modalId);
+            if (currentModal) {
+                const modalInst = bootstrap.Modal.getInstance(currentModal) || bootstrap.Modal.getOrCreateInstance(currentModal);
+                modalInst.hide();
+            }
+        }
+        setTimeout(() => {
+            const loginModalElem = document.getElementById('loginModal');
+            if (loginModalElem) {
+                const loginInst = bootstrap.Modal.getOrCreateInstance(loginModalElem);
+                loginInst.show();
+            }
+        }, 300);
+        showAlert("Please log in to track recipes and save your diet history!", false);
+        return;
+    }
+
+    let servingSize = 1.0;
+    if (modalId) {
+        const modalElem = document.getElementById(modalId);
+        if (modalElem) {
+            const selectElem = modalElem.querySelector('.portion-select');
+            if (selectElem) {
+                servingSize = parseFloat(selectElem.value) || 1.0;
+            }
+        }
+    }
+
+    let originalBtnContent = '';
+    if (btnElem) {
+        originalBtnContent = btnElem.innerHTML;
+        btnElem.disabled = true;
+        btnElem.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving...';
+    }
+
+    fetch(`/mark_eaten/${recipeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serving_size: servingSize })
+    })
+    .then(res => {
+        if (!res.ok) {
+            return res.json().then(err => { throw err; }).catch(() => {
+                throw new Error("Server error (" + res.status + ")");
+            });
+        }
+        return res.json();
+    })
+    .then(data => {
+        if (data.success) {
+            showAlert(data.message, true);
+
+            // Update all corresponding buttons to Cooked / Eaten state
+            document.querySelectorAll(`button[onclick*="'${recipeId}'"]`).forEach(b => {
+                if (b.classList.contains('btn-eaten')) {
+                    b.classList.remove('btn-eaten');
+                    b.classList.add('btn-success');
+                    b.innerHTML = '<i class="fas fa-check-circle me-2"></i>Cooked / Eaten';
+                    b.disabled = true;
+                }
+            });
+
+            // Close the recipe detail modal
+            if (modalId) {
+                const detailModalElement = document.getElementById(modalId);
+                if (detailModalElement) {
+                    const detailModal = bootstrap.Modal.getInstance(detailModalElement) || bootstrap.Modal.getOrCreateInstance(detailModalElement);
+                    detailModal.hide();
+                }
+            }
+
+            // Only open review modal if a review doesn't already exist
+            if (!data.review_exists) {
+                currentRecipeId = recipeId;
+                setTimeout(() => {
+                    openReviewModal(true);
+                }, 400);
+            }
+        } else {
+            if (btnElem) {
+                btnElem.disabled = false;
+                btnElem.innerHTML = originalBtnContent;
+            }
+            showAlert(data.message || "Could not mark as eaten. Please try again.", false);
+        }
+    })
+    .catch(err => {
+        console.error("Error marking recipe as eaten:", err);
+        if (btnElem) {
+            btnElem.disabled = false;
+            btnElem.innerHTML = originalBtnContent;
+        }
+        const errorMessage = (err && err.message) ? err.message : "An error occurred while communicating with the server.";
+        showAlert(errorMessage, false);
+    });
+}
+
+// ----------------------------
+// Open Review Modal and setup stars
+// ----------------------------
+function openReviewModal(reset = true) {
+    if (reset) {
+        selectedRating = 0;
+        const commentInput = document.getElementById('reviewComment');
+        if (commentInput) commentInput.value = '';
+        
+        document.querySelectorAll('.rating-stars .star').forEach(star => {
+            star.classList.remove('selected');
+        });
+    }
+
+    const reviewModalElement = document.getElementById('reviewModal');
+    if (reviewModalElement) {
+        const reviewInst = bootstrap.Modal.getInstance(reviewModalElement) || bootstrap.Modal.getOrCreateInstance(reviewModalElement);
+        reviewInst.show();
+    }
+}
+
+// ----------------------------
+// Star Rating Logic
+// ----------------------------
+document.querySelectorAll('.rating-stars .star').forEach(star => {
+    star.addEventListener('click', function() {
+        selectedRating = parseInt(this.getAttribute('data-rating'));
+        
+        document.querySelectorAll('.rating-stars .star').forEach(s => {
+            const rating = parseInt(s.getAttribute('data-rating'));
+            if (rating <= selectedRating) {
+                s.classList.add('selected');
+            } else {
+                s.classList.remove('selected');
+            }
+        });
+    });
+});
+
+// ----------------------------
+// Submit Review
+// ----------------------------
+document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!currentRecipeId) {
+        showAlert("Internal error: Recipe ID is missing for review.", false);
+        const reviewModalElement = document.getElementById('reviewModal');
+        if (reviewModalElement) {
+            (bootstrap.Modal.getInstance(reviewModalElement) || bootstrap.Modal.getOrCreateInstance(reviewModalElement)).hide();
+        }
+        return;
+    }
+
+    if (selectedRating === 0) {
+        showAlert("Please select a star rating (1 to 5) before submitting.", false);
+        return;
+    }
+
+    const submitBtn = document.getElementById('submitReviewBtn');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+    }
+
+    const comment = document.getElementById('reviewComment').value;
+    
+    fetch(`/review/${currentRecipeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            rating: selectedRating,
+            comment: comment
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        const reviewModalElement = document.getElementById('reviewModal');
+        if (reviewModalElement) {
+            (bootstrap.Modal.getInstance(reviewModalElement) || bootstrap.Modal.getOrCreateInstance(reviewModalElement)).hide();
+        }
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Submit Review';
+        }
+        if (data.success) {
+            showAlert(data.message, true);
+        } else {
+            showAlert(data.message || "Failed to save review.", false);
+        }
+    })
+    .catch(err => {
+        console.error("Error submitting review:", err);
+        const reviewModalElement = document.getElementById('reviewModal');
+        if (reviewModalElement) {
+            (bootstrap.Modal.getInstance(reviewModalElement) || bootstrap.Modal.getOrCreateInstance(reviewModalElement)).hide();
+        }
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Submit Review';
+        }
+        showAlert("Network error during review submission.", false);
+    });
+});
+
+// ----------------------------
+// Catalog 50-Recipe Pagination, Live Search & Category Filter
+// ----------------------------
+let currentCatalogCategory = 'all';
+const catalogPageSize = 50;
+let currentCatalogPage = 1;
+let isShowingAll = false;
+
+function setCategoryFilter(category, btn) {
+    currentCatalogCategory = category.toLowerCase();
+    document.querySelectorAll('.btn-category').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    currentCatalogPage = 1;
+    isShowingAll = false;
+    filterCatalog();
+}
+
+function goToCatalogPage(pageNum, btnElem) {
+    currentCatalogPage = pageNum;
+    isShowingAll = false;
+    document.querySelectorAll('#pageNumberButtons .btn').forEach(b => b.classList.remove('active'));
+    if (btnElem) btnElem.classList.add('active');
+    filterCatalog();
+    document.querySelector('.all-recipes-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function loadMoreRecipes() {
+    isShowingAll = false;
+    if (currentCatalogPage < 3) {
+        currentCatalogPage++;
+        const pageBtns = document.querySelectorAll('#pageNumberButtons .btn');
+        pageBtns.forEach((b, idx) => {
+            if (idx === currentCatalogPage - 1) b.classList.add('active');
+            else b.classList.remove('active');
+        });
+    }
+    filterCatalog();
+}
+
+function showAllCatalogRecipes() {
+    isShowingAll = true;
+    document.querySelectorAll('#pageNumberButtons .btn').forEach(b => b.classList.remove('active'));
+    filterCatalog();
+}
+
+function filterCatalog() {
+    const searchInput = document.getElementById('catalogSearchInput');
+    const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const items = Array.from(document.querySelectorAll('.catalog-item'));
+    
+    // First, find matching items
+    const matchingItems = items.filter(item => {
+        const name = (item.getAttribute('data-name') || '').toLowerCase();
+        const ingredients = (item.getAttribute('data-ingredients') || '').toLowerCase();
+        const type = (item.getAttribute('data-type') || '').toLowerCase();
+        const diet = (item.getAttribute('data-diet') || '').toLowerCase();
+        const matchesSearch = !searchVal || name.includes(searchVal) || ingredients.includes(searchVal);
+        let matchesCategory = true;
+        if (currentCatalogCategory !== 'all') {
+            if (currentCatalogCategory === 'veg') {
+                matchesCategory = (type === 'veg');
+            } else if (currentCatalogCategory === 'non-veg') {
+                matchesCategory = (type === 'non-veg');
+            } else {
+                matchesCategory = diet.includes(currentCatalogCategory) || name.includes(currentCatalogCategory);
+            }
+        }
+        return matchesSearch && matchesCategory;
+    });
+
+    const isFiltered = (searchVal !== '' || currentCatalogCategory !== 'all');
+    const totalMatching = matchingItems.length;
+
+    // Reset visibility
+    items.forEach(item => item.classList.add('d-none'));
+
+    let startIndex = 0;
+    let endIndex = totalMatching;
+
+    if (!isFiltered && !isShowingAll) {
+        startIndex = (currentCatalogPage - 1) * catalogPageSize;
+        endIndex = Math.min(startIndex + catalogPageSize, totalMatching);
+        for (let i = startIndex; i < endIndex; i++) {
+            if (matchingItems[i]) {
+                matchingItems[i].classList.remove('d-none');
+            }
+        }
+    } else {
+        matchingItems.forEach(item => item.classList.remove('d-none'));
+    }
+
+    const visibleCount = (!isFiltered && !isShowingAll) ? (endIndex - startIndex) : totalMatching;
+
+    // Update count indicator in section header
+    const countElem = document.getElementById('catalogCount');
+    if (countElem) {
+        countElem.innerText = isFiltered 
+            ? `Showing ${visibleCount} matching recipes`
+            : `Showing ${visibleCount} / ${items.length} (Page ${currentCatalogPage})`;
+    }
+
+    // Update pagination controls
+    const paginationControls = document.getElementById('catalogPaginationControls');
+    const paginationText = document.getElementById('paginationStatusText');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    if (paginationControls) {
+        if (isFiltered) {
+            paginationControls.classList.add('d-none');
+        } else {
+            paginationControls.classList.remove('d-none');
+            if (paginationText) {
+                if (isShowingAll) {
+                    paginationText.innerHTML = `Showing all <strong>${items.length}</strong> recipes`;
+                } else {
+                    paginationText.innerHTML = `Showing <strong>${startIndex + 1} to ${endIndex}</strong> of <strong>${items.length}</strong> recipes (Page ${currentCatalogPage} of 3)`;
+                }
+            }
+            if (loadMoreBtn) {
+                loadMoreBtn.style.display = (currentCatalogPage >= 3 || isShowingAll) ? 'none' : 'inline-block';
+            }
+        }
+    }
+
+    // Toggle no matches banner
+    const noMatch = document.getElementById('noCatalogMatch');
+    if (noMatch) {
+        if (totalMatching === 0) {
+            noMatch.classList.remove('d-none');
+        } else {
+            noMatch.classList.add('d-none');
+        }
+    }
+}
+
+// Ensure 50 recipes display initially & attach loading states
+document.addEventListener('DOMContentLoaded', function() {
+    filterCatalog();
+
+    // Instant feedback on Recipe Search form
+    const searchForm = document.querySelector('form.search-container');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function() {
+            const btn = searchForm.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Searching...';
+            }
+        });
+    }
+
+    // Instant feedback on Login modal
+    const loginForm = document.querySelector('#loginModal form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function() {
+            const btn = loginForm.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Logging in...';
+            }
+        });
+    }
+
+    // Instant feedback on Signup modal
+    const signupForm = document.querySelector('#signupModal form');
+    if (signupForm) {
+        signupForm.addEventListener('submit', function() {
+            const btn = signupForm.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating Account...';
+            }
+        });
+    }
+    // Multi-facet Indian Cuisine & Nutrition Filter Logic
+    window.currentFacetFilters = {
+        cuisine: 'all',
+        meal_type: 'all',
+        diet: 'all',
+        nutrition_tag: 'all'
+    };
+
+    window.applyFacetFilter = async function(btnEl) {
+        const type = btnEl.getAttribute('data-filter-type');
+        const val = btnEl.getAttribute('data-filter-val');
+
+        // Update active class within the group
+        const groupBtns = btnEl.parentElement.querySelectorAll(`[data-filter-type="${type}"]`);
+        groupBtns.forEach(b => b.classList.remove('active', 'btn-secondary', 'btn-primary', 'btn-success', 'btn-danger', 'btn-warning', 'btn-info'));
+        btnEl.classList.add('active');
+
+        window.currentFacetFilters[type] = val;
+
+        const queryParams = new URLSearchParams();
+        for (const [k, v] of Object.entries(window.currentFacetFilters)) {
+            if (v && v !== 'all') queryParams.set(k, v);
+        }
+
+        const titleEl = document.getElementById('recipeSectionTitle');
+        if (titleEl) titleEl.innerText = `Filtered Recipes (${val === 'all' ? 'All' : val})`;
+
+        try {
+            const res = await fetch(`/api/recipes?${queryParams.toString()}`);
+            const data = await res.json();
+            renderFilteredRecipes(data.recipes || []);
+        } catch (e) {
+            console.error("Error filtering recipes:", e);
+        }
+    };
+
+    window.resetFilters = function() {
+        document.querySelectorAll('.filter-pill').forEach(b => {
+            if (b.getAttribute('data-filter-val') === 'all') b.classList.add('active');
+            else b.classList.remove('active');
+        });
+        window.currentFacetFilters = { cuisine: 'all', meal_type: 'all', diet: 'all', nutrition_tag: 'all' };
+        window.location.reload();
+    };
+
+    function renderFilteredRecipes(recipesList) {
+        const container = document.getElementById('recipesGridContainer');
+        if (!container) return;
+
+        if (recipesList.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No recipes found matching these filters.</h5>
+                    <button class="btn btn-outline-primary rounded-pill px-4 mt-2" onclick="resetFilters()">Reset Filters</button>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = recipesList.map((r, idx) => `
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+                <div class="card recipe-card w-100" onclick="trackRecipeView('${r.recipe_id}'); location.href='#recipeModal${idx + 1}';">
+                    <img src="${r.image_link || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600'}" class="card-img-top recipe-img" alt="${r.recipe_name}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" style="color: var(--primary-color);">${r.recipe_name}</h5>
+                        <div class="mb-2 d-flex flex-wrap gap-1">
+                            ${r.cuisine ? `<span class="badge bg-secondary">${r.cuisine}</span>` : ''}
+                            ${r.meal_type ? `<span class="badge bg-light text-dark border">${r.meal_type}</span>` : ''}
+                            ${r.diet ? `<span class="badge bg-success-subtle text-success">${r.diet}</span>` : ''}
+                        </div>
+                        <div class="mt-auto pt-2 border-top d-flex justify-content-between text-muted small">
+                            <span>🔥 ${r.nutritions?.calories || 300} kcal</span>
+                            <span>💪 ${r.nutritions?.protein_g || 15}g P</span>
+                            <span>⏱️ ${(r.prep_time_mins || 15) + (r.cook_time_mins || 20)}m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    window.trackRecipeView = function(recipeId) {
+        if (recipeId) {
+            fetch(`/api/recipes/${recipeId}/view`, { method: 'POST' }).catch(() => {});
+        }
+    };
+});
+</script>
+
+<!-- Floating AI Coach Launcher Button -->
+<a href="/coach" class="floating-coach-btn" title="Chat with Tastio AI Nutrition Coach">
+    <span class="coach-pulse-dot"></span>
+    <i class="fas fa-robot text-warning"></i>
+    <span>AI Coach</span>
+</a>
+
+<!-- Mobile Bottom Navigation Bar -->
+<div class="mobile-bottom-bar d-md-none">
+    <a href="/dashboard" class="mobile-nav-item active">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="/what-can-i-cook" class="mobile-nav-item">
+        <i class="fas fa-carrot"></i>
+        <span>Pantry</span>
+    </a>
+    <a href="/meal-plan" class="mobile-nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Planner</span>
+    </a>
+    <a href="/grocery-list" class="mobile-nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Grocery</span>
+    </a>
+    <a href="/coach" class="mobile-nav-item">
+        <i class="fas fa-robot"></i>
+        <span>Coach</span>
+    </a>
+    <a href="/profile" class="mobile-nav-item">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
+    </a>
+</div>
+
+</body>
+</html>

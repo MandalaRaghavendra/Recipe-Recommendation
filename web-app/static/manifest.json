@@ -1,0 +1,25 @@
+{
+  "name": "Tastio - Recipe Recommendation",
+  "short_name": "Tastio",
+  "description": "Discover personalized healthy recipes tailored to your ingredients and diet goals.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8f9fa",
+  "theme_color": "#7B2C3F",
+  "icons": [
+    {
+      "src": "/static/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "health", "lifestyle"]
+}

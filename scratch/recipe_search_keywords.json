@@ -1,0 +1,1586 @@
+[
+  {
+    "id": 1,
+    "name": "Andhra Chicken Biryani",
+    "clean_name": "Andhra Chicken Biryani",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 2,
+    "name": "Gongura Mutton",
+    "clean_name": "Gongura Mutton",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 3,
+    "name": "Royyala Iguru (Prawn Curry)",
+    "clean_name": "Royyala Iguru",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1559742811-822873691df8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 4,
+    "name": "Andhra Style Fish Curry",
+    "clean_name": "Andhra Style Fish Curry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 5,
+    "name": "Andhra Special Egg Curry",
+    "clean_name": "Andhra Special Egg Curry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1582169296194-e4d644c48063?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 6,
+    "name": "Andhra Chicken Pulao",
+    "clean_name": "Andhra Chicken Pulao",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 7,
+    "name": "Andhra Special Chicken Fry",
+    "clean_name": "Andhra Special Chicken Fry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 8,
+    "name": "Andhra Mutton Curry",
+    "clean_name": "Andhra Mutton Curry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 9,
+    "name": "Andhra Style Crab Curry",
+    "clean_name": "Andhra Style Crab Curry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "/static/images/recipes/crab_curry.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Andhra Chicken 65",
+    "clean_name": "Andhra Chicken 65",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 11,
+    "name": "Andhra Special Veg Biryani",
+    "clean_name": "Andhra Special Veg Biryani",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1642821373181-696a54913e93?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 12,
+    "name": "Andhra Style Paneer Curry",
+    "clean_name": "Andhra Style Paneer Curry",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 13,
+    "name": "Andhra Special Aloo Curry",
+    "clean_name": "Andhra Special Aloo Curry",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/aloo_curry.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Andhra Style Baingan Bharta",
+    "clean_name": "Andhra Style Baingan Bharta",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 15,
+    "name": "Andhra Special Dal Tadka",
+    "clean_name": "Andhra Special Dal Tadka",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 16,
+    "name": "Andhra Style Chana Masala",
+    "clean_name": "Andhra Style Chana Masala",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 17,
+    "name": "Andhra Special Vegetable Curry",
+    "clean_name": "Andhra Special Vegetable Curry",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 18,
+    "name": "Andhra Style Mushroom Curry",
+    "clean_name": "Andhra Style Mushroom Curry",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 19,
+    "name": "Andhra Special Tomato Rice",
+    "clean_name": "Andhra Special Tomato Rice",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 20,
+    "name": "Andhra Style Lemon Rice",
+    "clean_name": "Andhra Style Lemon Rice",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 21,
+    "name": "Andhra Special Tamarind Rice",
+    "clean_name": "Andhra Special Tamarind Rice",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 22,
+    "name": "Andhra Style Coconut Rice",
+    "clean_name": "Andhra Style Coconut Rice",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 23,
+    "name": "Andhra Special Curd Rice",
+    "clean_name": "Andhra Special Curd Rice",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 24,
+    "name": "Andhra Style Bisi Bele Bath",
+    "clean_name": "Andhra Style Bisi Bele Bath",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 25,
+    "name": "Andhra Special Pongal",
+    "clean_name": "Andhra Special Pongal",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/pongal.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Gongura Pappu (Sorrel Leaves Dal)",
+    "clean_name": "Gongura Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 27,
+    "name": "Pesarattu (Green Moong Dal Dosa)",
+    "clean_name": "Pesarattu",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 28,
+    "name": "Gutti Vankaya Kura (Stuffed Brinjal Curry)",
+    "clean_name": "Gutti Vankaya Kura",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 29,
+    "name": "Andhra Chicken Curry (Kodi Kura)",
+    "clean_name": "Andhra Chicken Curry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 30,
+    "name": "Dibba Rotti (Andhra Minapa Rotti)",
+    "clean_name": "Dibba Rotti",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 31,
+    "name": "Tamarind Rice (Chintapandu Pulihora)",
+    "clean_name": "Tamarind Rice",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 32,
+    "name": "Tomato Pappu (Andhra Tomato Dal)",
+    "clean_name": "Tomato Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 33,
+    "name": "Aloo Vepudu (Andhra Potato Fry)",
+    "clean_name": "Aloo Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/aloo_fry.jpg"
+  },
+  {
+    "id": 34,
+    "name": "Coconut Chutney (Kobbari Pachadi)",
+    "clean_name": "Coconut Chutney",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 35,
+    "name": "Lemon Rice (Nimmakaya Pulihora)",
+    "clean_name": "Lemon Rice",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 36,
+    "name": "Punugulu (Rice & Urad Dal Fritters)",
+    "clean_name": "Punugulu",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 37,
+    "name": "Mamidikaya Pappu (Raw Mango Dal)",
+    "clean_name": "Mamidikaya Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 38,
+    "name": "Mirapakaya Bajji (Chili Fritters)",
+    "clean_name": "Mirapakaya Bajji",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 39,
+    "name": "Sunnundalu (Urad Dal Jaggery Laddu)",
+    "clean_name": "Sunnundalu",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 40,
+    "name": "Chicken Biryani (Andhra Style)",
+    "clean_name": "Chicken Biryani",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 41,
+    "name": "Ragi Sankati (Finger Millet Balls)",
+    "clean_name": "Ragi Sankati",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 42,
+    "name": "Bendakaya Fry (Okra Stir Fry)",
+    "clean_name": "Bendakaya Fry",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1525607551316-4a8e16d1f9ba?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 43,
+    "name": "Rasam (Chaaru)",
+    "clean_name": "Rasam",
+    "cuisine": "South Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1543353071-873f17a7a088?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 44,
+    "name": "Bobbatlu (Poli/Puran Poli)",
+    "clean_name": "Bobbatlu",
+    "cuisine": "Maharashtrian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 45,
+    "name": "Chicken Liver Fry",
+    "clean_name": "Chicken Liver Fry",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 46,
+    "name": "Masala Vada (Paruppu Vada)",
+    "clean_name": "Masala Vada",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/masala_vada.jpg"
+  },
+  {
+    "id": 47,
+    "name": "Aratikaya Fry (Raw Banana Fry)",
+    "clean_name": "Aratikaya Fry",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 48,
+    "name": "Ulavacharu (Horse Gram Soup)",
+    "clean_name": "Ulavacharu",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1543353071-873f17a7a088?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 49,
+    "name": "Chicken Fry (Kodi Vepudu)",
+    "clean_name": "Chicken Fry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 50,
+    "name": "Semiya Payasam (Vermicelli Kheer)",
+    "clean_name": "Semiya Payasam",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 51,
+    "name": "Paneer Butter Masala",
+    "clean_name": "Paneer Butter Masala",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 52,
+    "name": "Dal Tadka (Yellow Lentil Curry)",
+    "clean_name": "Dal Tadka",
+    "cuisine": "South Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 53,
+    "name": "Grilled Lemon Herb Chicken",
+    "clean_name": "Grilled Lemon Herb Chicken",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 54,
+    "name": "Palak Paneer (Spinach Cottage Cheese)",
+    "clean_name": "Palak Paneer",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/palak_paneer.jpg"
+  },
+  {
+    "id": 55,
+    "name": "Egg Bhurji (Indian Masala Scrambled Eggs)",
+    "clean_name": "Egg Bhurji",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 56,
+    "name": "Vegetable Oats Upma",
+    "clean_name": "Vegetable Oats Upma",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 57,
+    "name": "Chicken Tikka Masala",
+    "clean_name": "Chicken Tikka Masala",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 58,
+    "name": "Crispy Masala Dosa with Potato Filling",
+    "clean_name": "Crispy Masala Dosa with Potato Filling",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 59,
+    "name": "Tandoori Fish Tikka",
+    "clean_name": "Tandoori Fish Tikka",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "/static/images/recipes/fish_tikka.jpg"
+  },
+  {
+    "id": 60,
+    "name": "Quinoa Mediterranean Power Bowl",
+    "clean_name": "Quinoa Mediterranean Power Bowl",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 61,
+    "name": "Classic Butter Chicken (Murgh Makhani)",
+    "clean_name": "Classic Butter Chicken",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 62,
+    "name": "Punjabi Rajma Masala (Red Kidney Beans)",
+    "clean_name": "Punjabi Rajma Masala",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/rajma_masala.jpg"
+  },
+  {
+    "id": 63,
+    "name": "Avocado Toast with Poached Eggs",
+    "clean_name": "Avocado Toast with Poached Eggs",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 64,
+    "name": "Mushroom Pepper Fry",
+    "clean_name": "Mushroom Pepper Fry",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 65,
+    "name": "Mutton Sukka (Spicy Dry Roast)",
+    "clean_name": "Mutton Sukka",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "/static/images/recipes/mutton_sukka.jpg"
+  },
+  {
+    "id": 66,
+    "name": "Moong Dal Khichdi",
+    "clean_name": "Moong Dal Khichdi",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 67,
+    "name": "Tofu & Broccoli Stir Fry",
+    "clean_name": "Tofu & Broccoli Stir Fry",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 68,
+    "name": "Coastal Prawns Masala Fry",
+    "clean_name": "Coastal Prawns Masala Fry",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 69,
+    "name": "Sprouted Moong Salad",
+    "clean_name": "Sprouted Moong Salad",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 70,
+    "name": "Greek Yogurt Berry & Nut Parfait",
+    "clean_name": "Greek Yogurt Berry & Nut Parfait",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 71,
+    "name": "Healthy Chicken Clear Soup",
+    "clean_name": "Healthy Chicken Clear Soup",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 72,
+    "name": "Besan Chilla (Savory Chickpea Pancakes)",
+    "clean_name": "Besan Chilla",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/besan_chilla.jpg"
+  },
+  {
+    "id": 73,
+    "name": "Methi Chicken (Fenugreek Chicken Curry)",
+    "clean_name": "Methi Chicken",
+    "cuisine": "South Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 74,
+    "name": "Royal Vegetable Biryani",
+    "clean_name": "Royal Vegetable Biryani",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1642821373181-696a54913e93?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 75,
+    "name": "Peanut Butter Banana Protein Smoothie",
+    "clean_name": "Peanut Butter Banana Protein Smoothie",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 76,
+    "name": "Natu Kodi Pulusu (Country Chicken Curry)",
+    "clean_name": "Natu Kodi Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 77,
+    "name": "Nellore Chepala Pulusu (Tangy Fish Curry)",
+    "clean_name": "Nellore Chepala Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 78,
+    "name": "Kodi Vepudu - Pepper Style (Andhra Pepper Chicken)",
+    "clean_name": "Kodi Vepudu - Pepper Style",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 79,
+    "name": "Mutton Keema Unde Kura (Meatball Curry)",
+    "clean_name": "Mutton Keema Unde Kura",
+    "cuisine": "Telangana",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 80,
+    "name": "Gongura Royyalu (Prawns with Sorrel Leaves)",
+    "clean_name": "Gongura Royyalu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1559742811-822873691df8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 81,
+    "name": "Peethala Vepudu (Andhra Crab Fry)",
+    "clean_name": "Peethala Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "/static/images/recipes/crab_curry.jpg"
+  },
+  {
+    "id": 82,
+    "name": "Guddu Pulusu (Andhra Egg Tamarind Curry)",
+    "clean_name": "Guddu Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1582169296194-e4d644c48063?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 83,
+    "name": "Boti Kura (Spicy Andhra Lamb Tripe Curry)",
+    "clean_name": "Boti Kura",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 84,
+    "name": "Kobbari Palu Kodi Kura (Chicken in Coconut Milk)",
+    "clean_name": "Kobbari Palu Kodi Kura",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 85,
+    "name": "Nellore Chepala Vepudu (Nellore Spicy Fish Fry)",
+    "clean_name": "Nellore Chepala Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 86,
+    "name": "Royyala Vepudu (Andhra Crispy Prawn Fry)",
+    "clean_name": "Royyala Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 87,
+    "name": "Kodi Guddu Porutu (Andhra Spiced Egg Scramble)",
+    "clean_name": "Kodi Guddu Porutu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "/static/images/recipes/egg_porutu.jpg"
+  },
+  {
+    "id": 88,
+    "name": "Talakaya Kura (Spicy Andhra Mutton Head Meat Curry)",
+    "clean_name": "Talakaya Kura",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 89,
+    "name": "Natu Kodi Fry (Country Chicken Dry Roast)",
+    "clean_name": "Natu Kodi Fry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 90,
+    "name": "Chintachiguru Mutton (Tender Tamarind Leaves Mutton)",
+    "clean_name": "Chintachiguru Mutton",
+    "cuisine": "North Indian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 91,
+    "name": "Gongura Chicken (Sorrel Leaf Chicken Curry)",
+    "clean_name": "Gongura Chicken",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 92,
+    "name": "Andhra Kodi Chips (Crispy Chicken Strips)",
+    "clean_name": "Andhra Kodi Chips",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 93,
+    "name": "Andhra Mutton Chops Fry",
+    "clean_name": "Andhra Mutton Chops Fry",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "/static/images/recipes/mutton_sukka.jpg"
+  },
+  {
+    "id": 94,
+    "name": "Royyala Pulao (Andhra Spiced Prawn Pulao)",
+    "clean_name": "Royyala Pulao",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 95,
+    "name": "Bommidala Pulusu (Mudfish in Tangy Stew)",
+    "clean_name": "Bommidala Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 96,
+    "name": "Dosakaya Pappu (Yellow Cucumber Dal)",
+    "clean_name": "Dosakaya Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/yellow_dal.jpg"
+  },
+  {
+    "id": 97,
+    "name": "Palakura Pappu (Spinach Dal)",
+    "clean_name": "Palakura Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 98,
+    "name": "Menthi Kura Pappu (Fenugreek Leaves Dal)",
+    "clean_name": "Menthi Kura Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 99,
+    "name": "Beerakaya Pappu (Ridge Gourd Dal)",
+    "clean_name": "Beerakaya Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 100,
+    "name": "Bachali Kura Pappu (Malabar Spinach Dal)",
+    "clean_name": "Bachali Kura Pappu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 101,
+    "name": "Majjiga Pulusu (Andhra Seasoned Buttermilk Stew)",
+    "clean_name": "Majjiga Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 102,
+    "name": "Challa Charu (Spiced Buttermilk Rasam)",
+    "clean_name": "Challa Charu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/challa_charu.jpg"
+  },
+  {
+    "id": 103,
+    "name": "Miriyala Chaaru (Andhra Pepper Rasam)",
+    "clean_name": "Miriyala Chaaru",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1543353071-873f17a7a088?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 104,
+    "name": "Andhra Tomato Charu (Spiced Tomato Rasam)",
+    "clean_name": "Andhra Tomato Charu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1543353071-873f17a7a088?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 105,
+    "name": "Kandi Kattu (Clear Toor Dal Broth)",
+    "clean_name": "Kandi Kattu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1543353071-873f17a7a088?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 106,
+    "name": "Menthi Majjiga (Tempered Buttermilk with Fenugreek)",
+    "clean_name": "Menthi Majjiga",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 107,
+    "name": "Pachi Pulusu (Rayalaseema Raw Tamarind Stew)",
+    "clean_name": "Pachi Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 108,
+    "name": "Kakarakaya Pulusu (Bitter Gourd Tangy Stew)",
+    "clean_name": "Kakarakaya Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 109,
+    "name": "Anapakaya Pulusu (Bottle Gourd Tamarind Stew)",
+    "clean_name": "Anapakaya Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 110,
+    "name": "Vankaya Pulusu (Brinjal Tangy Stew)",
+    "clean_name": "Vankaya Pulusu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 111,
+    "name": "Dondakaya Vepudu (Tindora / Ivy Gourd Fry with Peanuts)",
+    "clean_name": "Dondakaya Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 112,
+    "name": "Chamadumpa Vepudu (Crispy Taro Root / Arbi Fry)",
+    "clean_name": "Chamadumpa Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 113,
+    "name": "Kanda Bachali Kura (Yam with Malabar Spinach)",
+    "clean_name": "Kanda Bachali Kura",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 114,
+    "name": "Cabbage Senagapappu Vepudu (Cabbage & Chana Dal Stir Fry)",
+    "clean_name": "Cabbage Senagapappu Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/cabbage_poriyal.jpg"
+  },
+  {
+    "id": 115,
+    "name": "Andhra Beetroot Vepudu",
+    "clean_name": "Andhra Beetroot Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1607532941433-304659e8198a?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 116,
+    "name": "Kakarakaya Vepudu (Crispy Bitter Gourd Fry)",
+    "clean_name": "Kakarakaya Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 117,
+    "name": "Beerakaya Pechula Vepudu (Ridge Gourd Peel Stir Fry)",
+    "clean_name": "Beerakaya Pechula Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 118,
+    "name": "Potlakaya Fry (Snake Gourd Coconut Fry)",
+    "clean_name": "Potlakaya Fry",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 119,
+    "name": "Andhra Gobi Vepudu (Spicy Cauliflower Stir Fry)",
+    "clean_name": "Andhra Gobi Vepudu",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 120,
+    "name": "Carrot Senagapappu Kura (Carrot & Bengal Gram Fry)",
+    "clean_name": "Carrot Senagapappu Kura",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/cabbage_poriyal.jpg"
+  },
+  {
+    "id": 121,
+    "name": "Goruchikkudu Fry (Cluster Beans Coconut Fry)",
+    "clean_name": "Goruchikkudu Fry",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 122,
+    "name": "Sorakaya Palu Kura (Bottle Gourd in Milk Gravy)",
+    "clean_name": "Sorakaya Palu Kura",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 123,
+    "name": "Munakkaya Kaju Kura (Drumstick Cashew Curry)",
+    "clean_name": "Munakkaya Kaju Kura",
+    "cuisine": "South Indian",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 124,
+    "name": "Vankaya Kothimeera Karam (Brinjal in Cilantro Chili Paste)",
+    "clean_name": "Vankaya Kothimeera Karam",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 125,
+    "name": "Capsicum Senagapindi Kura (Bell Pepper with Besan)",
+    "clean_name": "Capsicum Senagapindi Kura",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/andhra_pulusu.jpg"
+  },
+  {
+    "id": 126,
+    "name": "Gongura Pachadi (Authentic Sorrel Leaves Chutney)",
+    "clean_name": "Gongura Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/green_chutney.jpg"
+  },
+  {
+    "id": 127,
+    "name": "Rallato Nurchina Tomato Pachadi (Rustic Tomato Chutney)",
+    "clean_name": "Rallato Nurchina Tomato Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/tomato_chutney.jpg"
+  },
+  {
+    "id": 128,
+    "name": "Dosakaya Pachadi (Raw Yellow Cucumber Chutney)",
+    "clean_name": "Dosakaya Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/tomato_chutney.jpg"
+  },
+  {
+    "id": 129,
+    "name": "Beerakaya Pachadi (Ridge Gourd Roti Pachadi)",
+    "clean_name": "Beerakaya Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/green_chutney.jpg"
+  },
+  {
+    "id": 130,
+    "name": "Vankaya Pachadi (Fire-Roasted Brinjal Chutney)",
+    "clean_name": "Vankaya Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 131,
+    "name": "Kothimeera Pachadi (Fresh Coriander Chutney)",
+    "clean_name": "Kothimeera Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/green_chutney.jpg"
+  },
+  {
+    "id": 132,
+    "name": "Allam Pachadi (Spicy Sweet Ginger Chutney)",
+    "clean_name": "Allam Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/ginger_chutney.jpg"
+  },
+  {
+    "id": 133,
+    "name": "Sorakaya Pachadi (Bottle Gourd Chutney)",
+    "clean_name": "Sorakaya Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/green_chutney.jpg"
+  },
+  {
+    "id": 134,
+    "name": "Mamidikaya Thokku (Grated Raw Mango Pickle)",
+    "clean_name": "Mamidikaya Thokku",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/mango_thokku.jpg"
+  },
+  {
+    "id": 135,
+    "name": "Karivepaku Pachadi (Curry Leaves Digestive Chutney)",
+    "clean_name": "Karivepaku Pachadi",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "/static/images/recipes/green_chutney.jpg"
+  },
+  {
+    "id": 136,
+    "name": "Rayalaseema Uggani (Spiced Puffed Rice / Borugula Upma)",
+    "clean_name": "Rayalaseema Uggani",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 137,
+    "name": "Andhra Stuffed Mirchi Bajji (Chili Fritters)",
+    "clean_name": "Andhra Stuffed Mirchi Bajji",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 138,
+    "name": "Alasanda Vada (Black-Eyed Peas Fritters / Lobia Vada)",
+    "clean_name": "Alasanda Vada",
+    "cuisine": "North Indian",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 139,
+    "name": "Gongura Rice (Sorrel Leaves Spiced Rice)",
+    "clean_name": "Gongura Rice",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 140,
+    "name": "Atukula Upma (Andhra Poha with Peanuts)",
+    "clean_name": "Atukula Upma",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 141,
+    "name": "Crispy Andhra Rava Dosa",
+    "clean_name": "Crispy Andhra Rava Dosa",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 142,
+    "name": "Biyyam Rava Upma (Uppudu Pindi / Rice Rava Upma)",
+    "clean_name": "Biyyam Rava Upma",
+    "cuisine": "South Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 143,
+    "name": "Godhuma Rava Pongal (Broken Wheat Pongal)",
+    "clean_name": "Godhuma Rava Pongal",
+    "cuisine": "South Indian",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/pongal.jpg"
+  },
+  {
+    "id": 144,
+    "name": "Palathalikalu (Traditional Rice Noodle Sweet)",
+    "clean_name": "Palathalikalu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 145,
+    "name": "Andhra Pootharekulu (Paper Sweet)",
+    "clean_name": "Andhra Pootharekulu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/pootharekulu.jpg"
+  },
+  {
+    "id": 146,
+    "name": "Kakinada Gottam Kaja (Syrup Filled Pastry Sweet)",
+    "clean_name": "Kakinada Gottam Kaja",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 147,
+    "name": "Poornam Boorelu (Sweet Stuffed Fritters)",
+    "clean_name": "Poornam Boorelu",
+    "cuisine": "Andhra",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 148,
+    "name": "Rava Kesari (Semolina Halwa with Saffron & Ghee)",
+    "clean_name": "Rava Kesari",
+    "cuisine": "North Indian",
+    "diet": "Vegetarian",
+    "current_img": "/static/images/recipes/rava_kesari.jpg"
+  },
+  {
+    "id": 149,
+    "name": "Bellam Paramannam (Jaggery Rice Pudding / Sweet Pongal)",
+    "clean_name": "Bellam Paramannam",
+    "cuisine": "South Indian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 150,
+    "name": "Jonna Rotti (Sorghum / Jowar Flatbread)",
+    "clean_name": "Jonna Rotti",
+    "cuisine": "Andhra",
+    "diet": "Vegan",
+    "current_img": "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 151,
+    "name": "Telangana Sarva Pindi",
+    "clean_name": "Telangana Sarva Pindi",
+    "cuisine": "Telangana",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 152,
+    "name": "Hyderabadi Bagara Rice & Dalcha",
+    "clean_name": "Hyderabadi Bagara Rice & Dalcha",
+    "cuisine": "Telangana",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 153,
+    "name": "Telangana Mamsam Curry (Country Mutton)",
+    "clean_name": "Telangana Mamsam Curry",
+    "cuisine": "Telangana",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 154,
+    "name": "Telangana Pacchi Pulusu",
+    "clean_name": "Telangana Pacchi Pulusu",
+    "cuisine": "Telangana",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 155,
+    "name": "Golichina Mamsam (Telangana Mutton Fry)",
+    "clean_name": "Golichina Mamsam",
+    "cuisine": "Telangana",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 156,
+    "name": "Sakinalu (Telangana Festive Crunch)",
+    "clean_name": "Sakinalu",
+    "cuisine": "Telangana",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 157,
+    "name": "Punjabi Butter Chicken (Murgh Makhani)",
+    "clean_name": "Punjabi Butter Chicken",
+    "cuisine": "Punjabi",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 158,
+    "name": "Amritsari Dal Makhani",
+    "clean_name": "Amritsari Dal Makhani",
+    "cuisine": "Punjabi",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 159,
+    "name": "Amritsari Chole Bhature",
+    "clean_name": "Amritsari Chole Bhature",
+    "cuisine": "Punjabi",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 160,
+    "name": "Paneer Tikka Masala",
+    "clean_name": "Paneer Tikka Masala",
+    "cuisine": "Punjabi",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 161,
+    "name": "Sarson Ka Saag & Makki Di Roti",
+    "clean_name": "Sarson Ka Saag & Makki Di Roti",
+    "cuisine": "Punjabi",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 162,
+    "name": "Punjabi Rajma Masala",
+    "clean_name": "Punjabi Rajma Masala",
+    "cuisine": "Punjabi",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 163,
+    "name": "Khaman Dhokla (Soft & Spongy)",
+    "clean_name": "Khaman Dhokla",
+    "cuisine": "Gujarati",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 164,
+    "name": "Gujarati Methi Thepla",
+    "clean_name": "Gujarati Methi Thepla",
+    "cuisine": "Gujarati",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 165,
+    "name": "Authentic Gujarati Undhiyu",
+    "clean_name": "Authentic Gujarati Undhiyu",
+    "cuisine": "Gujarati",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 166,
+    "name": "Gujarati Khatti Meethi Dal",
+    "clean_name": "Gujarati Khatti Meethi Dal",
+    "cuisine": "Gujarati",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 167,
+    "name": "Gujarati Handvo (Crisp Baked Lentil Cake)",
+    "clean_name": "Gujarati Handvo",
+    "cuisine": "Gujarati",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 168,
+    "name": "Sev Tameta Nu Shaak (Kathiyawadi Style)",
+    "clean_name": "Sev Tameta Nu Shaak",
+    "cuisine": "Gujarati",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 169,
+    "name": "Shorshe Maach (Bengali Mustard Fish)",
+    "clean_name": "Shorshe Maach",
+    "cuisine": "Bengali",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 170,
+    "name": "Kosha Mangsho (Bengali Mutton Kasha)",
+    "clean_name": "Kosha Mangsho",
+    "cuisine": "Bengali",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 171,
+    "name": "Bengali Chholar Dal with Luchi",
+    "clean_name": "Bengali Chholar Dal with Luchi",
+    "cuisine": "Bengali",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 172,
+    "name": "Aloo Posto (Potatoes in Poppy Seed Paste)",
+    "clean_name": "Aloo Posto",
+    "cuisine": "Bengali",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 173,
+    "name": "Chingri Malai Curry (Prawns in Coconut Milk)",
+    "clean_name": "Chingri Malai Curry",
+    "cuisine": "Bengali",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1559742811-822873691df8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 174,
+    "name": "Kolkata Style Chicken Chaap",
+    "clean_name": "Kolkata Style Chicken Chaap",
+    "cuisine": "Bengali",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 175,
+    "name": "Mumbai Pav Bhaji (Street Style)",
+    "clean_name": "Mumbai Pav Bhaji",
+    "cuisine": "Maharashtrian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 176,
+    "name": "Kolhapuri Misal Pav (Fiery Sprouted Curry)",
+    "clean_name": "Kolhapuri Misal Pav",
+    "cuisine": "Maharashtrian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 177,
+    "name": "Traditional Puran Poli",
+    "clean_name": "Traditional Puran Poli",
+    "cuisine": "Maharashtrian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 178,
+    "name": "Kanda Poha (Traditional Maharashtrian)",
+    "clean_name": "Kanda Poha",
+    "cuisine": "Maharashtrian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 179,
+    "name": "Kolhapuri Chicken Sukka",
+    "clean_name": "Kolhapuri Chicken Sukka",
+    "cuisine": "Maharashtrian",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 180,
+    "name": "Sabudana Khichdi (Non-Sticky Maharashtrian)",
+    "clean_name": "Sabudana Khichdi",
+    "cuisine": "Maharashtrian",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 181,
+    "name": "Kerala Appam with Vegetable Stew",
+    "clean_name": "Kerala Appam with Vegetable Stew",
+    "cuisine": "Kerala",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 182,
+    "name": "Kerala Meen Curry (Kottayam Fish Curry)",
+    "clean_name": "Kerala Meen Curry",
+    "cuisine": "Kerala",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 183,
+    "name": "Thalassery Malabar Chicken Biryani",
+    "clean_name": "Thalassery Malabar Chicken Biryani",
+    "cuisine": "Kerala",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 184,
+    "name": "Kerala Puttu with Kadala Curry",
+    "clean_name": "Kerala Puttu with Kadala Curry",
+    "cuisine": "Kerala",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 185,
+    "name": "Authentic Kerala Avial",
+    "clean_name": "Authentic Kerala Avial",
+    "cuisine": "Kerala",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 186,
+    "name": "Karimeen Pollichathu (Banana Leaf Roasted Fish)",
+    "clean_name": "Karimeen Pollichathu",
+    "cuisine": "Kerala",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 187,
+    "name": "Bisi Bele Bath (Classic Karnataka)",
+    "clean_name": "Bisi Bele Bath",
+    "cuisine": "Karnataka",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 188,
+    "name": "Mysore Masala Dosa",
+    "clean_name": "Mysore Masala Dosa",
+    "cuisine": "Karnataka",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 189,
+    "name": "Mangalore Chicken Ghee Roast",
+    "clean_name": "Mangalore Chicken Ghee Roast",
+    "cuisine": "Karnataka",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 190,
+    "name": "Neer Dosa with Coconut Chutney",
+    "clean_name": "Neer Dosa with Coconut Chutney",
+    "cuisine": "Karnataka",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 191,
+    "name": "Crispy Maddur Vada",
+    "clean_name": "Crispy Maddur Vada",
+    "cuisine": "Karnataka",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 192,
+    "name": "Ragi Mudde with Nati Koli Saaru",
+    "clean_name": "Ragi Mudde with Nati Koli Saaru",
+    "cuisine": "Karnataka",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 193,
+    "name": "Chettinad Chicken Curry",
+    "clean_name": "Chettinad Chicken Curry",
+    "cuisine": "Tamil Nadu",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 194,
+    "name": "Authentic Tamil Sambar with Soft Idli",
+    "clean_name": "Authentic Tamil Sambar with Soft Idli",
+    "cuisine": "Tamil Nadu",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 195,
+    "name": "Crispy Medu Vada (Hotel Style)",
+    "clean_name": "Crispy Medu Vada",
+    "cuisine": "Tamil Nadu",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 196,
+    "name": "Ven Pongal & Coconut Chutney",
+    "clean_name": "Ven Pongal & Coconut Chutney",
+    "cuisine": "Tamil Nadu",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 197,
+    "name": "Madurai Kothu Parotta (Street Style)",
+    "clean_name": "Madurai Kothu Parotta",
+    "cuisine": "Tamil Nadu",
+    "diet": "Non-Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": 198,
+    "name": "Thanjavur Tomato Rasam",
+    "clean_name": "Thanjavur Tomato Rasam",
+    "cuisine": "Tamil Nadu",
+    "diet": "Vegetarian",
+    "current_img": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80"
+  }
+]

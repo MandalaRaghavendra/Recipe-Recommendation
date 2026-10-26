@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+  <meta name="theme-color" content="#7B2C3F">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+  <title>Tastio - Discover Healthy Recipes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- NEW THEME: WARM AMBER & DEEP BURGUNDY --- */
+    :root {
+      --primary-color: #7B2C3F; /* Deep Burgundy */
+      --accent-color: #FF9E1F; /* Warm Amber/Orange */
+      --light-bg: #f8f9fa; /* Light Gray for body */
+    }
+
+    body { 
+      background-color: var(--light-bg); 
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-color), #9D3B55) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(rgba(123, 44, 63, 0.85), rgba(157, 59, 85, 0.85)), 
+                  url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 100px 0;
+      color: white;
+      text-align: center;
+    }
+    .hero-section h1 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    .hero-section .lead {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: white;
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 50px;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #E58E1B;
+      border-color: #E58E1B;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sections */
+    .section-title {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+
+    /* Feature Cards */
+    .feature-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      border-top: 4px solid var(--accent-color);
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    /* How It Works Section */
+    .steps-section {
+      background-color: white;
+    }
+    .step-item {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid var(--accent-color);
+      transition: transform 0.3s;
+    }
+    .step-item:hover {
+      transform: translateX(5px);
+    }
+    .step-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    /* Auth Modal */
+    .modal-header-custom {
+      background: linear-gradient(135deg, var(--primary-color), #9D3B55) !important;
+      color: white;
+    }
+    .nav-tabs .nav-link {
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+    .nav-tabs .nav-link.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    .btn-auth {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: white;
+      font-weight: 600;
+    }
+    .btn-auth:hover {
+      background-color: #E58E1B;
+      border-color: #E58E1B;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 70px 0;
+      }
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+  
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">
+        <i class="fas fa-utensils me-2"></i>Tastio
+      </a>
+      <div class="ms-auto">
+        <button class="btn btn-outline-light me-2" onclick="openAuthModal('login')">Login</button>
+        <button class="btn btn-auth" onclick="openAuthModal('signup')">Signup</button>
+      </div>
+    </div>
+  </nav>
+
+  {% if message %}
+  <div class="container mt-3">
+    <div class="alert {% if 'success' in message or 'Welcome' in message or 'ready' in message %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show text-center shadow-sm" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  {% endif %}
+
+  <section class="hero-section">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Discover Healthy & Delicious Recipes</h1>
+      <p class="lead">Find personalized recipes based on ingredients you already have and your health goals.</p>
+      <a href="/dashboard" class="btn btn-primary btn-lg me-2">
+        <i class="fas fa-compass me-2"></i>Explore Recipes
+      </a>
+      <button class="btn btn-outline-light btn-lg" onclick="openAuthModal('signup')">
+        <i class="fas fa-user-plus me-2"></i>Join Free
+      </button>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center section-title">🌟 Why Choose Tastio?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h5>Smart Pantry Match</h5>
+            <p>Enter ingredients from your kitchen to discover personalized, zero-waste recipes instantly.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h5>7-Day AI Meal Planner</h5>
+            <p>Automated 28-meal plans customized to your calorie, protein, and dietary preferences.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h5>AI Nutrition Coach</h5>
+            <p>Chat with a dedicated coach grounded in your health profile and real recipe nutrition data.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <h5>AI Food Scanner</h5>
+            <p>Photograph any meal to identify the authentic dish and inspect verified database nutrition.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h5>Smart Grocery List</h5>
+            <p>Consolidate ingredients into 7 categories directly from your active meal plan with zero manual hassle.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h5>Nutrition Analytics</h5>
+            <p>Track your daily, weekly, and monthly calories, macro splits, and health adherence trends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 steps-section">
+    <div class="container">
+      <h2 class="text-center section-title">⚙️ How It Works</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="step-item">
+            <div class="d-flex align-items-center mb-2">
+              <span class="step-number">1</span>
+              <h5 class="mb-0" style="color: var(--primary-color);">Create Your Profile</h5>
+            </div>
+            <p class="mb-0">Sign up and set your dietary preferences, health goals, and any allergies or ingredients to avoid.</p>
+          </div>
+          
+          <div class="step-item">
+            <div class="d-flex align-items-center mb-2">
+              <span class="step-number">2</span>
+              <h5 class="mb-0" style="color: var(--primary-color);">Search with Ingredients</h5>
+            </div>
+            <p class="mb-0">Enter the ingredients available in your kitchen. Our smart algorithm finds the perfect recipes for you.</p>
+          </div>
+          
+          <div class="step-item">
+            <div class="d-flex align-items-center mb-2">
+              <span class="step-number">3</span>
+              <h5 class="mb-0" style="color: var(--primary-color);">Get Personalized Recommendations</h5>
+            </div>
+            <p class="mb-0">Receive recipe suggestions that match your dietary needs, health goals, and available ingredients.</p>
+          </div>
+          
+          <div class="step-item">
+            <div class="d-flex align-items-center mb-2">
+              <span class="step-number">4</span>
+              <h5 class="mb-0" style="color: var(--primary-color);">Cook & Track Your Progress</h5>
+            </div>
+            <p class="mb-0">Follow step-by-step instructions, mark recipes as eaten, and track your nutrition over time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 text-center" style="background-color: rgba(123, 44, 63, 0.05);">
+    <div class="container">
+      <h2 class="mb-4" style="color: var(--primary-color);">Ready to Transform Your Cooking?</h2>
+      <p class="lead mb-4">Join thousands of users who are eating healthier with personalized recipe recommendations.</p>
+      <a href="/dashboard" class="btn btn-primary btn-lg me-3">
+        <i class="fas fa-utensils me-2"></i>Explore Recipes
+      </a>
+      <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#authModal">
+        <i class="fas fa-user-plus me-2"></i>Create Account
+      </button>
+    </div>
+  </section>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 Tastio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="authModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header modal-header-custom">
+          <h5 class="modal-title">Join Tastio</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+
+          <ul class="nav nav-tabs mb-4" id="authTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button">Login</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button">Signup</button>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="login">
+              <form action="/login" method="POST">
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-auth w-100">Login</button>
+              </form>
+            </div>
+
+            <div class="tab-pane fade" id="signup">
+              <form action="/signup" method="POST">
+                <div class="mb-3">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn btn-auth w-100">Create Account</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function openAuthModal(tabName) {
+      const modalEl = document.getElementById('authModal');
+      const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+      if (tabName === 'signup') {
+        const signupTab = document.getElementById('signup-tab');
+        if (signupTab) {
+          const tab = new bootstrap.Tab(signupTab);
+          tab.show();
+        }
+      } else {
+        const loginTab = document.getElementById('login-tab');
+        if (loginTab) {
+          const tab = new bootstrap.Tab(loginTab);
+          tab.show();
+        }
+      }
+      modal.show();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Auto open modal if failed login or signup
+      const urlParams = new URLSearchParams(window.location.search);
+      const msg = urlParams.get('message') || '';
+      if (msg.includes('Signup failed') || msg.includes('exists')) {
+        openAuthModal('signup');
+      } else if (msg.includes('Login failed') || msg.includes('Invalid credentials')) {
+        openAuthModal('login');
+      }
+
+      const loginForm = document.querySelector('#login form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', function() {
+          const btn = loginForm.querySelector('button[type="submit"]');
+          if (btn) {
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Logging in...';
+          }
+        });
+      }
+
+      const signupForm = document.querySelector('#signup form');
+      if (signupForm) {
+        signupForm.addEventListener('submit', function() {
+          const btn = signupForm.querySelector('button[type="submit"]');
+          if (btn) {
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating Account...';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

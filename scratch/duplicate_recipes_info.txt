@@ -1,0 +1,74 @@
+5 | Andhra Special Egg Curry | Andhra | Non-Vegetarian | Lunch
+7 | Andhra Special Chicken Fry | Andhra | Non-Vegetarian | Dinner
+9 | Andhra Style Crab Curry | Andhra | Non-Vegetarian | Lunch
+11 | Andhra Special Veg Biryani | Andhra | Vegetarian | Lunch
+14 | Andhra Style Baingan Bharta | Andhra | Vegan | Dinner
+15 | Andhra Special Dal Tadka | Andhra | Vegetarian | Lunch
+16 | Andhra Style Chana Masala | Andhra | Vegan | Dinner
+17 | Andhra Special Vegetable Curry | Andhra | Vegan | Lunch
+18 | Andhra Style Mushroom Curry | Andhra | Vegan | Lunch
+19 | Andhra Special Tomato Rice | Andhra | Vegan | Dinner
+21 | Andhra Special Tamarind Rice | Andhra | Vegan | Dinner
+23 | Andhra Special Curd Rice | Andhra | Vegetarian | Dinner
+24 | Andhra Style Bisi Bele Bath | Andhra | Vegetarian | Dinner
+41 | Ragi Sankati (Finger Millet Balls) | North Indian | Vegan | Dinner
+60 | Quinoa Mediterranean Power Bowl | North Indian | Vegan | Dinner
+67 | Tofu & Broccoli Stir Fry | North Indian | Vegan | Dinner
+68 | Coastal Prawns Masala Fry | North Indian | Non-Vegetarian | Dinner
+70 | Greek Yogurt Berry & Nut Parfait | North Indian | Vegetarian | Dinner
+71 | Healthy Chicken Clear Soup | North Indian | Non-Vegetarian | Dinner
+75 | Peanut Butter Banana Protein Smoothie | North Indian | Vegetarian | Drink
+78 | Kodi Vepudu - Pepper Style (Andhra Pepper Chicken) | Andhra | Non-Vegetarian | Dinner
+80 | Gongura Royyalu (Prawns with Sorrel Leaves) | Andhra | Non-Vegetarian | Dinner
+81 | Peethala Vepudu (Andhra Crab Fry) | Andhra | Non-Vegetarian | Dinner
+82 | Guddu Pulusu (Andhra Egg Tamarind Curry) | Andhra | Non-Vegetarian | Lunch
+83 | Boti Kura (Spicy Andhra Lamb Tripe Curry) | Andhra | Non-Vegetarian | Lunch
+86 | Royyala Vepudu (Andhra Crispy Prawn Fry) | Andhra | Non-Vegetarian | Dinner
+89 | Natu Kodi Fry (Country Chicken Dry Roast) | Andhra | Non-Vegetarian | Dinner
+94 | Royyala Pulao (Andhra Spiced Prawn Pulao) | Andhra | Non-Vegetarian | Lunch
+95 | Bommidala Pulusu (Mudfish in Tangy Stew) | Andhra | Non-Vegetarian | Lunch
+103 | Miriyala Chaaru (Andhra Pepper Rasam) | Andhra | Vegetarian | Lunch
+105 | Kandi Kattu (Clear Toor Dal Broth) | Andhra | Vegetarian | Lunch
+106 | Menthi Majjiga (Tempered Buttermilk with Fenugreek) | North Indian | Vegetarian | Lunch
+107 | Pachi Pulusu (Rayalaseema Raw Tamarind Stew) | Andhra | Vegan | Lunch
+108 | Kakarakaya Pulusu (Bitter Gourd Tangy Stew) | Andhra | Vegan | Lunch
+109 | Anapakaya Pulusu (Bottle Gourd Tamarind Stew) | Andhra | Vegan | Lunch
+110 | Vankaya Pulusu (Brinjal Tangy Stew) | Andhra | Vegan | Lunch
+111 | Dondakaya Vepudu (Tindora / Ivy Gourd Fry with Peanuts) | Andhra | Vegan | Dinner
+112 | Chamadumpa Vepudu (Crispy Taro Root / Arbi Fry) | Andhra | Vegan | Dinner
+113 | Kanda Bachali Kura (Yam with Malabar Spinach) | Andhra | Vegan | Lunch
+115 | Andhra Beetroot Vepudu | Andhra | Vegan | Dinner
+117 | Beerakaya Pechula Vepudu (Ridge Gourd Peel Stir Fry) | Andhra | Vegan | Dinner
+118 | Potlakaya Fry (Snake Gourd Coconut Fry) | Andhra | Vegan | Dinner
+122 | Sorakaya Palu Kura (Bottle Gourd in Milk Gravy) | Andhra | Vegetarian | Lunch
+123 | Munakkaya Kaju Kura (Drumstick Cashew Curry) | South Indian | Vegan | Lunch
+124 | Vankaya Kothimeera Karam (Brinjal in Cilantro Chili Paste) | North Indian | Vegan | Dinner
+125 | Capsicum Senagapindi Kura (Bell Pepper with Besan) | North Indian | Vegan | Lunch
+127 | Rallato Nurchina Tomato Pachadi (Rustic Tomato Chutney) | Andhra | Vegan | Dinner
+128 | Dosakaya Pachadi (Raw Yellow Cucumber Chutney) | Andhra | Vegan | Breakfast
+129 | Beerakaya Pachadi (Ridge Gourd Roti Pachadi) | Andhra | Vegan | Dinner
+130 | Vankaya Pachadi (Fire-Roasted Brinjal Chutney) | Andhra | Vegan | Dinner
+135 | Karivepaku Pachadi (Curry Leaves Digestive Chutney) | Andhra | Vegan | Lunch
+138 | Alasanda Vada (Black-Eyed Peas Fritters / Lobia Vada) | North Indian | Vegan | Breakfast
+140 | Atukula Upma (Andhra Poha with Peanuts) | Andhra | Vegan | Breakfast
+141 | Crispy Andhra Rava Dosa | Andhra | Vegetarian | Breakfast
+142 | Biyyam Rava Upma (Uppudu Pindi / Rice Rava Upma) | South Indian | Vegetarian | Breakfast
+144 | Palathalikalu (Traditional Rice Noodle Sweet) | Andhra | Vegetarian | Dessert
+149 | Bellam Paramannam (Jaggery Rice Pudding / Sweet Pongal) | South Indian | Vegetarian | Dessert
+151 | Telangana Sarva Pindi | Telangana | Vegetarian | Breakfast
+152 | Hyderabadi Bagara Rice & Dalcha | Telangana | Vegetarian | Lunch
+154 | Telangana Pacchi Pulusu | Telangana | Vegetarian | Lunch
+155 | Golichina Mamsam (Telangana Mutton Fry) | Telangana | Non-Vegetarian | Dinner
+158 | Amritsari Dal Makhani | Punjabi | Vegetarian | Dinner
+162 | Punjabi Rajma Masala | Punjabi | Vegetarian | Lunch
+164 | Gujarati Methi Thepla | Gujarati | Vegetarian | Breakfast
+165 | Authentic Gujarati Undhiyu | Gujarati | Vegetarian | Dinner
+166 | Gujarati Khatti Meethi Dal | Gujarati | Vegetarian | Lunch
+171 | Bengali Chholar Dal with Luchi | Bengali | Vegetarian | Breakfast
+183 | Thalassery Malabar Chicken Biryani | Kerala | Non-Vegetarian | Lunch
+185 | Authentic Kerala Avial | Kerala | Vegetarian | Lunch
+189 | Mangalore Chicken Ghee Roast | Karnataka | Non-Vegetarian | Dinner
+192 | Ragi Mudde with Nati Koli Saaru | Karnataka | Non-Vegetarian | Dinner
+194 | Authentic Tamil Sambar with Soft Idli | Tamil Nadu | Vegetarian | Breakfast
+196 | Ven Pongal & Coconut Chutney | Tamil Nadu | Vegetarian | Breakfast
+198 | Thanjavur Tomato Rasam | Tamil Nadu | Vegetarian | Lunch

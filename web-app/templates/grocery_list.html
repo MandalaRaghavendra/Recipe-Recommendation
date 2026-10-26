@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#7B2C3F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <title>Smart Grocery List - Tastio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7B2C3F;
+            --primary-dark: #581827;
+            --accent-color: #FF9E1F;
+            --accent-hover: #E58E1B;
+            --light-bg: #F4F6F9;
+            --card-bg: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary-color) !important;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: #475569 !important;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+            background-color: rgba(123, 44, 63, 0.06);
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9E3850 100%);
+            color: white;
+            padding: 36px 0;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 10px 25px rgba(123, 44, 63, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+        .category-header {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .cat-badge-veg { background-color: #ECFDF5; color: #047857; }
+        .cat-badge-fruits { background-color: #FEF2F2; color: #B91C1C; }
+        .cat-badge-protein { background-color: #EFF6FF; color: #1D4ED8; }
+        .cat-badge-grains { background-color: #FFFBEB; color: #B45309; }
+        .cat-badge-dairy { background-color: #F5F3FF; color: #6D28D9; }
+        .cat-badge-spices { background-color: #FFF1F2; color: #BE123C; }
+        .cat-badge-other { background-color: #F8FAFC; color: #475569; }
+
+        .grocery-item-row {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #F8FAFC;
+            transition: background 0.15s ease;
+        }
+        .grocery-item-row:last-child {
+            border-bottom: none;
+        }
+        .grocery-item-row:hover {
+            background-color: #F8FAFC;
+        }
+        .grocery-item-row.is-checked {
+            background-color: #FAFAFA;
+            opacity: 0.65;
+        }
+        .grocery-item-row.is-checked .item-text {
+            text-decoration: line-through;
+            color: #94A3B8;
+        }
+
+        .custom-checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+
+        .source-pill {
+            font-size: 0.75rem;
+            background: #F1F5F9;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 3px;
+        }
+
+        .floating-coach-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: #ffffff !important;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(123, 44, 63, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .mobile-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 1020;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748B;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .mobile-nav-item.active, .mobile-nav-item:hover {
+            color: var(--primary-color);
+        }
+        .mobile-nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/dashboard">
+            <i class="fas fa-utensils me-2"></i>Tastio
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard"><i class="fas fa-home me-1"></i>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/what-can-i-cook"><i class="fas fa-carrot me-1"></i>Pantry Matcher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/meal-plan"><i class="fas fa-calendar-alt me-1"></i>Meal Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/grocery-list"><i class="fas fa-shopping-cart me-1"></i>Grocery List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/coach"><i class="fas fa-robot text-warning me-1"></i>AI Coach</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2">
+                <a href="/profile?active_tab=v-pills-diet-history" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold">
+                    <i class="fas fa-chart-line me-1"></i>Analytics
+                </a>
+                <a href="/profile" class="btn btn-primary btn-sm rounded-pill px-3 fw-bold" style="background-color: var(--primary-color); border-color: var(--primary-color); color:white;">
+                    <i class="fas fa-user me-1"></i>Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">
+                    <i class="fas fa-sparkles me-1"></i>Smart Shopping Assistant
+                </span>
+                <h1 class="display-6 fw-bold mb-2">Smart Grocery List</h1>
+                <p class="lead mb-0 text-white-50 fs-6">
+                    Consolidated ingredients automatically compiled from your 7-Day Meal Plan, grouped into 7 culinary categories.
+                </p>
+            </div>
+            <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+                <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+                    <button class="btn btn-warning fw-bold rounded-pill px-3 py-2 shadow-sm text-dark" id="btnGeneratePlan" onclick="generateFromMealPlan()">
+                        <i class="fas fa-wand-magic-sparkles me-1"></i>Compile from Meal Plan
+                    </button>
+                    <button class="btn btn-light fw-bold rounded-pill px-3 py-2 shadow-sm text-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                        <i class="fas fa-plus me-1"></i>Add Item
+                    </button>
+                    <button class="btn btn-outline-light rounded-pill px-3 py-2 shadow-sm" onclick="clearCompleted()">
+                        <i class="fas fa-broom me-1"></i>Clear Checked
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Grocery Container -->
+<div class="container mb-5 flex-grow-1">
+    {% set items = grocery.items if grocery and grocery.items else [] %}
+    {% set categories = grocery.categories if grocery and grocery.categories else {} %}
+    {% set total = grocery.total_items if grocery else 0 %}
+    {% set completed = grocery.completed_items if grocery else 0 %}
+    {% set progress_pct = (completed / total * 100) | round(0) if total > 0 else 0 %}
+
+    <!-- Progress Card -->
+    <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h5 class="fw-bold mb-0 text-dark" id="listNameTitle">{{ grocery.list_name if grocery else 'My Smart Grocery List' }}</h5>
+                <small class="text-muted" id="progressSummary">{{ completed }} of {{ total }} items checked ({{ progress_pct }}% complete)</small>
+            </div>
+            <span class="badge bg-success rounded-pill px-3 py-2 fs-6" id="progressBadge">{{ progress_pct }}% Ready</span>
+        </div>
+        <div class="progress" style="height: 10px; border-radius: 5px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{ progress_pct }}%;" id="progressBar"></div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyGroceryBox" class="text-center py-5 bg-white rounded-4 shadow-sm" style="display: {{ 'none' if total > 0 else 'block' }};">
+        <div class="mb-3 text-muted">
+            <i class="fas fa-basket-shopping fa-3x text-warning mb-2"></i>
+        </div>
+        <h4 class="fw-bold text-dark">Your Grocery List is Empty</h4>
+        <p class="text-muted mb-3" style="max-width: 460px; margin: 0 auto;">
+            Generate an automated shopping list from your active 7-Day Meal Plan or add custom ingredients you need for your kitchen.
+        </p>
+        <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-warning rounded-pill px-4 fw-bold text-dark" onclick="generateFromMealPlan()">
+                <i class="fas fa-calendar-week me-1"></i>Compile from Active Meal Plan
+            </button>
+            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                <i class="fas fa-plus me-1"></i>Add Custom Item
+            </button>
+        </div>
+    </div>
+
+    <!-- 7 Category Sections -->
+    <div id="groceryCategoriesWrap" style="display: {{ 'block' if total > 0 else 'none' }};">
+        {% set cat_icons = {
+            'Vegetables': ('🥦', 'cat-badge-veg'),
+            'Fruits': ('🍎', 'cat-badge-fruits'),
+            'Protein': ('🍗', 'cat-badge-protein'),
+            'Grains': ('🌾', 'cat-badge-grains'),
+            'Dairy': ('🥛', 'cat-badge-dairy'),
+            'Spices': ('🌶️', 'cat-badge-spices'),
+            'Other': ('📦', 'cat-badge-other')
+        } %}
+
+        {% for cat_name, cat_items in categories.items() %}
+            <div class="category-card" id="cat-card-{{ cat_name|lower }}" style="display: {{ 'block' if cat_items|length > 0 else 'none' }};">
+                <div class="category-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5">{{ cat_icons.get(cat_name, ('🛒', ''))[0] }}</span>
+                        <span>{{ cat_name }}</span>
+                    </div>
+                    <span class="badge rounded-pill px-3 py-1 {{ cat_icons.get(cat_name, ('', 'bg-light text-dark'))[1] }}" id="badge-{{ cat_name|lower }}">
+                        {{ cat_items|length }} items
+                    </span>
+                </div>
+                <div class="category-body" id="body-{{ cat_name|lower }}">
+                    {% for it in cat_items %}
+                        <div class="grocery-item-row {{ 'is-checked' if it.checked else '' }}" id="row-{{ it.objectId }}">
+                            <div class="d-flex align-items-center gap-3">
+                                <input type="checkbox" class="custom-checkbox" {{ 'checked' if it.checked else '' }} onchange="toggleItem('{{ it.objectId }}', this)">
+                                <div>
+                                    <div class="item-text fw-bold text-dark fs-6">{{ it.item_name }}</div>
+                                    {% if it.recipe_sources and it.recipe_sources|length > 0 %}
+                                        <div class="source-pill">
+                                            <i class="fas fa-book-open text-muted me-1"></i>{{ it.recipe_sources|join(', ') }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-sm text-danger border-0" onclick="removeItem('{{ it.objectId }}')" title="Remove item">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal: Add Custom Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold"><i class="fas fa-cart-plus text-primary me-2"></i>Add Grocery Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="addItemForm" onsubmit="submitCustomItem(event)">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Item Name</label>
+                        <input type="text" class="form-control rounded-3" id="customItemName" placeholder="e.g. Sambar Onions, Basmati Rice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Category</label>
+                        <select class="form-select rounded-3" id="customItemCat">
+                            <option value="Vegetables">🥦 Vegetables</option>
+                            <option value="Fruits">🍎 Fruits</option>
+                            <option value="Protein" selected>🍗 Protein (Chicken, Paneer, Dals)</option>
+                            <option value="Grains">🌾 Grains (Rice, Atta, Oats)</option>
+                            <option value="Dairy">🥛 Dairy (Milk, Curd, Ghee)</option>
+                            <option value="Spices">🌶️ Spices (Masalas, Seeds)</option>
+                            <option value="Other">📦 Other</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-end gap-2 pt-2">
+                        <button type="button" class="btn btn-light rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: var(--primary-color); border-color: var(--primary-color);">
+                            Add to List
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating AI Coach Launcher Button -->
+<a href="/coach" class="floating-coach-btn d-none d-md-flex" title="Chat with Tastio AI Nutrition Coach">
+    <i class="fas fa-robot text-warning"></i>
+    <span>AI Coach</span>
+</a>
+
+<!-- Mobile Bottom Navigation Bar -->
+<div class="mobile-bottom-bar d-md-none">
+    <a href="/dashboard" class="mobile-nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="/what-can-i-cook" class="mobile-nav-item">
+        <i class="fas fa-carrot"></i>
+        <span>Pantry</span>
+    </a>
+    <a href="/meal-plan" class="mobile-nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Planner</span>
+    </a>
+    <a href="/grocery-list" class="mobile-nav-item active">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Grocery</span>
+    </a>
+    <a href="/profile" class="mobile-nav-item">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    async function toggleItem(objectId, checkboxEl) {
+        const row = document.getElementById(`row-${objectId}`);
+        if (checkboxEl.checked) {
+            row.classList.add('is-checked');
+        } else {
+            row.classList.remove('is-checked');
+        }
+
+        try {
+            await fetch(`/api/grocery-list/item/${objectId}/toggle`, { method: 'POST' });
+            updateProgressCounters();
+        } catch (e) {
+            console.error("Error toggling item:", e);
+        }
+    }
+
+    async function removeItem(objectId) {
+        if (!confirm("Remove this item from your grocery list?")) return;
+        try {
+            const res = await fetch(`/api/grocery-list/item/${objectId}`, { method: 'DELETE' });
+            const data = await res.json();
+            if (data.success) {
+                const row = document.getElementById(`row-${objectId}`);
+                if (row) row.remove();
+                refreshView();
+            }
+        } catch (e) {
+            console.error("Error removing item:", e);
+        }
+    }
+
+    async function clearCompleted() {
+        try {
+            const res = await fetch('/api/grocery-list/clear-completed', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.reload();
+            }
+        } catch (e) {
+            console.error("Error clearing completed items:", e);
+        }
+    }
+
+    async function generateFromMealPlan() {
+        const btn = document.getElementById('btnGeneratePlan');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Compiling Plan...';
+        }
+
+        try {
+            const res = await fetch('/api/grocery-list/generate-from-plan', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || "Please create a 7-day meal plan first.");
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-wand-magic-sparkles me-1"></i>Compile from Meal Plan';
+                }
+            }
+        } catch (e) {
+            alert("A network error occurred while compiling your grocery list.");
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-wand-magic-sparkles me-1"></i>Compile from Meal Plan';
+            }
+        }
+    }
+
+    async function submitCustomItem(event) {
+        event.preventDefault();
+        const name = document.getElementById('customItemName').value.trim();
+        const cat = document.getElementById('customItemCat').value;
+
+        if (!name) return;
+
+        try {
+            const res = await fetch('/api/grocery-list/item', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item_name: name, category: cat })
+            });
+            const data = await res.json();
+            if (data.success) {
+                window.location.reload();
+            }
+        } catch (e) {
+            console.error("Error adding item:", e);
+        }
+    }
+
+    function updateProgressCounters() {
+        const allBoxes = document.querySelectorAll('.custom-checkbox');
+        const checkedBoxes = document.querySelectorAll('.custom-checkbox:checked');
+        const total = allBoxes.length;
+        const completed = checkedBoxes.length;
+        const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+        const summary = document.getElementById('progressSummary');
+        const badge = document.getElementById('progressBadge');
+        const bar = document.getElementById('progressBar');
+
+        if (summary) summary.innerText = `${completed} of ${total} items checked (${pct}% complete)`;
+        if (badge) badge.innerText = `${pct}% Ready`;
+        if (bar) bar.style.width = `${pct}%`;
+    }
+
+    function refreshView() {
+        updateProgressCounters();
+        const allRows = document.querySelectorAll('.grocery-item-row');
+        if (allRows.length === 0) {
+            document.getElementById('emptyGroceryBox').style.display = 'block';
+            document.getElementById('groceryCategoriesWrap').style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

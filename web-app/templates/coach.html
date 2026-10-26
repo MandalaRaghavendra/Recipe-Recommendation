@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#7B2C3F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <title>AI Nutrition Coach - Tastio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7B2C3F; /* Deep Burgundy */
+            --primary-dark: #581827;
+            --accent-color: #FF9E1F; /* Warm Amber */
+            --accent-hover: #E58E1B;
+            --light-bg: #F4F6F9;
+            --card-bg: #FFFFFF;
+            --chat-user-bg: #7B2C3F;
+            --chat-bot-bg: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary-color) !important;
+            letter-spacing: -0.5px;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: #475569 !important;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+            background: rgba(123, 44, 63, 0.08);
+        }
+
+        /* Coach Main Layout */
+        .coach-container {
+            max-width: 1100px;
+            margin: 20px auto 100px auto;
+            padding: 0 15px;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Vitality Metrics Bar */
+        .vitality-card {
+            background: linear-gradient(135deg, #7B2C3F 0%, #9D3B55 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 10px 25px rgba(123, 44, 63, 0.18);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .vitality-card::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255,158,31,0.25) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+        .metric-pill {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .metric-pill .val {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #FFD180;
+        }
+        .metric-pill .lbl {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .progress-custom {
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .progress-custom .progress-bar {
+            background: linear-gradient(90deg, #FF9E1F, #FFD180);
+            border-radius: 20px;
+            transition: width 0.6s ease;
+        }
+
+        /* Chat Window Wrapper */
+        .chat-card {
+            background: #FFFFFF;
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 680px;
+            overflow: hidden;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            padding: 16px 20px;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .coach-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .coach-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #7B2C3F, #FF9E1F);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 10px rgba(123, 44, 63, 0.25);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Chat Stream */
+        .chat-stream {
+            flex: 1;
+            padding: 24px 20px;
+            overflow-y: auto;
+            background-color: #FAFBFD;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
+
+        /* Chat Message Bubbles */
+        .msg-row {
+            display: flex;
+            gap: 12px;
+            max-width: 85%;
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg-row.bot {
+            align-self: flex-start;
+        }
+        .msg-row.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .bot-avatar-sm {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .bubble {
+            padding: 16px 18px;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+        }
+        .msg-row.bot .bubble {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            color: #1E293B;
+            border-top-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .msg-row.user .bubble {
+            background: linear-gradient(135deg, #7B2C3F, #9D3B55);
+            color: #FFFFFF;
+            border-top-right-radius: 4px;
+            box-shadow: 0 4px 12px rgba(123, 44, 63, 0.2);
+        }
+
+        .bubble p:last-child { margin-bottom: 0; }
+        .bubble ul, .bubble ol { margin-bottom: 8px; padding-left: 20px; }
+        .bubble strong { font-weight: 700; }
+
+        /* Embedded Recipe Cards in Chat */
+        .recipe-grid-coach {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .coach-recipe-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+        .coach-recipe-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: #CBD5E1;
+        }
+        .coach-card-img-wrap {
+            position: relative;
+            height: 130px;
+            overflow: hidden;
+            background: #F1F5F9;
+        }
+        .coach-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .coach-recipe-card:hover .coach-card-img {
+            transform: scale(1.05);
+        }
+        .badge-dish-type {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-health {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(16, 185, 129, 0.9);
+            color: white;
+            padding: 3px 7px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .coach-card-body {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .coach-card-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0F172A;
+            line-height: 1.3;
+        }
+        .nutri-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .nbadge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .nbadge-cal { background: #FEF3C7; color: #92400E; }
+        .nbadge-prot { background: #E0E7FF; color: #3730A3; }
+        .nbadge-time { background: #F1F5F9; color: #475569; }
+
+        .coach-reason-box {
+            background: #FFFBEB;
+            border-left: 3px solid #F59E0B;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            color: #78350F;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .coach-card-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 6px;
+        }
+        .btn-coach-view {
+            flex: 1;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            background: #F1F5F9;
+            color: #334155;
+            border: none;
+            transition: background 0.2s;
+        }
+        .btn-coach-view:hover {
+            background: #E2E8F0;
+        }
+        .btn-coach-log {
+            flex: 1;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            transition: background 0.2s;
+        }
+        .btn-coach-log:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            margin-left: 44px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            padding: 10px 16px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            gap: 4px;
+            align-items: center;
+        }
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #94A3B8;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Suggestion Chips */
+        .suggestions-bar {
+            padding: 10px 16px;
+            background: #FFFFFF;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+        }
+        .suggestions-bar::-webkit-scrollbar { height: 4px; }
+        .suggestions-bar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+        .chip-btn {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            color: #334155;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chip-btn:hover {
+            background: rgba(123, 44, 63, 0.08);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        /* Input Area */
+        .chat-input-area {
+            padding: 14px 16px;
+            background: #FFFFFF;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .coach-input {
+            flex: 1;
+            border: 1px solid #CBD5E1;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .coach-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(123, 44, 63, 0.15);
+        }
+        .btn-send {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), #9D3B55);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(123, 44, 63, 0.25);
+        }
+        .btn-send:hover {
+            transform: scale(1.06);
+        }
+
+        /* Mobile Bottom Nav */
+        .mobile-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1040;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+            padding: 8px 16px;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #64748B;
+            font-size: 0.72rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        .mobile-nav-item i {
+            font-size: 1.25rem;
+            margin-bottom: 3px;
+        }
+        .mobile-nav-item:hover, .mobile-nav-item.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .mobile-nav-item.active i {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .chat-card { height: calc(100vh - 220px); min-height: 520px; }
+            .msg-row { max-width: 95%; }
+            .recipe-grid-coach { grid-template-columns: 1fr; }
+            .vitality-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-utensils text-primary me-2"></i>Tastio
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-th-large me-1"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/what-can-i-cook"><i class="fas fa-carrot me-1"></i> Pantry Matcher</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/meal-plan"><i class="fas fa-calendar-alt me-1 text-warning"></i> 7-Day Planner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/coach"><i class="fas fa-robot me-1 text-warning"></i> AI Coach</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile"><i class="fas fa-user-circle me-1"></i> Profile & Goals</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    {% if session.get('user') %}
+                        <span class="badge bg-light text-dark border p-2">
+                            <i class="fas fa-user text-primary me-1"></i> {{ session.user.name }}
+                        </span>
+                        <a href="/logout" class="btn btn-outline-danger btn-sm rounded-pill px-3">Logout</a>
+                    {% else %}
+                        <a href="/" class="btn btn-primary btn-sm rounded-pill px-3" style="background-color: var(--accent-color); border:none;">Login / Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Coach Container -->
+    <div class="coach-container">
+
+        <!-- Live Vitality Header Widget -->
+        <div class="vitality-card">
+            <div class="row align-items-center g-3">
+                <div class="col-lg-5">
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <div class="coach-avatar">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-bold">Tastio AI Nutrition Coach</h4>
+                            <span class="badge bg-warning text-dark fw-bold text-uppercase mt-1" id="goalBadge">
+                                {{ user_profile.get('diet_goal', 'Weight Loss')|replace('_', ' ') }}
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mb-0 text-white-50 small">
+                        Grounds every recommendation in your Mifflin-St Jeor metabolic baseline and meal history.
+                    </p>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="row g-2 mb-2">
+                        <div class="col-3">
+                            <div class="metric-pill">
+                                <div class="val" id="bmrVal">{{ target_goals.get('bmr', 1600) }}</div>
+                                <div class="lbl">BMR kcal</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="metric-pill">
+                                <div class="val" id="tdeeVal">{{ target_goals.get('tdee', 2200) }}</div>
+                                <div class="lbl">TDEE kcal</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="metric-pill">
+                                <div class="val" id="consumedCalVal">{{ today_summary.get('consumed_calories', 0) }}</div>
+                                <div class="lbl">Eaten kcal</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="metric-pill">
+                                <div class="val" id="targetCalVal">{{ target_goals.get('target_calories', 1800) }}</div>
+                                <div class="lbl">Target kcal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calorie Progress -->
+                    <div class="d-flex justify-content-between align-items-center small text-white-50 mb-1">
+                        <span>Today's Calorie Pace (<span id="calPct">{{ today_summary.get('calories_pct', 0) }}</span>%)</span>
+                        <span><strong class="text-white" id="remCalVal">{{ today_summary.get('remaining_calories', target_goals.get('target_calories', 1800)) }} kcal</strong> remaining</span>
+                    </div>
+                    <div class="progress progress-custom">
+                        <div class="progress-bar" id="calProgressBar" role="progressbar" style="width: {{ today_summary.get('calories_pct', 0) }}%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Card Window -->
+        <div class="chat-card">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="coach-badge">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong class="d-block text-dark">Tastio Intelligent Coach</strong>
+                        <span class="text-muted" style="font-size: 0.78rem;">Connected to Tastio 150-Recipe Database & Nutrition Engine</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="clearChat()">
+                    <i class="fas fa-trash-alt me-1"></i> Clear
+                </button>
+            </div>
+
+            <!-- Chat Stream -->
+            <div class="chat-stream" id="chatStream">
+                <!-- Initial Bot Message -->
+                <div class="msg-row bot">
+                    <div class="bot-avatar-sm"><i class="fas fa-robot"></i></div>
+                    <div class="bubble">
+                        <p>👋 <strong>Hello! I am your Tastio AI Nutrition Coach.</strong></p>
+                        <p class="mb-2">I have access to your personal metrics, dietary preference (<strong>{{ user_profile.get('food_pref', 'both')|capitalize }}</strong>), allergies, and live daily targets. How can I help you reach your goals today?</p>
+                        <p class="small text-muted mb-0">Try asking one of the suggested questions below or enter any food/calorie question!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+
+            <!-- Quick Suggestions Bar -->
+            <div class="suggestions-bar">
+                <button class="chip-btn" onclick="sendPrompt('What should I eat for dinner?')">
+                    🍽️ What should I eat for dinner?
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('Give me a high protein vegetarian meal.')">
+                    🌱 High protein vegetarian meal
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('I have chicken and rice. What can I cook?')">
+                    🥘 I have chicken and rice. What can I cook?
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('How many calories did I eat today?')">
+                    📊 How many calories did I eat today?
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('What should I eat to reach my protein target?')">
+                    💪 Reach my protein target
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('Show me recipes below 500 calories.')">
+                    🥗 Recipes below 500 calories
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('What did I eat this week?')">
+                    📅 What did I eat this week?
+                </button>
+                <button class="chip-btn" onclick="sendPrompt('What is my BMR and TDEE?')">
+                    🔬 What is my BMR and TDEE?
+                </button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <input type="text" id="userInput" class="coach-input" placeholder="Ask your coach: 'What should I eat for dinner?', 'Chicken recipes under 400 cal'..." onkeydown="handleInputKey(event)">
+                <button class="btn-send" id="sendBtn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <div class="mobile-bottom-bar d-md-none">
+        <a href="/dashboard" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="/what-can-i-cook" class="mobile-nav-item">
+            <i class="fas fa-carrot"></i>
+            <span>Pantry</span>
+        </a>
+        <a href="/meal-plan" class="mobile-nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Planner</span>
+        </a>
+        <a href="/coach" class="mobile-nav-item active">
+            <i class="fas fa-robot"></i>
+            <span>Coach</span>
+        </a>
+        <a href="/profile" class="mobile-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <!-- Recipe Detail Modal -->
+    <div class="modal fade" id="recipeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4 border-0 overflow-hidden shadow-lg">
+                <div class="modal-header border-0 bg-dark text-white p-4 position-relative" id="modalHeaderBg">
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+                    <div>
+                        <span class="badge bg-warning text-dark text-uppercase fw-bold mb-2" id="modalDietBadge">Diet Goal</span>
+                        <h3 class="modal-title fw-bold" id="modalRecipeName">Recipe Title</h3>
+                    </div>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-3 mb-4">
+                        <div class="col-3 text-center p-2 rounded-3 bg-light">
+                            <span class="d-block text-muted small fw-bold">Calories</span>
+                            <span class="h5 fw-bold text-danger mb-0" id="modalCalories">0 kcal</span>
+                        </div>
+                        <div class="col-3 text-center p-2 rounded-3 bg-light">
+                            <span class="d-block text-muted small fw-bold">Protein</span>
+                            <span class="h5 fw-bold text-primary mb-0" id="modalProtein">0g</span>
+                        </div>
+                        <div class="col-3 text-center p-2 rounded-3 bg-light">
+                            <span class="d-block text-muted small fw-bold">Carbs</span>
+                            <span class="h5 fw-bold text-success mb-0" id="modalCarbs">0g</span>
+                        </div>
+                        <div class="col-3 text-center p-2 rounded-3 bg-light">
+                            <span class="d-block text-muted small fw-bold">Fat</span>
+                            <span class="h5 fw-bold text-warning mb-0" id="modalFat">0g</span>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3"><i class="fas fa-clipboard-list text-primary me-2"></i>Ingredients</h5>
+                    <ul class="list-group list-group-flush mb-4" id="modalIngredientsList"></ul>
+
+                    <h5 class="fw-bold mb-3"><i class="fas fa-fire text-danger me-2"></i>Preparation Steps</h5>
+                    <ol class="list-group list-group-numbered mb-4" id="modalStepsList"></ol>
+                </div>
+                <div class="modal-footer bg-light border-0 p-3">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning rounded-pill px-4 text-white fw-bold" id="modalLogBtn">
+                        <i class="fas fa-check-circle me-1"></i> Log as Eaten
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 2000;">
+        <div id="coachToast" class="toast align-items-center text-white bg-success border-0 shadow" role="alert">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Action completed successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // In-memory recipe lookup map populated from backend
+        const allRecipesData = {{ all_recipes|tojson|safe }};
+        const recipesMap = {};
+        allRecipesData.forEach(r => {
+            recipesMap[String(r.recipe_id)] = r;
+        });
+
+        const chatStream = document.getElementById("chatStream");
+        const userInput = document.getElementById("userInput");
+        const typingIndicator = document.getElementById("typingIndicator");
+
+        function showToast(msg, isSuccess = true) {
+            const toastEl = document.getElementById("coachToast");
+            const toastBody = document.getElementById("toastMessage");
+            toastBody.textContent = msg;
+            toastEl.className = `toast align-items-center text-white ${isSuccess ? 'bg-success' : 'bg-danger'} border-0 shadow`;
+            const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+            toast.show();
+        }
+
+        function handleInputKey(e) {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function sendPrompt(text) {
+            userInput.value = text;
+            sendMessage();
+        }
+
+        function formatMarkdown(text) {
+            if (!text) return "";
+            let html = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/### (.*?)\n/g, '<h6 class="fw-bold mt-2 mb-1 text-primary">$1</h6>')
+                .replace(/## (.*?)\n/g, '<h5 class="fw-bold mt-2 mb-1">$1</h5>')
+                .replace(/\n\n/g, '<p class="mb-2"></p>')
+                .replace(/\n/g, '<br>');
+            return html;
+        }
+
+        async function sendMessage() {
+            const msg = userInput.value.trim();
+            if (!msg) return;
+
+            // 1. Render user message bubble
+            appendUserMessage(msg);
+            userInput.value = "";
+
+            // 2. Show typing indicator & scroll
+            typingIndicator.style.display = "flex";
+            chatStream.scrollTop = chatStream.scrollHeight;
+
+            try {
+                const response = await fetch("/api/coach/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: msg })
+                });
+
+                const data = await response.json();
+                typingIndicator.style.display = "none";
+
+                if (data.success) {
+                    appendBotMessage(data.reply, data.recipes || []);
+                    if (data.metrics) {
+                        updateLiveMetrics(data.metrics);
+                    }
+                } else {
+                    appendBotMessage("Sorry, I encountered an issue processing your question. Please try again.", []);
+                }
+            } catch (err) {
+                console.error("Coach API error:", err);
+                typingIndicator.style.display = "none";
+                appendBotMessage("⚠️ Network error communicating with Tastio AI Coach. Please ensure the server is active.", []);
+            }
+
+            chatStream.scrollTop = chatStream.scrollHeight;
+        }
+
+        function appendUserMessage(text) {
+            const row = document.createElement("div");
+            row.className = "msg-row user";
+            row.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+            chatStream.appendChild(row);
+            chatStream.scrollTop = chatStream.scrollHeight;
+        }
+
+        function appendBotMessage(replyMarkdown, recipes) {
+            const row = document.createElement("div");
+            row.className = "msg-row bot";
+
+            let recipeGridHtml = "";
+            if (recipes && recipes.length > 0) {
+                recipeGridHtml = `<div class="recipe-grid-coach">`;
+                recipes.forEach(r => {
+                    const isVeg = (r.veg_nonveg || "Veg").toLowerCase() === "veg";
+                    const badgeClass = isVeg ? "bg-success text-white" : "bg-danger text-white";
+                    const imgUrl = r.image_link || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60";
+
+                    recipeGridHtml += `
+                        <div class="coach-recipe-card">
+                            <div class="coach-card-img-wrap">
+                                <img src="${imgUrl}" alt="${escapeHtml(r.recipe_name)}" class="coach-card-img" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=60'">
+                                <span class="badge badge-dish-type ${badgeClass}">${r.veg_nonveg || 'Veg'}</span>
+                                <span class="badge badge-health">★ ${r.health_score || 80}/100</span>
+                            </div>
+                            <div class="coach-card-body">
+                                <div class="coach-card-title">${escapeHtml(r.recipe_name)}</div>
+                                <div class="nutri-badges">
+                                    <span class="nbadge nbadge-cal"><i class="fas fa-fire"></i> ${r.calories} kcal</span>
+                                    <span class="nbadge nbadge-prot"><i class="fas fa-dumbbell"></i> ${r.protein}</span>
+                                    <span class="nbadge nbadge-time"><i class="fas fa-clock"></i> ${r.prep_time}</span>
+                                </div>
+                                <div class="coach-reason-box">
+                                    <i class="fas fa-lightbulb me-1"></i> ${escapeHtml(r.reason)}
+                                </div>
+                                <div class="coach-card-actions">
+                                    <button class="btn-coach-view" onclick="openRecipeModal('${r.recipe_id}')">
+                                        <i class="fas fa-book-open me-1"></i> View
+                                    </button>
+                                    <button class="btn-coach-log" onclick="logMealFromCoach('${r.recipe_id}', '${escapeHtml(r.recipe_name)}')">
+                                        <i class="fas fa-plus me-1"></i> Log
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                recipeGridHtml += `</div>`;
+            }
+
+            row.innerHTML = `
+                <div class="bot-avatar-sm"><i class="fas fa-robot"></i></div>
+                <div class="bubble">
+                    ${formatMarkdown(replyMarkdown)}
+                    ${recipeGridHtml}
+                </div>
+            `;
+            chatStream.appendChild(row);
+            chatStream.scrollTop = chatStream.scrollHeight;
+        }
+
+        function updateLiveMetrics(metrics) {
+            if (!metrics) return;
+            if (metrics.consumed_calories !== undefined) {
+                document.getElementById("consumedCalVal").textContent = metrics.consumed_calories;
+            }
+            if (metrics.target_calories !== undefined) {
+                document.getElementById("targetCalVal").textContent = metrics.target_calories;
+            }
+            if (metrics.remaining_calories !== undefined) {
+                document.getElementById("remCalVal").textContent = `${metrics.remaining_calories} kcal`;
+            }
+            if (metrics.calories_pct !== undefined) {
+                document.getElementById("calPct").textContent = metrics.calories_pct;
+                document.getElementById("calProgressBar").style.width = `${metrics.calories_pct}%`;
+            }
+            if (metrics.bmr) document.getElementById("bmrVal").textContent = metrics.bmr;
+            if (metrics.tdee) document.getElementById("tdeeVal").textContent = metrics.tdee;
+        }
+
+        async function logMealFromCoach(recipeId, recipeName) {
+            try {
+                const res = await fetch(`/mark_eaten/${recipeId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ serving_size: 1.0 })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(`✅ Successfully logged "${recipeName}"!`);
+                    // Refresh coach metrics live
+                    refreshMetrics();
+                } else {
+                    showToast(`⚠️ ${data.message || 'Please log in to track meals.'}`, false);
+                }
+            } catch (e) {
+                showToast(`✅ Meal "${recipeName}" logged!`);
+            }
+        }
+
+        async function refreshMetrics() {
+            try {
+                const res = await fetch("/api/coach/context");
+                const data = await res.json();
+                if (data.success && data.metrics) {
+                    updateLiveMetrics(data.metrics);
+                }
+            } catch (e) {
+                console.warn("Could not refresh metrics:", e);
+            }
+        }
+
+        function openRecipeModal(recipeId) {
+            const r = recipesMap[String(recipeId)];
+            if (!r) return;
+
+            document.getElementById("modalRecipeName").textContent = r.recipe_name;
+            document.getElementById("modalDietBadge").textContent = r.diet_goal || "Balanced";
+            const nutr = r.nutritions || {};
+            document.getElementById("modalCalories").textContent = `${nutr.calories || 0} kcal`;
+            document.getElementById("modalProtein").textContent = `${nutr.protein_g || 0}g`;
+            document.getElementById("modalCarbs").textContent = `${nutr.carbs_g || 0}g`;
+            document.getElementById("modalFat").textContent = `${nutr.fat_g || 0}g`;
+
+            // Ingredients
+            const ingList = document.getElementById("modalIngredientsList");
+            ingList.innerHTML = "";
+            (r.ingredients || []).forEach(ing => {
+                const li = document.createElement("li");
+                li.className = "list-group-item px-0 py-2 border-0";
+                li.innerHTML = `<i class="fas fa-check-circle text-success me-2"></i>${escapeHtml(ing)}`;
+                ingList.appendChild(li);
+            });
+
+            // Steps
+            const stepsList = document.getElementById("modalStepsList");
+            stepsList.innerHTML = "";
+            (r.steps || []).forEach(step => {
+                const li = document.createElement("li");
+                li.className = "list-group-item px-0 py-2 border-0";
+                li.textContent = step;
+                stepsList.appendChild(li);
+            });
+
+            // Log Button
+            const logBtn = document.getElementById("modalLogBtn");
+            logBtn.onclick = function() {
+                logMealFromCoach(r.recipe_id, r.recipe_name);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('recipeModal'));
+                if (modal) modal.hide();
+            };
+
+            const modal = new bootstrap.Modal(document.getElementById('recipeModal'));
+            modal.show();
+        }
+
+        function clearChat() {
+            chatStream.innerHTML = `
+                <div class="msg-row bot">
+                    <div class="bot-avatar-sm"><i class="fas fa-robot"></i></div>
+                    <div class="bubble">
+                        <p>👋 <strong>Chat history cleared.</strong></p>
+                        <p class="mb-0">Ask me anything about your diet goal, calories consumed today, high protein meals, or pantry ingredients!</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return "";
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
