@@ -177,12 +177,12 @@ def signup():
         return redirect(url_for("home"))
 
     client_ip = request.remote_addr or "127.0.0.1"
-    if not check_rate_limit(f"signup_{client_ip}", max_attempts=12, window_seconds=60):
+    if not check_rate_limit(f"signup_{client_ip}", max_attempts=30, window_seconds=60):
         return redirect(url_for("home", message="Too many signup attempts. Please wait a minute and try again."))
 
-    name = request.form.get("name")
-    email = request.form.get("email")
-    password = request.form.get("password")
+    name = str(request.form.get("name") or "").strip()
+    email = str(request.form.get("email") or "").strip()
+    password = str(request.form.get("password") or "")
 
     success, res = db.register_user(name, email, password)
     if success:
@@ -198,11 +198,11 @@ def login():
         return redirect(url_for("home"))
 
     client_ip = request.remote_addr or "127.0.0.1"
-    if not check_rate_limit(f"login_{client_ip}", max_attempts=20, window_seconds=60):
+    if not check_rate_limit(f"login_{client_ip}", max_attempts=40, window_seconds=60):
         return redirect(url_for("home", message="Too many login attempts. Please wait a minute and try again."))
 
-    email = request.form.get("email")
-    password = request.form.get("password")
+    email = str(request.form.get("email") or "").strip()
+    password = str(request.form.get("password") or "")
 
     success, user = db.login_user(email, password)
     if success:
@@ -477,29 +477,45 @@ def api_health():
 @app.route("/api/auth/signup", methods=["POST"])
 def api_signup():
     client_ip = request.remote_addr or "127.0.0.1"
-    if not check_rate_limit(f"api_signup_{client_ip}", max_attempts=15, window_seconds=60):
+    if not check_rate_limit(f"api_signup_{client_ip}", max_attempts=30, window_seconds=60):
         return jsonify({"success": False, "error": "Too Many Requests", "message": "Too many signup attempts. Please try again later."}), 429
 
-    payload = request.get_json() or {}
-    name = payload.get("name")
-    email = payload.get("email")
-    password = payload.get("password")
+    payload = request.get_json(silent=True) or {}
+    name = str(payload.get("name") or "").strip()
+    email = str(payload.get("email") or "").strip()
+    password = str(payload.get("password") or "")
+
+    if not name:
+        return jsonify({"success": False, "message": "Name is required."}), 400
+    if not email:
+        return jsonify({"success": False, "message": "Email is required."}), 400
+    if not password:
+        return jsonify({"success": False, "message": "Password is required."}), 400
+
     success, res = db.register_user(name, email, password)
     if success:
+        session["user"] = res
+        session["user_id"] = res.get("objectId")
         return jsonify({"success": True, "user": res})
     return jsonify({"success": False, "message": str(res)}), 400
 
 @app.route("/api/auth/login", methods=["POST"])
 def api_login():
     client_ip = request.remote_addr or "127.0.0.1"
-    if not check_rate_limit(f"api_login_{client_ip}", max_attempts=25, window_seconds=60):
+    if not check_rate_limit(f"api_login_{client_ip}", max_attempts=40, window_seconds=60):
         return jsonify({"success": False, "error": "Too Many Requests", "message": "Too many login attempts. Please try again later."}), 429
 
-    payload = request.get_json() or {}
-    email = payload.get("email") or payload.get("login")
-    password = payload.get("password")
+    payload = request.get_json(silent=True) or {}
+    email = str(payload.get("email") or payload.get("login") or "").strip()
+    password = str(payload.get("password") or "")
+
+    if not email or not password:
+        return jsonify({"success": False, "message": "Email and password are required."}), 400
+
     success, res = db.login_user(email, password)
     if success:
+        session["user"] = res
+        session["user_id"] = res.get("objectId")
         return jsonify({"success": True, "user": res})
     return jsonify({"success": False, "message": str(res)}), 401
 

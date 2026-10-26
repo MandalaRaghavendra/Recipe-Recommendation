@@ -17,15 +17,16 @@ def validate_email(email):
         return False, "Invalid email address format."
     return True, clean.lower()
 
-def validate_password(password, min_len=6):
+def validate_password(password, min_len=4):
     """Validates password length and complexity."""
     if not password or not isinstance(password, str):
         return False, "Password is required."
-    if len(password) < min_len:
+    clean_pwd = password.strip()
+    if len(clean_pwd) < min_len:
         return False, f"Password must be at least {min_len} characters long."
-    if len(password) > 128:
+    if len(clean_pwd) > 128:
         return False, "Password cannot exceed 128 characters."
-    return True, password
+    return True, clean_pwd
 
 def validate_rating(rating):
     """Validates recipe rating between 1 and 5."""

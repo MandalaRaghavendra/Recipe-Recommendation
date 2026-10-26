@@ -352,6 +352,14 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-4">
+          {% if message %}
+          <div class="alert {% if 'success' in message or 'Welcome' in message or 'ready' in message %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show text-center py-2 px-3 small mb-3" role="alert">
+            <i class="fas {% if 'success' in message or 'Welcome' in message or 'ready' in message %}fa-check-circle{% else %}fa-exclamation-triangle{% endif %} me-1"></i>
+            {{ message }}
+            <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endif %}
+          <div id="modalClientAlert" class="alert alert-danger py-2 px-3 small mb-3 text-center" style="display: none;"></div>
 
           <ul class="nav nav-tabs mb-4" id="authTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -367,11 +375,11 @@
               <form action="/login" method="POST">
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                  <input type="email" name="email" class="form-control" placeholder="Enter your email" required autocomplete="email">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                  <input type="password" name="password" class="form-control" placeholder="Enter your password" minlength="4" required autocomplete="current-password">
                 </div>
                 <button type="submit" class="btn btn-auth w-100">Login</button>
               </form>
@@ -381,15 +389,16 @@
               <form action="/signup" method="POST">
                 <div class="mb-3">
                   <label class="form-label">Full Name</label>
-                  <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+                  <input type="text" name="name" class="form-control" placeholder="Enter your full name" required autocomplete="name">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                  <input type="email" name="email" class="form-control" placeholder="Enter your email" required autocomplete="email">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Create a password" required>
+                  <input type="password" name="password" class="form-control" placeholder="Create a password (min. 4 characters)" minlength="4" required autocomplete="new-password">
+                  <div class="form-text text-muted small mt-1">Minimum 4 characters</div>
                 </div>
                 <button type="submit" class="btn btn-auth w-100">Create Account</button>
               </form>
@@ -406,6 +415,9 @@
     function openAuthModal(tabName) {
       const modalEl = document.getElementById('authModal');
       const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+      const alertBox = document.getElementById('modalClientAlert');
+      if (alertBox) alertBox.style.display = 'none';
+
       if (tabName === 'signup') {
         const signupTab = document.getElementById('signup-tab');
         if (signupTab) {
@@ -426,28 +438,77 @@
       // Auto open modal if failed login or signup
       const urlParams = new URLSearchParams(window.location.search);
       const msg = urlParams.get('message') || '';
-      if (msg.includes('Signup failed') || msg.includes('exists')) {
+      if (msg.includes('Signup failed') || msg.includes('exists') || msg.includes('signup')) {
         openAuthModal('signup');
-      } else if (msg.includes('Login failed') || msg.includes('Invalid credentials')) {
+      } else if (msg.includes('Login failed') || msg.includes('Invalid') || msg.includes('login')) {
         openAuthModal('login');
-      }
-
-      const loginForm = document.querySelector('#login form');
-      if (loginForm) {
-        loginForm.addEventListener('submit', function() {
-          const btn = loginForm.querySelector('button[type="submit"]');
-          if (btn) {
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Logging in...';
-          }
-        });
       }
 
       const signupForm = document.querySelector('#signup form');
       if (signupForm) {
-        signupForm.addEventListener('submit', function() {
+        signupForm.addEventListener('submit', function(e) {
+          const nameInput = signupForm.querySelector('input[name="name"]');
+          const emailInput = signupForm.querySelector('input[name="email"]');
+          const passwordInput = signupForm.querySelector('input[name="password"]');
+          const alertBox = document.getElementById('modalClientAlert');
+
+          const name = (nameInput ? nameInput.value : '').trim();
+          const email = (emailInput ? emailInput.value : '').trim();
+          const password = (passwordInput ? passwordInput.value : '').trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!name) {
+            e.preventDefault();
+            if (alertBox) { alertBox.innerText = 'Please enter your full name.'; alertBox.style.display = 'block'; }
+            return;
+          }
+          if (!email || !emailRegex.test(email)) {
+            e.preventDefault();
+            if (alertBox) { alertBox.innerText = 'Please enter a valid email address.'; alertBox.style.display = 'block'; }
+            return;
+          }
+          if (!password || password.length < 4) {
+            e.preventDefault();
+            if (alertBox) { alertBox.innerText = 'Password must be at least 4 characters long.'; alertBox.style.display = 'block'; }
+            return;
+          }
+
+          if (alertBox) alertBox.style.display = 'none';
           const btn = signupForm.querySelector('button[type="submit"]');
           if (btn) {
+            btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating Account...';
+          }
+        });
+      }
+
+      const loginForm = document.querySelector('#login form');
+      if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+          const emailInput = loginForm.querySelector('input[name="email"]');
+          const passwordInput = loginForm.querySelector('input[name="password"]');
+          const alertBox = document.getElementById('modalClientAlert');
+
+          const email = (emailInput ? emailInput.value : '').trim();
+          const password = (passwordInput ? passwordInput.value : '').trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!email || !emailRegex.test(email)) {
+            e.preventDefault();
+            if (alertBox) { alertBox.innerText = 'Please enter a valid email address.'; alertBox.style.display = 'block'; }
+            return;
+          }
+          if (!password || password.length < 4) {
+            e.preventDefault();
+            if (alertBox) { alertBox.innerText = 'Password must be at least 4 characters long.'; alertBox.style.display = 'block'; }
+            return;
+          }
+
+          if (alertBox) alertBox.style.display = 'none';
+          const btn = loginForm.querySelector('button[type="submit"]');
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Logging in...';
           }
         });
       }

@@ -1113,45 +1113,60 @@ export async function recognizeFoodImage(imageDataOrBase64) {
 
 export async function apiLogin(email, password) {
   try {
-    const res = await fetchWithTimeout(`${getApiBaseUrl()}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const res = await fetchWithTimeout(
+      `${getApiBaseUrl()}/auth/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: String(email).trim(), password: String(password) })
+      },
+      10000
+    );
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      return {
+        success: false,
+        message: data.message || `Login failed (HTTP ${res.status}).`
+      };
+    }
+    return data;
   } catch (err) {
     logApiError("apiLogin", err);
-    // Offline / Demo account login fallback
     return {
-      success: true,
-      user: {
-        objectId: "1",
-        name: email.split("@")[0] || "Chef",
-        email
-      }
+      success: false,
+      message: "Network error: Unable to connect to Tastio backend server."
     };
   }
 }
 
 export async function apiSignup(name, email, password) {
   try {
-    const res = await fetchWithTimeout(`${getApiBaseUrl()}/auth/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password })
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const res = await fetchWithTimeout(
+      `${getApiBaseUrl()}/auth/signup`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(name).trim(),
+          email: String(email).trim(),
+          password: String(password)
+        })
+      },
+      10000
+    );
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      return {
+        success: false,
+        message: data.message || `Signup failed (HTTP ${res.status}).`
+      };
+    }
+    return data;
   } catch (err) {
     logApiError("apiSignup", err);
     return {
-      success: true,
-      user: {
-        objectId: "1",
-        name,
-        email
-      }
+      success: false,
+      message: "Network error: Unable to connect to Tastio backend server."
     };
   }
 }

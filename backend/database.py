@@ -193,7 +193,7 @@ def register_user(name, email, password):
             return False, "An account with this email already exists."
 
         user_objectId = str(uuid.uuid4())
-        hashed_pwd = generate_password_hash(password)
+        hashed_pwd = generate_password_hash(pwd_res)
 
         cursor.execute(
             "INSERT INTO users (objectId, name, email, password) VALUES (?, ?, ?, ?)",
@@ -217,7 +217,8 @@ def register_user(name, email, password):
         return True, user_dict
     except Exception as e:
         conn.close()
-        return False, "Registration error. Please try again."
+        print(f"[SQLite DB Error] register_user failed: {e}")
+        return False, f"Registration error: {str(e)}"
 
 def login_user(email, password):
     """
@@ -232,6 +233,7 @@ def login_user(email, password):
         return False, "Invalid email or password."
 
     email_clean = email_res
+    clean_pwd = str(password).strip()
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -247,18 +249,19 @@ def login_user(email, password):
 
     # 1. Standard Werkzeug verify
     try:
-        if check_password_hash(stored_hash, password):
+        if check_password_hash(stored_hash, clean_pwd) or check_password_hash(stored_hash, password):
             is_authenticated = True
     except Exception:
         is_authenticated = False
 
     # 2. Legacy SHA-256 fallback with automatic hash upgrade
     if not is_authenticated:
-        legacy_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
-        if legacy_hash == stored_hash:
+        legacy_hash_clean = hashlib.sha256(clean_pwd.encode("utf-8")).hexdigest()
+        legacy_hash_raw = hashlib.sha256(password.encode("utf-8")).hexdigest()
+        if legacy_hash_clean == stored_hash or legacy_hash_raw == stored_hash:
             is_authenticated = True
             # Transparently upgrade database record to modern Werkzeug hash
-            new_hash = generate_password_hash(password)
+            new_hash = generate_password_hash(clean_pwd)
             cursor.execute("UPDATE users SET password = ? WHERE objectId = ?", (new_hash, row["objectId"]))
             conn.commit()
 

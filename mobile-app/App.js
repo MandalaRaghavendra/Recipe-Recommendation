@@ -131,21 +131,37 @@ export default function App() {
   };
 
   const handleAuthSubmit = async () => {
-    if (!authEmail.trim() || !authPassword.trim()) {
-      Alert.alert("Input Required", "Please enter your email and password.");
+    const cleanEmail = authEmail.trim();
+    const cleanPassword = authPassword.trim();
+    const cleanName = authName.trim();
+
+    if (!cleanEmail || !cleanPassword) {
+      Alert.alert("Input Required", "Please enter both your email and password.");
       return;
     }
-    if (authMode === "signup" && !authName.trim()) {
-      Alert.alert("Input Required", "Please enter your full name.");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      Alert.alert("Invalid Email", "Please enter a valid email address (e.g., name@example.com).");
+      return;
+    }
+
+    if (cleanPassword.length < 4) {
+      Alert.alert("Password Too Short", "Password must be at least 4 characters long.");
+      return;
+    }
+
+    if (authMode === "signup" && !cleanName) {
+      Alert.alert("Name Required", "Please enter your full name to register.");
       return;
     }
 
     setAuthLoading(true);
     let res;
     if (authMode === "signup") {
-      res = await apiSignup(authName.trim(), authEmail.trim(), authPassword.trim());
+      res = await apiSignup(cleanName, cleanEmail, cleanPassword);
     } else {
-      res = await apiLogin(authEmail.trim(), authPassword.trim());
+      res = await apiLogin(cleanEmail, cleanPassword);
     }
     setAuthLoading(false);
 
@@ -160,7 +176,10 @@ export default function App() {
           : `Welcome back, ${res.user.name || "Chef"}!`
       );
     } else {
-      Alert.alert("Authentication Notice", res?.message || "Invalid credentials.");
+      Alert.alert(
+        authMode === "signup" ? "Registration Failed" : "Login Failed",
+        res?.message || "Invalid credentials. Please verify your details."
+      );
     }
   };
 
@@ -445,6 +464,9 @@ export default function App() {
                   value={authPassword}
                   onChangeText={setAuthPassword}
                 />
+                <Text style={{ fontSize: 11, color: "#64748B", marginTop: 4, marginBottom: 8 }}>
+                  Minimum 4 characters
+                </Text>
 
                 <TouchableOpacity
                   style={styles.authSubmitBtn}
