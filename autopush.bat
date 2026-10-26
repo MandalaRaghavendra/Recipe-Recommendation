@@ -12,14 +12,14 @@ if "%COMMIT_MSG%"=="" (
     set "COMMIT_MSG=auto-sync: !mydate! !mytime!"
 )
 
-echo [1/3] Staging all project changes...
+echo [1/3] Staging project changes...
 git add -A
 
 echo [2/3] Committing changes...
 git commit -m "%COMMIT_MSG%"
 
-echo [3/3] Pushing to GitHub (origin main)...
-git push origin main
+echo [3/3] Syncing with GitHub (origin main)...
+git push -u origin main
 
 echo ========================================================
 echo Auto-push complete!
