@@ -1,5 +1,9 @@
 from collections import defaultdict
-import database as db
+
+try:
+    import database as db
+except ImportError:
+    from backend import database as db
 
 # ==============================================================================
 # USER PREFERENCE LEARNING ENGINE

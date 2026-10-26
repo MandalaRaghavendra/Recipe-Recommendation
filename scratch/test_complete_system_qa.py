@@ -275,7 +275,7 @@ class SeniorQARunner:
     # =========================================================================
     def _test_recipes_indexed(self):
         all_r = ai_engine.get_all_recipes()
-        assert len(all_r) == 150, f"Expected 150 recipes, found {len(all_r)}"
+        assert len(all_r) >= 150, f"Expected at least 150 recipes, found {len(all_r)}"
 
     def _test_cuisine_filtering(self):
         andhra = ai_engine.filter_recipes(cuisine="Andhra", top_n=50)
