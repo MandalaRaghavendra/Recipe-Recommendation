@@ -666,7 +666,7 @@
                                 <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="toggleFavorite('{{ recipe.recipe_id }}', this)">
                                     <i class="{% if recipe.recipe_id|string in (favorites or []) %}fas fa-heart text-danger{% else %}far fa-heart text-muted{% endif %} me-1"></i>Favorite
                                 </button>
-                                <button type="button" class="btn btn-outline-success btn-sm rounded-pill px-3" onclick="addRecipeToGrocery('{{ recipe.recipe_id }}', '{{ recipe.recipe_name|replace("\'", "\\\'") }}', this)">
+                                <button type="button" class="btn btn-outline-success btn-sm rounded-pill px-3" data-recipe-id="{{ recipe.recipe_id }}" data-recipe-name="{{ recipe.recipe_name|e }}" onclick="addRecipeToGrocery(this.dataset.recipeId, this.dataset.recipeName, this)">
                                     <i class="fas fa-cart-plus me-1"></i>Add to Grocery
                                 </button>
                                 <button type="button" class="btn btn-eaten btn-sm" onclick="markRecipeEaten('{{ recipe.recipe_id }}', 'recipeModal{{ loop.index }}', this)">
@@ -816,7 +816,7 @@
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <div class="d-flex gap-2">
-                                    <button type="button" class="btn btn-outline-success" onclick="addRecipeToGrocery('{{ recipe.recipe_id }}', '{{ recipe.recipe_name|replace("\'", "\\\'") }}', this)">
+                                    <button type="button" class="btn btn-outline-success" data-recipe-id="{{ recipe.recipe_id }}" data-recipe-name="{{ recipe.recipe_name|e }}" onclick="addRecipeToGrocery(this.dataset.recipeId, this.dataset.recipeName, this)">
                                         <i class="fas fa-cart-plus me-2"></i>Add to Grocery
                                     </button>
                                     <button type="button" class="btn btn-eaten" onclick="markRecipeEaten('{{ recipe.recipe_id }}', 'catalogModal_{{ recipe.recipe_id }}', this)">
