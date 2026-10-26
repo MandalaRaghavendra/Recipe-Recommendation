@@ -520,49 +520,7 @@
     </div>
 
 
-    <!-- Multi-facet Indian Cuisine & Category Filter Toolbar -->
-    <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-            <h6 class="fw-bold mb-0 text-dark">
-                <i class="fas fa-sliders text-warning me-2"></i>Explore by Cuisine & Diet
-            </h6>
-            <button class="btn btn-sm btn-link text-muted p-0 text-decoration-none" type="button" onclick="resetFilters()">
-                <i class="fas fa-rotate-left me-1"></i>Reset Filters
-            </button>
-        </div>
 
-        <!-- 1. Regional Cuisines Row -->
-        <div class="d-flex align-items-center flex-wrap gap-1 mb-2">
-            <small class="fw-bold text-muted me-2" style="font-size:0.75rem;"><i class="fas fa-map-marker-alt me-1 text-danger"></i>CUISINE:</small>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill active" data-filter-type="cuisine" data-filter-val="all" onclick="applyFacetFilter(this)">All</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Andhra" onclick="applyFacetFilter(this)">Andhra</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Telangana" onclick="applyFacetFilter(this)">Telangana</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="South Indian" onclick="applyFacetFilter(this)">South Indian</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="North Indian" onclick="applyFacetFilter(this)">North Indian</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Punjabi" onclick="applyFacetFilter(this)">Punjabi</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Gujarati" onclick="applyFacetFilter(this)">Gujarati</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Bengali" onclick="applyFacetFilter(this)">Bengali</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Maharashtrian" onclick="applyFacetFilter(this)">Maharashtrian</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Kerala" onclick="applyFacetFilter(this)">Kerala</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Karnataka" onclick="applyFacetFilter(this)">Karnataka</button>
-            <button class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 filter-pill" data-filter-type="cuisine" data-filter-val="Tamil Nadu" onclick="applyFacetFilter(this)">Tamil Nadu</button>
-        </div>
-
-        <!-- 2. Meal Type & Nutrition Row -->
-        <div class="d-flex align-items-center flex-wrap gap-1">
-            <small class="fw-bold text-muted me-2" style="font-size:0.75rem;"><i class="fas fa-utensils me-1 text-primary"></i>MEAL & NUTRITION:</small>
-            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Breakfast" onclick="applyFacetFilter(this)">Breakfast</button>
-            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Lunch" onclick="applyFacetFilter(this)">Lunch</button>
-            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Dinner" onclick="applyFacetFilter(this)">Dinner</button>
-            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Snack" onclick="applyFacetFilter(this)">Snack</button>
-            <button class="btn btn-sm btn-outline-primary rounded-pill py-0 px-2 filter-pill" data-filter-type="meal_type" data-filter-val="Dessert" onclick="applyFacetFilter(this)">Dessert</button>
-            <span class="text-muted mx-1">|</span>
-            <button class="btn btn-sm btn-outline-success rounded-pill py-0 px-2 filter-pill" data-filter-type="diet" data-filter-val="Vegetarian" onclick="applyFacetFilter(this)">Veg</button>
-            <button class="btn btn-sm btn-outline-danger rounded-pill py-0 px-2 filter-pill" data-filter-type="diet" data-filter-val="Non-Vegetarian" onclick="applyFacetFilter(this)">Non-Veg</button>
-            <button class="btn btn-sm btn-outline-warning rounded-pill py-0 px-2 filter-pill" data-filter-type="nutrition_tag" data-filter-val="High Protein" onclick="applyFacetFilter(this)">💪 High Protein</button>
-            <button class="btn btn-sm btn-outline-info rounded-pill py-0 px-2 filter-pill" data-filter-type="nutrition_tag" data-filter-val="Low Calorie" onclick="applyFacetFilter(this)">🔥 Low Cal</button>
-        </div>
-    </div>
 
     <h2 class="text-center mb-5 mt-4 section-header" id="recipeSectionTitle">
         {% if recipes and not message %}Popular Recipes Today{% elif recipes and 'Found' in message %}Your Search Results{% elif recipes %}Recommended Recipes{% else %}Start Your Culinary Journey!{% endif %}
