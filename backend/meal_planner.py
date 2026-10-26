@@ -196,10 +196,11 @@ class MealPlannerService:
             "reason": reasons[0] if reasons else "Aligned with your daily macro targets."
         }
 
-    def generate_7day_plan(self, user_id=None):
+    def generate_7day_plan(self, user_id=None, start_date=None):
         """
         Generates a 7-day meal plan (28 meals) with Breakfast, Lunch, Snack, Dinner.
         Calculates exact daily totals, targets, and difference from target.
+        start_date: Optional 'YYYY-MM-DD' string or date/datetime object. Defaults to date.today().
         """
         ctx = self._get_user_context(user_id)
         profile = ctx["profile"]
@@ -245,6 +246,17 @@ class MealPlannerService:
 
         days = []
         today_dt = date.today()
+        if start_date:
+            try:
+                if isinstance(start_date, datetime):
+                    today_dt = start_date.date()
+                elif isinstance(start_date, date):
+                    today_dt = start_date
+                elif isinstance(start_date, str) and start_date.strip():
+                    today_dt = datetime.strptime(start_date.strip()[:10], "%Y-%m-%d").date()
+            except Exception as e:
+                print(f"[MealPlanner] Invalid start_date '{start_date}': {e}, defaulting to today.")
+                today_dt = date.today()
 
         for day_idx in range(7):
             day_date = today_dt + timedelta(days=day_idx)

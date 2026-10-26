@@ -401,6 +401,12 @@
             transform: scale(1.1);
         }
 
+        .date-preset-btn.active {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: #ffffff !important;
+        }
+
         @media (max-width: 768px) {
             .meal-cards-grid { grid-template-columns: 1fr; }
             .plan-hero-card { padding: 18px; }
@@ -505,8 +511,8 @@
                     </div>
 
                     <div class="d-flex gap-2 justify-content-lg-end">
-                        <button class="btn btn-warning btn-sm rounded-pill px-3 text-white fw-bold" id="btnRegenerate" onclick="regeneratePlan()">
-                            <i class="fas fa-sync-alt me-1"></i> Regenerate 7-Day Plan
+                        <button class="btn btn-warning btn-sm rounded-pill px-3 text-white fw-bold shadow-sm" id="btnRegenerate" onclick="openScheduleModal()">
+                            <i class="fas fa-calendar-alt me-1"></i> Choose Date & Regenerate
                         </button>
                         <button class="btn btn-outline-light btn-sm rounded-pill px-3" onclick="window.print()">
                             <i class="fas fa-print me-1"></i> Print
@@ -596,6 +602,59 @@
             <i class="fas fa-user"></i>
             <span>Profile</span>
         </a>
+    </div>
+
+    <!-- Schedule & Regenerate Plan Modal -->
+    <div class="modal fade" id="scheduleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="modal-header border-0 bg-light p-3">
+                    <h5 class="modal-title fw-bold text-dark">
+                        <i class="fas fa-calendar-alt text-warning me-2"></i>Choose Meal Plan Start Date
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">
+                        Choose when you'd like Day 1 of your 7-day schedule to start. Tastio will optimize 28 personalized meals across 7 days:
+                    </p>
+
+                    <!-- Quick Preset Buttons -->
+                    <label class="form-label small fw-bold text-muted mb-1">Quick Presets:</label>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3 date-preset-btn active" id="presetTodayBtn" onclick="setDatePreset('today')">
+                            <i class="fas fa-calendar-day me-1"></i>Today
+                        </button>
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3 date-preset-btn" id="presetTomorrowBtn" onclick="setDatePreset('tomorrow')">
+                            <i class="fas fa-arrow-right me-1"></i>Tomorrow
+                        </button>
+                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3 date-preset-btn" id="presetNextMonBtn" onclick="setDatePreset('next_monday')">
+                            <i class="fas fa-calendar-week me-1"></i>Next Monday
+                        </button>
+                    </div>
+
+                    <!-- Custom Date Input -->
+                    <div class="mb-3">
+                        <label for="planStartDateInput" class="form-label small fw-bold text-muted">
+                            Start Date (Day 1):
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="fas fa-calendar text-primary"></i></span>
+                            <input type="date" class="form-control fw-bold" id="planStartDateInput" onchange="onCustomDateChange()">
+                        </div>
+                        <div class="form-text text-primary fw-semibold mt-2" id="selectedDateRangeText">
+                            Schedule: Day 1 to Day 7
+                        </div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="button" class="btn btn-warning rounded-pill py-2 text-white fw-bold shadow-sm" id="btnConfirmRegenerate" onclick="executeRegenerateWithDate()">
+                            <i class="fas fa-sync-alt me-1"></i> Generate 7-Day Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Meal Swap Alternatives Modal -->
@@ -796,21 +855,117 @@
             });
         }
 
-        async function regeneratePlan() {
+        function formatDateIso(d) {
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function getNextMonday() {
+            const d = new Date();
+            const day = d.getDay();
+            const diff = (day === 0 ? 1 : (8 - day));
+            const nextMon = new Date(d);
+            nextMon.setDate(d.getDate() + diff);
+            return formatDateIso(nextMon);
+        }
+
+        function updateDateRangePreview(isoStr) {
+            if (!isoStr) return;
+            const parts = isoStr.split('-');
+            const startD = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+            const endD = new Date(startD);
+            endD.setDate(startD.getDate() + 6);
+
+            const opt = { month: 'short', day: 'numeric', weekday: 'short' };
+            const startFmt = startD.toLocaleDateString(undefined, opt);
+            const endFmt = endD.toLocaleDateString(undefined, opt);
+            const previewEl = document.getElementById("selectedDateRangeText");
+            if (previewEl) {
+                previewEl.innerHTML = `<i class="fas fa-check-circle me-1 text-success"></i> 7-Day Schedule: <strong>${startFmt}</strong> → <strong>${endFmt}</strong>`;
+            }
+        }
+
+        function setDatePreset(preset) {
+            const dateInput = document.getElementById("planStartDateInput");
+            document.querySelectorAll(".date-preset-btn").forEach(b => b.classList.remove("active", "btn-primary", "text-white"));
+
+            let targetDate = "";
+            const now = new Date();
+            if (preset === 'today') {
+                targetDate = formatDateIso(now);
+                document.getElementById("presetTodayBtn")?.classList.add("active");
+            } else if (preset === 'tomorrow') {
+                const tomorrow = new Date(now);
+                tomorrow.setDate(now.getDate() + 1);
+                targetDate = formatDateIso(tomorrow);
+                document.getElementById("presetTomorrowBtn")?.classList.add("active");
+            } else if (preset === 'next_monday') {
+                targetDate = getNextMonday();
+                document.getElementById("presetNextMonBtn")?.classList.add("active");
+            }
+
+            if (dateInput) {
+                dateInput.value = targetDate;
+                updateDateRangePreview(targetDate);
+            }
+        }
+
+        function onCustomDateChange() {
+            document.querySelectorAll(".date-preset-btn").forEach(b => b.classList.remove("active"));
+            const dateInput = document.getElementById("planStartDateInput");
+            if (dateInput && dateInput.value) {
+                updateDateRangePreview(dateInput.value);
+            }
+        }
+
+        function openScheduleModal() {
+            const dateInput = document.getElementById("planStartDateInput");
+            if (dateInput && !dateInput.value) {
+                setDatePreset('today');
+            }
+            const modalEl = document.getElementById("scheduleModal");
+            if (modalEl) {
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+        }
+
+        async function executeRegenerateWithDate() {
+            const dateInput = document.getElementById("planStartDateInput");
+            const chosenDate = dateInput ? dateInput.value : formatDateIso(new Date());
+
+            const modalEl = document.getElementById("scheduleModal");
+            if (modalEl) {
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
+            }
+
+            await regeneratePlan(chosenDate);
+        }
+
+        async function regeneratePlan(startDate = null) {
             const btn = document.getElementById("btnRegenerate");
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Optimizing 7-Day Plan...';
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Optimizing 7-Day Plan...';
+            }
 
             try {
+                const payload = {};
+                if (startDate) payload.start_date = startDate;
+
                 const res = await fetch("/api/meal-plan/generate", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({})
+                    body: JSON.stringify(payload)
                 });
                 const data = await res.json();
                 if (data.success && data.meal_plan) {
                     currentMealPlan = data.meal_plan;
-                    showToast("✅ Fresh 7-Day Meal Plan generated successfully!");
+                    const firstDayDate = currentMealPlan.days && currentMealPlan.days[0] ? currentMealPlan.days[0].date : "";
+                    showToast(`✅ Fresh 7-Day Meal Plan generated starting ${firstDayDate}!`);
                     renderTabs();
                     selectDay(1);
                 } else {
@@ -819,8 +974,10 @@
             } catch (err) {
                 showToast("Network error generating meal plan.", false);
             } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-sync-alt me-1"></i> Regenerate 7-Day Plan';
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-calendar-alt me-1"></i> Choose Date & Regenerate';
+                }
             }
         }
 

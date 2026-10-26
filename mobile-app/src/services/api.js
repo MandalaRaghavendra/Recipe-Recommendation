@@ -790,12 +790,12 @@ export async function fetchCurrentMealPlan(userId = null) {
   }
 }
 
-export async function generateMealPlan(userId = null) {
+export async function generateMealPlan(userId = null, startDate = null) {
   try {
     const res = await fetchWithTimeout(`${getApiBaseUrl()}/meal-plan/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id: userId })
+      body: JSON.stringify({ user_id: userId, start_date: startDate })
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();

@@ -754,7 +754,8 @@ def api_generate_meal_plan():
     payload = request.get_json(silent=True) or {}
     user = session.get("user")
     user_id = payload.get("user_id") or (user.get("objectId") if isinstance(user, dict) else None) or session.get("user_id")
-    plan = meal_planner_service.generate_7day_plan(user_id=user_id)
+    start_date = payload.get("start_date")
+    plan = meal_planner_service.generate_7day_plan(user_id=user_id, start_date=start_date)
     return jsonify({"success": True, "meal_plan": plan})
 
 @app.route("/api/meal-plan/current", methods=["GET"])
