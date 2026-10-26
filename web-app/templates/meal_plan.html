@@ -804,7 +804,8 @@
             try {
                 const res = await fetch("/api/meal-plan/generate", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" }
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({})
                 });
                 const data = await res.json();
                 if (data.success && data.meal_plan) {

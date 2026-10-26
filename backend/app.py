@@ -751,8 +751,9 @@ def api_coach_context():
 @app.route("/api/meal-plan/generate", methods=["POST"])
 def api_generate_meal_plan():
     """Generates fresh 7-day personalized meal plan."""
-    payload = request.get_json() or {}
-    user_id = payload.get("user_id") or session.get("user_id")
+    payload = request.get_json(silent=True) or {}
+    user = session.get("user")
+    user_id = payload.get("user_id") or (user.get("objectId") if isinstance(user, dict) else None) or session.get("user_id")
     plan = meal_planner_service.generate_7day_plan(user_id=user_id)
     return jsonify({"success": True, "meal_plan": plan})
 

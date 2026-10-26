@@ -5,6 +5,14 @@ import math
 import random
 from datetime import datetime, date, timedelta
 
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
+AI_SERVICE_DIR = os.path.join(PROJECT_ROOT, "ai-service")
+if AI_SERVICE_DIR not in sys.path:
+    sys.path.insert(0, AI_SERVICE_DIR)
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
+
 try:
     import database as db
     import nutrition_engine as nutrition
