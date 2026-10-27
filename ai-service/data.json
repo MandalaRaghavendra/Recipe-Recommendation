@@ -287,48 +287,51 @@
   },
   {
     "recipe_id": 7,
-    "recipe_name": "Andhra Special Chicken Fry",
+    "recipe_name": "Andhra Spiced Egg Pulao",
+    "cuisine": "Andhra",
+    "meal_type": "Lunch",
+    "diet": "Non-Vegetarian",
+    "veg_nonveg": "Non-Veg",
+    "diet_goal": "High Protein",
+    "health_score": 85,
+    "image_link": "/static/images/recipes/recipe_7.jpg",
+    "nutritions": {
+      "calories": 390,
+      "protein_g": 20,
+      "carbs_g": 50,
+      "fat_g": 12
+    },
     "ingredients": [
-      "chicken",
+      "basmati rice",
+      "hard boiled eggs",
+      "onions (sliced)",
+      "tomatoes (chopped)",
       "ginger-garlic paste",
-      "red chili powder",
-      "turmeric",
-      "coriander powder",
-      "lemon juice",
+      "green chilies",
       "curry leaves",
-      "oil",
+      "pulao whole spices (bay leaf, cloves, cardamom)",
+      "turmeric powder",
+      "garam masala",
+      "ghee",
+      "fresh coriander",
       "salt"
     ],
-    "nutritions": {
-      "calories": 350,
-      "protein_g": 35,
-      "carbs_g": 8,
-      "fat_g": 18
-    },
-    "veg_nonveg": "Non-Veg",
-    "diet_goal": "High Protein / Appetizer",
-    "health_score": 75,
-    "image_link": "/static/images/recipes/recipe_7.jpg",
     "steps": [
-      "Step 1 (Prep & Wash): Thoroughly clean and prep the meat/seafood with turmeric and lemon juice. Marinate with ginger-garlic paste, red chili powder, spices, and salt for 20 to 30 minutes in a mixing bowl.",
-      "Step 2 (Heat & Fry): Heat oil/ghee in a heavy-bottomed pan or cast-iron skillet on medium flame. Add whole spices, curry leaves, and green chilies, letting them crackle vigorously.",
-      "Step 3 (Fry Onions & Spices): Add finely chopped onions and saute on medium flame with a pinch of salt until caramelized and deep golden brown.",
-      "Step 4 (Fry Onions & Spices): Add the marinated meat/seafood and fry on high flame for 4-5 minutes to lock in moisture and natural juices.",
-      "Step 5 (Fry Onions & Spices): Lower heat to medium, cover partially, and let meat cook in its own juices until tender. Uncover and fry continuously until moisture evaporates completely.",
-      "Step 6 (Step 6): Increase heat to medium-high, toss with freshly ground black pepper and roasted garam masala until crisp and dark brown.",
-      "Step 7 (Finish & Serve): Turn off flame, top with freshly chopped coriander leaves, and serve hot with steamed rice, dal, or as a flavorful appetizer."
+      "Step 1 (Marinate & Roast Eggs): Boil 4 eggs, peel, make shallow slits, and roll in a pinch of turmeric, chili powder, and salt. Shallow fry in 1 tbsp ghee for 2 minutes until golden blistered.",
+      "Step 2 (Whole Spices Tadka): In a pressure cooker or heavy pot, heat 1 tbsp ghee and 1 tbsp oil. Sizzle bay leaf, cardamom, cloves, and star anise until aromatic.",
+      "Step 3 (Saute Base): Add sliced onions, slit green chilies, and curry leaves; saute until onions turn translucent golden. Add ginger-garlic paste and chopped tomatoes, cooking until oil separates.",
+      "Step 4 (Simmer Rice & Eggs): Add washed and drained basmati rice, turmeric, garam masala, and 2 cups water (per 1 cup rice). Gently place the fried eggs in the pot. Season with salt.",
+      "Step 5 (Cook & Serve): Cover and pressure cook for 2 whistles on medium flame (or simmer on low heat covered for 15 minutes). Rest 5 minutes, fluff gently, and garnish with chopped fresh coriander."
     ],
-    "cuisine": "Andhra",
-    "meal_type": "Dinner",
-    "diet": "Non-Vegetarian",
     "nutrition_tags": [
-      "Low Calorie",
-      "High Protein"
+      "High Protein",
+      "Muscle Gain",
+      "Balanced"
     ],
     "prep_time_mins": 15,
-    "cook_time_mins": 30,
+    "cook_time_mins": 20,
     "difficulty": "Medium",
-    "servings": 2
+    "servings": 3
   },
   {
     "recipe_id": 8,
@@ -657,51 +660,52 @@
   },
   {
     "recipe_id": 15,
-    "recipe_name": "Andhra Special Dal Tadka",
-    "ingredients": [
-      "toor dal",
-      "onions",
-      "tomatoes",
-      "ginger-garlic paste",
-      "red chili powder",
-      "turmeric",
-      "mustard seeds",
-      "cumin seeds",
-      "curry leaves",
-      "ghee",
-      "salt"
-    ],
-    "nutritions": {
-      "calories": 250,
-      "protein_g": 15,
-      "carbs_g": 35,
-      "fat_g": 6
-    },
-    "veg_nonveg": "Veg",
-    "diet_goal": "High Protein / Vegetarian",
-    "health_score": 88,
-    "image_link": "/static/images/recipes/recipe_15.jpg",
-    "steps": [
-      "Step 1 (Prep & Wash): Rinse toor dal / moong dal thoroughly in cold water until water runs clear. Soak for 20 minutes for quick, even cooking.",
-      "Step 2 (Marinate / Mix): In a pressure cooker, add soaked lentils, chopped vegetables/greens, green chilies, tomatoes, turmeric, and 2.5 cups of water. cook in pressure cooker on medium flame for 3 to 4 cooker whistles until soft and mushy.",
-      "Step 3 (Step 3): Allow pressure to release naturally. Open lid, add crystal salt, and mash the dal gently using a wooden masher (pappu gutti) to a creamy thickness.",
-      "Step 4 (Add Tadka (Popu)): In a small pan, heat 1.5 tbsp ghee or oil on medium flame. Add mustard seeds, cumin seeds, crushed garlic cloves, dry red chilies, and a sprig of fresh curry leaves until fragrant.",
-      "Step 5 (Cook on Low Heat): Pour the sizzling tempering directly into the mashed dal. Cover immediately with a lid for 2 minutes to trap the aroma, then cook on low heat on low for 3 minutes.",
-      "Step 6 (Finish & Serve): Serve piping hot poured over steamed white rice with a dollop of pure homemade ghee and spicy Andhra pickle or vadiyalu."
-    ],
-    "cuisine": "Andhra",
+    "recipe_name": "Dal Fry (Homestyle Yellow Dal)",
+    "cuisine": "North Indian",
     "meal_type": "Lunch",
     "diet": "Vegetarian",
+    "veg_nonveg": "Veg",
+    "diet_goal": "High Protein / Weight Loss",
+    "health_score": 90,
+    "image_link": "/static/images/recipes/recipe_15.jpg",
+    "nutritions": {
+      "calories": 210,
+      "protein_g": 13,
+      "carbs_g": 31,
+      "fat_g": 4
+    },
+    "ingredients": [
+      "toor dal (pigeon peas)",
+      "masoor dal (red lentils)",
+      "onions (finely chopped)",
+      "tomatoes (diced)",
+      "ginger-garlic paste",
+      "green chilies",
+      "cumin seeds",
+      "mustard seeds",
+      "turmeric powder",
+      "kasuri methi",
+      "ghee",
+      "coriander leaves",
+      "salt"
+    ],
+    "steps": [
+      "Step 1 (Cook Dal): Wash toor dal and masoor dal thoroughly. Pressure cook with 3 cups water, turmeric, and 1/2 tsp salt for 4 whistles until soft and mushy. Whisk smooth.",
+      "Step 2 (Fry Base): Heat 2 tbsp ghee in a pan. Add cumin seeds and mustard seeds until they splutter. Saute onions and green chilies until golden brown.",
+      "Step 3 (Add Aromatics): Stir in ginger-garlic paste and diced tomatoes. Cook on medium heat until tomatoes turn soft and pulpy.",
+      "Step 4 (Simmer): Pour the cooked dal into the masala pan, adjusting water for desired consistency. Simmer for 5 minutes, adding crushed kasuri methi and salt.",
+      "Step 5 (Garnish): Finish with chopped fresh coriander leaves and a dollop of pure ghee on top. Serve hot with steamed basmati rice or rotis."
+    ],
     "nutrition_tags": [
-      "Weight Loss",
-      "Low Calorie",
+      "High Protein",
       "High Fiber",
-      "High Protein"
+      "Weight Loss",
+      "Low Calorie"
     ],
     "prep_time_mins": 10,
-    "cook_time_mins": 15,
+    "cook_time_mins": 20,
     "difficulty": "Easy",
-    "servings": 2
+    "servings": 4
   },
   {
     "recipe_id": 16,
@@ -891,94 +895,98 @@
   },
   {
     "recipe_id": 20,
-    "recipe_name": "Andhra Style Lemon Rice",
+    "recipe_name": "Classic Egg Fried Rice",
+    "cuisine": "Indo-Chinese",
+    "meal_type": "Dinner",
+    "diet": "Non-Vegetarian",
+    "veg_nonveg": "Non-Veg",
+    "diet_goal": "Quick Meal / High Protein",
+    "health_score": 84,
+    "image_link": "/static/images/recipes/recipe_20.jpg",
+    "nutritions": {
+      "calories": 360,
+      "protein_g": 18,
+      "carbs_g": 48,
+      "fat_g": 11
+    },
     "ingredients": [
-      "rice",
-      "lemon juice",
-      "peanuts",
-      "chana dal",
-      "urad dal",
-      "mustard seeds",
+      "cooked rice (chilled basmati or long grain)",
+      "eggs",
+      "spring onions (scallions)",
+      "carrots (finely diced)",
+      "green beans",
+      "garlic (finely minced)",
+      "soy sauce",
+      "black pepper powder",
       "green chilies",
-      "curry leaves",
-      "turmeric",
-      "oil",
+      "cooking oil",
       "salt"
     ],
-    "nutritions": {
-      "calories": 320,
-      "protein_g": 10,
-      "carbs_g": 55,
-      "fat_g": 8
-    },
-    "veg_nonveg": "Veg",
-    "diet_goal": "Quick Meal / Tangy",
-    "health_score": 82,
-    "image_link": "/static/images/recipes/recipe_20.jpg",
     "steps": [
-      "Step 1 (Prep & Wash): Wash, trim, and chop fresh vegetables and herbs into bite-sized uniform pieces.",
-      "Step 2 (Heat & Fry): Heat oil in a pan, temper with whole spices and saute onions and ginger-garlic until soft and pink.",
-      "Step 3 (Cook on Low Heat): Add ground spices and cook for 1-2 minutes until fragrant and oil separates from the masala.",
-      "Step 4 (Step 4): Add main vegetables/grains/legumes and mix thoroughly to coat in spices.",
-      "Step 5 (Cook on Low Heat): Cover with lid and cook on low heat on low-medium heat until tender and flavors meld together.",
-      "Step 6 (Finish & Serve): top with fresh herbs and lemon juice; serve hot with rice or flatbreads."
+      "Step 1 (Prep Ingredients): Use cold, pre-cooked day-old rice to ensure separate, fluffy grains. Finely mince garlic, slit green chilies, and chop carrots and spring onions.",
+      "Step 2 (Scramble Eggs): Beat 3 eggs in a bowl with a pinch of salt and crushed black pepper. Heat 1 tbsp oil in a smoking-hot wok or wide pan, pour in eggs, and scramble softly until 80% set. Remove and set aside.",
+      "Step 3 (Stir-Fry Aromatics): In the same hot wok, add 1 tbsp oil. Stir-fry minced garlic and green chilies on high heat for 30 seconds until fragrant. Add diced carrots and beans; toss for 2 minutes to retain crunch.",
+      "Step 4 (Toss Rice & Seasoning): Add the chilled cooked rice and scrambled eggs into the wok. Drizzle 1 tbsp soy sauce, freshly cracked black pepper, and salt across the sides. Toss continuously on high flame for 3 minutes.",
+      "Step 5 (Garnish & Serve): Fold in freshly chopped spring onion greens, toss for 30 seconds, and transfer to a serving bowl. Enjoy hot with chili vinegar or spicy schezwan sauce."
     ],
-    "cuisine": "Andhra",
-    "meal_type": "Dinner",
-    "diet": "Vegan",
     "nutrition_tags": [
-      "Weight Loss",
-      "Low Calorie"
+      "High Protein",
+      "Quick Meal",
+      "Balanced"
     ],
     "prep_time_mins": 10,
-    "cook_time_mins": 15,
+    "cook_time_mins": 12,
     "difficulty": "Easy",
     "servings": 2
   },
   {
     "recipe_id": 21,
-    "recipe_name": "Andhra Special Tamarind Rice",
+    "recipe_name": "Daddojanam (Temple Style Curd Rice)",
+    "cuisine": "South Indian",
+    "meal_type": "Lunch",
+    "diet": "Vegetarian",
+    "veg_nonveg": "Veg",
+    "diet_goal": "Cooling / Digestive",
+    "health_score": 88,
+    "image_link": "/static/images/recipes/recipe_21.jpg",
+    "nutritions": {
+      "calories": 260,
+      "protein_g": 8,
+      "carbs_g": 42,
+      "fat_g": 7
+    },
     "ingredients": [
-      "rice",
-      "tamarind",
-      "peanuts",
-      "chana dal",
-      "urad dal",
+      "sona masoori rice (softly cooked)",
+      "fresh curd (plain yogurt)",
+      "warm milk",
       "mustard seeds",
-      "red chilies",
+      "urad dal",
+      "chana dal",
+      "green chilies (slit)",
+      "ginger (finely grated)",
       "curry leaves",
-      "turmeric",
-      "oil",
+      "asafoetida (hing)",
+      "roasted cashews",
+      "pomegranate seeds",
+      "ghee",
       "salt"
     ],
-    "nutritions": {
-      "calories": 340,
-      "protein_g": 12,
-      "carbs_g": 58,
-      "fat_g": 8
-    },
-    "veg_nonveg": "Veg",
-    "diet_goal": "Traditional / Tangy",
-    "health_score": 78,
-    "image_link": "/static/images/recipes/recipe_21.jpg",
     "steps": [
-      "Step 1 (Prep & Wash): Wash, trim, and chop fresh vegetables and herbs into bite-sized uniform pieces.",
-      "Step 2 (Heat & Fry): Heat oil in a pan, temper with whole spices and saute onions and ginger-garlic until soft and pink.",
-      "Step 3 (Cook on Low Heat): Add ground spices and cook for 1-2 minutes until fragrant and oil separates from the masala.",
-      "Step 4 (Step 4): Add main vegetables/grains/legumes and mix thoroughly to coat in spices.",
-      "Step 5 (Cook on Low Heat): Cover with lid and cook on low heat on low-medium heat until tender and flavors meld together.",
-      "Step 6 (Finish & Serve): top with fresh herbs and lemon juice; serve hot with rice or flatbreads."
+      "Step 1 (Cook & Mash Rice): Cook rice slightly soft with a little extra water. Mash the warm rice gently with the back of a ladle. Let it cool to lukewarm.",
+      "Step 2 (Mix Curd & Milk): Add smooth beaten fresh curd, warm milk, and salt to the mashed rice. Mix thoroughly until creamy and luscious.",
+      "Step 3 (Temple Tempering): Heat 1 tbsp ghee in a small tadka pan. Add mustard seeds, urad dal, and chana dal until golden. Add slit green chilies, grated ginger, curry leaves, and a pinch of hing.",
+      "Step 4 (Combine): Pour the sizzling tempering directly into the creamy curd rice. Fold gently to distribute the crunchy dals and aromatics evenly.",
+      "Step 5 (Garnish & Serve): Garnish with golden roasted cashews and vibrant pomegranate pearls. Serve slightly chilled or at room temperature with lemon pickle."
     ],
-    "cuisine": "Andhra",
-    "meal_type": "Dinner",
-    "diet": "Vegan",
     "nutrition_tags": [
-      "Low Calorie"
+      "Digestive",
+      "Low Calorie",
+      "Balanced"
     ],
     "prep_time_mins": 10,
     "cook_time_mins": 15,
     "difficulty": "Easy",
-    "servings": 2
+    "servings": 3
   },
   {
     "recipe_id": 22,
@@ -1071,48 +1079,47 @@
   },
   {
     "recipe_id": 24,
-    "recipe_name": "Andhra Style Bisi Bele Bath",
-    "ingredients": [
-      "rice",
-      "toor dal",
-      "mixed vegetables",
-      "bisi bele bath powder",
-      "tamarind",
-      "jaggery",
-      "mustard seeds",
-      "curry leaves",
-      "ghee",
-      "oil",
-      "salt"
-    ],
-    "nutritions": {
-      "calories": 350,
-      "protein_g": 15,
-      "carbs_g": 55,
-      "fat_g": 10
-    },
-    "veg_nonveg": "Veg",
-    "diet_goal": "One-Pot Meal / Balanced",
-    "health_score": 82,
-    "image_link": "/static/images/recipes/recipe_24.jpg",
-    "steps": [
-      "Step 1 (Prep & Wash): Wash, trim, and chop fresh vegetables and herbs into bite-sized uniform pieces.",
-      "Step 2 (Heat & Fry): Heat oil in a pan, temper with whole spices and saute onions and ginger-garlic until soft and pink.",
-      "Step 3 (Cook on Low Heat): Add ground spices and cook for 1-2 minutes until fragrant and oil separates from the masala.",
-      "Step 4 (Step 4): Add main vegetables/grains/legumes and mix thoroughly to coat in spices.",
-      "Step 5 (Cook on Low Heat): Cover with lid and cook on low heat on low-medium heat until tender and flavors meld together.",
-      "Step 6 (Finish & Serve): top with fresh herbs and lemon juice; serve hot with rice or flatbreads."
-    ],
+    "recipe_name": "Pesarattu (Andhra Moong Dal Crepe)",
     "cuisine": "Andhra",
-    "meal_type": "Dinner",
+    "meal_type": "Breakfast",
     "diet": "Vegetarian",
-    "nutrition_tags": [
-      "Low Calorie"
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss",
+    "health_score": 92,
+    "image_link": "/static/images/recipes/recipe_24.jpg",
+    "nutritions": {
+      "calories": 210,
+      "protein_g": 12,
+      "carbs_g": 34,
+      "fat_g": 4
+    },
+    "ingredients": [
+      "whole green gram (moong)",
+      "raw rice",
+      "ginger",
+      "green chillies",
+      "cumin seeds",
+      "salt",
+      "finely chopped onions",
+      "oil or ghee"
     ],
-    "prep_time_mins": 10,
+    "steps": [
+      "Soak whole green gram and raw rice in water for 4 to 6 hours or overnight.",
+      "Grind the drained soaked gram with fresh ginger, green chillies, cumin seeds, and salt into a smooth, thick batter.",
+      "Heat a cast-iron tawa or griddle, pour a ladleful of batter, and spread quickly into a thin, crispy crepe.",
+      "Sprinkle finely chopped onions, drizzle ghee or oil around the edges, and roast until golden and crisp on both sides.",
+      "Serve hot with spicy ginger chutney (allam pachadi) or upma."
+    ],
+    "nutrition_tags": [
+      "High Protein",
+      "High Fiber",
+      "Low Calorie",
+      "Weight Loss"
+    ],
+    "prep_time_mins": 15,
     "cook_time_mins": 15,
     "difficulty": "Easy",
-    "servings": 2
+    "servings": 4
   },
   {
     "recipe_id": 25,
@@ -1787,51 +1794,55 @@
   },
   {
     "recipe_id": 40,
-    "recipe_name": "Chicken Biryani (Andhra Style)",
-    "ingredients": [
-      "basmati rice",
-      "chicken (bone-in)",
-      "curd/yogurt",
-      "ginger-garlic paste",
-      "biryani masala",
-      "chili powder",
-      "turmeric",
-      "onion",
-      "mint",
-      "cilantro",
-      "oil/ghee",
-      "saffron/food color",
-      "salt"
-    ],
-    "nutritions": {
-      "calories": 550,
-      "protein_g": 40,
-      "carbs_g": 55,
-      "fat_g": 20
-    },
-    "veg_nonveg": "Non-Veg",
-    "diet_goal": "Hearty Meal / Spicy",
-    "health_score": 65,
-    "image_link": "/static/images/recipes/recipe_40.jpg",
-    "steps": [
-      "Step 1 (Prep & Wash): Wash and clean the meat/seafood thoroughly. Marinate with yogurt, ginger-garlic paste, turmeric, and salt for 30 minutes.",
-      "Step 2 (Heat & Fry): Heat oil/ghee in a heavy pot or pressure cooker. Add whole spices, curry leaves, and sliced onions; saute until golden brown.",
-      "Step 3 (Fry Onions & Spices): Add ginger-garlic paste, pureed tomatoes, red chili powder, coriander powder, and garam masala; saute until oil glistens on the edges.",
-      "Step 4 (Fry Onions & Spices): Add the marinated meat and saute on medium-high heat for 6-8 minutes until seared.",
-      "Step 5 (Cook on Low Heat): Add measured water, cover with lid, and cook in pressure cooker (or slow cook on low heat) until meat is fork-tender and soft and juicy.",
-      "Step 6 (Cook on Low Heat): Open lid and cook on low heat for 3-5 minutes until gravy reaches desired thick, glossy thickness.",
-      "Step 7 (Finish & Serve): top with fresh chopped coriander and serve hot with steamed basmati rice, Ragi Sankati, or soft rotis."
-    ],
+    "recipe_name": "Hyderabadi Egg Dum Biryani",
     "cuisine": "Andhra",
     "meal_type": "Lunch",
     "diet": "Non-Vegetarian",
-    "nutrition_tags": [
-      "Muscle Gain",
-      "High Protein"
+    "veg_nonveg": "Non-Veg",
+    "diet_goal": "Muscle Gain / High Protein",
+    "health_score": 86,
+    "image_link": "/static/images/recipes/recipe_40.jpg",
+    "nutritions": {
+      "calories": 420,
+      "protein_g": 24,
+      "carbs_g": 52,
+      "fat_g": 14
+    },
+    "ingredients": [
+      "basmati rice",
+      "eggs (hard boiled)",
+      "onions (sliced)",
+      "yogurt / curd",
+      "biryani masala",
+      "ginger-garlic paste",
+      "mint leaves",
+      "coriander leaves",
+      "green chilies",
+      "ghee",
+      "saffron milk",
+      "turmeric",
+      "red chili powder",
+      "bay leaves",
+      "cloves",
+      "cardamom",
+      "cinnamon",
+      "salt"
     ],
-    "prep_time_mins": 25,
-    "cook_time_mins": 45,
-    "difficulty": "Hard",
+    "steps": [
+      "Step 1 (Boil Eggs): Boil 4-6 eggs for 10 minutes until hard boiled. Peel shells, make small vertical slits on each egg, and toss with turmeric, red chili powder, and salt. Pan-fry in 1 tbsp ghee for 3 minutes until lightly blistered and golden.",
+      "Step 2 (Cook Rice): Wash 2 cups aged Basmati rice gently and soak for 30 minutes. Boil 8 cups water with bay leaf, cloves, cardamom, cinnamon, and 1 tbsp salt. Add drained rice and cook for 5-6 minutes until 70% done. Strain and set aside.",
+      "Step 3 (Biryani Gravy): Heat 2 tbsp oil and 1 tbsp ghee in a heavy pot. Fry thinly sliced onions until deep golden brown. Stir in ginger-garlic paste, slit green chilies, beaten yogurt, biryani masala, mint, and coriander leaves. Simmer on low heat for 5 minutes.",
+      "Step 4 (Layer & Dum Cook): Add the fried eggs to the gravy. Layer the 70% cooked aromatic Basmati rice over the egg masala. Drizzle 2 tbsp saffron milk, melted ghee, and garnish with fried onions and mint.",
+      "Step 5 (Finish & Serve): Cover with a tight lid, seal edges, and dum-cook on low flame for 18-20 minutes. Rest 10 minutes, fluff gently, and serve hot with onion raita and mirchi ka salan."
+    ],
+    "nutrition_tags": [
+      "High Protein",
+      "Muscle Gain",
+      "Festive"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 30,
+    "difficulty": "Medium",
     "servings": 4
   },
   {
@@ -2737,94 +2748,96 @@
   },
   {
     "recipe_id": 61,
-    "recipe_name": "Classic Butter Chicken (Murgh Makhani)",
+    "recipe_name": "Murgh Kali Mirch (Black Pepper Chicken Curry)",
+    "cuisine": "North Indian",
+    "meal_type": "Dinner",
+    "diet": "Non-Vegetarian",
+    "veg_nonveg": "Non-Veg",
+    "diet_goal": "High Protein / Low Carb",
+    "health_score": 87,
+    "image_link": "/static/images/recipes/recipe_61.jpg",
+    "nutritions": {
+      "calories": 380,
+      "protein_g": 36,
+      "carbs_g": 8,
+      "fat_g": 22
+    },
     "ingredients": [
-      "chicken",
-      "butter",
-      "tomatoes",
-      "cashews",
-      "heavy cream",
+      "chicken (bone-in or boneless curry cut)",
+      "black peppercorns (freshly cracked)",
+      "plain yogurt (thick)",
+      "cashew paste",
+      "onion paste",
       "ginger-garlic paste",
-      "kasuri methi",
+      "green chilies",
       "garam masala",
-      "red chili powder",
+      "fresh cream",
+      "ghee",
+      "kasuri methi",
       "salt"
     ],
-    "nutritions": {
-      "calories": 480,
-      "protein_g": 36,
-      "carbs_g": 12,
-      "fat_g": 32
-    },
-    "veg_nonveg": "Non-Veg",
-    "diet_goal": "Festive / High Protein",
-    "health_score": 72,
-    "image_link": "/static/images/recipes/recipe_61.jpg",
     "steps": [
-      "Step 1 (Prep & Wash): Wash and clean the meat/seafood thoroughly. Marinate with yogurt, ginger-garlic paste, turmeric, and salt for 30 minutes.",
-      "Step 2 (Heat & Fry): Heat oil/ghee in a heavy pot or pressure cooker. Add whole spices, curry leaves, and sliced onions; saute until golden brown.",
-      "Step 3 (Fry Onions & Spices): Add ginger-garlic paste, pureed tomatoes, red chili powder, coriander powder, and garam masala; saute until oil glistens on the edges.",
-      "Step 4 (Fry Onions & Spices): Add the marinated meat and saute on medium-high heat for 6-8 minutes until seared.",
-      "Step 5 (Cook on Low Heat): Add measured water, cover with lid, and cook in pressure cooker (or slow cook on low heat) until meat is fork-tender and soft and juicy.",
-      "Step 6 (Cook on Low Heat): Open lid and cook on low heat for 3-5 minutes until gravy reaches desired thick, glossy thickness.",
-      "Step 7 (Finish & Serve): top with fresh chopped coriander and serve hot with steamed basmati rice, Ragi Sankati, or soft rotis."
+      "Step 1 (Marinate Chicken): Toss 500g chicken with 1/2 cup thick beaten yogurt, 1 tbsp crushed black pepper, 1 tbsp ginger-garlic paste, and 1 tsp salt. Marinate for 30 minutes.",
+      "Step 2 (Aromatics Base): Heat 2 tbsp ghee in a deep pan. Sizzle green cardamoms and cloves. Add boiled onion paste and cook on medium heat until water evaporates and paste turns lightly golden.",
+      "Step 3 (Cook Chicken): Add marinated chicken and slit green chilies. Sear on high heat for 6-8 minutes until chicken seals and turns opaque.",
+      "Step 4 (Simmer Creamy Gravy): Stir in cashew paste and 1/2 cup warm water. Cover with lid and cook on low flame for 15 minutes until chicken is tender and succulent.",
+      "Step 5 (Finish with Pepper): Stir in 2 tbsp fresh cream, 1 tsp freshly crushed black pepper, and crushed kasuri methi. Simmer for 2 minutes and serve warm with butter naan or steamed basmati rice."
     ],
-    "cuisine": "North Indian",
-    "meal_type": "Drink",
-    "diet": "Non-Vegetarian",
     "nutrition_tags": [
+      "High Protein",
       "Muscle Gain",
-      "High Protein"
+      "Low Carb"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 25,
+    "difficulty": "Medium",
+    "servings": 4
+  },
+  {
+    "recipe_id": 62,
+    "recipe_name": "Pindi Chole (Authentic Spiced Chickpea Curry)",
+    "cuisine": "Punjabi",
+    "meal_type": "Lunch",
+    "diet": "Vegetarian",
+    "veg_nonveg": "Veg",
+    "diet_goal": "High Protein / High Fiber",
+    "health_score": 91,
+    "image_link": "/static/images/recipes/recipe_62.jpg",
+    "nutritions": {
+      "calories": 310,
+      "protein_g": 16,
+      "carbs_g": 48,
+      "fat_g": 6
+    },
+    "ingredients": [
+      "kabuli chana (white chickpeas)",
+      "black tea bag (for dark color)",
+      "chole masala",
+      "anardana powder (dried pomegranate)",
+      "ginger juliennes",
+      "green chilies (slit)",
+      "amchur powder",
+      "kasuri methi",
+      "ghee",
+      "coriander",
+      "black salt"
+    ],
+    "steps": [
+      "Step 1 (Boil Chana with Tea Bag): Soak kabuli chana overnight (8 hours). Pressure cook with 1 black tea bag, bay leaf, cinnamon stick, salt, and water for 6-7 whistles until completely tender and naturally dark.",
+      "Step 2 (Spice Coating): Discard tea bag. Drain water (reserve 1 cup). Place hot boiled chana in a bowl and sprinkle chole masala, anardana powder, amchur powder, and red chili powder evenly over them.",
+      "Step 3 (Sizzling Tadka): Heat 2 tbsp ghee in a small pan until smoking hot. Add cumin seeds, ginger juliennes, and slit green chilies. Pour sizzling ghee directly over the spiced chana.",
+      "Step 4 (Simmer): Transfer back into a pot, add reserved cooking broth, and gently mash a small portion of chickpeas to thicken the rustic gravy. Simmer on low heat for 10 minutes until flavors infuse.",
+      "Step 5 (Serve): Garnish with freshly chopped cilantro, pickled ginger, and sliced onions. Pair with fluffy bhature or piping hot puris."
+    ],
+    "nutrition_tags": [
+      "High Protein",
+      "High Fiber",
+      "Weight Loss"
     ],
     "prep_time_mins": 15,
     "cook_time_mins": 30,
     "difficulty": "Medium",
-    "servings": 2
-  },
-  {
-    "recipe_id": 62,
-    "recipe_name": "Punjabi Rajma Masala (Red Kidney Beans)",
-    "ingredients": [
-      "red kidney beans (rajma)",
-      "onions",
-      "tomatoes",
-      "ginger-garlic paste",
-      "garam masala",
-      "cumin seeds",
-      "coriander powder",
-      "ghee",
-      "salt"
-    ],
-    "nutritions": {
-      "calories": 270,
-      "protein_g": 15,
-      "carbs_g": 44,
-      "fat_g": 4
-    },
-    "veg_nonveg": "Veg",
-    "diet_goal": "High Protein / Comfort Food",
-    "health_score": 89,
-    "image_link": "/static/images/recipes/recipe_62.jpg",
-    "steps": [
-      "Step 1 (Prep & Wash): Wash, trim, and chop fresh vegetables and herbs into bite-sized uniform pieces.",
-      "Step 2 (Heat & Fry): Heat oil in a pan, temper with whole spices and saute onions and ginger-garlic until soft and pink.",
-      "Step 3 (Cook on Low Heat): Add ground spices and cook for 1-2 minutes until fragrant and oil separates from the masala.",
-      "Step 4 (Step 4): Add main vegetables/grains/legumes and mix thoroughly to coat in spices.",
-      "Step 5 (Cook on Low Heat): Cover with lid and cook on low heat on low-medium heat until tender and flavors meld together.",
-      "Step 6 (Finish & Serve): top with fresh herbs and lemon juice; serve hot with rice or flatbreads."
-    ],
-    "cuisine": "North Indian",
-    "meal_type": "Dinner",
-    "diet": "Vegetarian",
-    "nutrition_tags": [
-      "Weight Loss",
-      "Low Calorie",
-      "High Protein"
-    ],
-    "prep_time_mins": 10,
-    "cook_time_mins": 15,
-    "difficulty": "Easy",
-    "servings": 2
+    "servings": 4
   },
   {
     "recipe_id": 63,
@@ -9081,5 +9094,1402 @@
       "Heat 1 tbsp ghee in a tadka pan. Add mustard seeds, 1 dry red chili, pinch of hing, and curry leaves. Let crackle.",
       "Pour hot tempering over the rasam and garnish generously with chopped fresh coriander stems and leaves. Cover pot immediately and serve hot with rice and papad."
     ]
+  },
+  {
+    "recipe_id": 199,
+    "recipe_name": "Makka Gatka (Savory Cracked Corn Porridge)",
+    "ingredients": [
+      "cracked corn (makka rava)",
+      "buttermilk",
+      "water",
+      "cumin seeds",
+      "mustard seeds",
+      "green chilies",
+      "curry leaves",
+      "ginger",
+      "salt",
+      "oil"
+    ],
+    "nutritions": {
+      "calories": 210,
+      "protein_g": 6,
+      "carbs_g": 42,
+      "fat_g": 3
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss / Diabetic Friendly",
+    "health_score": 92,
+    "image_link": "/static/images/recipes/recipe_199.jpg",
+    "steps": [
+      "Step 1 (Rinse & Soak): Wash 1 cup cracked corn (makka rava) thoroughly in cold water and soak for 20 minutes.",
+      "Step 2 (Cook Porridge): In a heavy saucepan, bring 4 cups of lightly salted water to a boil. Slowly whisk in the soaked corn rava to avoid lumps. Simmer on low heat for 15-18 minutes until completely tender and creamy.",
+      "Step 3 (Whisk Buttermilk): Allow the cooked porridge to cool to lukewarm, then whisk in 1.5 cups of fresh churned sour buttermilk until smooth.",
+      "Step 4 (Temper Spices): Heat 1 tsp oil in a small tadka pan. Add mustard seeds, cumin seeds, minced ginger, slit green chilies, and fresh curry leaves until aromatic.",
+      "Step 5 (Combine & Serve): Pour the sizzling tempering over the Makka Gatka. Mix gently and serve warm or cooled with raw onions or spicy mango pickle."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "High Fiber",
+      "Low Calorie",
+      "Weight Loss",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 20,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 200,
+    "recipe_name": "Bille Kudumulu (Steamed Spiced Rice Lentil Cakes)",
+    "ingredients": [
+      "rice flour",
+      "chana dal",
+      "cumin seeds",
+      "green chilies",
+      "ginger",
+      "fresh coriander",
+      "curry leaves",
+      "salt",
+      "sesame seeds"
+    ],
+    "nutritions": {
+      "calories": 190,
+      "protein_g": 7,
+      "carbs_g": 38,
+      "fat_g": 2
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss / Healthy Snack",
+    "health_score": 90,
+    "image_link": "/static/images/recipes/recipe_200.jpg",
+    "steps": [
+      "Step 1 (Soak Dal): Soak 3 tbsp chana dal in warm water for 45 minutes and drain.",
+      "Step 2 (Prepare Dough): In a bowl, mix 1.5 cups rice flour with soaked chana dal, finely chopped green chilies, grated ginger, cumin seeds, chopped coriander, curry leaves, sesame seeds, and salt.",
+      "Step 3 (Knead): Gradually add hot boiling water and knead into a soft, non-sticky dough with a spatula.",
+      "Step 4 (Shape Discs): Grease your palms with a drop of oil. Take lemon-sized portions of dough and flatten them between your palms into 1/2-inch thick coin-shaped discs (billelu).",
+      "Step 5 (Steam): Arrange the discs on a greased idli or steamer plate. Steam on medium-high flame for 12-14 minutes until firm and glossy. Serve warm with allam pachadi."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "High Fiber",
+      "Low Calorie",
+      "Steamed",
+      "Oil Free"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 201,
+    "recipe_name": "Jonna Ambali (Fermented Sorghum Summer Porridge with Buttermilk)",
+    "ingredients": [
+      "sorghum flour (jowar flour)",
+      "water",
+      "buttermilk",
+      "shallots",
+      "green chilies",
+      "cumin powder",
+      "salt",
+      "curry leaves"
+    ],
+    "nutritions": {
+      "calories": 170,
+      "protein_g": 5,
+      "carbs_g": 35,
+      "fat_g": 2
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Digestive Health / Cooling",
+    "health_score": 95,
+    "image_link": "/static/images/recipes/recipe_201.jpg",
+    "steps": [
+      "Step 1 (Make Slurry): Whisk 1/2 cup jowar flour into 1 cup water until completely smooth without any lumps.",
+      "Step 2 (Cook Porridge): In an earthen pot or saucepan, bring 3 cups water to a rolling boil. Slowly pour the jowar slurry while stirring continuously. Cook on low flame for 10-12 minutes until thick and glossy.",
+      "Step 3 (Ferment Overnight): Cover the pot with a breathable cloth and let it rest overnight at room temperature to allow gentle natural fermentation.",
+      "Step 4 (Add Buttermilk): The next morning, whisk in 1.5 cups thick churned buttermilk, roasted cumin powder, and salt.",
+      "Step 5 (Garnish & Serve): Top with finely chopped shallots, crushed green chilies, and torn curry leaves. Serve cold as a revitalizing summer breakfast."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Probiotic",
+      "Cooling",
+      "Gluten Free",
+      "Low Calorie"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 2
+  },
+  {
+    "recipe_id": 203,
+    "recipe_name": "Telangana Malidalu (Spiced Wheat Jaggery Sweet Ladoos)",
+    "ingredients": [
+      "leftover whole wheat rotis",
+      "grated organic jaggery",
+      "pure ghee",
+      "cardamom powder",
+      "fennel seeds",
+      "cashews"
+    ],
+    "nutritions": {
+      "calories": 260,
+      "protein_g": 5,
+      "carbs_g": 46,
+      "fat_g": 7
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Energy Snack / Post Workout",
+    "health_score": 82,
+    "image_link": "/static/images/recipes/recipe_203.jpg",
+    "steps": [
+      "Step 1 (Shred Rotis): Tear 4 freshly made or leftover dry chapathis/rotis into rough pieces. Pulse in a blender into coarse, even crumbs.",
+      "Step 2 (Toast Nuts): Heat 2 tbsp ghee in a pan and lightly fry broken cashews and fennel seeds until fragrant and golden.",
+      "Step 3 (Mix Jaggery): Add the roti crumbs to the warm pan along with 1/2 cup finely grated jaggery and freshly ground cardamom powder.",
+      "Step 4 (Melt & Bind): Stir on very low heat for 2 minutes until the jaggery slightly softens and coats the crumbs.",
+      "Step 5 (Shape Ladoos): While still comfortably warm, roll tablespoons of the mixture between greased palms into tight, glossy sweet balls. Store in an airtight jar."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Traditional Sweet",
+      "High Energy",
+      "Zero Refined Sugar"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 10,
+    "difficulty": "Easy",
+    "servings": 4
+  },
+  {
+    "recipe_id": 204,
+    "recipe_name": "Makka Vada (Spicy Fresh Corn Patties with Mint and Green Chilies)",
+    "ingredients": [
+      "fresh sweet or field corn kernels",
+      "rice flour",
+      "green chilies",
+      "ginger",
+      "garlic",
+      "mint leaves",
+      "coriander",
+      "cumin seeds",
+      "oil for shallow frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 230,
+      "protein_g": 5,
+      "carbs_g": 36,
+      "fat_g": 8
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Monsoon Snack / High Fiber",
+    "health_score": 85,
+    "image_link": "/static/images/recipes/recipe_204.jpg",
+    "steps": [
+      "Step 1 (Coarse Grind): In a mixer jar, coarsely grind 2 cups fresh corn kernels with green chilies, ginger, garlic, and cumin seeds without adding any water.",
+      "Step 2 (Flavor Herbs): Transfer to a bowl. Add finely chopped mint, coriander leaves, salt, and 2-3 tbsp rice flour to bind.",
+      "Step 3 (Shape Patties): Take golf ball-sized portions and gently flatten them into 1/2-inch thick discs between your palms.",
+      "Step 4 (Fry until Golden): Heat oil in a kadai on medium flame. Slide the vadas in batches and fry for 4-5 minutes until golden brown and super crunchy on the outside.",
+      "Step 5 (Serve): Drain on absorbent paper and serve piping hot with spicy mint-coriander chutney or tomato sauce."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "High Fiber",
+      "Evening Snack",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 205,
+    "recipe_name": "Railu Palaharam (Steamed Spiced Rice Pellets with Mustard & Chana Dal Tempering)",
+    "ingredients": [
+      "rice flour",
+      "water",
+      "chana dal",
+      "mustard seeds",
+      "cumin seeds",
+      "dry red chilies",
+      "curry leaves",
+      "hing (asafoetida)",
+      "oil",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 200,
+      "protein_g": 5,
+      "carbs_g": 40,
+      "fat_g": 3
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss / Oil Free Breakfast",
+    "health_score": 91,
+    "image_link": "/static/images/recipes/recipe_205.jpg",
+    "steps": [
+      "Step 1 (Cook Dough): Bring 1.5 cups water to a boil with 1 tsp oil and salt. Stir in 1 cup rice flour quickly until it forms a lump. Turn off heat and cover for 5 minutes.",
+      "Step 2 (Roll Pellets): Knead the warm dough smooth. Pinch tiny peanut-sized pieces and roll them between your fingers into small oval pellets or beads.",
+      "Step 3 (Steam): Place the pellets on a greased steamer plate and steam for 8-10 minutes until firm and glossy.",
+      "Step 4 (Tadka): Heat 1 tbsp oil in a pan. Sizzle mustard seeds, cumin, chana dal, urad dal, broken dry red chilies, curry leaves, and a generous pinch of hing until crunchy.",
+      "Step 5 (Toss): Add the steamed rice pellets into the sizzling tadka and toss well on high flame for 2 minutes to coat. Serve warm."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Steamed",
+      "Low Calorie",
+      "Weight Loss",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 15,
+    "difficulty": "Medium",
+    "servings": 3
+  },
+  {
+    "recipe_id": 206,
+    "recipe_name": "Pulla Kudumulu (Fermented Sour Buttermilk Steamed Rice Cakes)",
+    "ingredients": [
+      "coarse rice rava",
+      "sour curd / buttermilk",
+      "green chilies",
+      "ginger",
+      "mustard seeds",
+      "cumin seeds",
+      "chana dal",
+      "curry leaves",
+      "oil",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 190,
+      "protein_g": 6,
+      "carbs_g": 37,
+      "fat_g": 3
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Probiotic / Gut Health",
+    "health_score": 93,
+    "image_link": "/static/images/recipes/recipe_206.jpg",
+    "steps": [
+      "Step 1 (Soak in Buttermilk): Soak 1 cup coarse rice rava in 2 cups sour buttermilk with salt for 1 hour.",
+      "Step 2 (Prepare Tempering): Heat 1 tsp oil in a pan. Splutter mustard seeds, cumin seeds, chana dal, minced ginger, slit green chilies, and curry leaves.",
+      "Step 3 (Cook Thick Mass): Pour the soaked buttermilk rava mixture into the pan. Stir continuously over medium heat for 6-8 minutes until it comes together into a thick dough ball.",
+      "Step 4 (Shape Kudumulu): When warm enough to handle, shape the mixture into smooth oval dumplings with a gentle thumb impression in the center.",
+      "Step 5 (Steam): Steam in an idli pot for 10-12 minutes. Serve hot with spicy peanut chutney or ginger pachadi."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Gut Health",
+      "Low Calorie",
+      "Probiotic",
+      "Steamed"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 20,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 207,
+    "recipe_name": "Chegodi (Crispy Moong Dal & Cumin Spiced Rings)",
+    "ingredients": [
+      "rice flour",
+      "yellow moong dal",
+      "cumin seeds",
+      "ajwain (carom seeds)",
+      "turmeric powder",
+      "red chili powder",
+      "sesame seeds",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 5,
+      "carbs_g": 36,
+      "fat_g": 12
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Snack / Tea Time",
+    "health_score": 78,
+    "image_link": "/static/images/recipes/recipe_207.jpg",
+    "steps": [
+      "Step 1 (Soak Moong Dal): Soak 3 tbsp yellow moong dal in water for 30 minutes, then drain completely.",
+      "Step 2 (Boil Water with Spices): In a pot, bring 1 cup water to a boil with 1 tsp oil, salt, turmeric, red chili powder, cumin, ajwain, sesame seeds, and soaked moong dal.",
+      "Step 3 (Add Rice Flour): Pour in 1 cup fine rice flour while stirring vigorously to prevent lumps. Cover and rest off the flame for 10 minutes.",
+      "Step 4 (Roll Rings): Knead into a smooth crack-free dough. Roll small portions into thin pencil-like ropes, cut into 2-inch segments, and join the ends to form rings.",
+      "Step 5 (Fry Crisp): Deep fry the rings in hot oil on medium flame until light golden and bubbling ceases completely. Drain and let cool to achieve iconic snap."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Festive Crunchy",
+      "Traditional Snack",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 25,
+    "cook_time_mins": 20,
+    "difficulty": "Medium",
+    "servings": 4
+  },
+  {
+    "recipe_id": 208,
+    "recipe_name": "Pappu Chekkalu (Crunchy Chana Dal Rice Crackers with Sesame)",
+    "ingredients": [
+      "rice flour",
+      "chana dal",
+      "white sesame seeds",
+      "butter or hot oil",
+      "ginger green chili paste",
+      "curry leaves",
+      "cumin seeds",
+      "oil for frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 260,
+      "protein_g": 5,
+      "carbs_g": 38,
+      "fat_g": 10
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Tea Time Crunchy Snack",
+    "health_score": 80,
+    "image_link": "/static/images/recipes/recipe_208.jpg",
+    "steps": [
+      "Step 1 (Soak Dal): Soak 1/4 cup chana dal in warm water for 1 hour. Drain well.",
+      "Step 2 (Make Dough): Combine 2 cups rice flour with soaked chana dal, sesame seeds, cumin, finely minced curry leaves, ginger-green chili paste, salt, and 2 tbsp hot oil or softened butter.",
+      "Step 3 (Knead): Gradually add water and knead to form a stiff, non-sticky dough.",
+      "Step 4 (Press Chekkalu): Make small marble-sized balls. Press each ball between greased plastic sheets or using a puri press into thin 2-inch discs. Prick with a fork.",
+      "Step 5 (Fry to Golden Crunch): Deep fry on medium heat until golden, crisp, and bubbling stops. Cool and store in an airtight container for weeks."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Crispy Crackers",
+      "Traditional Snack",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 20,
+    "difficulty": "Medium",
+    "servings": 5
+  },
+  {
+    "recipe_id": 209,
+    "recipe_name": "Saggubiyyam Punugulu (Crispy Sago / Tapioca Pearl Sour Curd Fritters)",
+    "ingredients": [
+      "saggubiyyam (sago / tapioca pearls)",
+      "sour curd",
+      "rice flour",
+      "maida or besan",
+      "green chilies",
+      "ginger",
+      "cumin seeds",
+      "onions",
+      "curry leaves",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 280,
+      "protein_g": 4,
+      "carbs_g": 42,
+      "fat_g": 11
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Monsoon Snack / Street Style",
+    "health_score": 79,
+    "image_link": "/static/images/recipes/recipe_209.jpg",
+    "steps": [
+      "Step 1 (Soak Sago): Soak 1 cup saggubiyyam in 1 cup sour curd for 3 to 4 hours until the pearls are soft and swell completely.",
+      "Step 2 (Form Batter): Mix in 1/2 cup rice flour, 2 tbsp besan, finely chopped onions, minced green chilies, grated ginger, cumin seeds, curry leaves, and salt into a thick drop-consistency batter.",
+      "Step 3 (Heat Oil): Heat deep oil in a kadai on medium heat.",
+      "Step 4 (Drop & Fry): Drop lemon-sized balls of batter into the hot oil. Fry for 4-5 minutes until the exterior turns golden and blistered-crisp while the center remains pillowy.",
+      "Step 5 (Serve): Serve hot with spicy coconut chutney or ginger dip."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Street Food",
+      "Crispy Fritters",
+      "Comfort Food"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 210,
+    "recipe_name": "Ravva Punugulu (Golden Semolina Fritters with Ginger and Green Chilies)",
+    "ingredients": [
+      "sooji / semolina (bombay rava)",
+      "sour curd",
+      "rice flour",
+      "finely chopped onions",
+      "green chilies",
+      "fresh ginger",
+      "cumin seeds",
+      "curry leaves",
+      "baking soda",
+      "oil",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 250,
+      "protein_g": 6,
+      "carbs_g": 38,
+      "fat_g": 9
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Quick Snack / Tea Time",
+    "health_score": 82,
+    "image_link": "/static/images/recipes/recipe_210.jpg",
+    "steps": [
+      "Step 1 (Mix Rava & Curd): In a bowl, whisk 1 cup sooji with 3/4 cup sour curd, 2 tbsp rice flour, and salt. Rest for 15 minutes for the rava to absorb moisture.",
+      "Step 2 (Add Aromatics): Stir in chopped onions, crushed green chilies, grated ginger, cumin seeds, curry leaves, and a pinch of baking soda.",
+      "Step 3 (Adjust Consistency): Add 2 tbsp water if needed to reach a thick drop-batter texture.",
+      "Step 4 (Deep Fry): Drop small teaspoon-sized balls into medium-hot oil. Fry for 3-4 minutes until evenly golden brown and crisp.",
+      "Step 5 (Serve): Serve warm with palli (peanut) chutney or allam pachadi."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Quick Snack",
+      "Crispy",
+      "Easy Cooking"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 211,
+    "recipe_name": "Jonna Kudumulu (Steamed Jowar Millet Dumplings with Chana Dal)",
+    "ingredients": [
+      "jowar flour (sorghum)",
+      "chana dal",
+      "green chilies",
+      "cumin seeds",
+      "coriander leaves",
+      "salt",
+      "warm water"
+    ],
+    "nutritions": {
+      "calories": 180,
+      "protein_g": 7,
+      "carbs_g": 35,
+      "fat_g": 2
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss / Diabetic Friendly",
+    "health_score": 94,
+    "image_link": "/static/images/recipes/recipe_211.jpg",
+    "steps": [
+      "Step 1 (Soak Dal): Soak 3 tbsp chana dal in water for 40 minutes.",
+      "Step 2 (Prepare Dough): In a bowl, mix 1.5 cups jowar flour with soaked chana dal, cumin seeds, minced green chilies, coriander leaves, and salt.",
+      "Step 3 (Knead): Gradually add warm water and knead into a soft, smooth dough.",
+      "Step 4 (Shape Oval Dumplings): Roll into small oval shaped dumplings (kudumulu) and press gently with fingers.",
+      "Step 5 (Steam Cook): Place on a greased steamer plate and steam for 12 minutes. Serve warm with spicy onion-tomato chutney or roasted flaxseed podi."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "High Fiber",
+      "Diabetic Friendly",
+      "Low Calorie",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 212,
+    "recipe_name": "Sajja Rotti (Rustic Bajra / Pearl Millet Flatbread with Ghee)",
+    "ingredients": [
+      "bajra flour (pearl millet / sajja pindi)",
+      "warm water",
+      "salt",
+      "sesame seeds",
+      "pure ghee"
+    ],
+    "nutritions": {
+      "calories": 230,
+      "protein_g": 6,
+      "carbs_g": 42,
+      "fat_g": 5
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Winter Warmth / Iron Rich",
+    "health_score": 93,
+    "image_link": "/static/images/recipes/recipe_212.jpg",
+    "steps": [
+      "Step 1 (Combine Flour): Mix 1.5 cups bajra flour with a pinch of salt in a wide basin.",
+      "Step 2 (Knead Dough): Add hot water gradually and knead vigorously with the heel of your hand for 4-5 minutes until smooth and supple.",
+      "Step 3 (Hand Pat): Sprinkle white sesame seeds on a board, place the dough ball, and pat gently with your hands into a thin round flatbread.",
+      "Step 4 (Roast): Transfer to a sizzling iron tawa. Wipe the top with a wet cloth to hydrate the surface. Flip and roast both sides until puffed with toasted brown specks.",
+      "Step 5 (Smear Ghee): Brush with 1/2 tsp pure ghee and serve hot with spicy brinjal curry (gutti vankaya) or garlic chutney."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Dinner",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "High Iron",
+      "Gluten Free",
+      "Winter Warmth",
+      "High Fiber"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 10,
+    "difficulty": "Medium",
+    "servings": 2
+  },
+  {
+    "recipe_id": 213,
+    "recipe_name": "Senagapappu Garelu (Crispy Bengal Gram & Onion Masala Vada)",
+    "ingredients": [
+      "chana dal (bengal gram)",
+      "onions",
+      "green chilies",
+      "ginger",
+      "curry leaves",
+      "fennel seeds",
+      "coriander leaves",
+      "oil for frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 250,
+      "protein_g": 9,
+      "carbs_g": 32,
+      "fat_g": 10
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "High Protein / Traditional Snack",
+    "health_score": 84,
+    "image_link": "/static/images/recipes/recipe_213.jpg",
+    "steps": [
+      "Step 1 (Soak Chana Dal): Soak 1.5 cups chana dal in water for 2 hours. Set aside 2 tbsp whole dal and drain the rest completely.",
+      "Step 2 (Coarse Grind): Grind the drained dal with ginger, green chilies, and fennel seeds into a coarse, thick paste without adding water.",
+      "Step 3 (Mix Aromatics): Combine the ground dal with reserved whole dal, chopped onions, curry leaves, coriander, and salt.",
+      "Step 4 (Shape & Flatten): Shape lemon-sized balls and flatten them into thick patties between your palms.",
+      "Step 5 (Deep Fry): Fry in hot oil on medium flame for 5-6 minutes until deep golden and crunchy. Serve hot with masala chai."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "High Protein",
+      "Traditional Crunchy",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 4
+  },
+  {
+    "recipe_id": 215,
+    "recipe_name": "Bellam Kudumulu (Sweet Steamed Rice Flakes & Jaggery Cakes)",
+    "ingredients": [
+      "rice flour",
+      "thick poha (atukulu)",
+      "grated jaggery",
+      "fresh grated coconut",
+      "cardamom powder",
+      "ghee",
+      "water"
+    ],
+    "nutritions": {
+      "calories": 210,
+      "protein_g": 4,
+      "carbs_g": 44,
+      "fat_g": 3
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Offering / Healthy Breakfast",
+    "health_score": 88,
+    "image_link": "/static/images/recipes/recipe_215.jpg",
+    "steps": [
+      "Step 1 (Melt Jaggery): Dissolve 3/4 cup jaggery in 1 cup warm water and strain to remove impurities.",
+      "Step 2 (Combine Base): Bring the jaggery syrup to a gentle boil with 1 tsp ghee, cardamom powder, and 2 tbsp grated coconut.",
+      "Step 3 (Add Flours): Stir in 1/2 cup washed thick poha and 1 cup rice flour. Cook on low heat until it comes together into a soft mass.",
+      "Step 4 (Shape Kudumulu): Roll into small oval cylindrical shapes with finger impressions.",
+      "Step 5 (Steam): Steam for 10 minutes in an idli cooker. Serve warm as a wholesome festive morning meal."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Steamed",
+      "Iron Rich",
+      "Traditional"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 216,
+    "recipe_name": "Aratikaya Bajji (Golden Raw Plantain / Banana Fritters with Carom)",
+    "ingredients": [
+      "raw green plantains (aratikaya)",
+      "besan (gram flour)",
+      "rice flour",
+      "ajwain (vamu)",
+      "red chili powder",
+      "turmeric",
+      "baking soda",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 240,
+      "protein_g": 5,
+      "carbs_g": 34,
+      "fat_g": 10
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Tea Time Crispy Snack",
+    "health_score": 81,
+    "image_link": "/static/images/recipes/recipe_216.jpg",
+    "steps": [
+      "Step 1 (Slice Plantains): Peel the fibrous outer green skin of raw plantains lightly and slice them diagonally into thin 3-inch strips. Immerse in salted water to avoid darkening.",
+      "Step 2 (Prepare Batter): Whisk 1 cup besan with 2 tbsp rice flour, crushed ajwain, red chili powder, turmeric, salt, and a pinch of baking soda into a thick lump-free batter.",
+      "Step 3 (Coat): Pat the banana slices dry and dip each slice in the batter to coat evenly on all sides.",
+      "Step 4 (Deep Fry): Gently slide into hot oil and fry on medium flame for 3-4 minutes until puffed, golden, and crispy.",
+      "Step 5 (Serve): Dust with chaat masala or serve alongside hot chai and coconut chutney."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Street Food",
+      "Monsoon Snack",
+      "Crispy Fritters"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 217,
+    "recipe_name": "Cut Mirchi Bajji (Double-Fried Crispy Stuffed Green Chili Fritters with Onions and Lemon)",
+    "ingredients": [
+      "large bhavnagri green chilies",
+      "besan (gram flour)",
+      "rice flour",
+      "ajwain",
+      "tamarind paste",
+      "cumin powder",
+      "finely chopped onions",
+      "lemon juice",
+      "oil for frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 6,
+      "carbs_g": 32,
+      "fat_g": 13
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Famous Andhra Street Food",
+    "health_score": 76,
+    "image_link": "/static/images/recipes/recipe_217.jpg",
+    "steps": [
+      "Step 1 (Slit & Stuff): Slit the green chilies lengthwise, deseed lightly, and stuff the interior with a paste of roasted cumin, ajwain, salt, and tamarind.",
+      "Step 2 (First Fry): Dip stuffed chilies in a thick besan-rice flour batter and deep fry in hot oil until 80% cooked and light golden. Remove and drain.",
+      "Step 3 (Cut Pieces): Cut each fried chili into 1-inch bite-sized pieces with a knife.",
+      "Step 4 (Second Fry for Crunch): Drop the cut pieces back into hot oil and flash fry on high flame for 1-2 minutes until ultra crispy and crunchy.",
+      "Step 5 (Garnish & Serve): Toss with finely chopped raw onions, chaat masala, fresh coriander, and a squeeze of fresh lemon juice."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Iconic Street Food",
+      "Extra Crispy",
+      "Spicy Delight"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 15,
+    "difficulty": "Medium",
+    "servings": 3
+  },
+  {
+    "recipe_id": 218,
+    "recipe_name": "Vamu Karapusa (Crisp Ajwain & Gram Flour Murukku / Ompodi)",
+    "ingredients": [
+      "besan (gram flour)",
+      "rice flour",
+      "ajwain (carom seeds)",
+      "hot ghee or oil",
+      "turmeric powder",
+      "salt",
+      "oil for deep frying"
+    ],
+    "nutritions": {
+      "calories": 280,
+      "protein_g": 6,
+      "carbs_g": 32,
+      "fat_g": 14
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Digestive Crunchy Savory",
+    "health_score": 79,
+    "image_link": "/static/images/recipes/recipe_218.jpg",
+    "steps": [
+      "Step 1 (Make Ajwain Water): Grind 2 tbsp ajwain with 1/2 cup warm water and strain the aromatic extract through a fine sieve.",
+      "Step 2 (Knead Dough): Mix 2 cups besan with 1/2 cup rice flour, salt, turmeric, and 2 tbsp sizzling hot oil. Gradually knead with the ajwain water into a soft, non-sticky dough.",
+      "Step 3 (Press into Oil): Fit a murukku press with the fine-holed sev/karapusa disc. Fill with dough.",
+      "Step 4 (Deep Fry): Press directly into hot oil in circular motions. Fry on medium flame for 2 minutes on each side until crisp and light golden without browning.",
+      "Step 5 (Drain & Cool): Drain on paper towels, break gently into crunchy strands, and store in an airtight container."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Digestive",
+      "Traditional Savory",
+      "Crispy"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Medium",
+    "servings": 5
+  },
+  {
+    "recipe_id": 219,
+    "recipe_name": "Ribbon Murukku (Flat Ribbon Pakoda with Sesame and Roasted Gram)",
+    "ingredients": [
+      "rice flour",
+      "roasted gram flour (putnala pindi)",
+      "butter",
+      "white sesame seeds",
+      "cumin seeds",
+      "red chili powder",
+      "hing",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 5,
+      "carbs_g": 35,
+      "fat_g": 13
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Savory / Tea Time",
+    "health_score": 80,
+    "image_link": "/static/images/recipes/recipe_219.jpg",
+    "steps": [
+      "Step 1 (Blend Flour): Combine 2 cups rice flour with 1/2 cup finely ground roasted gram flour (putnala pindi).",
+      "Step 2 (Season): Add white sesame seeds, cumin seeds, red chili powder, hing, salt, and 2 tbsp softened butter. Crumble well.",
+      "Step 3 (Knead): Add water gradually and form a soft, pliable dough.",
+      "Step 4 (Press Ribbons): Fit the murukku press with the slotted flat ribbon disc. Press directly over hot oil in continuous strips.",
+      "Step 5 (Fry Crisp): Fry on medium heat until golden and bubbles subside. Drain, break into strips, and enjoy."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Festive Crunchy",
+      "Traditional Murukku"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 5
+  },
+  {
+    "recipe_id": 220,
+    "recipe_name": "Semiya Upma (Telangana Style Spiced Vermicelli Upma with Cashews)",
+    "ingredients": [
+      "roasted vermicelli (semiya)",
+      "onions",
+      "green chilies",
+      "ginger",
+      "curry leaves",
+      "mustard seeds",
+      "urad dal",
+      "chana dal",
+      "cashews",
+      "oil or ghee",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 260,
+      "protein_g": 6,
+      "carbs_g": 45,
+      "fat_g": 7
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Quick Breakfast / Balanced",
+    "health_score": 86,
+    "image_link": "/static/images/recipes/recipe_220.jpg",
+    "steps": [
+      "Step 1 (Toast Semiya): Dry roast 1.5 cups vermicelli in 1 tsp ghee until evenly light golden.",
+      "Step 2 (Temper): Heat 1 tbsp oil in a pan. Sauté mustard seeds, chana dal, urad dal, and cashews until golden.",
+      "Step 3 (Add Aromatics): Sauté sliced onions, slit green chilies, grated ginger, and curry leaves until translucent.",
+      "Step 4 (Boil Water): Add 2.5 cups water and salt. Bring to a rolling boil.",
+      "Step 5 (Cook Fluffy): Lower flame, add roasted vermicelli, cover, and simmer for 5-6 minutes until all water is absorbed and grains are distinct and fluffy. Drizzle with ghee and serve."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Quick Breakfast",
+      "Comfort Food",
+      "Kids Favorite"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 2
+  },
+  {
+    "recipe_id": 232,
+    "recipe_name": "Garijalu / Kajjikayalu (Crisp Pastry Filled with Sweet Roasted Coconut & Sesame)",
+    "ingredients": [
+      "maida / all-purpose flour",
+      "fine sooji",
+      "dry desiccated coconut",
+      "sugar or jaggery",
+      "roasted sesame seeds",
+      "cardamom powder",
+      "ghee",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 260,
+      "protein_g": 4,
+      "carbs_g": 36,
+      "fat_g": 11
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Sweet / Traditional Pastry",
+    "health_score": 77,
+    "image_link": "/static/images/recipes/recipe_232.jpg",
+    "steps": [
+      "Step 1 (Dough): Knead 1.5 cups flour and 2 tbsp sooji with 2 tbsp hot ghee, a pinch of salt, and water into a smooth, semi-stiff dough. Rest for 20 minutes.",
+      "Step 2 (Sweet Filling): Roast grated coconut, roasted sesame seeds, cardamom powder, and powdered sugar/jaggery together in a pan. Cool.",
+      "Step 3 (Roll & Fill): Roll small dough balls into thin 3.5-inch circles. Place 1 tbsp filling in the center.",
+      "Step 4 (Pleat & Seal): Moisten the edges with water, fold into a half-moon shape, and press with a fork or pinch into traditional fluted patterns.",
+      "Step 5 (Fry to Gold): Deep fry in medium-hot oil until light golden and wonderfully crisp. Cool and store."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Traditional Festive",
+      "Crisp Pastry",
+      "Sweet"
+    ],
+    "prep_time_mins": 25,
+    "cook_time_mins": 20,
+    "difficulty": "Medium",
+    "servings": 4
+  },
+  {
+    "recipe_id": 233,
+    "recipe_name": "Janthikalu (Crispy Rice & Gram Flour Murukku with Cumin)",
+    "ingredients": [
+      "rice flour",
+      "besan (gram flour)",
+      "butter",
+      "cumin seeds",
+      "white sesame seeds",
+      "asafoetida (hing)",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 5,
+      "carbs_g": 36,
+      "fat_g": 12
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Savory / Crispy Murukku",
+    "health_score": 79,
+    "image_link": "/static/images/recipes/recipe_233.jpg",
+    "steps": [
+      "Step 1 (Mix Ingredients): Mix 2 cups rice flour, 1/2 cup besan, cumin seeds, sesame seeds, hing, salt, and 2 tbsp melted butter.",
+      "Step 2 (Knead): Gradually add water to make a soft dough that presses smoothly without breaking.",
+      "Step 3 (Fill Press): Place dough in a murukku maker fitted with a star or multi-hole disc.",
+      "Step 4 (Fry in Hot Oil): Press directly into hot oil in concentric coils. Fry on medium flame for 3-4 minutes until golden and bubbling subsides.",
+      "Step 5 (Cool & Store): Drain and allow to cool before breaking into crunchy pieces."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Festive Crunchy",
+      "Traditional Murukku",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 5
+  },
+  {
+    "recipe_id": 235,
+    "recipe_name": "Gavvalu (Traditional Shell-Shaped Jaggery Glazed Crisps)",
+    "ingredients": [
+      "maida / all-purpose flour",
+      "sooji (semolina)",
+      "pure ghee",
+      "grated jaggery",
+      "cardamom powder",
+      "oil for deep frying",
+      "water"
+    ],
+    "nutritions": {
+      "calories": 260,
+      "protein_g": 4,
+      "carbs_g": 42,
+      "fat_g": 9
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Traditional Sweet",
+    "health_score": 78,
+    "image_link": "/static/images/recipes/recipe_235.jpg",
+    "steps": [
+      "Step 1 (Knead Dough): Mix 1.5 cups flour, 2 tbsp sooji, 2 tbsp hot ghee, and water into a smooth, firm dough.",
+      "Step 2 (Shape Shells): Pinch tiny marble-sized balls. Roll each ball across a gavvala chekka (grooved wooden mold) or the back of a fork to curl into ribbed shell shapes.",
+      "Step 3 (Fry): Deep fry the shells in medium-hot oil until crisp and light golden. Drain.",
+      "Step 4 (Syrup): Boil jaggery with 1/3 cup water until it reaches soft-ball consistency. Stir in cardamom.",
+      "Step 5 (Glaze): Drop the fried shells into the syrup and toss rapidly to coat. Spread on a plate to cool; the jaggery crystallizes into a crisp glaze."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Festive Traditional",
+      "Sweet Crunch"
+    ],
+    "prep_time_mins": 25,
+    "cook_time_mins": 20,
+    "difficulty": "Medium",
+    "servings": 5
+  },
+  {
+    "recipe_id": 236,
+    "recipe_name": "Purnam Kudumulu (Steamed Rice Flour Modaks Filled with Chana Dal Jaggery)",
+    "ingredients": [
+      "rice flour",
+      "chana dal",
+      "grated jaggery",
+      "cardamom powder",
+      "fresh coconut",
+      "ghee",
+      "water",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 210,
+      "protein_g": 6,
+      "carbs_g": 42,
+      "fat_g": 3
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Prasadam / Steamed Sweet",
+    "health_score": 89,
+    "image_link": "/static/images/recipes/recipe_236.jpg",
+    "steps": [
+      "Step 1 (Make Purnam): Cook chana dal until soft, drain, and mash with jaggery in a pan. Cook until thick, stir in cardamom, and roll into small sweet balls.",
+      "Step 2 (Prepare Dough): Stir rice flour into boiling salted water with a touch of ghee. Cover and let it steam off heat for 5 minutes.",
+      "Step 3 (Knead): Knead smooth with greased hands.",
+      "Step 4 (Shape & Encapsulate): Flatten a ball of rice dough into a thin cup, place a purnam ball inside, and bring edges together to seal into a peaked modak shape.",
+      "Step 5 (Steam): Steam for 10-12 minutes until glossy and tender. Serve warm with melted ghee."
+    ],
+    "cuisine": "Telangana",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Festive Prasadam",
+      "Steamed",
+      "Traditional Sweet"
+    ],
+    "prep_time_mins": 20,
+    "cook_time_mins": 15,
+    "difficulty": "Medium",
+    "servings": 4
+  },
+  {
+    "recipe_id": 237,
+    "recipe_name": "Pasupu Karapusa (Crunchy Golden Turmeric & Cumin Ompodi)",
+    "ingredients": [
+      "besan (gram flour)",
+      "rice flour",
+      "pure ground turmeric",
+      "cumin powder",
+      "butter",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 6,
+      "carbs_g": 32,
+      "fat_g": 13
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Savory / Tea Time",
+    "health_score": 80,
+    "image_link": "/static/images/recipes/recipe_237.jpg",
+    "steps": [
+      "Step 1 (Sift Flours): Sift 2 cups besan and 1/2 cup rice flour with salt, pure organic turmeric powder, and cumin powder.",
+      "Step 2 (Rub Butter): Rub 2 tbsp softened butter into the flour until crumbly.",
+      "Step 3 (Knead Dough): Add water gradually to create a soft, pliable dough.",
+      "Step 4 (Press into Hot Oil): Fill a sev press with the fine disc and press directly over hot oil in gentle swirling motions.",
+      "Step 5 (Fry): Fry for 1.5 to 2 minutes on medium flame until golden and crisp. Drain, cool, and enjoy."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Traditional Savory",
+      "Crispy",
+      "Anti-inflammatory"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 5
+  },
+  {
+    "recipe_id": 238,
+    "recipe_name": "Godhuma Dosa (Instant Homestyle Whole Wheat Flour Dosa with Cumin)",
+    "ingredients": [
+      "whole wheat flour (atta)",
+      "rice flour",
+      "cumin seeds",
+      "green chilies",
+      "ginger",
+      "curry leaves",
+      "onions",
+      "oil",
+      "salt",
+      "water"
+    ],
+    "nutritions": {
+      "calories": 200,
+      "protein_g": 6,
+      "carbs_g": 40,
+      "fat_g": 3
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss / Diabetic Friendly",
+    "health_score": 93,
+    "image_link": "/static/images/recipes/recipe_238.jpg",
+    "steps": [
+      "Step 1 (Whisk Batter): Whisk 1.5 cups whole wheat flour and 2 tbsp rice flour with 2.5 cups water, cumin seeds, minced green chilies, grated ginger, chopped onions, curry leaves, and salt into a smooth, thin pourable batter.",
+      "Step 2 (Heat Tawa): Heat a seasoned tawa until smoking hot.",
+      "Step 3 (Pour Crepe): Pour a ladle of batter from the outer edge inward. Drizzle a few drops of oil around edges.",
+      "Step 4 (Flip & Crisp): Cook on medium-high flame until the underside turns golden and crisp. Flip and cook for 1 minute.",
+      "Step 5 (Serve): Serve immediately with spicy tomato chutney or tangy mango pickle."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Breakfast",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "Instant Breakfast",
+      "High Fiber",
+      "Diabetic Friendly",
+      "Low Calorie"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 10,
+    "difficulty": "Easy",
+    "servings": 2
+  },
+  {
+    "recipe_id": 239,
+    "recipe_name": "Chitti Garelu (Mini Button Medu Vadas Served with Spicy Tomato Chutney)",
+    "ingredients": [
+      "urad dal (black gram lentils)",
+      "green chilies",
+      "ginger",
+      "curry leaves",
+      "whole black pepper",
+      "cumin seeds",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 240,
+      "protein_g": 8,
+      "carbs_g": 30,
+      "fat_g": 10
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Traditional Breakfast / High Protein",
+    "health_score": 85,
+    "image_link": "/static/images/recipes/recipe_239.jpg",
+    "steps": [
+      "Step 1 (Grind Batter): Soak urad dal for 2 hours. Grind into an ultra-fluffy, thick batter adding droplets of cold water.",
+      "Step 2 (Aerate): Beat with hand for 3 minutes to incorporate air. Fold in crushed black pepper, cumin seeds, minced ginger, green chilies, and salt.",
+      "Step 3 (Shape Mini Buttons): Moisten fingers, take tiny marble-sized portions, make a tiny hole in center.",
+      "Step 4 (Fry in Batches): Drop 15-20 mini vadas into medium-hot oil. Fry for 3-4 minutes until uniformly golden-crisp.",
+      "Step 5 (Serve): Serve a bowl full of hot mini button vadas dipped in fiery Andhra tomato chutney or sambar."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Breakfast",
+    "diet": "Vegan",
+    "nutrition_tags": [
+      "High Protein",
+      "Crispy",
+      "Popular Tiffin"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 3
+  },
+  {
+    "recipe_id": 241,
+    "recipe_name": "Minapa Rotti with Allam Pachadi (Thick Cast-Iron Urad Dal Bread with Ginger Chutney)",
+    "ingredients": [
+      "urad dal",
+      "coarse rice rava",
+      "cumin seeds",
+      "pure ghee or groundnut oil",
+      "salt",
+      "ginger chutney (allam pachadi) for serving"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 9,
+      "carbs_g": 44,
+      "fat_g": 7
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "High Protein / Traditional Breakfast",
+    "health_score": 88,
+    "image_link": "/static/images/recipes/recipe_241.jpg",
+    "steps": [
+      "Step 1 (Batter): Soak 1 cup urad dal for 3 hours and grind fluffy. Mix with 2 cups soaked coarse rice rava and salt. Ferment for 6 hours.",
+      "Step 2 (Heat Iron Kadai): Heat a heavy cast-iron pan and add 2 tbsp groundnut oil or ghee.",
+      "Step 3 (Pour Thick Rotti): Pour 3 ladlefuls of thick batter into the pan without spreading (approx. 1.5 inches thick).",
+      "Step 4 (Slow Roast): Cover with a lid and cook on low flame for 12-14 minutes until the bottom forms a thick, ultra-crisp golden-brown crust.",
+      "Step 5 (Flip & Finish): Flip gently and cook the other side for 6 minutes. Serve piping hot with spicy-sweet allam pachadi."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "High Protein",
+      "Rustic Crust",
+      "Traditional"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 20,
+    "difficulty": "Medium",
+    "servings": 3
+  },
+  {
+    "recipe_id": 242,
+    "recipe_name": "Ragi Dosa (Finger Millet Crisp Crepe with Onions and Green Chilies)",
+    "ingredients": [
+      "ragi flour (finger millet)",
+      "rice flour",
+      "sour curd",
+      "onions",
+      "green chilies",
+      "cumin seeds",
+      "coriander",
+      "oil",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 200,
+      "protein_g": 6,
+      "carbs_g": 38,
+      "fat_g": 4
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Weight Loss / High Calcium",
+    "health_score": 96,
+    "image_link": "/static/images/recipes/recipe_242.jpg",
+    "steps": [
+      "Step 1 (Make Batter): Whisk 1 cup ragi flour, 1/2 cup rice flour, 1/2 cup sour curd, and 2 cups water until smooth. Rest for 15 minutes.",
+      "Step 2 (Season): Add finely chopped onions, minced green chilies, cumin seeds, coriander leaves, and salt.",
+      "Step 3 (Pour on Tawa): Pour the thin batter onto a hot greased griddle starting from edges towards center.",
+      "Step 4 (Crisp Up): Drizzle oil in the crevices and cook on medium heat for 3 minutes until dark and crisp.",
+      "Step 5 (Serve): Flip for 30 seconds and serve hot with spicy peanut chutney."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Breakfast",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "High Calcium",
+      "High Fiber",
+      "Weight Loss",
+      "Gluten Free"
+    ],
+    "prep_time_mins": 10,
+    "cook_time_mins": 10,
+    "difficulty": "Easy",
+    "servings": 2
+  },
+  {
+    "recipe_id": 244,
+    "recipe_name": "Kobbari Rava Laddu (Festive Coconut Semolina Sweet Balls with Ghee)",
+    "ingredients": [
+      "sooji (bombay rava)",
+      "fresh grated coconut",
+      "sugar",
+      "pure ghee",
+      "cardamom powder",
+      "cashews",
+      "raisins",
+      "warm milk"
+    ],
+    "nutritions": {
+      "calories": 250,
+      "protein_g": 4,
+      "carbs_g": 44,
+      "fat_g": 7
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Festive Sweet / Quick Dessert",
+    "health_score": 81,
+    "image_link": "/static/images/recipes/recipe_244.jpg",
+    "steps": [
+      "Step 1 (Roast Rava): Heat 2 tbsp ghee and roast 1.5 cups semolina on low flame until fragrant and pale golden.",
+      "Step 2 (Roast Coconut): In the same pan, lightly roast 1 cup freshly grated coconut for 2 minutes to remove excess moisture.",
+      "Step 3 (Fry Dry Fruits): Fry cashews and golden raisins in ghee until plump.",
+      "Step 4 (Mix & Melt): Combine roasted rava, coconut, fried nuts, cardamom powder, and 1 cup powdered sugar while still warm.",
+      "Step 5 (Bind Laddus): Sprinkle 3-4 tbsp warm milk and bind firmly into round, aromatic laddus. Store in an airtight jar."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Traditional Festive",
+      "Quick Sweet",
+      "Melt in Mouth"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 5
+  },
+  {
+    "recipe_id": 247,
+    "recipe_name": "Biyyam Pindi Murukulu (Traditional Rice Flour Ring Murukku)",
+    "ingredients": [
+      "rice flour",
+      "roasted urad dal flour",
+      "butter or ghee",
+      "carom seeds (ajwain)",
+      "sesame seeds",
+      "oil for deep frying",
+      "salt"
+    ],
+    "nutritions": {
+      "calories": 270,
+      "protein_g": 5,
+      "carbs_g": 36,
+      "fat_g": 12
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Tea Time Crunchy Savory",
+    "health_score": 79,
+    "image_link": "/static/images/recipes/recipe_247.jpg",
+    "steps": [
+      "Step 1 (Blend Flours): Mix 2 cups fine rice flour and 1/3 cup roasted urad dal flour.",
+      "Step 2 (Add Seasoning): Add sesame seeds, ajwain, salt, and 2 tbsp softened butter. Rub together until crumbly.",
+      "Step 3 (Knead): Gradually add water to make a pliable, non-sticky dough.",
+      "Step 4 (Press Murukku): Fill murukku press with single star or ribbon disc and pipe onto greased ladles or directly into hot oil.",
+      "Step 5 (Fry Crisp): Fry on medium flame for 3-4 minutes until golden and bubbling completely ceases. Drain and cool."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Festive Crunchy",
+      "Gluten Free",
+      "Traditional"
+    ],
+    "prep_time_mins": 15,
+    "cook_time_mins": 15,
+    "difficulty": "Easy",
+    "servings": 5
+  },
+  {
+    "recipe_id": 248,
+    "recipe_name": "Ariselu (Traditional Ghee-Fried Rice Flour & Jaggery Sesame Sweet)",
+    "ingredients": [
+      "wet rice flour (freshly ground soaked rice)",
+      "organic jaggery (bellam)",
+      "pure ghee",
+      "white sesame seeds",
+      "cardamom powder",
+      "water"
+    ],
+    "nutritions": {
+      "calories": 290,
+      "protein_g": 3,
+      "carbs_g": 50,
+      "fat_g": 10
+    },
+    "veg_nonveg": "Veg",
+    "diet_goal": "Iconic Sankranti Festival Sweet",
+    "health_score": 80,
+    "image_link": "/static/images/recipes/recipe_248.jpg",
+    "steps": [
+      "Step 1 (Make Wet Rice Flour): Soak aged raw rice for 24 hours. Drain, air dry on a cloth for 15 minutes, grind in a mill to fine damp flour, and sieve.",
+      "Step 2 (Jaggery Syrup): Boil jaggery with 1/2 cup water until it reaches soft-ball stage (when dropped in cold water, it forms a pliable soft ball). Stir in cardamom powder.",
+      "Step 3 (Mix Dough / Chalimidi): Slowly incorporate the damp rice flour into the boiling syrup while stirring constantly until a soft, glossy dough (chalimidi) forms. Stir in 2 tbsp ghee.",
+      "Step 4 (Press on Sesame): Take lemon-sized balls, coat in white sesame seeds, and pat thin on greased banana leaves.",
+      "Step 5 (Ghee Fry & Press): Slide into hot pure ghee. Fry until it puffs and turns deep golden brown. Press immediately between two wooden arisela pressers to squeeze out excess ghee. Cool and store."
+    ],
+    "cuisine": "Andhra",
+    "meal_type": "Snack",
+    "diet": "Vegetarian",
+    "nutrition_tags": [
+      "Iconic Festive Sweet",
+      "Sankranti Special",
+      "Traditional"
+    ],
+    "prep_time_mins": 30,
+    "cook_time_mins": 25,
+    "difficulty": "Hard",
+    "servings": 5
   }
 ]

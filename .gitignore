@@ -19,3 +19,11 @@ web-build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Tastio Expansion Quarantines, Backups & Scratch
+backup_*/
+scratch/
+integration_package_*/
+ai-service/batches/
+web-app/static/images/recipes/staging_*/
+
