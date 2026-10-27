@@ -38,7 +38,53 @@ app = Flask(
 )
 
 # Secrets & Session Hardening
-app.secret_key = os.environ.get("SECRET_KEY", "supersecret-recipe-key-2026")
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
+except ImportError:
+    pass
+
+INSECURE_FALLBACK_KEYS = {
+    "supersecret-recipe-key-2026",
+    "secret",
+    "secret_key",
+    "default",
+    "changeme",
+    "development",
+    "dev",
+}
+
+def resolve_secret_key():
+    """
+    Validates and configures Flask SECRET_KEY with strict production enforcement.
+    In production environments (e.g. Render, FLASK_ENV=production, ENV=production),
+    refuses to start if SECRET_KEY is missing, empty, or using a known fallback.
+    In local development, safely falls back to a development key.
+    """
+    is_production = any([
+        os.environ.get("RENDER", "").lower() in ("true", "1"),
+        os.environ.get("FLASK_ENV", "").lower() in ("production", "prod"),
+        os.environ.get("ENV", "").lower() in ("production", "prod"),
+        os.environ.get("ENVIRONMENT", "").lower() in ("production", "prod"),
+        os.environ.get("PRODUCTION", "").lower() in ("true", "1"),
+    ])
+
+    raw_secret = os.environ.get("SECRET_KEY")
+    clean_secret = raw_secret.strip() if raw_secret else ""
+
+    if is_production:
+        if not clean_secret or clean_secret in INSECURE_FALLBACK_KEYS or len(clean_secret) < 16:
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION ERROR: A strong, unique SECRET_KEY environment variable "
+                "(minimum 16 characters) must be configured in production (detected production environment). "
+                "Refusing to start with missing, empty, or known default fallback key."
+            )
+        return clean_secret
+    else:
+        # Development / local testing mode fallback
+        return clean_secret if clean_secret else "supersecret-recipe-key-2026"
+
+app.secret_key = resolve_secret_key()
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)

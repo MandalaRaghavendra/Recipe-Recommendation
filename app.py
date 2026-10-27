@@ -9,7 +9,7 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(CURRENT_DIR, "backend"))
 sys.path.insert(0, os.path.join(CURRENT_DIR, "ai-service"))
 
-from backend.app import app
+from backend.app import app, resolve_secret_key
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
