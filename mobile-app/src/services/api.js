@@ -93,7 +93,7 @@ export function resolveRecipeImageUrl(link) {
 }
 
 // Timeout fetch helper (8000ms default) to handle network calls safely over WiFi
-async function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
+async function fetchWithTimeout(url, options = {}, timeoutMs = 2500) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -530,7 +530,7 @@ export async function fetchCoachContext(userId = null) {
 // 7-DAY AI MEAL PLANNER
 // =============================================================================
 
-function generateDefaultLocalMealPlan() {
+export function generateDefaultLocalMealPlan() {
   const days = [
     { day_index: 1, day_name: "Monday", diff: "+25 kcal" },
     { day_index: 2, day_name: "Tuesday", diff: "-40 kcal" },
@@ -695,6 +695,38 @@ export async function deleteMealPlan(userId = null) {
 // NUTRITION ANALYTICS & DASHBOARD
 // =============================================================================
 
+export function getDefaultLocalAnalytics() {
+  return {
+    today: {
+      calories: 1420,
+      protein: 78,
+      carbs: 160,
+      fat: 42,
+      fiber: 28,
+      calorie_target: 1800,
+      protein_target: 100,
+      calorie_compliance_pct: 79,
+      meals_count: 3,
+      logged_meals: [
+        { recipe_id: "3", recipe_name: "Crispy Masala Dosa", calories: 280, protein: 8, time: "Breakfast" },
+        { recipe_id: "1", recipe_name: "Andhra Chicken Biryani", calories: 450, protein: 35, time: "Lunch" }
+      ]
+    },
+    week: {
+      avg_daily_calories: 1720,
+      avg_daily_protein: 94,
+      total_meals_logged: 18,
+      goal_adherence_pct: 88,
+      protein_compliance_pct: 94
+    },
+    month: {
+      days_active: 22,
+      target_calorie_days: 19,
+      streak_days: 6
+    }
+  };
+}
+
 export async function fetchNutritionAnalytics(userId = null) {
   try {
     const res = await fetchWithTimeout(`${getApiBaseUrl()}/analytics/nutrition${userId ? `?user_id=${encodeURIComponent(userId)}` : ""}`);
@@ -741,6 +773,41 @@ export async function fetchNutritionAnalytics(userId = null) {
 // =============================================================================
 // SMART GROCERY LIST
 // =============================================================================
+
+export function getDefaultLocalGroceryList() {
+  return {
+    total_items: 8,
+    completed_items: 2,
+    categories: {
+      Vegetables: [
+        { objectId: "g1", item_name: "Onions (1 kg)", checked: true, category: "Vegetables" },
+        { objectId: "g2", item_name: "Tomatoes (500g)", checked: false, category: "Vegetables" },
+        { objectId: "g3", item_name: "Spinach (1 bunch)", checked: false, category: "Vegetables" }
+      ],
+      Protein: [
+        { objectId: "g4", item_name: "Chicken Breast (500g)", checked: true, category: "Protein" },
+        { objectId: "g5", item_name: "Paneer (200g)", checked: false, category: "Protein" }
+      ],
+      Grains: [
+        { objectId: "g6", item_name: "Basmati Rice (1 kg)", checked: false, category: "Grains" },
+        { objectId: "g7", item_name: "Toor Dal (500g)", checked: false, category: "Grains" }
+      ],
+      Dairy: [
+        { objectId: "g8", item_name: "Curd / Dahi (400g)", checked: false, category: "Dairy" }
+      ]
+    },
+    items: [
+      { objectId: "g1", item_name: "Onions (1 kg)", checked: true, category: "Vegetables" },
+      { objectId: "g2", item_name: "Tomatoes (500g)", checked: false, category: "Vegetables" },
+      { objectId: "g3", item_name: "Spinach (1 bunch)", checked: false, category: "Vegetables" },
+      { objectId: "g4", item_name: "Chicken Breast (500g)", checked: true, category: "Protein" },
+      { objectId: "g5", item_name: "Paneer (200g)", checked: false, category: "Protein" },
+      { objectId: "g6", item_name: "Basmati Rice (1 kg)", checked: false, category: "Grains" },
+      { objectId: "g7", item_name: "Toor Dal (500g)", checked: false, category: "Grains" },
+      { objectId: "g8", item_name: "Curd / Dahi (400g)", checked: false, category: "Dairy" }
+    ]
+  };
+}
 
 export async function fetchGroceryList(userId = null) {
   try {

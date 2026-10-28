@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import { Colors } from "../theme/colors";
 import {
+  generateDefaultLocalMealPlan,
   fetchCurrentMealPlan,
   generateMealPlan,
   replaceMealInPlan,
@@ -29,8 +30,8 @@ const SLOT_CONFIG = [
 ];
 
 export default function MealPlanScreen({ onSelectRecipe, userId = null }) {
-  const [mealPlan, setMealPlan] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [mealPlan, setMealPlan] = useState(() => generateDefaultLocalMealPlan());
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const [activeDayIndex, setActiveDayIndex] = useState(1);
@@ -45,19 +46,23 @@ export default function MealPlanScreen({ onSelectRecipe, userId = null }) {
     loadPlan();
   }, [userId]);
 
-  const loadPlan = async () => {
-    setLoading(true);
-    const res = await fetchCurrentMealPlan(userId);
-    if (res.success && res.meal_plan) {
-      setMealPlan(res.meal_plan);
+  const loadPlan = async (isManualRefresh = false) => {
+    if (isManualRefresh) setRefreshing(true);
+    try {
+      const res = await fetchCurrentMealPlan(userId);
+      if (res && res.success && res.meal_plan) {
+        setMealPlan(res.meal_plan);
+      }
+    } catch (e) {
+      // Keep existing instant meal plan
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-    setLoading(false);
-    setRefreshing(false);
   };
 
   const onRefresh = () => {
-    setRefreshing(true);
-    loadPlan();
+    loadPlan(true);
   };
 
   const handleRegenerate = async () => {

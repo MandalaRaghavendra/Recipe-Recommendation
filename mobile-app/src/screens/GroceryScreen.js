@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Colors } from "../theme/colors";
 import {
+  getDefaultLocalGroceryList,
   fetchGroceryList,
   generateGroceryFromPlan,
   addGroceryItem,
@@ -35,8 +36,8 @@ const CATEGORY_ICONS = {
 };
 
 export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
-  const [grocery, setGrocery] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [grocery, setGrocery] = useState(() => getDefaultLocalGroceryList());
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [compiling, setCompiling] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,19 +48,23 @@ export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
     loadGroceryList();
   }, [userId]);
 
-  const loadGroceryList = async () => {
-    setLoading(true);
-    const data = await fetchGroceryList(userId);
-    if (data?.success && data?.grocery) {
-      setGrocery(data.grocery);
+  const loadGroceryList = async (isManualRefresh = false) => {
+    if (isManualRefresh) setRefreshing(true);
+    try {
+      const data = await fetchGroceryList(userId);
+      if (data?.success && data?.grocery) {
+        setGrocery(data.grocery);
+      }
+    } catch (e) {
+      // Keep existing local grocery
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-    setLoading(false);
-    setRefreshing(false);
   };
 
   const onRefresh = () => {
-    setRefreshing(true);
-    loadGroceryList();
+    loadGroceryList(true);
   };
 
   const handleGenerateFromPlan = async () => {

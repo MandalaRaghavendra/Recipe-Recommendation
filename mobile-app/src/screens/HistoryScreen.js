@@ -12,37 +12,43 @@ import {
 } from "react-native";
 import { Colors } from "../theme/colors";
 import RecipeCard from "../components/RecipeCard";
-import { fetchHistory, fetchNutritionAnalytics } from "../services/api";
+import { fetchHistory, fetchNutritionAnalytics, getDefaultLocalAnalytics, FALLBACK_RECIPES } from "../services/api";
 
 export default function HistoryScreen({ onSelectRecipe, userId = null }) {
   const [mainTab, setMainTab] = useState("analytics"); // 'analytics' | 'log'
   const [analyticsSubTab, setAnalyticsSubTab] = useState("today"); // 'today' | 'week' | 'month'
-  const [history, setHistory] = useState([]);
-  const [analytics, setAnalytics] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [history, setHistory] = useState(() => (FALLBACK_RECIPES || []).slice(0, 5));
+  const [analytics, setAnalytics] = useState(() => getDefaultLocalAnalytics());
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     loadData();
   }, [userId]);
 
-  const loadData = async () => {
-    setLoading(true);
-    const [histData, analData] = await Promise.all([
-      fetchHistory(userId),
-      fetchNutritionAnalytics(userId)
-    ]);
-    setHistory(histData || []);
-    if (analData?.success && analData?.analytics) {
-      setAnalytics(analData.analytics);
+  const loadData = async (isManualRefresh = false) => {
+    if (isManualRefresh) setRefreshing(true);
+    try {
+      const [histData, analData] = await Promise.all([
+        fetchHistory(userId),
+        fetchNutritionAnalytics(userId)
+      ]);
+      if (histData && histData.length > 0) {
+        setHistory(histData);
+      }
+      if (analData?.success && analData?.analytics) {
+        setAnalytics(analData.analytics);
+      }
+    } catch (e) {
+      // Keep instant data
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-    setLoading(false);
-    setRefreshing(false);
   };
 
   const onRefresh = () => {
-    setRefreshing(true);
-    loadData();
+    loadData(true);
   };
 
   const today = analytics?.today || {};

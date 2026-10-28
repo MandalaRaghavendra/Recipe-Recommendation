@@ -45,6 +45,12 @@ const TABS = [
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState("home");
+  const [visitedTabs, setVisitedTabs] = useState({ home: true });
+
+  const switchTab = (tabId) => {
+    setCurrentTab(tabId);
+    setVisitedTabs((prev) => (prev[tabId] ? prev : { ...prev, [tabId]: true }));
+  };
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -210,56 +216,72 @@ export default function App() {
 
       {/* Main Screen View Container */}
       <View style={styles.screenContainer}>
-        {currentTab === "home" && (
-          <HomeScreen
-            onSelectRecipe={handleSelectRecipe}
-            currentUser={currentUser}
-            onOpenAuth={() => setAuthModalVisible(true)}
-          />
+        {visitedTabs.home && (
+          <View style={[styles.tabContent, currentTab !== "home" && styles.hiddenTab]}>
+            <HomeScreen
+              onSelectRecipe={handleSelectRecipe}
+              currentUser={currentUser}
+              onOpenAuth={() => setAuthModalVisible(true)}
+            />
+          </View>
         )}
-        {currentTab === "search" && (
-          <SearchScreen
-            onSelectRecipe={handleSelectRecipe}
-            userId={userId}
-          />
+        {visitedTabs.search && (
+          <View style={[styles.tabContent, currentTab !== "search" && styles.hiddenTab]}>
+            <SearchScreen
+              onSelectRecipe={handleSelectRecipe}
+              userId={userId}
+            />
+          </View>
         )}
-        {currentTab === "scanner" && (
-          <ScannerScreen
-            onSelectRecipe={handleSelectRecipe}
-            userId={userId}
-          />
+        {visitedTabs.scanner && (
+          <View style={[styles.tabContent, currentTab !== "scanner" && styles.hiddenTab]}>
+            <ScannerScreen
+              onSelectRecipe={handleSelectRecipe}
+              userId={userId}
+            />
+          </View>
         )}
-        {currentTab === "planner" && (
-          <MealPlanScreen
-            onSelectRecipe={handleSelectRecipe}
-            userId={userId}
-          />
+        {visitedTabs.planner && (
+          <View style={[styles.tabContent, currentTab !== "planner" && styles.hiddenTab]}>
+            <MealPlanScreen
+              onSelectRecipe={handleSelectRecipe}
+              userId={userId}
+            />
+          </View>
         )}
-        {currentTab === "grocery" && (
-          <GroceryScreen
-            userId={userId}
-            onNavigateToPlanner={() => setCurrentTab("planner")}
-          />
+        {visitedTabs.grocery && (
+          <View style={[styles.tabContent, currentTab !== "grocery" && styles.hiddenTab]}>
+            <GroceryScreen
+              userId={userId}
+              onNavigateToPlanner={() => switchTab("planner")}
+            />
+          </View>
         )}
-        {currentTab === "coach" && (
-          <CoachScreen
-            onSelectRecipe={handleSelectRecipe}
-            userId={userId}
-          />
+        {visitedTabs.coach && (
+          <View style={[styles.tabContent, currentTab !== "coach" && styles.hiddenTab]}>
+            <CoachScreen
+              onSelectRecipe={handleSelectRecipe}
+              userId={userId}
+            />
+          </View>
         )}
-        {currentTab === "history" && (
-          <HistoryScreen
-            onSelectRecipe={handleSelectRecipe}
-            userId={userId}
-          />
+        {visitedTabs.history && (
+          <View style={[styles.tabContent, currentTab !== "history" && styles.hiddenTab]}>
+            <HistoryScreen
+              onSelectRecipe={handleSelectRecipe}
+              userId={userId}
+            />
+          </View>
         )}
-        {currentTab === "profile" && (
-          <ProfileScreen
-            currentUser={currentUser}
-            onOpenAuth={() => setAuthModalVisible(true)}
-            onNavigateToHistory={() => setCurrentTab("history")}
-            onNavigateToPlanner={() => setCurrentTab("planner")}
-          />
+        {visitedTabs.profile && (
+          <View style={[styles.tabContent, currentTab !== "profile" && styles.hiddenTab]}>
+            <ProfileScreen
+              currentUser={currentUser}
+              onOpenAuth={() => setAuthModalVisible(true)}
+              onNavigateToHistory={() => switchTab("history")}
+              onNavigateToPlanner={() => switchTab("planner")}
+            />
+          </View>
         )}
       </View>
 
@@ -276,7 +298,7 @@ export default function App() {
               <TouchableOpacity
                 key={tab.id}
                 style={[styles.tabItem, isActive && styles.tabItemActive]}
-                onPress={() => setCurrentTab(tab.id)}
+                onPress={() => switchTab(tab.id)}
               >
                 <Text style={[styles.tabIcon, isActive && styles.tabIconActive]}>
                   {tab.icon}
@@ -533,6 +555,12 @@ const styles = StyleSheet.create({
   },
   screenContainer: {
     flex: 1
+  },
+  tabContent: {
+    flex: 1
+  },
+  hiddenTab: {
+    display: "none"
   },
   bottomBarWrap: {
     backgroundColor: "#FFFFFF",
