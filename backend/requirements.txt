@@ -7,4 +7,3 @@ python-dotenv
 Pillow
 gunicorn
 scikit-learn
-sentence-transformers
