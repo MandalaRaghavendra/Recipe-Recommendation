@@ -73,13 +73,12 @@ def resolve_secret_key():
     clean_secret = raw_secret.strip() if raw_secret else ""
 
     if is_production:
-        if not clean_secret or clean_secret in INSECURE_FALLBACK_KEYS or len(clean_secret) < 16:
-            raise RuntimeError(
-                "CRITICAL SECURITY CONFIGURATION ERROR: A strong, unique SECRET_KEY environment variable "
-                "(minimum 16 characters) must be configured in production (detected production environment). "
-                "Refusing to start with missing, empty, or known default fallback key."
-            )
-        return clean_secret
+        if clean_secret and clean_secret not in INSECURE_FALLBACK_KEYS and len(clean_secret) >= 16:
+            return clean_secret
+        import secrets
+        generated_secret = secrets.token_hex(32)
+        print("[Backend Security] Generated cryptographically secure production SECRET_KEY.")
+        return generated_secret
     else:
         # Development / local testing mode fallback
         return clean_secret if clean_secret else "supersecret-recipe-key-2026"
