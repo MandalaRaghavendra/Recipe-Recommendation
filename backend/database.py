@@ -782,6 +782,21 @@ def clear_completed_grocery_items(user_id):
     conn.close()
     return True, {"deleted_count": deleted_count, "cleared_count": deleted_count}
 
+def clear_all_grocery_items(user_id):
+    """
+    Removes all items from the user's active grocery list.
+    """
+    if not user_id:
+        return False, "Missing user_id"
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM grocery_items WHERE user_id = ?", (user_id,))
+    deleted_count = cursor.rowcount
+    conn.commit()
+    conn.close()
+    return True, {"deleted_count": deleted_count, "cleared_count": deleted_count}
+
 def add_recipe_to_grocery(user_id, recipe_name, ingredients):
     """
     Adds all ingredients of a recipe directly to the user's active grocery list.

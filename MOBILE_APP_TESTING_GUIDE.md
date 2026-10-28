@@ -4,9 +4,18 @@ This guide explains how to run and test the **Tastio Mobile Application** on you
 
 ---
 
-## 🚀 Quick Start (2 Steps)
+### ⚡ Option A: 1-Click Start (Backend + Expo Together)
+Just double-click **`start_all.bat`** in the project root directory, or run:
+```bash
+.\start_all.bat
+```
+> This starts both the Python backend API (port 5000) and the Expo mobile server (port 8081) simultaneously!
 
-### Step 1: Start the Backend Server
+---
+
+### 🛠️ Option B: Manual 2-Step Start
+
+#### Step 1: Start the Backend Server
 First, make sure the backend REST API is running:
 ```bash
 # Navigate to the backend directory
@@ -22,7 +31,7 @@ python app.py
 
 ---
 
-### Step 2: Launch the Mobile App with Expo
+#### Step 2: Launch the Mobile App with Expo
 Open a new terminal window :
 ```bash
 # Navigate to the mobile app directory

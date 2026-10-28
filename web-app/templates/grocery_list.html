@@ -254,6 +254,9 @@
                     <button class="btn btn-outline-light rounded-pill px-3 py-2 shadow-sm" onclick="clearCompleted()">
                         <i class="fas fa-broom me-1"></i>Clear Checked
                     </button>
+                    <button class="btn btn-danger rounded-pill px-3 py-2 shadow-sm fw-bold" id="btnClearAll" onclick="clearAllGrocery()" {% if not grocery or grocery.total_items == 0 %}style="display: none;"{% endif %}>
+                        <i class="fas fa-trash-alt me-1"></i>Clear All
+                    </button>
                 </div>
             </div>
         </div>
@@ -464,6 +467,22 @@
         }
     }
 
+    async function clearAllGrocery() {
+        if (!confirm("Are you sure you want to clear your entire grocery list? This action cannot be undone.")) return;
+        try {
+            const res = await fetch('/api/grocery-list/clear-all', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || "Failed to clear grocery list.");
+            }
+        } catch (e) {
+            console.error("Error clearing grocery list:", e);
+            alert("A network error occurred while clearing your grocery list.");
+        }
+    }
+
     async function generateFromMealPlan() {
         const btn = document.getElementById('btnGeneratePlan');
         if (btn) {
@@ -533,9 +552,13 @@
     function refreshView() {
         updateProgressCounters();
         const allRows = document.querySelectorAll('.grocery-item-row');
+        const clearAllBtn = document.getElementById('btnClearAll');
         if (allRows.length === 0) {
             document.getElementById('emptyGroceryBox').style.display = 'block';
             document.getElementById('groceryCategoriesWrap').style.display = 'none';
+            if (clearAllBtn) clearAllBtn.style.display = 'none';
+        } else {
+            if (clearAllBtn) clearAllBtn.style.display = 'inline-block';
         }
     }
 </script>

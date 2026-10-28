@@ -91,8 +91,8 @@ export function resolveRecipeImageUrl(link) {
   return link;
 }
 
-// Timeout fetch helper (2500ms default) to eliminate screen freezes
-async function fetchWithTimeout(url, options = {}, timeoutMs = 2500) {
+// Timeout fetch helper (8000ms default) to handle network calls safely over WiFi
+async function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -128,6 +128,63 @@ export const FALLBACK_RECIPES = [
     nutritions: { calories: 450, protein_g: 35, carbs_g: 55, fat_g: 12 },
     ingredients: ["chicken", "basmati rice", "onion", "ginger garlic paste", "curd", "mint leaves", "biryani spices", "green chillies", "ghee"],
     steps: ["Marinate chicken with spices and curd for 30 minutes.", "Cook basmati rice to 70% doneness.", "Layer rice over marinated chicken in a heavy pot.", "Dum cook on low flame for 25 minutes."]
+  },
+  {
+    recipe_id: "20",
+    recipe_name: "Classic Egg Fried Rice",
+    cuisine: "Indo-Chinese",
+    meal_type: "Dinner",
+    diet: "Eggetarian",
+    veg_nonveg: "Non-Veg",
+    diet_goal: "Quick Meal",
+    health_score: 88,
+    nutrition_tags: ["High Protein", "Quick Meal", "Balanced"],
+    prep_time_mins: 10,
+    cook_time_mins: 12,
+    difficulty: "Easy",
+    servings: 2,
+    image_link: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&auto=format&fit=crop&q=80",
+    nutritions: { calories: 340, protein_g: 14, carbs_g: 48, fat_g: 9 },
+    ingredients: ["cooked rice", "eggs", "spring onions", "soy sauce", "garlic", "carrots", "black pepper", "sesame oil"],
+    steps: ["Heat oil in a wok on high heat and saute minced garlic and spring onions.", "Push aromatics to side, crack eggs and scramble gently.", "Toss in chilled cooked rice, soy sauce, and ground black pepper.", "Stir fry on high flame for 3 minutes until fragrant and garnish with scallion greens."]
+  },
+  {
+    recipe_id: "35",
+    recipe_name: "Lemon Rice (Nimmakaya Pulihora)",
+    cuisine: "Andhra",
+    meal_type: "Lunch",
+    diet: "Vegan",
+    veg_nonveg: "Veg",
+    diet_goal: "Tangy / Quick Meal",
+    health_score: 84,
+    nutrition_tags: ["Low Calorie", "Balanced", "Quick Meal"],
+    prep_time_mins: 10,
+    cook_time_mins: 15,
+    difficulty: "Easy",
+    servings: 3,
+    image_link: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80",
+    nutritions: { calories: 310, protein_g: 7, carbs_g: 54, fat_g: 8 },
+    ingredients: ["cooked rice", "lemon juice", "peanuts", "mustard seeds", "curry leaves", "green chillies", "turmeric", "chana dal", "urad dal", "hing"],
+    steps: ["Spread freshly cooked rice on a wide plate and let it cool slightly.", "Heat oil in a pan, sizzle mustard seeds, peanuts, chana dal, and urad dal until golden and crunchy.", "Add slit green chillies, ginger strips, curry leaves, turmeric, and asafoetida.", "Pour the aromatic tempering over the rice, add freshly squeezed lemon juice and salt, then toss gently."]
+  },
+  {
+    recipe_id: "40",
+    recipe_name: "Hyderabadi Egg Dum Biryani",
+    cuisine: "Hyderabadi",
+    meal_type: "Dinner",
+    diet: "Eggetarian",
+    veg_nonveg: "Non-Veg",
+    diet_goal: "High Protein",
+    health_score: 86,
+    nutrition_tags: ["High Protein", "Royal Feast", "Balanced"],
+    prep_time_mins: 20,
+    cook_time_mins: 35,
+    difficulty: "Medium",
+    servings: 4,
+    image_link: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&auto=format&fit=crop&q=80",
+    nutritions: { calories: 410, protein_g: 22, carbs_g: 52, fat_g: 12 },
+    ingredients: ["hard boiled eggs", "basmati rice", "onions", "yogurt", "biryani masala", "mint leaves", "saffron milk", "ghee"],
+    steps: ["Make shallow slits in hard-boiled eggs and shallow fry with turmeric and chili powder until golden crust forms.", "Cook whole spiced basmati rice until 70% done and drain.", "Prepare a thick spiced onion-yogurt biryani gravy and coat the fried eggs.", "Layer half-cooked rice over the egg gravy, top with fried onions, mint, and saffron milk.", "Seal with a tight lid and dum-cook on low flame for 20 minutes."]
   },
   {
     recipe_id: "2",
@@ -168,25 +225,6 @@ export const FALLBACK_RECIPES = [
     steps: ["Temper mustard seeds, onions, and curry leaves in a pan.", "Add mashed potatoes and turmeric to make the spiced filling.", "Pour batter onto a hot tawa and spread in concentric circles.", "Roast until golden and crispy, fold with potato filling."]
   },
   {
-    recipe_id: "20",
-    recipe_name: "Andhra Style Lemon Rice (Pulihora)",
-    cuisine: "Andhra",
-    meal_type: "Dinner",
-    diet: "Vegan",
-    veg_nonveg: "Veg",
-    diet_goal: "Quick Meal / Tangy",
-    health_score: 82,
-    nutrition_tags: ["Weight Loss", "Low Calorie", "Balanced"],
-    prep_time_mins: 10,
-    cook_time_mins: 15,
-    difficulty: "Easy",
-    servings: 2,
-    image_link: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80",
-    nutritions: { calories: 320, protein_g: 10, carbs_g: 55, fat_g: 8 },
-    ingredients: ["rice", "lemon juice", "peanuts", "mustard seeds", "curry leaves", "green chillies", "turmeric", "chana dal", "urad dal", "salt"],
-    steps: ["Cook fluffy white rice and allow it to cool slightly on a flat tray.", "Heat oil in a pan, add mustard seeds, peanuts, and dals until golden and crunchy.", "Toss in slit green chillies, curry leaves, and a pinch of turmeric and hing.", "Squeeze fresh lemon juice over the seasoned rice and mix gently until uniformly bright yellow."]
-  },
-  {
     recipe_id: "4",
     recipe_name: "Dal Tadka (Tempered Yellow Lentils)",
     cuisine: "North Indian",
@@ -200,10 +238,29 @@ export const FALLBACK_RECIPES = [
     cook_time_mins: 20,
     difficulty: "Easy",
     servings: 4,
-    image_link: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80",
+    image_link: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&auto=format&fit=crop&q=80",
     nutritions: { calories: 210, protein_g: 14, carbs_g: 32, fat_g: 4 },
     ingredients: ["toor dal", "onion", "tomato", "garlic", "cumin seeds", "ghee", "dry red chillies", "coriander"],
     steps: ["Pressure cook toor dal with turmeric and salt until soft.", "In a tadka pan, heat ghee and sizzle cumin, garlic, and red chillies.", "Saute onions and tomatoes until tender.", "Pour the sizzling tadka over cooked dal and simmer."]
+  },
+  {
+    recipe_id: "7",
+    recipe_name: "Andhra Spiced Egg Pulao",
+    cuisine: "Andhra",
+    meal_type: "Lunch",
+    diet: "Eggetarian",
+    veg_nonveg: "Non-Veg",
+    diet_goal: "High Protein",
+    health_score: 87,
+    nutrition_tags: ["High Protein", "Quick Meal", "Balanced"],
+    prep_time_mins: 15,
+    cook_time_mins: 20,
+    difficulty: "Easy",
+    servings: 3,
+    image_link: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=80",
+    nutritions: { calories: 360, protein_g: 18, carbs_g: 48, fat_g: 9 },
+    ingredients: ["basmati rice", "boiled eggs", "sliced onions", "ginger garlic paste", "cardamom", "cloves", "cinnamon", "mint leaves"],
+    steps: ["Saute whole spices and thinly sliced onions until deep caramelized brown.", "Add ginger-garlic paste and mint leaves until fragrant.", "Gently toss in halved boiled eggs to absorb the masala.", "Stir in soaked basmati rice, warm water, and simmer covered until rice is fluffy."]
   },
   {
     recipe_id: "5",
@@ -242,25 +299,6 @@ export const FALLBACK_RECIPES = [
     nutritions: { calories: 220, protein_g: 17, carbs_g: 12, fat_g: 12 },
     ingredients: ["firm tofu", "broccoli florets", "soy sauce", "garlic", "ginger", "sesame oil", "sesame seeds"],
     steps: ["Cube tofu and pan-sear until golden on each side.", "Flash stir-fry broccoli with minced garlic and ginger.", "Combine with soy-sesame glaze and sprinkle toasted sesame seeds."]
-  },
-  {
-    recipe_id: "7",
-    recipe_name: "Dosakaya Pappu (Yellow Cucumber Dal)",
-    cuisine: "Andhra",
-    meal_type: "Lunch",
-    diet: "Vegetarian",
-    veg_nonveg: "Veg",
-    diet_goal: "Weight Loss",
-    health_score: 93,
-    nutrition_tags: ["High Fiber", "Low Calorie", "High Protein", "Weight Loss"],
-    prep_time_mins: 15,
-    cook_time_mins: 20,
-    difficulty: "Easy",
-    servings: 4,
-    image_link: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80",
-    nutritions: { calories: 190, protein_g: 11, carbs_g: 28, fat_g: 4 },
-    ingredients: ["dosakaya (yellow cucumber)", "toor dal", "green chillies", "tamarind", "mustard seeds", "curry leaves", "hing"],
-    steps: ["Peel, deseed, and dice the yellow cucumber.", "Pressure cook toor dal with cucumber cubes, green chillies, and turmeric.", "Mash lightly and season with tamarind extract.", "Finish with an aromatic mustard, cumin, and curry leaf tadka."]
   },
   {
     recipe_id: "8",
@@ -339,36 +377,81 @@ export function getFallbackRecipes(filters = {}) {
     const n = String(nutrition_tag).toLowerCase();
     list = list.filter((r) => (r.nutrition_tags || []).some((t) => t.toLowerCase().includes(n)));
   }
+
   if (query && String(query).trim()) {
     const q = String(query).trim().toLowerCase();
-    const qTerms = q.split(/[,+\s]+/).map((t) => t.trim().toLowerCase()).filter((t) => t.length > 2);
-    const nonVegWords = ["chicken", "mutton", "fish", "prawn", "egg", "crab", "meat", "shrimp"];
-    const isNonVegQuery = qTerms.some((t) => nonVegWords.includes(t));
+    const qTerms = q.split(/[,+\s]+/).map((t) => t.trim().toLowerCase()).filter((t) => t.length >= 2);
+
+    const PROTEIN_CLUSTERS = [
+      ["egg", "eggs", "guddu", "anda"],
+      ["chicken", "kodi", "murgh"],
+      ["mutton", "lamb", "goat", "gosht"],
+      ["fish", "chepa", "chepala", "machli", "salmon"],
+      ["prawn", "prawns", "royyalu", "shrimp"],
+      ["crab", "peethala"],
+      ["paneer"],
+      ["tofu"]
+    ];
+
+    const queriedClusters = new Set();
+    for (const term of qTerms) {
+      for (let i = 0; i < PROTEIN_CLUSTERS.length; i++) {
+        if (PROTEIN_CLUSTERS[i].includes(term)) {
+          queriedClusters.add(i);
+        }
+      }
+    }
 
     const scored = [];
     for (const r of list) {
       const name = (r.recipe_name || "").toLowerCase();
       const ings = (r.ingredients || []).map((i) => String(i).toLowerCase());
       const tags = (r.nutrition_tags || []).map((t) => t.toLowerCase());
-      const isVeg = (r.veg_nonveg || "").toLowerCase() === "veg";
+      const fullText = `${name} ${ings.join(" ")} ${tags.join(" ")}`;
 
-      if (isNonVegQuery && isVeg) {
-        continue;
+      // If user queried specific protein(s), strictly exclude dishes containing conflicting proteins
+      if (queriedClusters.size > 0) {
+        let hasConflict = false;
+        for (let i = 0; i < PROTEIN_CLUSTERS.length; i++) {
+          if (!queriedClusters.has(i)) {
+            const hasOtherProtein = PROTEIN_CLUSTERS[i].some((p) => fullText.includes(p));
+            const hasQueriedProtein = Array.from(queriedClusters).some((ci) =>
+              PROTEIN_CLUSTERS[ci].some((p) => fullText.includes(p))
+            );
+            if (hasOtherProtein && !hasQueriedProtein) {
+              hasConflict = true;
+              break;
+            }
+          }
+        }
+        if (hasConflict) continue;
       }
 
-      let matches = 0;
+      let score = 0;
+      let matchedTerms = 0;
       for (const t of qTerms) {
-        if (name.includes(t) || ings.some((i) => i.includes(t)) || tags.some((tag) => tag.includes(t))) {
-          matches++;
+        if (name.includes(t)) {
+          score += 15;
+          matchedTerms++;
+        } else if (ings.some((i) => i.includes(t))) {
+          score += 10;
+          matchedTerms++;
+        } else if (tags.some((tag) => tag.includes(t))) {
+          score += 4;
+          matchedTerms++;
         }
       }
 
-      if (name.includes(q) || ings.some((i) => i.includes(q))) {
-        matches += 3;
+      // Title match boosts:
+      if (name.includes(q)) {
+        score += 50;
+      }
+      if (qTerms.length >= 2 && qTerms.every((t) => name.includes(t))) {
+        score += 40;
       }
 
-      if (matches > 0) {
-        scored.push({ recipe: r, score: matches });
+      if (matchedTerms > 0 || score > 0) {
+        scored.push({ recipe: r, score });
       }
     }
 
@@ -1023,6 +1106,37 @@ export async function clearCompletedGroceryItems(userId = null) {
   } catch (err) {
     logApiError("clearCompletedGroceryItems", err);
     return { success: true };
+  }
+}
+
+export async function clearAllGroceryItems(userId = null) {
+  try {
+    const res = await fetchWithTimeout(`${getApiBaseUrl()}/grocery-list/clear-all`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: userId })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    logApiError("clearAllGroceryItems", err);
+    return {
+      success: true,
+      grocery: {
+        total_items: 0,
+        completed_items: 0,
+        categories: {
+          Vegetables: [],
+          Fruits: [],
+          Protein: [],
+          Grains: [],
+          Dairy: [],
+          Spices: [],
+          Other: []
+        },
+        items: []
+      }
+    };
   }
 }
 

@@ -18,7 +18,8 @@ import {
   addGroceryItem,
   toggleGroceryItem,
   removeGroceryItem,
-  clearCompletedGroceryItems
+  clearCompletedGroceryItems,
+  clearAllGroceryItems
 } from "../services/api";
 
 const CATEGORIES = ["Vegetables", "Fruits", "Protein", "Grains", "Dairy", "Spices", "Other"];
@@ -120,6 +121,31 @@ export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
     }
   };
 
+  const handleClearAll = () => {
+    Alert.alert(
+      "Clear Grocery List",
+      "Are you sure you want to remove all items from your grocery list? This action cannot be undone.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Clear All",
+          style: "destructive",
+          onPress: async () => {
+            const res = await clearAllGroceryItems(userId);
+            if (res?.success) {
+              setGrocery(res.grocery || {
+                total_items: 0,
+                completed_items: 0,
+                categories: {},
+                items: []
+              });
+            }
+          }
+        }
+      ]
+    );
+  };
+
   const handleAddCustomItem = async () => {
     if (!newItemName.trim()) {
       Alert.alert("Error", "Please enter an item name.");
@@ -188,6 +214,12 @@ export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
           {completedItems > 0 && (
             <TouchableOpacity style={styles.clearBtn} onPress={handleClearCompleted}>
               <Text style={styles.clearBtnText}>🧹 Clear Checked</Text>
+            </TouchableOpacity>
+          )}
+
+          {totalItems > 0 && (
+            <TouchableOpacity style={styles.clearAllBtn} onPress={handleClearAll}>
+              <Text style={styles.clearAllBtnText}>🗑️ Clear All</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -433,6 +465,18 @@ const styles = StyleSheet.create({
     color: "#64748B",
     fontSize: 12,
     fontWeight: "600"
+  },
+  clearAllBtn: {
+    backgroundColor: "#FEE2E2",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    alignItems: "center"
+  },
+  clearAllBtnText: {
+    color: "#DC2626",
+    fontSize: 12,
+    fontWeight: "700"
   },
   scrollContent: {
     padding: 14,

@@ -164,11 +164,42 @@ class EmbeddingEngine:
             veg = str(r.get("veg_nonveg", "")).lower()
             health_score = float(r.get("health_score", 80) or 80)
 
+            PROTEIN_CLUSTERS = [
+                {"egg", "eggs", "guddu", "anda"},
+                {"chicken", "kodi", "murgh"},
+                {"mutton", "lamb", "goat", "gosht"},
+                {"fish", "chepa", "chepala", "machli", "salmon"},
+                {"prawn", "prawns", "royyalu", "shrimp"},
+                {"crab", "peethala"},
+                {"paneer"},
+                {"tofu"},
+            ]
+            queried_protein_clusters = [cluster for cluster in PROTEIN_CLUSTERS if (cluster & query_tokens)]
+
             # Non-veg keyword enforcement:
             if query_nonveg:
                 if veg == "veg":
                     continue
                 if not any(nv in r_ings_tokens or nv in name_tokens or nv in r_ings_text for nv in query_nonveg):
+                    continue
+            else:
+                # If query did not ask for any non-veg/meat/fish ingredient, avoid recommending non-veg dishes
+                if veg == "non-veg":
+                    continue
+
+            # Protein cluster exclusivity:
+            if queried_protein_clusters:
+                has_queried = any(any(p in name or p in r_ings_text for p in qc) for qc in queried_protein_clusters)
+                if not has_queried:
+                    continue
+                has_conflict = False
+                for other_cluster in PROTEIN_CLUSTERS:
+                    if other_cluster not in queried_protein_clusters:
+                        has_other = any(p in name or p in r_ings_text for p in other_cluster)
+                        if has_other:
+                            has_conflict = True
+                            break
+                if has_conflict:
                     continue
 
             matched_tokens = [qt for qt in query_tokens if qt in name_tokens or qt in name or qt in r_ings_tokens or any(qt in ing for ing in ingredients)]
@@ -181,10 +212,13 @@ class EmbeddingEngine:
             coverage = match_count / max(1, len(query_tokens))
             score = coverage * 350.0
 
+            title_matches = [qt for qt in query_tokens if qt in name_tokens or qt in name]
             if clean_query in name:
-                score += 150.0
-            elif any(qt in name for qt in query_tokens):
-                score += 40.0
+                score += 300.0
+            elif len(title_matches) == len(query_tokens) and len(query_tokens) > 1:
+                score += 250.0
+            elif len(title_matches) > 0:
+                score += len(title_matches) * 50.0
 
             for qt in matched_unique:
                 if qt in r_ings_tokens:
@@ -389,6 +423,35 @@ class EmbeddingEngine:
                 continue
 
             if clean_query:
+                PROTEIN_CLUSTERS = [
+                    {"egg", "eggs", "guddu", "anda"},
+                    {"chicken", "kodi", "murgh"},
+                    {"mutton", "lamb", "goat", "gosht"},
+                    {"fish", "chepa", "chepala", "machli", "salmon"},
+                    {"prawn", "prawns", "royyalu", "shrimp"},
+                    {"crab", "peethala"},
+                    {"paneer"},
+                    {"tofu"},
+                ]
+                queried_protein_clusters = [cluster for cluster in PROTEIN_CLUSTERS if any(term in cluster for term in query_terms)]
+                if queried_protein_clusters:
+                    has_queried = any(any(p in r_name or p in r_ing_text for p in qc) for qc in queried_protein_clusters)
+                    if not has_queried:
+                        continue
+                    has_conflict = False
+                    for other_cluster in PROTEIN_CLUSTERS:
+                        if other_cluster not in queried_protein_clusters:
+                            has_other = any(p in r_name or p in r_ing_text for p in other_cluster)
+                            if has_other:
+                                has_conflict = True
+                                break
+                    if has_conflict:
+                        continue
+                else:
+                    query_nonveg = set(query_terms) & NON_VEG_WORDS
+                    if not query_nonveg and r_veg == "non-veg":
+                        continue
+
                 s_semantic = query_sim_map.get(str(rid), 0.0)
                 if s_semantic == 0.0 and (clean_query in r_name or clean_query in r_ing_text):
                     s_semantic = 0.85
@@ -398,6 +461,13 @@ class EmbeddingEngine:
             if query_terms:
                 matches = sum(1 for t in query_terms if t in r_name or any(t in ing for ing in r_ingredients))
                 s_ingredient = min(1.0, matches / max(1, len(query_terms)))
+                title_matches = [t for t in query_terms if t in r_name]
+                if clean_query in r_name:
+                    s_ingredient = 2.5
+                elif len(title_matches) == len(query_terms) and len(query_terms) > 1:
+                    s_ingredient = 2.0
+                elif len(title_matches) > 0:
+                    s_ingredient = 1.0 + (len(title_matches) * 0.3)
             else:
                 s_ingredient = 0.5
 
@@ -604,11 +674,37 @@ class EmbeddingEngine:
             # 10. Query Matching & Relevance Ranking
             entry = dict(r)
             if q_clean:
+                # Protein exclusivity: If user requested specific protein(s) (e.g. egg, paneer, chicken),
+                # strictly require that protein and prevent conflicting proteins from taking over.
+                PROTEIN_CLUSTERS = {
+                    'egg': {'egg', 'eggs', 'guddu', 'anda', 'muttai'},
+                    'chicken': {'chicken', 'kodi', 'murgh'},
+                    'mutton': {'mutton', 'mamsam', 'lamb', 'goat', 'boti', 'keema'},
+                    'fish': {'fish', 'chepala', 'meen', 'vanjaram', 'bommidala'},
+                    'prawn': {'prawn', 'prawns', 'royyalu', 'shrimp', 'chingri'},
+                    'crab': {'crab', 'peethala', 'nandu'},
+                    'paneer': {'paneer'},
+                    'tofu': {'tofu'}
+                }
+                requested_proteins = set()
+                for p_key, p_words in PROTEIN_CLUSTERS.items():
+                    if any(pw in query_tokens or pw in q_clean for pw in p_words):
+                        requested_proteins.add(p_key)
+
+                if requested_proteins:
+                    r_all_text = f"{r_name} {r_ings_text}".lower()
+                    has_requested = any(any(pw in r_all_text for pw in PROTEIN_CLUSTERS[rp]) for rp in requested_proteins)
+                    if not has_requested:
+                        continue
+
                 # Non-veg keyword enforcement:
                 if query_nonveg:
                     if r_veg == "veg":
                         continue
                     if not any(nv in r_ings_tokens or nv in r_name_tokens or nv in r_ings_text for nv in query_nonveg):
+                        continue
+                else:
+                    if r_veg == "non-veg" and not norm_diet:
                         continue
 
                 matched_tokens = [qt for qt in query_tokens if qt in r_name_tokens or qt in r_name or qt in r_ings_tokens or any(qt in ing for ing in r_ingredients) or any(qt in tag for tag in r_tags)]
@@ -644,14 +740,18 @@ class EmbeddingEngine:
                 coverage = match_count / max(1, len(query_tokens)) if query_tokens else 0.5
                 score = coverage * 350.0
 
+                # Huge boost for exact query or direct title matches
+                title_matches = [qt for qt in query_tokens if qt in r_name_tokens or qt in r_name]
                 if q_clean in r_name:
-                    score += 150.0
-                elif any(qt in r_name for qt in query_tokens):
-                    score += 40.0
+                    score += 300.0
+                elif len(title_matches) == len(query_tokens) and len(query_tokens) > 1:
+                    score += 250.0
+                elif len(title_matches) > 0:
+                    score += len(title_matches) * 50.0
 
                 for qt in matched_unique:
                     if qt in r_ings_tokens:
-                        score += 25.0
+                        score += 30.0
 
                 if query_nonveg and any(nv in r_name_tokens for nv in query_nonveg):
                     score += 50.0

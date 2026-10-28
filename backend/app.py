@@ -992,8 +992,27 @@ def api_remove_grocery_item(item_id):
 def api_clear_completed_grocery_items():
     """Clears all completed/checked items from the grocery list."""
     payload = request.get_json() if request.is_json else {}
-    user_id = (payload.get("user_id") if isinstance(payload, dict) else None) or request.args.get("user_id") or session.get("user_id")
+    user_id = (
+        (payload.get("user_id") if isinstance(payload, dict) else None)
+        or request.args.get("user_id")
+        or session.get("user_id")
+        or (session.get("user", {}).get("objectId") if isinstance(session.get("user"), dict) else None)
+    )
     success, res = db.clear_completed_grocery_items(user_id)
+    grocery_data = db.get_grocery_list(user_id)
+    return jsonify({"success": success, "cleared": res, "grocery": grocery_data})
+
+@app.route("/api/grocery-list/clear-all", methods=["POST", "DELETE"])
+def api_clear_all_grocery_items():
+    """Clears all items from the grocery list."""
+    payload = request.get_json() if request.is_json else {}
+    user_id = (
+        (payload.get("user_id") if isinstance(payload, dict) else None)
+        or request.args.get("user_id")
+        or session.get("user_id")
+        or (session.get("user", {}).get("objectId") if isinstance(session.get("user"), dict) else None)
+    )
+    success, res = db.clear_all_grocery_items(user_id)
     grocery_data = db.get_grocery_list(user_id)
     return jsonify({"success": success, "cleared": res, "grocery": grocery_data})
 
