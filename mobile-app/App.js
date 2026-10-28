@@ -29,7 +29,8 @@ import {
   getApiBaseUrl,
   setCustomHostIp,
   getDevHostIp,
-  DEV_HOST_IP
+  DEV_HOST_IP,
+  CLOUD_API_URL
 } from "./src/services/api";
 
 const TABS = [
@@ -69,7 +70,7 @@ export default function App() {
 
   // Server Host Config State
   const [serverModalVisible, setServerModalVisible] = useState(false);
-  const [customHost, setCustomHost] = useState(DEV_HOST_IP);
+  const [customHost, setCustomHost] = useState(CLOUD_API_URL);
   const [serverStatus, setServerStatus] = useState("Checking...");
   const [testingConnection, setTestingConnection] = useState(false);
 
@@ -208,7 +209,7 @@ export default function App() {
         >
           <View style={[styles.statusDot, { backgroundColor: serverStatus.includes("Online") ? "#22C55E" : "#F59E0B" }]} />
           <Text style={styles.serverPillText} numberOfLines={1}>
-            {serverStatus.includes("Online") ? `API: ${getDevHostIp()}` : `Cache: ${getDevHostIp()}`}
+            {serverStatus.includes("Online") ? "API: 24/7 Cloud" : "Cache: Offline"}
           </Text>
           <Text style={styles.serverPillConfigIcon}>⚙️</Text>
         </TouchableOpacity>

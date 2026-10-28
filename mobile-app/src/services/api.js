@@ -33,6 +33,8 @@ export function getDevHostIp() {
 
 export const DEV_HOST_IP = getDevHostIp();
 
+export const CLOUD_API_URL = "https://recipe-recommendation-vw7i.onrender.com/api";
+
 export function getApiBaseUrl() {
   if (customHostOverride) {
     if (customHostOverride.startsWith("http://") || customHostOverride.startsWith("https://")) {
@@ -42,13 +44,7 @@ export function getApiBaseUrl() {
     }
     return `http://${customHostOverride}:5000/api`;
   }
-  const activeIp = getDevHostIp();
-  return Platform.select({
-    web: "http://localhost:5000/api",
-    android: `http://${activeIp}:5000/api`,
-    ios: `http://${activeIp}:5000/api`,
-    default: `http://${activeIp}:5000/api`
-  });
+  return CLOUD_API_URL;
 }
 
 export const API_BASE_URL = getApiBaseUrl();
