@@ -19,7 +19,8 @@ import {
   generateMealPlan,
   replaceMealInPlan,
   fetchMealAlternatives,
-  markRecipeEaten
+  markRecipeEaten,
+  resolveRecipeImageUrl
 } from "../services/api";
 
 const SLOT_CONFIG = [
@@ -29,7 +30,7 @@ const SLOT_CONFIG = [
   { key: "dinner", label: "Dinner", icon: "🍲", color: "#7C3AED" }
 ];
 
-export default function MealPlanScreen({ onSelectRecipe, userId = null }) {
+export default function MealPlanScreen({ onSelectRecipe, userId = null, isActive = false }) {
   const [mealPlan, setMealPlan] = useState(() => generateDefaultLocalMealPlan());
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -43,8 +44,10 @@ export default function MealPlanScreen({ onSelectRecipe, userId = null }) {
   const [loadingAlts, setLoadingAlts] = useState(false);
 
   useEffect(() => {
-    loadPlan();
-  }, [userId]);
+    if (isActive || !mealPlan) {
+      loadPlan();
+    }
+  }, [userId, isActive]);
 
   const loadPlan = async (isManualRefresh = false) => {
     if (isManualRefresh) setRefreshing(true);
@@ -266,7 +269,7 @@ export default function MealPlanScreen({ onSelectRecipe, userId = null }) {
 
                   {/* Meal Image */}
                   <Image
-                    source={{ uri: meal.image_link || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" }}
+                    source={{ uri: resolveRecipeImageUrl(meal.image_link) }}
                     style={styles.mealImage}
                     resizeMode="cover"
                   />
@@ -375,7 +378,7 @@ export default function MealPlanScreen({ onSelectRecipe, userId = null }) {
                     onPress={() => handleExecuteSwap(item.recipe_id)}
                   >
                     <Image
-                      source={{ uri: item.image_link || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" }}
+                      source={{ uri: resolveRecipeImageUrl(item.image_link) }}
                       style={styles.altImg}
                     />
                     <View style={styles.altInfo}>

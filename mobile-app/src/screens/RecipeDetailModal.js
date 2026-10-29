@@ -26,7 +26,7 @@ const AUTHENTIC_FOOD_FALLBACK = "https://images.unsplash.com/photo-1546069901-ba
 
 const SERVING_OPTIONS = [0.5, 1.0, 1.5, 2.0, 3.0];
 
-export default function RecipeDetailModal({ visible, recipe, onClose, userId = null }) {
+export default function RecipeDetailModal({ visible, recipe, onClose, userId = null, onGroceryUpdated = null }) {
   const [servingSize, setServingSize] = useState(1.0);
   const [isFav, setIsFav] = useState(false);
   const [togglingFav, setTogglingFav] = useState(false);
@@ -81,6 +81,9 @@ export default function RecipeDetailModal({ visible, recipe, onClose, userId = n
     try {
       const res = await addRecipeIngredientsToGrocery(recipe, userId);
       if (res && res.success) {
+        if (typeof onGroceryUpdated === "function") {
+          onGroceryUpdated();
+        }
         Alert.alert("Grocery List Updated! 🛒", `Added ${res.added !== undefined ? res.added : (recipe.ingredients?.length || 0)} ingredients directly to your Smart Grocery List.`);
       } else {
         Alert.alert("Notice", res?.message || "Failed to add ingredients to grocery list.");

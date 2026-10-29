@@ -35,7 +35,7 @@ const CATEGORY_ICONS = {
   Other: "📦"
 };
 
-export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
+export default function GroceryScreen({ userId = null, isActive = false, refreshTrigger = 0, onNavigateToPlanner }) {
   const [grocery, setGrocery] = useState(() => getDefaultLocalGroceryList());
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -46,7 +46,7 @@ export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
 
   useEffect(() => {
     loadGroceryList();
-  }, [userId]);
+  }, [userId, isActive, refreshTrigger]);
 
   const loadGroceryList = async (isManualRefresh = false) => {
     if (isManualRefresh) setRefreshing(true);
@@ -237,16 +237,23 @@ export default function GroceryScreen({ userId = null, onNavigateToPlanner }) {
           <Text style={styles.loadingText}>Loading grocery list...</Text>
         </View>
       ) : totalItems === 0 ? (
-        <View style={styles.emptyBox}>
-          <Text style={styles.emptyIcon}>🛒</Text>
-          <Text style={styles.emptyTitle}>Your Grocery List is Empty</Text>
-          <Text style={styles.emptySub}>
-            Compile ingredients automatically from your 7-Day Meal Plan or add custom items you need.
-          </Text>
-          <TouchableOpacity style={styles.emptyActionBtn} onPress={handleGenerateFromPlan}>
-            <Text style={styles.emptyActionBtnText}>🪄 Compile from 7-Day Plan</Text>
-          </TouchableOpacity>
-        </View>
+        <ScrollView
+          contentContainerStyle={[styles.scrollContent, { flexGrow: 1, justifyContent: "center" }]}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={["#7B2C3F"]} />
+          }
+        >
+          <View style={styles.emptyBox}>
+            <Text style={styles.emptyIcon}>🛒</Text>
+            <Text style={styles.emptyTitle}>Your Grocery List is Empty</Text>
+            <Text style={styles.emptySub}>
+              Compile ingredients automatically from your 7-Day Meal Plan or add custom items you need.
+            </Text>
+            <TouchableOpacity style={styles.emptyActionBtn} onPress={handleGenerateFromPlan}>
+              <Text style={styles.emptyActionBtnText}>🪄 Compile from 7-Day Plan</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       ) : (
         <ScrollView
           contentContainerStyle={styles.scrollContent}

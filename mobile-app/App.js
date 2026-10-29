@@ -53,6 +53,7 @@ export default function App() {
     setVisitedTabs((prev) => (prev[tabId] ? prev : { ...prev, [tabId]: true }));
   };
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [groceryVersion, setGroceryVersion] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
   // Authentication State
@@ -247,6 +248,7 @@ export default function App() {
             <MealPlanScreen
               onSelectRecipe={handleSelectRecipe}
               userId={userId}
+              isActive={currentTab === "planner"}
             />
           </View>
         )}
@@ -254,6 +256,8 @@ export default function App() {
           <View style={[styles.tabContent, currentTab !== "grocery" && styles.hiddenTab]}>
             <GroceryScreen
               userId={userId}
+              isActive={currentTab === "grocery"}
+              refreshTrigger={groceryVersion}
               onNavigateToPlanner={() => switchTab("planner")}
             />
           </View>
@@ -320,6 +324,7 @@ export default function App() {
           recipe={selectedRecipe}
           userId={userId}
           onClose={handleCloseModal}
+          onGroceryUpdated={() => setGroceryVersion(v => v + 1)}
         />
       )}
 
