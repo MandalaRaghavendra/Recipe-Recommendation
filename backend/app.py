@@ -789,6 +789,7 @@ def api_coach_context():
     user_id = request.args.get("user_id") or session.get("user_id")
     ctx = coach_service.get_user_context(user_id)
     metrics = coach_service._build_metrics_dict(ctx)
+    return jsonify({"success": True, "context": ctx, "metrics": metrics})
 # ==============================================================================
 # TASTIO 7-DAY AI MEAL PLANNER API
 # ==============================================================================
