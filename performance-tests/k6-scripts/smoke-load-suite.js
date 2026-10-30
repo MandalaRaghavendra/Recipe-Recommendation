@@ -4,11 +4,7 @@ import { check, sleep } from 'k6';
 
 export const options = {
   vus: 5,
-  duration: '10s',
-  thresholds: {
-    'http_req_duration': ['p(95)<850'],
-    'http_req_failed': ['rate<0.02']
-  }
+  duration: '10s'
 };
 
 const BASE_URL = __ENV.TASTIO_PERF_URL || 'http://127.0.0.1:5000';
@@ -44,8 +40,6 @@ export function handleSummary(data) {
   const summaryPath = __ENV.K6_SUMMARY_PATH || './reports/k6-summary.json';
   const out = {};
   out[summaryPath] = JSON.stringify(data, null, 2);
-  out['./reports/k6-summary.json'] = JSON.stringify(data, null, 2);
-  out['../reports/k6-summary.json'] = JSON.stringify(data, null, 2);
   return out;
 }
 

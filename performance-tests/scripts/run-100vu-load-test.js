@@ -29,10 +29,10 @@ async function checkBackendHealth(url) {
 function runK6(k6Bin, scriptPath, summaryPath) {
   return new Promise((resolve) => {
     console.log(`[k6] Executing: ${k6Bin} run ${scriptPath}`);
-    const args = ['run', '-e', `K6_SUMMARY_PATH=${summaryPath}`, '--summary-export', summaryPath, scriptPath];
-    const proc = spawn(k6Bin, args, {
+    const perfRootDir = path.resolve(__dirname, '..');
+    const proc = spawn(k6Bin, ['run', '-e', `K6_SUMMARY_PATH=${summaryPath}`, scriptPath], {
       stdio: 'inherit',
-      cwd: path.dirname(scriptPath),
+      cwd: perfRootDir,
       env: { ...process.env, K6_SUMMARY_PATH: summaryPath }
     });
 

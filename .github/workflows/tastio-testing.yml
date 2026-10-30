@@ -69,7 +69,7 @@ jobs:
 
       - name: Start Flask Backend Server
         run: |
-          python backend/app.py &
+          python backend/app.py > /tmp/flask_backend.log 2>&1 &
           echo $! > /tmp/flask_backend.pid
           # Wait up to 30s for health probe
           HEALTHY=0
@@ -84,6 +84,7 @@ jobs:
           done
           if [ $HEALTHY -ne 1 ]; then
             echo "FATAL: Flask backend failed to become healthy within 30 seconds."
+            cat /tmp/flask_backend.log || true
             exit 1
           fi
 
@@ -237,7 +238,7 @@ jobs:
 
       - name: Start Flask Backend Server
         run: |
-          python backend/app.py &
+          python backend/app.py > /tmp/flask_perf.log 2>&1 &
           echo $! > /tmp/flask_perf.pid
           HEALTHY=0
           for i in {1..30}; do
@@ -251,6 +252,7 @@ jobs:
           done
           if [ $HEALTHY -ne 1 ]; then
             echo "FATAL: Flask backend failed to become healthy within 30 seconds."
+            cat /tmp/flask_perf.log || true
             exit 1
           fi
 
@@ -338,7 +340,7 @@ jobs:
 
       - name: Start Flask Backend Server for Dynamic Security Probing
         run: |
-          python backend/app.py &
+          python backend/app.py > /tmp/flask_sec.log 2>&1 &
           echo $! > /tmp/flask_sec.pid
           HEALTHY=0
           for i in {1..30}; do
@@ -352,6 +354,7 @@ jobs:
           done
           if [ $HEALTHY -ne 1 ]; then
             echo "FATAL: Flask backend failed to become healthy within 30 seconds."
+            cat /tmp/flask_sec.log || true
             exit 1
           fi
 
