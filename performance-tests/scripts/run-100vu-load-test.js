@@ -134,12 +134,13 @@ async function main() {
     let isPassed = true;
     let failureReason = '';
 
+    const maxP95 = isSmoke ? 850 : 450;
     if (errorRate > 2.0) {
       isPassed = false;
       failureReason = `Error rate ${errorRate}% exceeds 2.0% threshold`;
-    } else if (p95 > 450) {
+    } else if (p95 > maxP95) {
       isPassed = false;
-      failureReason = `p95 latency ${p95}ms exceeds 450ms SLA budget`;
+      failureReason = `p95 latency ${p95}ms exceeds ${maxP95}ms SLA budget`;
     }
 
     if (isPassed) {

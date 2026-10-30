@@ -228,6 +228,7 @@ jobs:
 
       - name: Install Performance Test Dependencies
         run: |
+          mkdir -p performance-tests/reports
           cd performance-tests
           npm ci
 
@@ -307,6 +308,7 @@ jobs:
 
       - name: Install Security Scanners (Bandit & pip-audit)
         run: |
+          mkdir -p security-tests/reports
           python -m pip install --upgrade pip
           pip install bandit pip-audit
           pip install -r backend/requirements.txt
@@ -388,6 +390,7 @@ jobs:
         with:
           name: security-review
           path: security-tests/reports/security-review.md
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload Executive Summary Markdown
@@ -396,6 +399,7 @@ jobs:
         with:
           name: executive-summary
           path: security-tests/reports/executive-summary.md
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload Dependency Report Markdown
@@ -404,6 +408,7 @@ jobs:
         with:
           name: dependency-report
           path: security-tests/reports/dependency-report.md
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Clean Up Security Backend
