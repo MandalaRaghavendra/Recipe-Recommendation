@@ -138,7 +138,7 @@ jobs:
       - name: Install Appium Test Dependencies
         run: |
           cd appium-tests
-          npm ci
+          npm ci || npm install
 
       - name: Start Appium Server in Background
         run: |

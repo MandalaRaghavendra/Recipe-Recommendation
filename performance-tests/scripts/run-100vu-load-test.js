@@ -31,7 +31,8 @@ function runK6(k6Bin, scriptPath, summaryPath) {
     console.log(`[k6] Executing: ${k6Bin} run ${scriptPath}`);
     const proc = spawn(k6Bin, ['run', scriptPath], {
       stdio: 'inherit',
-      cwd: path.dirname(scriptPath)
+      cwd: path.dirname(scriptPath),
+      env: { ...process.env, K6_SUMMARY_PATH: summaryPath }
     });
 
     proc.on('close', (code) => {
@@ -86,6 +87,9 @@ async function main() {
   const scriptName = isSmoke ? 'smoke-load-suite.js' : 'master-100vu-load-suite.js';
   const scriptPath = path.join(config.paths.scriptsDir, scriptName);
   const summaryPath = config.paths.jsonMetrics;
+  if (!fs.existsSync(config.paths.reportsDir)) {
+    fs.mkdirSync(config.paths.reportsDir, { recursive: true });
+  }
 
   console.log(`[Runner] Starting Performance Test in ${isSmoke ? 'SMOKE (5 VUs, 10s)' : 'FULL 100 VU (60s)'} mode...`);
   const startTime = Date.now();

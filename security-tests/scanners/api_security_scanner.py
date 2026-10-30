@@ -201,7 +201,11 @@ def run_security_probes():
     print(f"Dynamic security probe complete! {len(findings)} findings documented.")
     print("=" * 70)
 
-    with open("d:/recipie/Recipe-Recommendation/security-tests/reports/dynamic-findings.json", "w", encoding="utf-8") as f:
+    import os
+    out_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "reports")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "dynamic-findings.json")
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(findings, f, indent=2)
 
     return findings

@@ -657,6 +657,9 @@ async function main() {
   console.log('========================================================================');
   console.log('       GENERATING ENTERPRISE SECURITY ASSESSMENT EXCEL REPORTS          ');
   console.log('========================================================================');
+  if (!fs.existsSync(config.paths.reportsDir)) {
+    fs.mkdirSync(config.paths.reportsDir, { recursive: true });
+  }
   await generateMainSecurityReport();
   await generateFindingsExcel();
   await generateInventoryExcel();

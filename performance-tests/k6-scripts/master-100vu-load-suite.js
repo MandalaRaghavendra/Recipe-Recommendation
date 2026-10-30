@@ -284,8 +284,9 @@ export default function () {
 
 // Export detailed summary for reporting and metrics processing
 export function handleSummary(data) {
+  const summaryPath = __ENV.K6_SUMMARY_PATH || './reports/k6-summary.json';
   return {
-    'd:/recipie/Recipe-Recommendation/performance-tests/reports/k6-summary.json': JSON.stringify(data, null, 2),
+    [summaryPath]: JSON.stringify(data, null, 2),
     stdout: textSummary(data, { indent: ' ', enableColors: false })
   };
 }
