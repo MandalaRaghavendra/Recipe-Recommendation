@@ -285,10 +285,12 @@ export default function () {
 // Export detailed summary for reporting and metrics processing
 export function handleSummary(data) {
   const summaryPath = __ENV.K6_SUMMARY_PATH || './reports/k6-summary.json';
-  return {
-    [summaryPath]: JSON.stringify(data, null, 2),
-    stdout: textSummary(data, { indent: ' ', enableColors: false })
-  };
+  const out = {};
+  out[summaryPath] = JSON.stringify(data, null, 2);
+  out['./reports/k6-summary.json'] = JSON.stringify(data, null, 2);
+  out['../reports/k6-summary.json'] = JSON.stringify(data, null, 2);
+  out['stdout'] = textSummary(data, { indent: ' ', enableColors: false });
+  return out;
 }
 
 function textSummary(data, options) {

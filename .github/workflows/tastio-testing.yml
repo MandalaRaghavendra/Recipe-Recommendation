@@ -98,6 +98,7 @@ jobs:
         with:
           name: selenium-test-report
           path: selenium-tests/reports/selenium-test-report.xlsx
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Clean Up Test Backend
@@ -172,6 +173,7 @@ jobs:
         with:
           name: appium-test-report
           path: appium-tests/reports/appium-test-report.xlsx
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload Appium Server Execution Logs
@@ -180,6 +182,7 @@ jobs:
         with:
           name: appium-server-log
           path: /tmp/appium.log
+          if-no-files-found: warn
           retention-days: 7
 
       - name: Clean Up Appium Server
@@ -266,6 +269,7 @@ jobs:
         with:
           name: perf-test-report
           path: performance-tests/reports/perf-test-report.xlsx
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload k6 Metrics JSON
@@ -274,6 +278,7 @@ jobs:
         with:
           name: k6-metrics-summary
           path: performance-tests/reports/k6-summary.json
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Clean Up Perf Backend
@@ -366,6 +371,7 @@ jobs:
         with:
           name: security-test-report
           path: security-tests/reports/security-test-report.xlsx
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload Vulnerability Findings Workbook
@@ -374,6 +380,7 @@ jobs:
         with:
           name: findings
           path: security-tests/reports/findings.xlsx
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload Endpoint Inventory Workbook
@@ -382,6 +389,7 @@ jobs:
         with:
           name: endpoint-inventory
           path: security-tests/reports/endpoint-inventory.xlsx
+          if-no-files-found: warn
           retention-days: 14
 
       - name: Upload Security Review Markdown

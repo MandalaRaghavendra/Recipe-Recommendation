@@ -42,8 +42,10 @@ export default function () {
 
 export function handleSummary(data) {
   const summaryPath = __ENV.K6_SUMMARY_PATH || './reports/k6-summary.json';
-  return {
-    [summaryPath]: JSON.stringify(data, null, 2)
-  };
+  const out = {};
+  out[summaryPath] = JSON.stringify(data, null, 2);
+  out['./reports/k6-summary.json'] = JSON.stringify(data, null, 2);
+  out['../reports/k6-summary.json'] = JSON.stringify(data, null, 2);
+  return out;
 }
 
