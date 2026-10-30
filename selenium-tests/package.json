@@ -1,0 +1,36 @@
+{
+  "name": "tastio-selenium-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive Selenium WebDriver End-to-End Testing Suite for Tastio Recipe Recommendation System",
+  "main": "tests/login-tests.js",
+  "scripts": {
+    "test": "node scripts/run-all-tests.js",
+    "test:mocha": "mocha --config .mocharc.json \"tests/**/*.js\"",
+    "test:login": "mocha --config .mocharc.json tests/login-tests.js",
+    "test:mealplan": "mocha --config .mocharc.json tests/meal-plan-tests.js",
+    "test:grocery": "mocha --config .mocharc.json tests/grocery-list-tests.js",
+    "test:discovery": "mocha --config .mocharc.json tests/discovery-search-tests.js",
+    "generate:report": "node scripts/generate-excel-report.js"
+  },
+  "keywords": [
+    "selenium",
+    "webdriver",
+    "mocha",
+    "chai",
+    "e2e",
+    "tastio",
+    "testing",
+    "excel-report"
+  ],
+  "author": "Antigravity Senior QA Automation Engineer",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.5.0",
+    "dotenv": "^16.4.7",
+    "exceljs": "^4.4.0",
+    "mocha": "^11.1.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-report-generator": "^6.2.0",
+    "selenium-webdriver": "^4.29.0"
+  }
+}

@@ -1,0 +1,463 @@
+name: Tastio Enterprise Testing Suite (1,200 Scenarios)
+
+'on':
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      perf_profile:
+        description: 'Performance test workload profile (smoke vs full 100 VU)'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - 'smoke'
+          - 'full-100vu'
+      run_mobile:
+        description: 'Attempt live Android emulator launch in CI (requires KVM)'
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '0 2 * * 1' # Weekly Monday 02:00 UTC deep soak execution
+
+env:
+  FLASK_ENV: testing
+  SECRET_KEY: ${{ secrets.TASTIO_SECRET_KEY || 'ci-testing-secret-key-tastio-enterprise' }}
+  TASTIO_BASE_URL: 'http://127.0.0.1:5000'
+  TASTIO_PERF_URL: 'http://127.0.0.1:5000'
+  TASTIO_SECURITY_URL: 'http://127.0.0.1:5000'
+  HEADLESS: 'true'
+
+jobs:
+  # =========================================================================
+  # JOB A: Selenium Web Testing (Module A - 300 Scenarios)
+  # =========================================================================
+  selenium-web-testing:
+    name: Job A - Selenium Web E2E (300 Tests)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "selenium-tests/package.json"
+
+      - name: Install Python Backend Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Install Selenium Test Dependencies
+        run: |
+          cd selenium-tests
+          npm ci
+
+      - name: Start Flask Backend Server
+        run: |
+          python backend/app.py &
+          echo $! > /tmp/flask_backend.pid
+          # Wait up to 30s for health probe
+          HEALTHY=0
+          for i in {1..30}; do
+            if curl -s http://127.0.0.1:5000/api/health | grep -q "healthy"; then
+              echo "Flask backend is UP and HEALTHY!"
+              HEALTHY=1
+              break
+            fi
+            echo "Waiting for Flask server ($i/30)..."
+            sleep 1
+          done
+          if [ $HEALTHY -ne 1 ]; then
+            echo "FATAL: Flask backend failed to become healthy within 30 seconds."
+            exit 1
+          fi
+
+      - name: Execute Selenium E2E Test Suite (WEB-001 to WEB-300)
+        run: |
+          cd selenium-tests
+          node scripts/run-all-tests.js
+
+      - name: Upload Selenium Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-test-report
+          path: selenium-tests/reports/selenium-test-report.xlsx
+          retention-days: 14
+
+      - name: Clean Up Test Backend
+        if: always()
+        run: |
+          if [ -f /tmp/flask_backend.pid ]; then
+            kill $(cat /tmp/flask_backend.pid) || true
+          fi
+
+  # =========================================================================
+  # JOB B: Appium Android Testing (Module B - 300 Scenarios)
+  # =========================================================================
+  appium-android-testing:
+    name: Job B - Appium Android E2E (300 Tests)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Java 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Install Appium & UiAutomator2 Driver
+        run: |
+          npm install -g appium@next
+          appium driver install uiautomator2
+
+      - name: Install Appium Test Dependencies
+        run: |
+          cd appium-tests
+          npm ci
+
+      - name: Start Appium Server in Background
+        run: |
+          appium --port 4723 --relaxed-security --log /tmp/appium.log &
+          echo $! > /tmp/appium.pid
+          sleep 5
+          curl -s http://127.0.0.1:4723/status || echo "Appium warming up..."
+
+      - name: Run Android Emulator & Appium Tests (When run_mobile is true)
+        if: ${{ inputs.run_mobile == true }}
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: default
+          arch: x86_64
+          profile: pixel
+          script: |
+            cd appium-tests
+            node scripts/run-all-mobile-tests.js
+
+      - name: Register Appium Tests as Not Executed (When AVD is offline)
+        if: ${{ inputs.run_mobile != true }}
+        run: |
+          cd appium-tests
+          # Without live AVD, reports all 300 mobile tests accurately as NOT EXECUTED (never marked passed)
+          node scripts/run-all-mobile-tests.js
+
+      - name: Upload Appium Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: appium-test-report
+          path: appium-tests/reports/appium-test-report.xlsx
+          retention-days: 14
+
+      - name: Upload Appium Server Execution Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: appium-server-log
+          path: /tmp/appium.log
+          retention-days: 7
+
+      - name: Clean Up Appium Server
+        if: always()
+        run: |
+          if [ -f /tmp/appium.pid ]; then
+            kill $(cat /tmp/appium.pid) || true
+          fi
+
+  # =========================================================================
+  # JOB C: Performance & Load Testing (Module C - 300 Scenarios)
+  # =========================================================================
+  performance-testing:
+    name: Job C - Performance & Load Testing (300 Tests)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install k6 Load Engine
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install -y k6
+          k6 version
+
+      - name: Install Python Backend Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Install Performance Test Dependencies
+        run: |
+          cd performance-tests
+          npm ci
+
+      - name: Start Flask Backend Server
+        run: |
+          python backend/app.py &
+          echo $! > /tmp/flask_perf.pid
+          HEALTHY=0
+          for i in {1..30}; do
+            if curl -s http://127.0.0.1:5000/api/health | grep -q "healthy"; then
+              echo "Flask backend is ready for performance testing!"
+              HEALTHY=1
+              break
+            fi
+            echo "Waiting for Flask server ($i/30)..."
+            sleep 1
+          done
+          if [ $HEALTHY -ne 1 ]; then
+            echo "FATAL: Flask backend failed to become healthy within 30 seconds."
+            exit 1
+          fi
+
+      - name: Execute Performance Test Suite (PERF-001 to PERF-300)
+        env:
+          PERF_MODE: ${{ (github.event_name == 'schedule' || inputs.perf_profile == 'full-100vu') && 'full' || 'smoke' }}
+          K6_BIN: 'k6'
+        run: |
+          cd performance-tests
+          echo "Executing with PERF_MODE=$PERF_MODE"
+          node scripts/run-100vu-load-test.js
+
+      - name: Upload Performance Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-test-report
+          path: performance-tests/reports/perf-test-report.xlsx
+          retention-days: 14
+
+      - name: Upload k6 Metrics JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-metrics-summary
+          path: performance-tests/reports/k6-summary.json
+          retention-days: 14
+
+      - name: Clean Up Perf Backend
+        if: always()
+        run: |
+          if [ -f /tmp/flask_perf.pid ]; then
+            kill $(cat /tmp/flask_perf.pid) || true
+          fi
+
+  # =========================================================================
+  # JOB D: Security & Vulnerability Assessment (Module D - 300 Scenarios)
+  # =========================================================================
+  security-testing:
+    name: Job D - Security Assessment (300 Tests)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Security Scanners (Bandit & pip-audit)
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit pip-audit
+          pip install -r backend/requirements.txt
+
+      - name: Install Security Test Dependencies
+        run: |
+          cd security-tests
+          npm ci
+
+      - name: Run Bandit SAST Static Analysis
+        run: |
+          python -m bandit -r backend/ -f json -o security-tests/reports/bandit-report.json || true
+
+      - name: Run Python Backend Dependency Scan (pip-audit)
+        run: |
+          python -m pip_audit --local -f json -o security-tests/reports/pip-audit-report.json || true
+
+      - name: Run Mobile NPM Package Dependency Scan (npm audit)
+        run: |
+          cd mobile-app
+          npm audit --json > ../security-tests/reports/npm-audit-report.json || true
+
+      - name: Start Flask Backend Server for Dynamic Security Probing
+        run: |
+          python backend/app.py &
+          echo $! > /tmp/flask_sec.pid
+          HEALTHY=0
+          for i in {1..30}; do
+            if curl -s http://127.0.0.1:5000/api/health | grep -q "healthy"; then
+              echo "Flask backend is ready for security probing!"
+              HEALTHY=1
+              break
+            fi
+            echo "Waiting for Flask server ($i/30)..."
+            sleep 1
+          done
+          if [ $HEALTHY -ne 1 ]; then
+            echo "FATAL: Flask backend failed to become healthy within 30 seconds."
+            exit 1
+          fi
+
+      - name: Run Dynamic API Security Probes
+        run: |
+          cd security-tests
+          python scanners/api_security_scanner.py
+
+      - name: Generate Consolidated Security Excel & Markdown Reports
+        run: |
+          cd security-tests
+          node scripts/generate-all-security-reports.js
+
+      - name: Upload Security Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-test-report
+          path: security-tests/reports/security-test-report.xlsx
+          retention-days: 14
+
+      - name: Upload Vulnerability Findings Workbook
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: findings
+          path: security-tests/reports/findings.xlsx
+          retention-days: 14
+
+      - name: Upload Endpoint Inventory Workbook
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: endpoint-inventory
+          path: security-tests/reports/endpoint-inventory.xlsx
+          retention-days: 14
+
+      - name: Upload Security Review Markdown
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-review
+          path: security-tests/reports/security-review.md
+          retention-days: 14
+
+      - name: Upload Executive Summary Markdown
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: executive-summary
+          path: security-tests/reports/executive-summary.md
+          retention-days: 14
+
+      - name: Upload Dependency Report Markdown
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-report
+          path: security-tests/reports/dependency-report.md
+          retention-days: 14
+
+      - name: Clean Up Security Backend
+        if: always()
+        run: |
+          if [ -f /tmp/flask_sec.pid ]; then
+            kill $(cat /tmp/flask_sec.pid) || true
+          fi
+
+  # =========================================================================
+  # JOB E: Final Test Summary & Quality Gate Certification
+  # =========================================================================
+  final-test-summary:
+    name: Job E - Final Test Summary & Certification
+    needs: [selenium-web-testing, appium-android-testing, performance-testing, security-testing]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install ExcelJS for CI Aggregator
+        run: |
+          npm install exceljs
+
+      - name: Download All Test Reports from Preceding Jobs
+        uses: actions/download-artifact@v4
+        with:
+          path: /tmp/ci_artifacts/
+
+      - name: Organize Artifacts for Reporting
+        run: |
+          mkdir -p selenium-tests/reports appium-tests/reports performance-tests/reports security-tests/reports
+          cp /tmp/ci_artifacts/selenium-test-report/* selenium-tests/reports/ || true
+          cp /tmp/ci_artifacts/appium-test-report/* appium-tests/reports/ || true
+          cp /tmp/ci_artifacts/perf-test-report/* performance-tests/reports/ || true
+          cp /tmp/ci_artifacts/k6-metrics-summary/* performance-tests/reports/ || true
+          cp /tmp/ci_artifacts/security-test-report/* security-tests/reports/ || true
+
+      - name: Generate Consolidated CI Summary Report
+        run: |
+          node scripts/generate-ci-summary.js
+          cat TESTING-CI-SUMMARY.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Final Unified CI Summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: TESTING-CI-SUMMARY
+          path: TESTING-CI-SUMMARY.md
+          retention-days: 30

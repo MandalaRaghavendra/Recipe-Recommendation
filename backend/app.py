@@ -73,20 +73,42 @@ def resolve_secret_key():
     clean_secret = raw_secret.strip() if raw_secret else ""
 
     if is_production:
-        if clean_secret and clean_secret not in INSECURE_FALLBACK_KEYS and len(clean_secret) >= 16:
-            return clean_secret
-        import secrets
-        generated_secret = secrets.token_hex(32)
-        print("[Backend Security] Generated cryptographically secure production SECRET_KEY.")
-        return generated_secret
+        if not clean_secret:
+            raise RuntimeError(
+                "FATAL PRODUCTION CONFIGURATION ERROR: SECRET_KEY environment variable is missing. "
+                "In production, a persistent and strong SECRET_KEY (minimum 16 characters) must be configured."
+            )
+        if clean_secret in INSECURE_FALLBACK_KEYS:
+            raise RuntimeError(
+                f"FATAL PRODUCTION CONFIGURATION ERROR: Insecure SECRET_KEY '{clean_secret}' detected in production. "
+                "You must provide a strong, unique secret key from the environment."
+            )
+        if len(clean_secret) < 16:
+            raise RuntimeError(
+                "FATAL PRODUCTION CONFIGURATION ERROR: SECRET_KEY is too short (minimum 16 characters required in production)."
+            )
+        return clean_secret
     else:
         # Development / local testing mode fallback
         return clean_secret if clean_secret else "supersecret-recipe-key-2026"
 
+is_production = any([
+    os.environ.get("RENDER", "").lower() in ("true", "1"),
+    os.environ.get("FLASK_ENV", "").lower() in ("production", "prod"),
+    os.environ.get("ENV", "").lower() in ("production", "prod"),
+    os.environ.get("ENVIRONMENT", "").lower() in ("production", "prod"),
+    os.environ.get("PRODUCTION", "").lower() in ("true", "1"),
+])
+
 app.secret_key = resolve_secret_key()
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = is_production or os.environ.get("COOKIE_SECURE", "").lower() in ("true", "1")
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
+
+# Enable Flask-WTF CSRF Protection
+from flask_wtf.csrf import CSRFProtect, CSRFError
+csrf = CSRFProtect(app)
 
 # In-memory sliding-window rate limiter for auth endpoints
 AUTH_ATTEMPTS = {}
@@ -111,19 +133,125 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+# BOLA / IDOR Defense & Authentication
+def _get_auth_serializer():
+    secret = app.secret_key or app.config.get("SECRET_KEY")
+    if not secret:
+        if is_production:
+            raise RuntimeError("FATAL: SECRET_KEY not available for auth serializer in production.")
+        secret = "tastio-dev-secret-key-300"
+    from itsdangerous import URLSafeTimedSerializer
+    return URLSafeTimedSerializer(secret, salt="tastio-api-token")
+
+def generate_api_token(user_id, email=None):
+    s = _get_auth_serializer()
+    return s.dumps({"user_id": str(user_id), "email": email or ""})
+
+def get_authenticated_user_id():
+    """
+    Derives the authenticated user ID strictly from the server-side session or verified Bearer token.
+    Never trusts user_id supplied through query parameters or request bodies.
+    Detects BOLA/IDOR if an unauthenticated user attempts access or if an
+    authenticated user attempts to access another user's resources.
+    Returns: (user_id_str, error_code)
+      - If authenticated and authorized: (user_id_str, None)
+      - If unauthenticated: (None, 401)
+      - If BOLA/IDOR attempt (mismatched user_id): (None, 403)
+    """
+    auth_header = request.headers.get("Authorization", "").strip()
+    session_user_id = None
+
+    # 1. If Bearer token is provided in Authorization header, validate it strictly
+    if auth_header.startswith("Bearer "):
+        token = auth_header[7:].strip()
+        if not token:
+            return None, 401
+        try:
+            s = _get_auth_serializer()
+            data = s.loads(token, max_age=86400 * 30)
+            session_user_id = data.get("user_id")
+            if not session_user_id:
+                return None, 401
+        except Exception:
+            return None, 401
+    else:
+        # 2. Otherwise fall back to server-side cookie session
+        session_user_id = session.get("user_id")
+        if not session_user_id:
+            user_obj = session.get("user")
+            if isinstance(user_obj, dict):
+                session_user_id = user_obj.get("objectId")
+
+    if not session_user_id:
+        return None, 401
+
+    session_user_id_str = str(session_user_id).strip()
+
+    # IDOR / BOLA Check: If client supplied user_id in query args or body, it MUST match the session!
+    query_user_id = request.args.get("user_id")
+    if query_user_id is not None and str(query_user_id).strip() != session_user_id_str:
+        return None, 403
+
+    if request.is_json:
+        payload = request.get_json(silent=True) or {}
+        if isinstance(payload, dict):
+            body_user_id = payload.get("user_id")
+            if body_user_id is not None and str(body_user_id).strip() != session_user_id_str:
+                return None, 403
+
+    return session_user_id_str, None
+
 def api_auth_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        user_id = session.get("user_id")
-        if not user_id and request.is_json:
-            payload = request.get_json(silent=True) or {}
-            user_id = payload.get("user_id")
-        if not user_id:
-            user_id = request.args.get("user_id") or request.headers.get("X-User-Id")
-        if not user_id:
-            return jsonify({"success": False, "error": "Unauthorized", "message": "Authentication required to access this resource."}), 401
+        user_id, error = get_authenticated_user_id()
+        if error == 401:
+            return jsonify({
+                "success": False,
+                "error": "Unauthorized",
+                "message": "Authentication required to access this resource."
+            }), 401
+        if error == 403:
+            return jsonify({
+                "success": False,
+                "error": "Forbidden",
+                "message": "Access denied: cannot access another user's data."
+            }), 403
         return f(*args, **kwargs)
     return decorated_function
+
+@app.after_request
+def add_security_headers(response):
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    csp_directives = [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com",
+        "font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com data:",
+        "img-src 'self' data: https: http: blob:",
+        "connect-src 'self' https://cdn.jsdelivr.net",
+        "frame-ancestors 'self'",
+        "base-uri 'self'",
+        "form-action 'self'"
+    ]
+    response.headers["Content-Security-Policy"] = "; ".join(csp_directives)
+    if request.is_secure or request.headers.get("X-Forwarded-Proto", "").lower() == "https":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Server"] = "TastioServer"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=(self)"
+    return response
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    if request.path.startswith("/api/") or request.is_json:
+        return jsonify({
+            "success": False,
+            "error": "CSRF Error",
+            "message": e.description or "CSRF token validation failed."
+        }), 400
+    return render_template("main.html", message="Invalid or expired CSRF token. Please try again."), 400
 
 try:
     from flask_cors import CORS
@@ -147,7 +275,7 @@ def _normalize_image_url(recipe):
     if img and img.startswith("/static/"):
         try:
             r["image_link"] = request.host_url.rstrip("/") + img
-        except Exception:
+        except (RuntimeError, ValueError, AttributeError):
             pass
     return r
 
@@ -455,9 +583,8 @@ def meal_plan():
 
 @app.route("/mark_eaten/<recipe_id>", methods=["POST"])
 def mark_eaten(recipe_id):
-    user = session.get("user")
-    user_id = user.get("objectId") if isinstance(user, dict) else request.json.get("user_id") if request.is_json else None
-    if not user_id:
+    user_id, err = get_authenticated_user_id()
+    if err or not user_id:
         if request.is_json:
             return jsonify({"success": False, "message": "Authentication required"}), 401
         return redirect(url_for("home", message="Please login first."))
@@ -471,9 +598,8 @@ def mark_eaten(recipe_id):
 
 @app.route("/favorite/<recipe_id>", methods=["POST"])
 def favorite(recipe_id):
-    user = session.get("user")
-    user_id = user.get("objectId") if isinstance(user, dict) else request.json.get("user_id") if request.is_json else None
-    if not user_id:
+    user_id, err = get_authenticated_user_id()
+    if err or not user_id:
         if request.is_json:
             return jsonify({"success": False, "message": "Authentication required"}), 401
         return redirect(url_for("home", message="Please login first."))
@@ -485,9 +611,8 @@ def favorite(recipe_id):
 
 @app.route("/review/<recipe_id>", methods=["POST"])
 def review(recipe_id):
-    user = session.get("user")
-    user_id = user.get("objectId") if isinstance(user, dict) else request.json.get("user_id") if request.is_json else None
-    if not user_id:
+    user_id, err = get_authenticated_user_id()
+    if err or not user_id:
         if request.is_json:
             return jsonify({"success": False, "message": "Authentication required"}), 401
         return redirect(url_for("home", message="Please login first."))
@@ -541,7 +666,8 @@ def api_signup():
     if success:
         session["user"] = res
         session["user_id"] = res.get("objectId")
-        return jsonify({"success": True, "user": res})
+        token = generate_api_token(res.get("objectId"), email=email)
+        return jsonify({"success": True, "user": res, "token": token})
     return jsonify({"success": False, "message": str(res)}), 400
 
 @app.route("/api/auth/login", methods=["POST"])
@@ -561,7 +687,8 @@ def api_login():
     if success:
         session["user"] = res
         session["user_id"] = res.get("objectId")
-        return jsonify({"success": True, "user": res})
+        token = generate_api_token(res.get("objectId"), email=email)
+        return jsonify({"success": True, "user": res, "token": token})
     return jsonify({"success": False, "message": str(res)}), 401
 
 @app.route("/api/recipes", methods=["GET"])
@@ -688,11 +815,9 @@ def api_pantry_match():
     })
 
 @app.route("/api/profile", methods=["GET", "POST"])
+@api_auth_required
 def api_profile():
-    user_id = request.args.get("user_id") or session.get("user_id")
-    if not user_id:
-        return jsonify({"success": False, "error": "Unauthorized", "message": "Authentication required"}), 401
-
+    user_id, _ = get_authenticated_user_id()
     if request.method == "POST":
         payload = request.get_json() or {}
         is_valid, clean = validate_profile_payload(payload)
@@ -713,33 +838,27 @@ def api_profile():
     })
 
 @app.route("/api/history", methods=["GET"])
+@api_auth_required
 def api_history():
-    user_id = request.args.get("user_id") or session.get("user_id")
-    if not user_id:
-        return jsonify({"success": False, "message": "Authentication required"}), 401
-
+    user_id, _ = get_authenticated_user_id()
     cooked = db.get_cooked_recipes(user_id, recipe_lookup_fn=ai_engine.get_recipe_by_id)
     return jsonify({"success": True, "history": cooked})
 
 @app.route("/api/mark_eaten/<recipe_id>", methods=["POST"])
+@api_auth_required
 def api_mark_eaten(recipe_id):
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json() or {}
-    user_id = payload.get("user_id") or session.get("user_id")
     serving_size = float(payload.get("serving_size", 1.0))
-    if not user_id:
-        return jsonify({"success": False, "message": "Authentication required"}), 401
-
     success, res = db.mark_recipe_eaten(user_id, recipe_id, serving_size=serving_size)
     if success:
         return jsonify({"success": True, "message": "Recipe logged as eaten!", "review_exists": res.get("review_exists", False)})
     return jsonify({"success": False, "message": "Failed to log recipe", "error": str(res)}), 400
 
 @app.route("/api/favorites", methods=["GET", "POST"])
+@api_auth_required
 def api_favorites():
-    user_id = request.args.get("user_id") or (request.json.get("user_id") if request.is_json else session.get("user_id"))
-    if not user_id:
-        return jsonify({"success": False, "message": "Authentication required"}), 401
-
+    user_id, _ = get_authenticated_user_id()
     if request.method == "POST":
         payload = request.get_json() or {}
         recipe_id = payload.get("recipe_id")
@@ -751,12 +870,10 @@ def api_favorites():
     return jsonify({"success": True, "favorites": favs, "recipes": recipes})
 
 @app.route("/api/review/<recipe_id>", methods=["POST"])
+@api_auth_required
 def api_review(recipe_id):
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json() or {}
-    user_id = payload.get("user_id") or session.get("user_id")
-    if not user_id:
-        return jsonify({"success": False, "message": "Authentication required"}), 401
-
     rating = payload.get("rating", 5)
     comment = payload.get("comment", "")
     success = db.save_recipe_review(user_id, recipe_id, rating, comment)
@@ -768,14 +885,16 @@ def api_review(recipe_id):
 
 @app.route("/api/coach/chat", methods=["POST"])
 @app.route("/api/ai-coach", methods=["POST"])
+@api_auth_required
 def api_coach_chat():
     """
     Main endpoint for Tastio AI Nutrition Coach.
     Uses profile, Mifflin-St Jeor targets, today's eaten history, and recipe database.
+    Requires authentication via session cookie or Bearer token.
     """
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json() or {}
     message = payload.get("message") or payload.get("query") or ""
-    user_id = payload.get("user_id") or session.get("user_id")
 
     if not message.strip():
         message = "Hello coach"
@@ -784,9 +903,10 @@ def api_coach_chat():
     return jsonify(result)
 
 @app.route("/api/coach/context", methods=["GET"])
+@api_auth_required
 def api_coach_context():
     """Fetches user live context snapshot for nutrition coach UI widget."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     ctx = coach_service.get_user_context(user_id)
     metrics = coach_service._build_metrics_dict(ctx)
     return jsonify({"success": True, "context": ctx, "metrics": metrics})
@@ -795,26 +915,28 @@ def api_coach_context():
 # ==============================================================================
 
 @app.route("/api/meal-plan/generate", methods=["POST"])
+@api_auth_required
 def api_generate_meal_plan():
     """Generates fresh 7-day personalized meal plan."""
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json(silent=True) or {}
-    user = session.get("user")
-    user_id = payload.get("user_id") or (user.get("objectId") if isinstance(user, dict) else None) or session.get("user_id")
     start_date = payload.get("start_date")
     plan = meal_planner_service.generate_7day_plan(user_id=user_id, start_date=start_date)
     return jsonify({"success": True, "meal_plan": plan})
 
 @app.route("/api/meal-plan/current", methods=["GET"])
+@api_auth_required
 def api_get_current_meal_plan():
     """Fetches active 7-day meal plan."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     plan = meal_planner_service.get_current_plan(user_id=user_id)
     return jsonify({"success": True, "meal_plan": plan})
 
 @app.route("/api/meal-plan/date/<date_str>", methods=["GET"])
+@api_auth_required
 def api_get_meal_plan_by_date(date_str):
     """Fetches meal plan for a specific date or day index."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     plan = meal_planner_service.get_current_plan(user_id=user_id)
     if not plan or "days" not in plan:
         return jsonify({"success": False, "message": "No active meal plan"}), 404
@@ -826,10 +948,11 @@ def api_get_meal_plan_by_date(date_str):
     return jsonify({"success": False, "message": f"No meal plan found for '{date_str}'"}), 404
 
 @app.route("/api/meal-plan/replace-meal", methods=["POST"])
+@api_auth_required
 def api_replace_meal():
     """Replaces an individual meal slot in the user's active plan."""
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json() or {}
-    user_id = payload.get("user_id") or session.get("user_id")
     day_index = payload.get("day_index", 1)
     meal_type = payload.get("meal_type", "lunch")
     new_recipe_id = payload.get("new_recipe_id")
@@ -846,9 +969,10 @@ def api_replace_meal():
     return jsonify({"success": False, "message": msg}), 400
 
 @app.route("/api/meal-plan/alternatives", methods=["GET"])
+@api_auth_required
 def api_get_meal_alternatives():
     """Fetches alternative recipes for a meal slot picker modal."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     meal_type = request.args.get("meal_type", "lunch")
     current_recipe_id = request.args.get("current_recipe_id")
 
@@ -860,11 +984,11 @@ def api_get_meal_alternatives():
     return jsonify({"success": True, "alternatives": alternatives})
 
 @app.route("/api/meal-plan/delete", methods=["DELETE", "POST"])
+@api_auth_required
 def api_delete_meal_plan():
-    """Deletes active meal plan for the user."""
-    payload = request.get_json() if request.is_json else {}
-    user_id = (payload.get("user_id") if isinstance(payload, dict) else None) or request.args.get("user_id") or session.get("user_id")
-    success, msg = db.delete_meal_plan(user_id)
+    """Deletes active meal plan for the user with resource ownership verification."""
+    user_id, _ = get_authenticated_user_id()
+    success, msg = db.delete_meal_plan(user_id=user_id)
     return jsonify({"success": success, "message": msg})
 
 # ==============================================================================
@@ -873,12 +997,13 @@ def api_delete_meal_plan():
 
 @app.route("/api/analytics/nutrition", methods=["GET"])
 @app.route("/api/nutrition-dashboard", methods=["GET"])
+@api_auth_required
 def api_nutrition_analytics():
     """
     Returns complete, multi-dimensional nutrition analytics for Today, Week, and Month
     based strictly on actual SQLite database records and recipe nutrition data.
     """
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     user_profile, cooked, reviews, favorites, pref_profile = _get_user_context(user_id)
     diet_report = nutrition.generate_diet_report(cooked, user_profile)
     analytics = diet_report.get("analytics") or nutrition.get_comprehensive_analytics(cooked, user_profile)
@@ -914,13 +1039,13 @@ def grocery_list_page():
     )
 
 @app.route("/api/grocery-list/generate-from-plan", methods=["POST"])
+@api_auth_required
 def api_generate_grocery_from_plan():
     """
     Generates a consolidated, de-duplicated, and categorized grocery list
-    directly from the user's active 7-day meal plan.
+    directly from the user's active 7-day meal plan with resource ownership verification.
     """
-    payload = request.get_json() if request.is_json else {}
-    user_id = (payload.get("user_id") if isinstance(payload, dict) else None) or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
 
     plan = meal_planner_service.get_current_plan(user_id=user_id)
     if not plan or "days" not in plan:
@@ -944,17 +1069,19 @@ def api_generate_grocery_from_plan():
     })
 
 @app.route("/api/grocery-list", methods=["GET"])
+@api_auth_required
 def api_get_grocery_list():
     """Fetches user's active grocery list categorized into the 7 groups."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     grocery_data = db.get_grocery_list(user_id)
     return jsonify({"success": True, "grocery": grocery_data})
 
 @app.route("/api/grocery-list/item", methods=["POST"])
+@api_auth_required
 def api_add_grocery_item():
     """Adds a custom item to the grocery list."""
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json() or {}
-    user_id = payload.get("user_id") or session.get("user_id")
     item_name = payload.get("item_name") or payload.get("name")
     category = payload.get("category", "Other")
     quantity = payload.get("quantity")
@@ -969,58 +1096,53 @@ def api_add_grocery_item():
 
 @app.route("/api/grocery-list/item/<item_id>/toggle", methods=["POST", "PUT"])
 @app.route("/api/grocery-list/toggle", methods=["POST"])
+@api_auth_required
 def api_toggle_grocery_item(item_id=None):
-    """Toggles checked/unchecked status of a grocery item."""
+    """Toggles checked/unchecked status of a grocery item with resource ownership check."""
+    user_id, _ = get_authenticated_user_id()
     if not item_id:
         payload = request.get_json() or {}
         item_id = payload.get("item_id") or payload.get("objectId")
-    user_id = request.args.get("user_id") or session.get("user_id")
 
     success, res = db.toggle_grocery_item(item_id, user_id=user_id)
+    if not success and res == "Item not found":
+        return jsonify({"success": False, "error": "Not Found", "message": "Grocery item not found or unauthorized"}), 404
     return jsonify({"success": success, "result": res})
 
 @app.route("/api/grocery-list/item/<item_id>", methods=["DELETE", "POST"])
 @app.route("/api/grocery-list/item/<item_id>/delete", methods=["POST", "DELETE"])
+@api_auth_required
 def api_remove_grocery_item(item_id):
-    """Removes a single item from the grocery list."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    """Removes a single item from the grocery list with resource ownership check."""
+    user_id, _ = get_authenticated_user_id()
     success, msg = db.remove_grocery_item(item_id, user_id=user_id)
     grocery_data = db.get_grocery_list(user_id)
     return jsonify({"success": success, "message": msg, "grocery": grocery_data})
 
 @app.route("/api/grocery-list/clear-completed", methods=["POST"])
+@api_auth_required
 def api_clear_completed_grocery_items():
-    """Clears all completed/checked items from the grocery list."""
-    payload = request.get_json() if request.is_json else {}
-    user_id = (
-        (payload.get("user_id") if isinstance(payload, dict) else None)
-        or request.args.get("user_id")
-        or session.get("user_id")
-        or (session.get("user", {}).get("objectId") if isinstance(session.get("user"), dict) else None)
-    )
+    """Clears all completed/checked items from the grocery list for the authenticated user."""
+    user_id, _ = get_authenticated_user_id()
     success, res = db.clear_completed_grocery_items(user_id)
     grocery_data = db.get_grocery_list(user_id)
     return jsonify({"success": success, "cleared": res, "grocery": grocery_data})
 
 @app.route("/api/grocery-list/clear-all", methods=["POST", "DELETE"])
+@api_auth_required
 def api_clear_all_grocery_items():
-    """Clears all items from the grocery list."""
-    payload = request.get_json() if request.is_json else {}
-    user_id = (
-        (payload.get("user_id") if isinstance(payload, dict) else None)
-        or request.args.get("user_id")
-        or session.get("user_id")
-        or (session.get("user", {}).get("objectId") if isinstance(session.get("user"), dict) else None)
-    )
+    """Clears all items from the grocery list for the authenticated user."""
+    user_id, _ = get_authenticated_user_id()
     success, res = db.clear_all_grocery_items(user_id)
     grocery_data = db.get_grocery_list(user_id)
     return jsonify({"success": success, "cleared": res, "grocery": grocery_data})
 
 @app.route("/api/grocery-list/add-recipe", methods=["POST"])
+@api_auth_required
 def api_add_recipe_to_grocery():
     """Adds all ingredients of a recipe directly to the user's Smart Grocery List."""
+    user_id, _ = get_authenticated_user_id()
     payload = request.get_json() if request.is_json else {}
-    user_id = (payload.get("user_id") if isinstance(payload, dict) else None) or session.get("user_id") or "1"
     recipe_name = payload.get("recipe_name") or "Recipe"
     ingredients = payload.get("ingredients") or []
 
@@ -1046,25 +1168,28 @@ def api_add_recipe_to_grocery():
 @app.route("/api/recipes/<recipe_id>/view", methods=["POST"])
 def api_record_recipe_view(recipe_id):
     """Records recipe view event for dynamic taste preference learning."""
-    payload = request.get_json() if request.is_json else {}
-    user_id = (payload.get("user_id") if isinstance(payload, dict) else None) or session.get("user_id")
+    user_id, error = get_authenticated_user_id()
+    if error == 403:
+        return jsonify({"success": False, "error": "Forbidden", "message": "Access denied: cannot record view for another user."}), 403
     if user_id:
         db.record_recipe_view(user_id, recipe_id)
     return jsonify({"success": True, "recipe_id": recipe_id})
 
 @app.route("/api/user/recently-viewed", methods=["GET"])
+@api_auth_required
 def api_get_recently_viewed():
     """Returns list of recently viewed recipe objects."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     limit = int(request.args.get("limit", 10))
     recipe_ids = db.get_recently_viewed_recipe_ids(user_id, limit=limit)
     recipes = [ai_engine.get_recipe_by_id(rid) for rid in recipe_ids if ai_engine.get_recipe_by_id(rid)]
     return jsonify({"success": True, "count": len(recipes), "recipes": recipes})
 
 @app.route("/api/user/preferences", methods=["GET"])
+@api_auth_required
 def api_get_user_preferences():
     """Returns learned dynamic user preference profile."""
-    user_id = request.args.get("user_id") or session.get("user_id")
+    user_id, _ = get_authenticated_user_id()
     prof = preference_engine.get_user_preference_profile(user_id, recipe_lookup_fn=ai_engine.get_recipe_by_id)
     return jsonify({
         "success": True,
@@ -1193,7 +1318,23 @@ def handle_500(e):
         return jsonify({"success": False, "error": "Internal Server Error", "message": "An unexpected error occurred on the server."}), 500
     return render_template("main.html", message="An unexpected error occurred. Please try again."), 500
 
+# Register API endpoints as exempt from form-based CSRF token checks
+# (Protected API endpoints enforce session-based BOLA/IDOR verification)
+for endpoint, view_func in app.view_functions.items():
+    if endpoint.startswith("api_") or endpoint in ("favorite", "mark_eaten", "review"):
+        csrf.exempt(view_func)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    print(f"[Tastio Server] Running on http://localhost:{port} (Tastio 2.0 with Food Vision & Grocery List)")
-    app.run(host="0.0.0.0", port=port, debug=True)
+    flask_env = os.environ.get("FLASK_ENV", "").lower()
+    is_debug = os.environ.get("FLASK_DEBUG", "").lower() in ("1", "true") and flask_env not in ("production", "prod")
+    host = os.environ.get("HOST", "127.0.0.1")
+    if is_debug and host != "127.0.0.1":
+        host = "127.0.0.1"
+    try:
+        from werkzeug.serving import WSGIRequestHandler
+        WSGIRequestHandler.version_string = lambda self: "TastioServer"
+    except Exception as ex:
+        logger.debug(f"WSGI version string override skipped: {ex}")
+    print(f"[Tastio Server] Running on http://{host}:{port} (debug={is_debug})")
+    app.run(host=host, port=port, debug=is_debug)

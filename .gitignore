@@ -27,3 +27,26 @@ integration_package_*/
 ai-service/batches/
 web-app/static/images/recipes/staging_*/
 
+# Performance test binaries
+/performance-tests/bin/
+
+# Selenium diagnostic screenshots
+/selenium-tests/reports/screenshots/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Performance test binaries
+/performance-tests/bin/
+
+# Selenium screenshots
+/selenium-tests/reports/screenshots/
+
+# Generated test reports and execution artifacts
+/appium-tests/reports/
+/performance-tests/reports/
+/security-tests/reports/
+/selenium-tests/reports/
+

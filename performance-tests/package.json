@@ -1,0 +1,27 @@
+{
+  "name": "tastio-performance-tests",
+  "version": "1.0.0",
+  "description": "Enterprise Performance and 100 VU Load Testing Suite for Tastio Recipe Recommendation System using k6",
+  "main": "scripts/run-100vu-load-test.js",
+  "scripts": {
+    "test:100vu": "node scripts/run-100vu-load-test.js",
+    "test:k6": "./bin/k6.exe run k6-scripts/master-100vu-load-suite.js",
+    "report": "node scripts/generate-excel-report.js",
+    "verify": "node scripts/verify-excel-report.js"
+  },
+  "keywords": [
+    "k6",
+    "load-testing",
+    "performance",
+    "concurrency",
+    "tastio",
+    "sla",
+    "apdex"
+  ],
+  "author": "Antigravity QA Automation Team",
+  "license": "ISC",
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
+

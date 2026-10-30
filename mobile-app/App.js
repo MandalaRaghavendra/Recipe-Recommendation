@@ -26,6 +26,9 @@ import RecipeDetailModal from "./src/screens/RecipeDetailModal";
 import {
   apiLogin,
   apiSignup,
+  apiLogout,
+  initAuthSession,
+  setOnAuthExpired,
   getApiBaseUrl,
   setCustomHostIp,
   getDevHostIp,
@@ -79,7 +82,23 @@ export default function App() {
 
   useEffect(() => {
     checkServerHealth();
+    restoreSession();
+    setOnAuthExpired(() => {
+      setCurrentUser(null);
+      Alert.alert("Session Expired", "Your session has expired. Please log in again.");
+    });
   }, []);
+
+  const restoreSession = async () => {
+    try {
+      const { token, user } = await initAuthSession();
+      if (token && user) {
+        setCurrentUser(user);
+      }
+    } catch (e) {
+      // Fallback
+    }
+  };
 
   const checkServerHealth = async () => {
     try {
@@ -191,7 +210,8 @@ export default function App() {
     }
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    await apiLogout();
     setCurrentUser(null);
     setAuthModalVisible(false);
     Alert.alert("Signed Out", "You are now using Tastio in Guest mode.");

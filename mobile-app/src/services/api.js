@@ -62,9 +62,51 @@ function logApiError(tag, err) {
   }
 }
 
+import {
+  saveAuthToken,
+  getStoredAuthToken,
+  removeAuthToken,
+  saveStoredUser,
+  getStoredUser,
+  clearAuthSession
+} from "./authStorage";
+
 // In-memory query cache for instant responses and zero UI stutter
 const apiCache = new Map();
 const MAX_CACHE_ENTRIES = 50;
+
+let currentAuthToken = null;
+let onAuthExpiredCallback = null;
+
+export function setOnAuthExpired(callback) {
+  onAuthExpiredCallback = callback;
+}
+
+export function setAuthToken(token) {
+  currentAuthToken = token || null;
+}
+
+export function getAuthToken() {
+  return currentAuthToken;
+}
+
+export async function initAuthSession() {
+  try {
+    const token = await getStoredAuthToken();
+    if (token) {
+      currentAuthToken = token;
+    }
+    const user = await getStoredUser();
+    return { token, user };
+  } catch (err) {
+    return { token: null, user: null };
+  }
+}
+
+export async function apiLogout() {
+  currentAuthToken = null;
+  await clearAuthSession();
+}
 
 function setCache(key, value) {
   if (apiCache.size >= MAX_CACHE_ENTRIES) {
@@ -93,8 +135,23 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 2500) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url, { ...options, signal: controller.signal });
+    const headers = {
+      ...(options.headers || {}),
+      ...(currentAuthToken ? { Authorization: `Bearer ${currentAuthToken}` } : {})
+    };
+    const response = await fetch(url, { ...options, headers, signal: controller.signal });
     clearTimeout(id);
+
+    // Gracefully handle 401 Unauthorized (expired or invalid token)
+    if (response.status === 401 && currentAuthToken && !url.includes("/auth/login") && !url.includes("/auth/signup")) {
+      console.warn("[Tastio Mobile] Authentication token expired or invalid. Clearing session.");
+      currentAuthToken = null;
+      clearAuthSession().catch(() => {});
+      if (typeof onAuthExpiredCallback === "function") {
+        onAuthExpiredCallback();
+      }
+    }
+
     return response;
   } catch (err) {
     clearTimeout(id);
@@ -1059,6 +1116,14 @@ export async function apiLogin(email, password) {
         message: data.message || `Login failed (HTTP ${res.status}).`
       };
     }
+    if (data.token) {
+      setAuthToken(data.token);
+      await saveAuthToken(data.token);
+    }
+    if (data.user) {
+      // NEVER store passwords in storage!
+      await saveStoredUser(data.user);
+    }
     return data;
   } catch (err) {
     logApiError("apiLogin", err);
@@ -1090,6 +1155,14 @@ export async function apiSignup(name, email, password) {
         success: false,
         message: data.message || `Signup failed (HTTP ${res.status}).`
       };
+    }
+    if (data.token) {
+      setAuthToken(data.token);
+      await saveAuthToken(data.token);
+    }
+    if (data.user) {
+      // NEVER store passwords in storage!
+      await saveStoredUser(data.user);
     }
     return data;
   } catch (err) {

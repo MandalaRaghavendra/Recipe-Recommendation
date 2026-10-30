@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import math
-import random
+import secrets
 from datetime import datetime, date, timedelta
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -304,7 +304,7 @@ class MealPlannerService:
 
                     total_score = (s_cal * 0.4) + (s_goal * 0.3) + (health_sc / 100.0 * 0.2) + s_rating - s_repetition_penalty
                     # Add tiny random jitter to prevent static repetition on ties
-                    total_score += random.uniform(0.0, 0.05)
+                    total_score += secrets.SystemRandom().uniform(0.0, 0.05)
 
                     scored.append((total_score, r))
 
@@ -445,8 +445,8 @@ class MealPlannerService:
 
             candidates.sort(key=lambda x: x[0])
             if candidates:
-                # Pick from top 3 alternatives randomly for nice variety
-                chosen = random.choice(candidates[:min(3, len(candidates))])[1]
+                # Pick from top 3 alternatives securely for nice variety
+                chosen = secrets.choice(candidates[:min(3, len(candidates))])[1]
             else:
                 chosen = all_r[0]
 

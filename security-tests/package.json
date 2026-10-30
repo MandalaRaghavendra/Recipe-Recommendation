@@ -1,0 +1,27 @@
+{
+  "name": "tastio-security-assessment",
+  "version": "1.0.0",
+  "description": "Module D: Comprehensive 300-Scenario Security Assessment for Tastio Recipe Recommendation System",
+  "main": "scripts/run-security-suite.js",
+  "scripts": {
+    "test:security": "node scripts/run-security-suite.js",
+    "report:excel": "node scripts/generate-excel-reports.js",
+    "verify": "node scripts/verify-excel-report.js"
+  },
+  "keywords": [
+    "security",
+    "sast",
+    "dast",
+    "owasp",
+    "bandit",
+    "pip-audit",
+    "npm-audit",
+    "tastio"
+  ],
+  "author": "Antigravity Security Engineering Team",
+  "license": "ISC",
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
+

@@ -8,3 +8,6 @@ MarkupSafe
 gunicorn
 scikit-learn
 Pillow
+
+Flask-WTF>=1.2.0
+

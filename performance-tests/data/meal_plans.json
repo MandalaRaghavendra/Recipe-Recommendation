@@ -1,0 +1,32 @@
+[
+  {
+    "target_calories": 1800,
+    "diet_type": "weight_loss",
+    "user_id": 1,
+    "split": "high_protein"
+  },
+  {
+    "target_calories": 2200,
+    "diet_type": "muscle_gain",
+    "user_id": 1,
+    "split": "balanced"
+  },
+  {
+    "target_calories": 2000,
+    "diet_type": "maintenance",
+    "user_id": 1,
+    "split": "both"
+  },
+  {
+    "target_calories": 1600,
+    "diet_type": "weight_loss",
+    "user_id": 1,
+    "split": "vegetarian"
+  },
+  {
+    "target_calories": 2400,
+    "diet_type": "muscle_gain",
+    "user_id": 1,
+    "split": "non_vegetarian"
+  }
+]

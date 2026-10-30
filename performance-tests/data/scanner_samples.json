@@ -1,0 +1,27 @@
+[
+  {
+    "dish_name": "Hyderabadi Chicken Biryani",
+    "category": "Rice / Non-Veg",
+    "confidence": 0.96
+  },
+  {
+    "dish_name": "Masala Dosa with Sambar",
+    "category": "South Indian Breakfast",
+    "confidence": 0.94
+  },
+  {
+    "dish_name": "Paneer Butter Masala",
+    "category": "North Indian Curry",
+    "confidence": 0.92
+  },
+  {
+    "dish_name": "Greek Salad with Feta",
+    "category": "Salads & Greens",
+    "confidence": 0.95
+  },
+  {
+    "dish_name": "Banana Protein Smoothie",
+    "category": "Beverage / Fitness",
+    "confidence": 0.97
+  }
+]

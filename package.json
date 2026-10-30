@@ -1,0 +1,17 @@
+{
+  "name": "tastio-monorepo",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Tastio AI Recipe Recommendation & Nutrition Monorepo with Enterprise QA Automation",
+  "scripts": {
+    "test:web": "cd selenium-tests && node scripts/run-all-tests.js",
+    "test:mobile": "cd appium-tests && node scripts/run-all-mobile-tests.js",
+    "test:perf": "cd performance-tests && node scripts/run-100vu-load-test.js",
+    "test:security": "cd security-tests && node scripts/generate-all-security-reports.js",
+    "test:ci-summary": "node scripts/generate-ci-summary.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
+

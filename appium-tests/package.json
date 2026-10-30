@@ -1,0 +1,35 @@
+{
+  "name": "tastio-appium-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive Appium Android End-to-End Testing Suite for Tastio Recipe Recommendation System",
+  "main": "tests/01-lifecycle-launch-tests.js",
+  "scripts": {
+    "test": "node scripts/run-all-mobile-tests.js",
+    "test:mocha": "mocha --config .mocharc.json \"tests/**/*.js\"",
+    "generate:report": "node scripts/generate-excel-report.js",
+    "verify:report": "node scripts/verify-excel-report.js"
+  },
+  "keywords": [
+    "appium",
+    "android",
+    "uiautomator2",
+    "react-native",
+    "expo",
+    "webdriverio",
+    "mocha",
+    "chai",
+    "e2e",
+    "tastio",
+    "excel-report"
+  ],
+  "author": "Antigravity Senior Mobile Automation Engineer",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.5.0",
+    "dotenv": "^16.4.7",
+    "exceljs": "^4.4.0",
+    "mocha": "^11.1.0",
+    "webdriverio": "^8.36.0"
+  }
+}
+

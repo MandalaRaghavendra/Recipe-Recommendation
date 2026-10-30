@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
     <title>Tastio - Recipe Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -467,6 +468,7 @@
             <!-- Mode 1: General Recipe Search -->
             <div class="tab-pane fade {% if not is_pantry_mode %}show active{% endif %}" id="generalSearchPane" role="tabpanel">
                 <form method="POST" action="/recommend" class="search-container">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                     <div class="search-box">
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" name="query" value="{{ query or '' }}" class="form-control search-input" placeholder="Search dish or ingredients (e.g., chicken, broccoli, biryani)" aria-label="Search ingredients">
@@ -481,6 +483,7 @@
             <!-- Mode 2: What Can I Cook? (Pantry Matcher) -->
             <div class="tab-pane fade {% if is_pantry_mode %}show active{% endif %}" id="pantrySearchPane" role="tabpanel">
                 <form method="POST" action="/what-can-i-cook" class="search-container" id="pantryForm">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                     <div class="search-box" style="border: 2px solid #f59e0b;">
                         <i class="fas fa-carrot search-icon text-warning"></i>
                         <input type="text" id="pantryInput" name="pantry_ingredients" value="{{ pantry_query or '' }}" class="form-control search-input" placeholder="Enter ingredients you currently have (e.g., chicken, rice, tomato, onion)" aria-label="Pantry ingredients">
@@ -869,6 +872,7 @@
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <form action="/login" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="modal-header modal-header-custom">
                     <h5 class="modal-title" id="loginModalLabel"><i class="fas fa-sign-in-alt me-2"></i>Login</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -897,6 +901,7 @@
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <form action="/signup" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="modal-header modal-header-custom">
                     <h5 class="modal-title" id="signupModalLabel"><i class="fas fa-user-plus me-2"></i>Sign Up</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
