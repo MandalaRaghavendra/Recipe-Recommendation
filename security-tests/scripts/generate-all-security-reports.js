@@ -1,5 +1,20 @@
 // generate-all-security-reports.js - Enterprise Multi-Report Generation for Module D
-const ExcelJS = require('exceljs');
+let ExcelJS;
+const possibleExcelJsPaths = [
+  'exceljs',
+  require('path').join(__dirname, '..', 'node_modules', 'exceljs'),
+  require('path').join(__dirname, '..', '..', 'node_modules', 'exceljs'),
+  require('path').join(process.cwd(), 'node_modules', 'exceljs')
+];
+for (const p of possibleExcelJsPaths) {
+  try {
+    ExcelJS = require(p);
+    if (ExcelJS) break;
+  } catch (e) {}
+}
+if (!ExcelJS) {
+  ExcelJS = require('exceljs');
+}
 const path = require('path');
 const fs = require('fs');
 const secRegistry = require('../utils/sec-registry');

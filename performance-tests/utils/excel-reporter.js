@@ -1,5 +1,20 @@
 // excel-reporter.js - Enterprise 5-Worksheet Excel Report Generator for Module C Performance Testing
-const ExcelJS = require('exceljs');
+let ExcelJS;
+const possibleExcelJsPaths = [
+  'exceljs',
+  require('path').join(__dirname, '..', 'node_modules', 'exceljs'),
+  require('path').join(__dirname, '..', '..', 'node_modules', 'exceljs'),
+  require('path').join(process.cwd(), 'node_modules', 'exceljs')
+];
+for (const p of possibleExcelJsPaths) {
+  try {
+    ExcelJS = require(p);
+    if (ExcelJS) break;
+  } catch (e) {}
+}
+if (!ExcelJS) {
+  ExcelJS = require('exceljs');
+}
 const path = require('path');
 const fs = require('fs');
 const perfRegistry = require('./perf-registry');

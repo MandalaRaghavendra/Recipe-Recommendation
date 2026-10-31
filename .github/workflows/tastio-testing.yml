@@ -227,8 +227,9 @@ jobs:
       - name: Install Performance Test Dependencies
         run: |
           mkdir -p performance-tests/reports
+          npm install exceljs
           cd performance-tests
-          npm ci || npm install
+          npm install exceljs
 
       - name: Start Flask Backend Server
         run: |
@@ -315,8 +316,9 @@ jobs:
 
       - name: Install Security Test Dependencies
         run: |
+          npm install exceljs
           cd security-tests
-          npm ci || npm install
+          npm install exceljs
 
       - name: Run Bandit SAST Static Analysis
         run: |
