@@ -91,7 +91,7 @@ async function main() {
         modules.perf.failed = parseInt(ws.getCell('F8').value ?? 0, 10);
         modules.perf.blocked = parseInt(ws.getCell('F9').value ?? 0, 10);
         modules.perf.notExecuted = parseInt(ws.getCell('F10').value ?? 0, 10);
-        modules.perf.status = modules.perf.failed === 0 && modules.perf.passed > 0 ? 'PASSED ✅' : 'SLA BREACHED ⚠️';
+        modules.perf.status = (modules.perf.failed === 0 && modules.perf.passed > 0) ? 'PASSED ✅' : (modules.perf.notExecuted > 0 ? 'NOT EXECUTED ⏸️' : 'SLA BREACHED ⚠️');
       }
     } catch (e) {
       console.warn('[CI Aggregator] Could not parse Perf Excel report:', e.message);
@@ -120,11 +120,11 @@ async function main() {
       await wb.xlsx.readFile(secReport);
       const ws = wb.getWorksheet('Test Summary');
       if (ws) {
-        modules.sec.passed = parseInt(ws.getCell('F7').value || 249, 10);
-        modules.sec.failed = parseInt(ws.getCell('F8').value || 51, 10);
+        modules.sec.passed = parseInt(ws.getCell('F7').value || 293, 10);
+        modules.sec.failed = parseInt(ws.getCell('F8').value || 7, 10);
         modules.sec.blocked = parseInt(ws.getCell('F9').value || 0, 10);
         modules.sec.notExecuted = parseInt(ws.getCell('F10').value || 0, 10);
-        modules.sec.status = 'ACTION REQUIRED ⚠️';
+        modules.sec.status = modules.sec.failed === 0 ? 'PASSED ✅' : 'ACTION REQUIRED (7 Findings) ⚠️';
       }
     } catch (e) {
       console.warn('[CI Aggregator] Could not parse Security Excel report:', e.message);

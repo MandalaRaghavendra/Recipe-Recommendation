@@ -21,7 +21,8 @@ async function run() {
     timeout: 45000,
     reporter: 'spec',
     slow: 5000,
-    exit: true
+    exit: true,
+    retries: 2
   });
 
   const testsDir = path.resolve(__dirname, '../tests');

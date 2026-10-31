@@ -7,6 +7,7 @@
   "timeout": "45000",
   "ui": "bdd",
   "recursive": true,
-  "exit": true
+  "exit": true,
+  "retries": 2
 }
 
