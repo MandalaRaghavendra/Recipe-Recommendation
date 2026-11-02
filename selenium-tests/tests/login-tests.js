@@ -25,6 +25,15 @@ describe('Module A: Authentication & Session Management (WEB-001 to WEB-035)', f
     if (driver) {
       await driver.quit();
     }
+    // Automatically generate the Master Excel Report with summary and 300 test details
+    try {
+      const ExcelReporter = require('../utils/excel-reporter');
+      const reporter = new ExcelReporter();
+      await reporter.generateReport();
+      console.log('\n[Excel] Master Excel Report with 300 test cases generated at: reports/selenium-test-report.xlsx');
+    } catch (e) {
+      console.warn('[Excel] Report generation notice:', e.message);
+    }
   });
 
   beforeEach(async function () {
@@ -548,3 +557,14 @@ describe('Module A: Authentication & Session Management (WEB-001 to WEB-035)', f
     }
   });
 });
+
+if (require.main === module) {
+  // If invoked directly with `node tests/login-tests.js`, run E2E suite and generate 300-test Excel report
+  const run = require('../scripts/run-all-tests');
+  run().then(() => {
+    console.log('[Runner] Selenium E2E execution and Excel report generation complete.');
+  }).catch(err => {
+    console.error('[Runner Fatal Error]', err);
+    process.exit(1);
+  });
+}
